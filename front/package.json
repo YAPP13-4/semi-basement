@@ -39,6 +39,7 @@
     "react-dev-utils": "^5.0.1",
     "react-dom": "^16.4.2",
     "react-hot-loader": "^4.3.5",
+    "react-responsive-music-player": "^0.3.0",
     "react-router-dom": "^4.3.1",
     "resolve": "1.6.0",
     "sass-loader": "^7.1.0",
