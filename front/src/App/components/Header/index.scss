@@ -1,0 +1,37 @@
+.Header {
+  // background: black;
+  background: darkgrey;
+  width: 1440px;
+  height: 100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  &-menu {
+    background: lightcoral;
+    padding-left: 50px;
+    padding-top: 30px;
+  }
+  &-logo {
+    img {
+      margin-top: 27px;
+    }
+  }
+  &-rightSide {
+    background: lavenderblush;
+    padding-right: 50px;
+    display: flex;
+    &-user {
+      background: lightblue;
+      &-image {
+        display: inline-block;
+        background: lightcoral;
+        width: 43px;
+        height: 43px;
+        border-radius: 10px;
+      }
+    }
+    &-playlist {
+      padding-left: 125px;
+    }
+  }
+}
