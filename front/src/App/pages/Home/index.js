@@ -12,6 +12,8 @@ import Song from './Song'
 import classnames from 'classnames/bind'
 import css from './index.scss'
 
+import Navigation from './components/Navigation'
+
 const cx = classnames.bind(css)
 const moduleName = 'Home'
 
@@ -36,6 +38,7 @@ class Home extends Component {
   render() {
     return (
       <div className={cx(`${moduleName}`)}>
+        <Navigation />
         <div className={cx(`${moduleName}-songWrapper`)}>
           {this.state.songsThumbnail ? this._renderSong() : 'Loading'}
         </div>
