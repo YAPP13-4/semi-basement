@@ -21,7 +21,7 @@ class Home extends Component {
     this._getSongThumbnail()
   }
   _getSongThumbnail = () => {
-    const songsThumbnail = [Billy, Bryson, No_Rest, sheck_wes, Walk]
+    const songsThumbnail = [Billy, Bryson, No_Rest, sheck_wes, Walk,sheck_wes]
 
     this.setState({
       songsThumbnail
