@@ -8,7 +8,7 @@
   display: flex;
   justify-content: space-between;
   &-menu {
-   /* background: lightcoral;*/
+    margin-left: 50px;
   }
   &-logo {
     position: absolute;
@@ -42,6 +42,7 @@
     }
     &-playlist {
       padding-left: 125px;
+      padding-right: 30px;
     }
   }
 }

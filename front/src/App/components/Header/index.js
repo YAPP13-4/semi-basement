@@ -28,7 +28,7 @@ class Header extends Component {
 
           </div>
           <div className={cx(`${moduleName}-rightSide-playlist`)}>
-            <img src={menuIcon} alt="menuIcon" style= {{position : 'absolute' ,right : '0'}}/>
+            <img src={menuIcon} alt="menuIcon" style= {{position : 'absolute'}}/>
           </div>
         </div>
       </header>
