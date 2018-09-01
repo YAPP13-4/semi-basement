@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { hot } from 'react-hot-loader'
+import { Switch, Route, withRouter } from 'react-router-dom';
 import routes from './routes';
 
 class App extends Component {
@@ -16,4 +17,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default hot(module)(withRouter(App))
