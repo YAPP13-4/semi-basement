@@ -4,6 +4,8 @@ import classnames from 'classnames/bind'
 import css from './index.scss'
 import first from './Billy.mp3'
 
+const cx = classnames.bind(css)
+const moduleName = 'BottomPlayer'
 
 
 
@@ -16,7 +18,9 @@ import first from './Billy.mp3'
 class BottomPlayer extends Component {
     render() {
         return (
-          <ReactPlayer url={first} controls={true}/>
+          <div className={cx(`${moduleName}`)}>
+            <ReactPlayer className={cx(`${moduleName}-player`)} url={first} controls={true}/>
+          </div>
         )
       }
 }

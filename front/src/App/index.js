@@ -22,8 +22,9 @@ class App extends Component {
               <Route {...routeProps} key={routeProps.path || ''} />
             ))}
           </Switch>
+          <BottomPlayer />
         </div>
-        <BottomPlayer />
+        
       </div>
     )
   }
