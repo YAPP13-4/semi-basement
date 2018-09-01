@@ -1,33 +1,43 @@
 .Header {
   // background: black;
-  background: darkgrey;
+  background: rgb(0, 0, 0);
   width: 1440px;
-  height: 100px;
+  position: relative;
+  padding: 28px 0px 28px 0px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   &-menu {
-    background: lightcoral;
-    padding-left: 50px;
-    padding-top: 30px;
+   /* background: lightcoral;*/
   }
   &-logo {
-    img {
-      margin-top: 27px;
-    }
+    position: absolute;
+    left: 644px;
   }
   &-rightSide {
-    background: lavenderblush;
+    /*background: lavenderblush;*/
     padding-right: 50px;
     display: flex;
     &-user {
-      background: lightblue;
+      /*background: lightblue;*/
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      display: flex;
       &-image {
         display: inline-block;
-        background: lightcoral;
+        /* background: lightcoral; */
+        border: 0.9px solid gray;
         width: 43px;
         height: 43px;
-        border-radius: 10px;
+        border-radius: 50%;
+    
+      }
+      &-name {
+        padding-top: 11px;
+        margin-left: 19px;
+        margin-right: 10px;
+        
       }
     }
     &-playlist {
