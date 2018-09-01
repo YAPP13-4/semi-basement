@@ -16,7 +16,10 @@ class Navigation extends Component {
           <div>Recent</div>
         </div>
         <div className={cx(`${moduleName}-leftBox`)}>
-          <input />
+          <div>
+            <i className="material-icons">search</i>
+            <input placeholder={'Type something'} />
+          </div>
         </div>
       </div>
     )

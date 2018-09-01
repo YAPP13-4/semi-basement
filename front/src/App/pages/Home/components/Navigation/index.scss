@@ -1,24 +1,49 @@
 .Navigation {
   width: 1340px;
   height: 85px;
-  background-color: aliceblue;
+  background-color: black;
   margin: 0 50px;
   display: flex;
   justify-content: space-between;
   border-bottom: 1px gray solid;
   &-rightBox {
-    // background-color:lightgoldenrodyellow;
-    background-color:black;
     width: 380px;
     display: flex;
-    justify-content: space-between;
-    padding-left: 10px;
     font-size: 19px;
     font-weight: 900;
     color: white;
     line-height: 85px;
+    div {
+      width: 120px;
+      text-align: center;
+      &:first-child {
+        border-bottom: 2px solid #45f7aa;
+      }
+    }
   }
   &-leftBox {
-    background-color: lightcoral;
+    padding-top: 24px;
+    div {
+      background: white;
+      height: 36px;
+      width: 250px;
+      border-radius: 18px;
+      display: flex;
+      justify-content: center;
+    }
+    input {
+      display: inline-block;
+      border: none;
+      font-size: 16px;
+      height: 33px;
+      &:focus {
+        outline: none;
+      }
+    }
+    i {
+      color: gray;
+      line-height: 38px;
+      padding-right: 25px;
+    }
   }
 }
