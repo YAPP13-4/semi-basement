@@ -1,7 +1,8 @@
-.BottomPlayer {
-    padding: 0px 50px 0px 50px;    
+.BottomPlayer {  
     &>div {
-        height: 0 !important;
-        width: 100% !important;
+        width: 1440px !important;
+        position: fixed;
+        bottom: 0;
+        
     }
 }
