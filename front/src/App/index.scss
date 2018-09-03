@@ -1,7 +1,9 @@
+body {
+  background: black;
+}
 .App {
   height: 100vh;
   &-body {
-    background: black;
     width: 1440px;
     height: 90vh;
     margin: 0 auto;
