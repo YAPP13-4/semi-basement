@@ -6,7 +6,7 @@ import classnames from 'classnames/bind'
 import routes from './routes'
 import css from './index.scss'
 import Header from './components/Header'
-import Footer from './components/Footer'
+import BottomPlayer from './components/BottomPlayer'
 
 const cx = classnames.bind(css)
 const moduleName = 'App'
@@ -22,8 +22,9 @@ class App extends Component {
               <Route {...routeProps} key={routeProps.path || ''} />
             ))}
           </Switch>
+          <BottomPlayer />
         </div>
-        <Footer />
+        
       </div>
     )
   }
