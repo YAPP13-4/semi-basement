@@ -1,0 +1,31 @@
+.ChartTab {
+    
+    &-selectTab {
+        padding: 0px 50px;
+        span {
+            display: inline-block;
+            width: 33.8px;
+            height: 33.8px;
+            background-color: #4c4c4c;
+            border-radius: 50%;
+        }
+        select{
+            width: 171.8px;
+            height: 35px;
+            border-radius: 11px;
+            border: solid 1px #979797;
+            background-color: black;
+            color: white;
+            margin-left: 21px;
+        }
+    }
+    &-chart {
+        color: white;
+        padding: 0px 50px;
+        margin-top: 37px;
+        table {
+            width: 100%;
+
+        }
+    }
+}

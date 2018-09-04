@@ -1,0 +1,13 @@
+.ChartTabContainer {
+    & tr:hover {
+        opacity: 0.9;
+        background-color: #393939;
+        border: #393939;
+    }
+    tr {
+        height: 75.4px;
+    }
+    td {
+        vertical-align: middle; 
+    }
+}
