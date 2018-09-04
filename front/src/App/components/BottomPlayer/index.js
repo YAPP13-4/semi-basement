@@ -13,8 +13,7 @@ const moduleName = 'BottomPlayer'
 class BottomPlayer extends Component {
     render() {
         return (
-          <div className={cx(`${moduleName}`)}>
-            <div>{this.props.song}</div>
+          <div className={cx(`${moduleName}`)}> 
             <ReactPlayer className={cx(`${moduleName}-player`) } url={this.props.song} controls={true}/>
           </div>
         )

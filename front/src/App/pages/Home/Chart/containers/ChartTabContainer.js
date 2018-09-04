@@ -23,12 +23,30 @@ class chartItem extends Component{
     }
     render() {
         return (
-            <li className={cx(`${moduleName}`)}>
-                <div onClick={this._onSongSelected} id="https://soundcloud.com/uiceheidd/lucid-dreams-forget-me">Lucid Dreams</div>
-                <div>Creator</div>
-                <div>-2:00</div>
-                <div>icons</div>
-            </li>
+            <div className={cx(`${moduleName}`)}>
+                <table>
+                    <tr>
+                        <td onClick={this._onSongSelected} id="https://soundcloud.com/uiceheidd/lucid-dreams-forget-me">Lucid Dreams</td>
+                        <td>Creator</td>
+                        <td>Creator</td>
+                        <td>icons</td>
+                    </tr>
+
+                     <tr>
+                        <td onClick={this._onSongSelected} id="https://soundcloud.com/trippie-hippie-2/taking-a-walk-prod-scott-storch">Taking A walk</td>
+                        <td>Creator</td>
+                        <td>Creator</td>
+                        <td>icons</td>
+                    </tr>
+                    <tr>
+                        <td onClick={this._onSongSelected} id="https://soundcloud.com/kinggoldchains/taste-feat-offset">Taste</td>
+                        <td>Creator</td>
+                        <td>Creator</td>
+                        <td>icons</td>
+                    </tr>
+                </table>
+            </div>
+
         )
     }
 }
