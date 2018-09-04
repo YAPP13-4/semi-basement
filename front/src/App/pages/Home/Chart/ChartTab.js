@@ -3,14 +3,16 @@ import React, { Component } from 'react'
 import classnames from 'classnames/bind'
 
 import css from './ChartTab.scss'
-import ChartTabItem from './ChartTab_item'
+import ChartTabItem from './containers/ChartTabContainer'
 const cx = classnames.bind(css)
 const moduleName = 'ChartTab'
-
+//ChartTab에서 state 관리해서 던지기 .. ? 
 class ChartTab extends Component {
+    state = {}
+    //나중에 서버에서 song을 받아오면... .. state 수정해서 넣어야지 ..
     render() {
         return(
-            <div classNmae = {cx(`${moduleName}`)}>
+            <div className = {cx(`${moduleName}`)}>
                 <div className={cx(`${moduleName}-selectTab`)}>
                     <button>  </button>
                     <select>
@@ -18,7 +20,7 @@ class ChartTab extends Component {
                     </select>
                 </div>
                 <div className={cx(`${moduleName}-chart`)}>
-                    <ChartTabItem />
+                    <ChartTabItem/>
                 </div>
             </div>
         )
