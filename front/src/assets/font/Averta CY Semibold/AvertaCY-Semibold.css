@@ -1,0 +1,12 @@
+/* Webfont: AvertaCY-Semibold */@font-face {
+    font-family: 'AvertaCYSemibold';
+    src: url('AvertaCY-Semibold.eot'); /* IE9 Compat Modes */
+    src: url('AvertaCY-Semibold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('AvertaCY-Semibold.woff') format('woff'), /* Modern Browsers */
+         url('AvertaCY-Semibold.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('AvertaCY-Semibold.svg#AvertaCY-Semibold') format('svg'); /* Legacy iOS */
+    font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+

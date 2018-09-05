@@ -11,7 +11,9 @@ const Landing = () => {
         <div className={cx(`${moduleName}`)}>
            <div className={cx(`${moduleName}-logoWrapper`)}>
             <img src={landingtitle} alt="landing title"/>
-            <button>GET INTO</button>
+            <a>
+                <span>GET INTO</span>
+            </a>
            </div>
         </div>
     )

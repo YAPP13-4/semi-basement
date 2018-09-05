@@ -1,0 +1,12 @@
+/* Webfont: AvertaCY-ExtrathinItalic */@font-face {
+    font-family: 'AvertaCYExtrathin';
+    src: url('AvertaCY-ExtrathinItalic.eot'); /* IE9 Compat Modes */
+    src: url('AvertaCY-ExtrathinItalic.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('AvertaCY-ExtrathinItalic.woff') format('woff'), /* Modern Browsers */
+         url('AvertaCY-ExtrathinItalic.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('AvertaCY-ExtrathinItalic.svg#AvertaCY-ExtrathinItalic') format('svg'); /* Legacy iOS */
+    font-style: italic;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+
