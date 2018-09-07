@@ -11,14 +11,18 @@ const moduleName = 'Landing'
 class Landing extends Component {
     constructor(props) {
         super(props)
-
+        
         this.state = { term : 1}
+        console.log("constructor state : "+this.state.term)
         this._getInto = this._getInto.bind(this)
+        this.props.landing(this.state.term)
     }
     _getInto(event) {
+        event.preventDefault()
         this.setState({
-            term : 1
+            term : 0
         });
+        console.log("_getInto : "+this.state.term)
         this.props.landing(this.state.term)
     }
     render() {
@@ -26,7 +30,7 @@ class Landing extends Component {
             <div className={cx(`${moduleName}`)}>
                 <div className={cx(`${moduleName}-logoWrapper`)}>
                     <img src={landingtitle} alt="landing title"/>
-                    <a>
+                    <a onClick={this._getInto}>
                         <span>GET INTO</span>
                     </a>
                 </div>

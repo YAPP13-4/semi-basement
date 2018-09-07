@@ -2,17 +2,18 @@ import React, { Component } from 'react'
 
 import classnames from 'classnames/bind'
 import css from './index.scss'
-
+import {connect} from 'react-redux' 
 import menuIcon from '../../../assets/icons/menu.png'
 import logo from '../../../assets/logos/logo.png'
 import profile from '../../../assets/icons/profile_dummy.png'
 const cx = classnames.bind(css)
 const moduleName = 'Header'
 
+const bgBlack = {backgroundColor: '#000000'};
 class Header extends Component {
   render() {
     return (
-      <header className={cx(`${moduleName}`)}>
+      <header className={cx(`${moduleName}`)} styles={this.props.landing_state==0 ? {bgBlack} : ""} >
         <div className={cx(`${moduleName}-menu`)}>
           <img src={menuIcon} alt="menuIcon" />
         </div>
@@ -35,5 +36,7 @@ class Header extends Component {
     )
   }
 }
-
-export default Header
+function mapStateToProps({landing_state}) {
+  return { landing_state : landing_state}
+} 
+export default connect(mapStateToProps)(Header)
