@@ -7,13 +7,11 @@ import menuIcon from '../../../assets/icons/menu.png'
 import logo from '../../../assets/logos/logo.png'
 import profile from '../../../assets/icons/profile_dummy.png'
 const cx = classnames.bind(css)
-const moduleName = 'Header'
-
-const bgBlack = {backgroundColor: '#000000'};
+const moduleName = 'Header'; 
 class Header extends Component {
   render() {
     return (
-      <header className={cx(`${moduleName}`)} styles={this.props.landing_state==0 ? {bgBlack} : ""} >
+      <header className={cx(`${moduleName}`)} style={ { backgroundColor : this.props.landing_state==0 ? '#000000' : 'none'} } >
         <div className={cx(`${moduleName}-menu`)}>
           <img src={menuIcon} alt="menuIcon" />
         </div>
