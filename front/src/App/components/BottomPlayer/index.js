@@ -3,12 +3,10 @@ import ReactPlayer from 'react-player'
 import classnames from 'classnames/bind'
 import {connect} from 'react-redux' 
 import css from './index.scss'
-import first from './Billy.mp3'
 
 const cx = classnames.bind(css)
 const moduleName = 'BottomPlayer'
 
-// const cx = classnames.bind(css)
 
 class BottomPlayer extends Component {
     render() {
