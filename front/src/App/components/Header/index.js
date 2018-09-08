@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-
-import classnames from 'classnames/bind'
-import css from './index.scss'
 import {connect} from 'react-redux' 
+import classnames from 'classnames/bind'
+
 import menuIcon from '../../../assets/icons/menu.png'
 import logo from '../../../assets/logos/logo.png'
 import profile from '../../../assets/icons/profile_dummy.png'
+import css from './index.scss'
+
 const cx = classnames.bind(css)
 const moduleName = 'Header'; 
 class Header extends Component {
