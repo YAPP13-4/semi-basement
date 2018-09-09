@@ -1,22 +1,27 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter } from 'react-router-dom'
-import './index.css'
-import App from './App'
-import registerServiceWorker from './registerServiceWorker'
-//Redux setting
-import { createStore } from 'redux'
-import reducers from './reducers'
 import { Provider } from 'react-redux'
+import { ConnectedRouter } from 'react-router-redux'
 
-//store 생성
+import createHistory from 'history/createBrowserHistory'
+
+import App from './App'
+import { createStore } from 'redux'
+
+import registerServiceWorker from './registerServiceWorker'
+import './index.css'
+
+import reducers from './reducers'
+
+
+const history = createHistory()
 const store = createStore(reducers)
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <ConnectedRouter history={history}>
       <App />
-    </BrowserRouter>
+    </ConnectedRouter>
   </Provider>,
   document.getElementById('root')
 )
