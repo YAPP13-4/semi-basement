@@ -5,24 +5,26 @@ import { ConnectedRouter } from 'react-router-redux'
 
 import createHistory from 'history/createBrowserHistory'
 
-import App from './App'
-import { createStore } from 'redux'
+import App from 'src/App'
+import createNewStore from 'src/redux/createNewStore';
 
 import registerServiceWorker from './registerServiceWorker'
 import './index.css'
 
-import reducers from './reducers'
-
-
 const history = createHistory()
-const store = createStore(reducers)
+const store = createNewStore(history)
 
-ReactDOM.render(
-  <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <App />
-    </ConnectedRouter>
-  </Provider>,
-  document.getElementById('root')
-)
+const render = Component => {
+  ReactDOM.render(
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
+        <Component />
+      </ConnectedRouter>
+    </Provider>,
+    document.getElementById('root')
+  )
+}
+
+render(App)
+
 registerServiceWorker()
