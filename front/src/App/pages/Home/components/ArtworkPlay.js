@@ -8,29 +8,21 @@ class ArtworkPlay extends Component {
         super();
     }
     componentDidMount() {
-        this._getSongId();
+        this._requestId();
       }
-    _getSongId = async() => {
-        const singerId = await this._reauestId();
-        this.setState({
-            singerId
-        })
-    }
 
-    _reauestId = () => {
+    _requestId = () => {
         return axios.get(resolveUrl('https://soundcloud.com/matas/frost-theme-0-1'))
         .then(response => {
-            console.log(response)
-            response.json()
+            this.setState({
+                singerId : response.data.id
+            })    
         })
-        .then(json => 
-            console.log(json)
-        )
         .catch(err => console.log(err))
     }
     render() {
         return(
-            <div>
+            <div style={{color:'#ffffff'}}>
                 {this.state.singerId}
             </div>
         )
