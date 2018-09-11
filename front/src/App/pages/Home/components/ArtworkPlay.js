@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames/bind'
 import css from './ArtworkPlay.scss'
@@ -10,6 +10,7 @@ const propTypes = {
     singerName: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     artwork: PropTypes.string.isRequired,
+    selected : PropTypes.func.isRequired,
   };
 class ArtworkPlay extends Component {
     
@@ -23,6 +24,7 @@ class ArtworkPlay extends Component {
 
                             <div 
                                 className={cx(`${moduleName}-song-body-card-artwork`)}
+                                onClick={this.props.selected}
                                style= {{backgroundImage: `url(${getImageUrl(artworkUrl, IMAGE_SIZES.XLARGE)})`}}
                             >
                            </div>

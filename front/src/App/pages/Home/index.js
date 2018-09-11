@@ -19,26 +19,32 @@ class Home extends Component {
   state = {}
   constructor() {
       super();
+     
   }
   componentDidMount() {
-      this._requestId();
+      this._getInfo();
     }
-
+  _getInfo = async() => {
+    const info = await this._requestId()
+    this.setState({
+      singerId : info.id,
+      title : info.title,
+      singerName : info.user.username,
+      artwrokUrl : info.artwork_url
+  })    
+  }
   _requestId = () => {
       return axios.get(resolveUrl('https://soundcloud.com/matas/frost-theme-0-1'))
       .then(response => {
-        console.log(response.data)
-          this.setState({
-              singerId : response.data.id,
-              title : response.data.title,
-              singerName : response.data.user.username,
-              artwrokUrl : response.data.artwork_url
-          })
-          this.props.selectSong(this.state.singerId)
+        console.log(response.data);
+        return response.data
       })
       .catch(err => console.log(err))
   }
-
+  _fetchSong = () => {
+    console.log('fetchsong')
+    this.props.selectSong(this.state.singerId)
+  }
   render() {
     return (
       <div className={cx(`${moduleName}`)}>
@@ -51,31 +57,37 @@ class Home extends Component {
               singerName= {this.state.singerName}
               title = {this.state.title}
               artwork = {this.state.artwrokUrl}
+              selected={this._fetchSong}
           />
           <ArtworkPlay 
               singerName= {this.state.singerName}
               title = {this.state.title}
               artwork = {this.state.artwrokUrl}
+              selected={this._fetchSong}
           />
           <ArtworkPlay 
               singerName= {this.state.singerName}
               title = {this.state.title}
               artwork = {this.state.artwrokUrl}
+              selected={this._fetchSong}
           />
           <ArtworkPlay 
               singerName= {this.state.singerName}
               title = {this.state.title}
               artwork = {this.state.artwrokUrl}
+              selected={this._fetchSong}
           />
           <ArtworkPlay 
               singerName= {this.state.singerName}
               title = {this.state.title}
               artwork = {this.state.artwrokUrl}
+              selected={this._fetchSong}
           />
           <ArtworkPlay 
               singerName= {this.state.singerName}
               title = {this.state.title}
               artwork = {this.state.artwrokUrl}
+              selected={this._fetchSong}
           />                                                   
         </div>
 
