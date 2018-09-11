@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import { callApi } from '../../../utils/ApiUtils'
+import { selectSong } from '../../../actions/index'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import axios from 'axios';
 import { resolveUrl,SONG_URL } from '../../constants/ApiConstants'
 
@@ -26,12 +28,11 @@ class Home extends Component {
       return axios.get(resolveUrl('https://soundcloud.com/matas/frost-theme-0-1'))
       .then(response => {
         console.log(response.data)
-          console.log(response.data.id)
-          console.log(response.data.artwork_url)
           this.setState({
               singerId : response.data.id,
               artwrokUrl : response.data.artwork_url
-          })    
+          })
+          this.props.selectSong(this.state.singerId)
       })
       .catch(err => console.log(err))
   }
@@ -50,5 +51,8 @@ class Home extends Component {
     )
   }
 }
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({selectSong} , dispatch)
+}
 
-export default Home
+export default connect(null, mapDispatchToProps)(Home)
