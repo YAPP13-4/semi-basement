@@ -16,8 +16,7 @@ class ArtworkPlay extends Component {
     render() {
         const artworkUrl = this.props.artwork;
         return(
-            <Fragment>
- 
+            <div className={cx(`${moduleName}`)}>
                 <div className={cx(`${moduleName}-row`)}>
                     <div className={cx(`${moduleName}-row__cell`)}>
                         <div className={cx(`${moduleName}-song-body-card`)}>
@@ -27,15 +26,18 @@ class ArtworkPlay extends Component {
                                style= {{backgroundImage: `url(${getImageUrl(artworkUrl, IMAGE_SIZES.XLARGE)})`}}
                             >
                            </div>
-                            <div className = {cx(`${moduleName}-song-body-card-title`)}>
-
-                            </div>
-                            <div className ={cx(`${moduleName}-song-body-card-singer`)}>
+                           <div className={cx(`${moduleName}-song-body-card-info`)}>
+                                <div className ={cx(`${moduleName}-song-body-card-title`)}>
+                                    {this.props.title}
+                                </div>
+                                <div className ={cx(`${moduleName}-song-body-card-singer`)}>
+                                    {this.props.singerName}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </Fragment>
+            </div>
         )
     }
 }

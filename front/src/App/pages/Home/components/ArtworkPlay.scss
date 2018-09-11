@@ -1,14 +1,32 @@
 .ArtworkPlay {
-    padding: 26px 0px 0px 15px;
-    font-size: 23px;
     &-row {
         padding-top: 27px;
     }
     &-song-body-card {
         width: 188px;
         height: 243px;
+        border-radius: 3px;
     }
+    &-song-body-card:hover {
+        background-color: #393939;
+        &-song-body-card-singer {
+            color: white;
+        }
+    }  
     &-song-body-card-artwork {
        height: 188px;
+    }
+    &-song-body-card-info{
+        padding: 8px 0px 10px 7px;    
+    }
+    &-song-body-card-title {
+        padding-bottom: 5px;
+        font-size: 17px;
+        font-weight: 800;
+    }
+    &-song-body-card-singer {
+        padding-bottom: 5px;
+        font-size: 14px;
+        color: #a6a6a6;
     }
 }
