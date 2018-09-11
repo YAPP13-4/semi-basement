@@ -43,13 +43,42 @@ class Home extends Component {
     return (
       <div className={cx(`${moduleName}`)}>
         <Navigation />
+        <div className={cx(`${moduleName}-category`)}>
+            SEBA's Choice
+        </div>
         <div className={cx(`${moduleName}-songWrapper`)}>
           <ArtworkPlay 
               singerName= {this.state.singerName}
               title = {this.state.title}
               artwork = {this.state.artwrokUrl}
           />
+          <ArtworkPlay 
+              singerName= {this.state.singerName}
+              title = {this.state.title}
+              artwork = {this.state.artwrokUrl}
+          />
+          <ArtworkPlay 
+              singerName= {this.state.singerName}
+              title = {this.state.title}
+              artwork = {this.state.artwrokUrl}
+          />
+          <ArtworkPlay 
+              singerName= {this.state.singerName}
+              title = {this.state.title}
+              artwork = {this.state.artwrokUrl}
+          />
+          <ArtworkPlay 
+              singerName= {this.state.singerName}
+              title = {this.state.title}
+              artwork = {this.state.artwrokUrl}
+          />
+          <ArtworkPlay 
+              singerName= {this.state.singerName}
+              title = {this.state.title}
+              artwork = {this.state.artwrokUrl}
+          />                                                   
         </div>
+
       </div>
     )
   }

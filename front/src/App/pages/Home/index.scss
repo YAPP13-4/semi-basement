@@ -1,6 +1,12 @@
 .Home {
-  color: tomato;
+  color: white;
+  &-category {
+    padding: 70px 65px 20px 65px;
+    font-size: 23px;
+  }
   &-songWrapper {
+    padding: 0px 75px;
     display: flex;
+    justify-content: space-between;
   }
 }
