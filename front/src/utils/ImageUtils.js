@@ -1,7 +1,4 @@
-const IMAGE_SIZES = {
-  LARGE: 't300x300',
-  XLARGE: 't500x500',
-};
+import IMAGE_SIZES from '../App/constants/ImageConstants';
 
 const getImageUrl = (s, size = null) => {
   if (!s) {

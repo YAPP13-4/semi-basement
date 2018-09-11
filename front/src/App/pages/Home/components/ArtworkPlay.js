@@ -1,14 +1,15 @@
 import React, { Component, Fragment } from 'react';
 import classnames from 'classnames/bind'
 import css from './ArtworkPlay.scss'
-import { getImageUrl } from '../../../../utils/ImageUtils'
+import getImageUrl from '../../../../utils/ImageUtils'
+import IMAGE_SIZES from '../../../constants/ImageConstants'
 const cx = classnames.bind(css)
 const moduleName = 'ArtworkPlay'
 
 class ArtworkPlay extends Component {
     
     render() {
-        let imageUrl = this.props.artwork;
+        const artworkUrl = this.props.artwork;
         return(
             <Fragment>
                 <div >
@@ -21,7 +22,7 @@ class ArtworkPlay extends Component {
                             <div className ="song-body-card-inner">
                                 <div 
                                     className="song-body-card-artwork" 
-                                    style= {{backgroundImage: `url(${imageUrl})`}}
+                                    style= {{backgroundImage: `url(${getImageUrl(artworkUrl, IMAGE_SIZES.XLARGE)})`}}
                                 >
                                 </div>
                                 <div className ="song-body-card-title">

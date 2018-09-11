@@ -42,9 +42,7 @@ class Home extends Component {
       <div className={cx(`${moduleName}`)}>
         <Navigation />
         <div className={cx(`${moduleName}-songWrapper`)}>
-          <ArtworkPlay 
-            id = {this.state.singerId}
-            artwork = {this.state.artwrokUrl}
+          <ArtworkPlay artwork = {this.state.artwrokUrl}
           />
         </div>
       </div>
