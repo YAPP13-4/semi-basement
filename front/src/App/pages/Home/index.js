@@ -30,6 +30,8 @@ class Home extends Component {
         console.log(response.data)
           this.setState({
               singerId : response.data.id,
+              title : response.data.title,
+              singerName : response.data.user.username,
               artwrokUrl : response.data.artwork_url
           })
           this.props.selectSong(this.state.singerId)
@@ -42,7 +44,10 @@ class Home extends Component {
       <div className={cx(`${moduleName}`)}>
         <Navigation />
         <div className={cx(`${moduleName}-songWrapper`)}>
-          <ArtworkPlay artwork = {this.state.artwrokUrl}
+          <ArtworkPlay 
+              singerName= {this.state.singerName}
+              title = {this.state.title}
+              artwork = {this.state.artwrokUrl}
           />
         </div>
       </div>
