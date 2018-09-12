@@ -3,8 +3,8 @@ import { selectSong } from '../../../actions/index'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import axios from 'axios';
-import { resolveUrl,SONG_URL } from '../../constants/ApiConstants'
-
+import SONG_URL_LIST from '../../constants/test/SongUrlConstants'
+import { resolveUrl } from '../../constants/ApiConstants'
 import ArtworkPlay from './components/ArtworkPlay'
 
 import classnames from 'classnames/bind'
@@ -16,35 +16,55 @@ const cx = classnames.bind(css)
 const moduleName = 'Home'
 
 class Home extends Component {
-  state = {}
-  constructor() {
-      super();
-     
+  state = {
+    songInfos : [],
   }
+
   componentDidMount() {
-      this._getInfo();
+      this._requestId();
     }
   _getInfo = async() => {
     const info = await this._requestId()
+    console.log('info',info)
     this.setState({
-      singerId : info.id,
-      title : info.title,
-      singerName : info.user.username,
-      artwrokUrl : info.artwork_url
-  })    
+      songInfos: [...this.state.songInfo || [], info],
+    })    
   }
+  _requestId = () => {
+    SONG_URL_LIST.map( (url)=> {
+      return axios.get(resolveUrl(url))
+            .then(response => {
+              console.log('res data',response.data)
+              this.setState({
+                songInfos: [...this.state.songInfo || {}, response.data],
+              }) 
+              //return response.data;
+            })
+    })
+  }
+  _fetchSong = () => {
+    this.props.selectSong(this.state.singerId)
+  }
+  _rederDiscover = () => {
+    const songs = this.state.songInfos.map((songInfo, index) => {
+      console.log('songinfo',songInfo)
+      return <ArtworkPlay  singerName= {songInfo.user.permalink}
+                          title = {songInfo.title}
+                          artwork = {songInfo.artwork_url}
+                          selected={this._fetchSong}
+              />
+    })
+    return songs  
+  }
+  /*
   _requestId = () => {
       return axios.get(resolveUrl('https://soundcloud.com/matas/frost-theme-0-1'))
       .then(response => {
-        console.log(response.data);
         return response.data
       })
       .catch(err => console.log(err))
-  }
-  _fetchSong = () => {
-    console.log('fetchsong')
-    this.props.selectSong(this.state.singerId)
-  }
+  }*/
+
   render() {
     return (
       <div className={cx(`${moduleName}`)}>
@@ -53,42 +73,7 @@ class Home extends Component {
             SEBA's Choice
         </div>
         <div className={cx(`${moduleName}-songWrapper`)}>
-          <ArtworkPlay 
-              singerName= {this.state.singerName}
-              title = {this.state.title}
-              artwork = {this.state.artwrokUrl}
-              selected={this._fetchSong}
-          />
-          <ArtworkPlay 
-              singerName= {this.state.singerName}
-              title = {this.state.title}
-              artwork = {this.state.artwrokUrl}
-              selected={this._fetchSong}
-          />
-          <ArtworkPlay 
-              singerName= {this.state.singerName}
-              title = {this.state.title}
-              artwork = {this.state.artwrokUrl}
-              selected={this._fetchSong}
-          />
-          <ArtworkPlay 
-              singerName= {this.state.singerName}
-              title = {this.state.title}
-              artwork = {this.state.artwrokUrl}
-              selected={this._fetchSong}
-          />
-          <ArtworkPlay 
-              singerName= {this.state.singerName}
-              title = {this.state.title}
-              artwork = {this.state.artwrokUrl}
-              selected={this._fetchSong}
-          />
-          <ArtworkPlay 
-              singerName= {this.state.singerName}
-              title = {this.state.title}
-              artwork = {this.state.artwrokUrl}
-              selected={this._fetchSong}
-          />                                                   
+          {this.state.songInfos ? this._rederDiscover() : 'Loading'}                                                
         </div>
 
       </div>
@@ -100,3 +85,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(null, mapDispatchToProps)(Home)
+
