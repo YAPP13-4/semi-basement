@@ -1,0 +1,12 @@
+/* Webfont: AvertaCY-Regular */@font-face {
+    font-family: 'AvertaCY';
+    src: url('AvertaCY-Regular.eot'); /* IE9 Compat Modes */
+    src: url('AvertaCY-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('AvertaCY-Regular.woff') format('woff'), /* Modern Browsers */
+         url('AvertaCY-Regular.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('AvertaCY-Regular.svg#AvertaCY-Regular') format('svg'); /* Legacy iOS */
+    font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+
