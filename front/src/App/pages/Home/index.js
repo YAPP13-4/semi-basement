@@ -24,11 +24,7 @@ class Home extends Component {
       this._requestId();
     }
   _getInfo = async() => {
-    const info = await this._requestId()
-    console.log('info',info)
-    this.setState({
-      songInfos: [...this.state.songInfo || [], info],
-    })    
+    const info = await this._requestId()  
   }
   _requestId = () => {
     SONG_URL_LIST.map( (url)=> {
@@ -36,7 +32,7 @@ class Home extends Component {
             .then(response => {
               console.log('res data',response.data)
               this.setState({
-                songInfos: [...this.state.songInfo || {}, response.data],
+                songInfos: this.state.songInfos.concat(response.data)
               }) 
               //return response.data;
             })
@@ -56,14 +52,6 @@ class Home extends Component {
     })
     return songs  
   }
-  /*
-  _requestId = () => {
-      return axios.get(resolveUrl('https://soundcloud.com/matas/frost-theme-0-1'))
-      .then(response => {
-        return response.data
-      })
-      .catch(err => console.log(err))
-  }*/
 
   render() {
     return (
