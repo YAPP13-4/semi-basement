@@ -1,6 +1,31 @@
 .Home {
-  color: tomato;
+  color: white;
+  &-category {
+    padding: 70px 65px 20px 65px;
+    font-size: 23px;
+  }
   &-songWrapper {
+    padding: 0px 75px;
     display: flex;
+    justify-content: space-between;
+  }
+  &-category {
+    display: flex;
+    div:first-child {
+      cursor: pointer;
+      background: url('../../../assets/icons/icon2.png') no-repeat -111px -152px;
+      width: 35px;
+      height: 35px;
+    }
+
+    div:first-child:hover {
+      cursor: pointer;
+      background: url('../../../assets/icons/icon2.png') no-repeat -49px -152px;
+      width: 35px;
+      height: 35px;
+    }
+  }
+  &-category-title {
+    margin-left: 20px;
   }
 }
