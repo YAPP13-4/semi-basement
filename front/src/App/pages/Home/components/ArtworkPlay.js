@@ -15,10 +15,9 @@ const propTypes = {
   };
 class ArtworkPlay extends Component {
     static defaultProps = {
-        singerName: 'PropTypes.string.isRequired',
-        title: 'PropTypes.string.isRequired',
-        artwork: 'PropTypes.string.isRequired',
-        selected : ()=> {console.log('err')},
+        singerName: 'Creator',
+        title: 'Title',
+        artwork: 'ArtWork',
     }   
     render() {
         const artworkUrl = this.props.artwork;
@@ -33,7 +32,9 @@ class ArtworkPlay extends Component {
                                 onClick={this.props.selected}
                                style= {{backgroundImage: `url(${getImageUrl(artworkUrl, IMAGE_SIZES.XLARGE)})`}}
                             >
+                                <div className={cx(`${moduleName}-song-body-card-playicon`)}></div>
                            </div>
+
                            <div className={cx(`${moduleName}-song-body-card-info`)}>
                                 <div className ={cx(`${moduleName}-song-body-card-title`)}>
                                     {this.props.title}

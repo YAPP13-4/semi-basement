@@ -30,7 +30,6 @@ class Home extends Component {
     SONG_URL_LIST.map( (url)=> {
       return axios.get(resolveUrl(url))
             .then(response => {
-              console.log('res data',response.data)
               this.setState({
                 songInfos: this.state.songInfos.concat(response.data)
               }) 
@@ -38,29 +37,28 @@ class Home extends Component {
             })
     })
   }
-  _fetchSong = (index) => {
-    console.log('id',index)
-    this.props.selectSong(this.state.songInfos[index].id) // 속성 뭔지 확인해서 고치기 
+  _fetchSong = (songInfo) => {
+    console.log('click',songInfo);
+    this.props.selectSong(songInfo.id) // 속성 뭔지 확인해서 고치기 
   }
   _rederDiscover = () => {
     const songs = this.state.songInfos.map((songInfo, index) => {
-      console.log('songinfo',songInfo)
+      //console.log('songinfo',songInfo)
       return <ArtworkPlay key={index}
                           singerName= {songInfo.user.permalink}
                           title = {songInfo.title}
                           artwork = {songInfo.artwork_url}
-                          selected={()=>{this._fetchSong(index)}}
+                          selected={()=>{ this._fetchSong(songInfo) }}
               />
     })
     return songs  
   }
-
   render() {
     return (
       <div className={cx(`${moduleName}`)}>
         <Navigation />
         <div className={cx(`${moduleName}-category`)}>
-            SEBA's Choice
+          <div></div> <div className={cx(`${moduleName}-category-title`)}>SEBA's Choice</div> 
         </div>
         <div className={cx(`${moduleName}-songWrapper`)}>
           {this.state.songInfos ? this._rederDiscover() : 'Loading'}                                                
