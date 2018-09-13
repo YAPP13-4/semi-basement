@@ -6,6 +6,7 @@ import getImageUrl from '../../../../utils/ImageUtils'
 import IMAGE_SIZES from '../../../constants/ImageConstants'
 const cx = classnames.bind(css)
 const moduleName = 'ArtworkPlay'
+
 const propTypes = {
     singerName: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
@@ -13,7 +14,12 @@ const propTypes = {
     selected : PropTypes.func.isRequired,
   };
 class ArtworkPlay extends Component {
-    
+    static defaultProps = {
+        singerName: 'PropTypes.string.isRequired',
+        title: 'PropTypes.string.isRequired',
+        artwork: 'PropTypes.string.isRequired',
+        selected : ()=> {console.log('err')},
+    }   
     render() {
         const artworkUrl = this.props.artwork;
         return(

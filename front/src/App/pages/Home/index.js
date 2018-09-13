@@ -38,16 +38,18 @@ class Home extends Component {
             })
     })
   }
-  _fetchSong = () => {
-    this.props.selectSong(this.state.singerId)
+  _fetchSong = (index) => {
+    console.log('id',index)
+    this.props.selectSong(this.state.songInfos[index].id) // 속성 뭔지 확인해서 고치기 
   }
   _rederDiscover = () => {
     const songs = this.state.songInfos.map((songInfo, index) => {
       console.log('songinfo',songInfo)
-      return <ArtworkPlay  singerName= {songInfo.user.permalink}
+      return <ArtworkPlay key={index}
+                          singerName= {songInfo.user.permalink}
                           title = {songInfo.title}
                           artwork = {songInfo.artwork_url}
-                          selected={this._fetchSong}
+                          selected={()=>{this._fetchSong(index)}}
               />
     })
     return songs  
