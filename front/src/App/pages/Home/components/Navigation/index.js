@@ -11,7 +11,7 @@ class Navigation extends Component {
     return (
       <div className={cx(`${moduleName}`)}>
         <div className={cx(`${moduleName}-rightBox`)}>
-          <div><Link to ="/discover">Discover</Link></div>
+          <div><Link to ="/main">Discover</Link></div>
           <div><Link to ="/chart">Chart</Link></div>
           <div><Link to ="/recent">Recent</Link></div>
         </div>
