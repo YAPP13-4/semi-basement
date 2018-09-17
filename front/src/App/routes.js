@@ -2,6 +2,7 @@ import Home from './pages/Home'
 import Mypage from './pages/Mypage'
 import Sign from './pages/Sign'
 import ChartTab from './pages/Home/Chart/ChartTab'
+import Landing from './pages/Landing'
 const routes = [
   {
     path: '/mypage',
@@ -18,10 +19,13 @@ const routes = [
     component: ChartTab
   },
   {
-    path: '/',
+    path: '/main',
     component: Home,
   },
-
+  {
+    path: '/',
+    component: Landing,
+  },
 ]
 
 export default routes;

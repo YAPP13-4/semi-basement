@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+
+import { Link } from 'react-router-dom'
+
 import { selectSong } from '../../../actions/index'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -9,8 +12,6 @@ import ArtworkPlay from './components/ArtworkPlay'
 
 import classnames from 'classnames/bind'
 import css from './index.scss'
-
-import Navigation from './components/Navigation'
 
 const cx = classnames.bind(css)
 const moduleName = 'Home'

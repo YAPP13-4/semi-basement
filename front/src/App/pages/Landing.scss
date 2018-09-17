@@ -1,0 +1,63 @@
+@font-face {
+    font-family: 'AvertaCYExtrabold';
+    src: url('../../assets/font/Averta\ CY\ Extrabold/AvertaCY-ExtraboldItalic.eot'); /* IE9 Compat Modes */
+    src: url('../../assets/font/Averta\ CY\ Extrabold/AvertaCY-ExtraboldItalic.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('../../assets/font/Averta\ CY\ Extrabold/AvertaCY-ExtraboldItalic.woff') format('woff'), /* Modern Browsers */
+         url('../../assets/font/Averta\ CY\ Extrabold/AvertaCY-ExtraboldItalic.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('../../assets/font/Averta\ CY\ Extrabold/AvertaCY-ExtraboldItalic.svg#AvertaCY-ExtraboldItalic') format('svg'); /* Legacy iOS */
+    font-style: italic;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+.Landing {
+    background-image: url('../../assets/landing_img.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100%;
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    width: 100%;
+    &-logoWrapper {
+        position: relative;
+        height: 100%;
+        img {
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+        a {
+            font-family: 'AvertaCYExtrabold';
+            cursor: pointer;
+            margin: 0 auto;
+            position: fixed;
+            bottom: 37%;
+            left: 47%;
+            color: white;
+            width: 143px;
+            height: 46px;
+            border-radius: 6px;
+            mix-blend-mode: screen;
+            border: solid 1px #00ffff;
+            text-align: center;
+            text-decoration: none;
+            span {
+                display: flex;
+                align-items: center;
+                mix-blend-mode: screen;
+                justify-content: center;
+                height: 100%;
+                font-size: 20px;
+                color: #ffffff;
+            }
+            
+        }
+    }
+}

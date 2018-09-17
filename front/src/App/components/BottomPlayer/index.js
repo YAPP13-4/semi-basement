@@ -5,10 +5,10 @@ import {connect} from 'react-redux'
 import css from './index.scss'
 import { SONG_URL } from '../../constants/ApiConstants'
 import { callApi } from '../../../utils/ApiUtils'
+
 const cx = classnames.bind(css)
 const moduleName = 'BottomPlayer'
 
-// const cx = classnames.bind(css)
 
 class BottomPlayer extends Component {
     render() {
