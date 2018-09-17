@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-
-import { Link } from 'react-router-dom'
+import Navigation from './components/Navigation/index'
 
 import { selectSong } from '../../../actions/index'
 import { connect } from 'react-redux'
