@@ -6,6 +6,10 @@
   display: flex;
   justify-content: space-between;
   border-bottom: 1px gray solid;
+  a {
+    text-decoration: none;
+    color: white;
+  }
   &-rightBox {
     width: 380px;
     display: flex;
