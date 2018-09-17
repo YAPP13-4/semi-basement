@@ -6,30 +6,31 @@ import IMAGE_SIZES from '../../../../constants/ImageConstants'
 
 const cx         = classnames.bind(css)
 const moduleName = 'ChartTabContainer'
-
-class chartItem extends Component{
-
+class ChartTabItem extends Component{
     render() {
+        const min = Math.ceil( (this.props.duration/1000) / 60);
+        const sec = (Math.ceil(this.props.duration/1000)) % 60;
 
+        const playCount = (this.props.playCount / 1000000).toFixed(2);
+        const likeCount = (this.props.favoriteCount / 1000000).toFixed(2);
         return (
-            <div className={cx(`${moduleName}`)}>
-                <table>
-                    <tr>
-                        <td >{this.props.key} </td>
-                        <td onClick={this.props.selected}>
-                            <img  src={`url(${getImageUrl(this.props.artwork, IMAGE_SIZES.LARGE)})`}/>
-                        </td>
-                        <td onClick={this.props.selected}>Lucid Dreams</td>
-                        <td>{this.props.title}</td>
-                        <td>{this.props.singer}</td>
-                        <td>02: 27(time)</td>
-                        <td>icons</td>
-                    </tr>
-                </table>
-            </div>
-
+            <tr className={cx(`${moduleName}`)}>
+                <td >{this.props.ind +1} </td>
+                <td className={cx(`${moduleName}-thumbnail`)}
+                    onClick={this.props.selected}>
+                    <img src={`${getImageUrl(this.props.artwork, IMAGE_SIZES.SMALL)}`} alt="artwork"/>
+                </td>
+                <td className={cx(`${moduleName}-title`)} onClick={this.props.selected}>{this.props.title}s</td>
+                <td className={cx(`${moduleName}-singer`)}>{this.props.singer}</td>
+                <td className={cx(`${moduleName}-time`)}>{min} : {sec}</td>
+                <td> <span className={cx(`${moduleName}-likeIcon`)}></span> </td>
+                <td>{likeCount}m</td>
+                <td> <span className={cx(`${moduleName}-playIcon`)}></span> </td>
+                <td>{playCount}m</td>
+                <td> <span className={cx(`${moduleName}-addListIcon`)}></span> </td>
+            </tr>
         )
     }
 }
 
-export default chartItem
+export default ChartTabItem

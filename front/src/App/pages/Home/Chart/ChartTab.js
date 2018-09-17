@@ -6,7 +6,7 @@ import axios from 'axios';
 import { resolveUrl } from '../../../constants/ApiConstants'
 import classnames from 'classnames/bind'
 import SongChartList from './constants/test/SongChartList' 
-
+import Navigation from '../components/Navigation/index'
 import css from './ChartTab.scss'
 import ChartTabItem from './containers/ChartTabContainer'
 const cx         = classnames.bind(css)
@@ -37,11 +37,16 @@ class ChartTab extends Component {
     }
     _renderChart = () => {
         const songs = this.state.songInfos.map( (songInfo,index)=> {
+            console.log('data',songInfo)
             return <ChartTabItem 
                         key      = {index}
+                        ind      = {index}
                         singer   = {songInfo.user.permalink}
                         title    = {songInfo.title}
                         artwork  = {songInfo.artwork_url}
+                        duration = {songInfo.duration}
+                        favoriteCount = {songInfo.favoritings_count}
+                        playCount = {songInfo.playback_count}
                         selected = {()=>{this._fetchSong(songInfo)}}
                     />
         })
@@ -51,14 +56,22 @@ class ChartTab extends Component {
     render() {
         return(
             <div className = {cx(`${moduleName}`)}>
+                <Navigation />
                 <div className={cx(`${moduleName}-selectTab`)}>
-                    <button>  </button>
-                    <select>
-                        <option value="Top50">Top50</option>
-                    </select>
+                    <div></div>
+                    <div>
+                        <select>
+                            <option value="Top50">Top 50</option>
+                        </select>
+                    </div>
                 </div>
                 <div className={cx(`${moduleName}-chart`)}>
-                    {this.state.songInfos ? this._renderChart() : 'Loading'}  
+                    <table>
+                        <tbody>
+                            {this.state.songInfos ? this._renderChart() : 'Loading'}  
+                        </tbody>
+                    </table>
+                    
                 </div>
             </div>
         )
