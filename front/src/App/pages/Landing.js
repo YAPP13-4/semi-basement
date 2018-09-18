@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 
 import classnames from 'classnames/bind'
 import css from './Landing.scss'
+import landingBtn from '../../assets/get-into-button@2x.png'
 import landingtitle from '../../assets/landing-title.png'
 // import { landing } from '../../actions/index'
 
@@ -35,7 +36,7 @@ class Landing extends Component {
           <img src={landingtitle} alt="landing title" />
           <a onClick={this._getInto}>
             <Link to="/main">
-              <span>GET INTO</span>
+              <div> <img  src={landingBtn} alt="mainBtn"/>  </div>
             </Link>
           </a>
         </div>

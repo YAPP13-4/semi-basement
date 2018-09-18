@@ -33,6 +33,18 @@
             right: 0;
             margin: auto;
         }
+        div {
+            position: fixed;
+            bottom: 26%;
+            left: 46%;
+            width: 145px;
+            height: 48px;
+            img {
+                max-width: 100%;
+                max-height: 100%;
+            }
+        }
+        /*
         a {
             font-family: 'AvertaCYExtrabold';
             cursor: pointer;
@@ -48,6 +60,10 @@
             border: solid 1px #00ffff;
             text-align: center;
             text-decoration: none;
+            div {
+                
+            }
+            
             span {
                 display: flex;
                 align-items: center;
@@ -58,6 +74,6 @@
                 color: #ffffff;
             }
             
-        }
+        }*/
     }
 }
