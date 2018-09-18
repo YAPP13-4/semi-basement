@@ -13,7 +13,14 @@
   display: flex;
   justify-content: space-between;
   &-menu {
-    margin-left: 50px;
+    span {
+      display: block;
+      margin-left: 50px;
+      background: url('../../../assets/icons/icon2.png') no-repeat -442px -41px;
+      width: 19px;
+      height: 13px;
+    }
+
   }
   &-logo {
     position: absolute;
@@ -23,31 +30,27 @@
     /*background: lavenderblush;*/
     padding-right: 50px;
     display: flex;
-    &-user {
-      /*background: lightblue;*/
-      color: white;
-      font-size: 18px;
-      font-weight: bold;
-      display: flex;
-      &-image {
-        display: inline-block;
-        /* background: lightcoral; */
-        border: 0.9px solid gray;
-        width: 43px;
-        height: 43px;
-        border-radius: 50%;
-    
-      }
-      &-name {
-        padding-top: 11px;
-        margin-left: 19px;
-        margin-right: 10px;
-        
-      }
-    }
     &-playlist {
-      padding-left: 125px;
-      padding-right: 30px;
+      span{
+        display: block;
+        background: url('../../../assets/icons/icon2.png') no-repeat -169px -93px;
+        width: 16px;
+        height: 15px;
+        margin-left: 124px;
+      }
+
     }
   }
+  &-rightSide-user{
+    display: flex;
+    & a{
+      cursor: pointer;
+      padding: 9px 32px;
+      border-radius: 18.5px;
+      border: solid 1px #979797;
+      font-size: 14px;
+      color: white;
+    }
+  }
+
 }
