@@ -90,7 +90,7 @@ app.get('/auth/login', function(req, res){
       <input type="submit">
      </p>
     </form>
-    <a href="/auth/facebook">Facebook</a>
+    <h2>You can also login with</h2>
     <a href="/auth/google">Google</a>
     `;
     res.send(output);
