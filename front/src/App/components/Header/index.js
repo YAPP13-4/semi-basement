@@ -5,7 +5,6 @@ import classnames from 'classnames/bind'
 
 import menuIcon from '../../../assets/icons/menu.png'
 import logo from '../../../assets/logos/logo.png'
-import profile from '../../../assets/icons/profile_dummy.png'
 import css from './index.scss'
 
 const cx = classnames.bind(css)
@@ -20,30 +19,21 @@ class Header extends Component {
         }}
       >
         <div className={cx(`${moduleName}-menu`)}>
-          <img src={menuIcon} alt="menuIcon" />
+          <span></span>
         </div>
         <div className={cx(`${moduleName}-logo`)}>
             <img src={logo} alt="logo" />
         </div>
         <div className={cx(`${moduleName}-rightSide`)}>
           <div className={cx(`${moduleName}-rightSide-user`)}>
-            <div>
-              <img
-                src={profile}
-                alt="profile"
-                className={cx(`${moduleName}-rightSide-user-image`)}
-              />
-            </div>
-            <div className={cx(`${moduleName}-rightSide-user-name`)}>
-              userName >{' '}
-            </div>
+            {/* sing up, sign in btn  a tag must be Link!!!*/}
+            <a style={{marginRight:"21px"}}>Sign In</a>
+            <a
+              style={{backgroundColor:"#45f7aa", color:"#020202", border:"none"}}
+            >Sign Up</a>
           </div>
           <div className={cx(`${moduleName}-rightSide-playlist`)}>
-            <img
-              src={menuIcon}
-              alt="menuIcon"
-              style={{ position: 'absolute' }}
-            />
+            <span></span>
           </div>
         </div>
       </header>
