@@ -7,7 +7,7 @@ import ArtworkPlay from './components/ArtworkPlay'
 
 import classnames from 'classnames/bind'
 import css from './index.scss'
-
+import MyPlayer from '../../components/MyPlayer/MyPlayer'
 const cx = classnames.bind(css)
 const moduleName = 'Home'
 
@@ -53,7 +53,9 @@ class Home extends Component {
           <div></div> <div className={cx(`${moduleName}-category-title`)}>SEBA's Choice</div> 
         </div>
         <div className={cx(`${moduleName}-songWrapper`)}>
-          {this.state.songInfos ? this._rederDiscover() : 'Loading'}                                                
+          {this.state.songInfos ? this._rederDiscover() : 'Loading'}
+          {/* temp test !!! */}
+          <MyPlayer />                                      
         </div>
 
       </div>
