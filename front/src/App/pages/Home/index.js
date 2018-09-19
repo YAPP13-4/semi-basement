@@ -1,9 +1,5 @@
 import React, { Component } from 'react'
 import Navigation from './components/Navigation/index'
-
-import { selectSong } from '../../../actions/index'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import axios from 'axios';
 import SONG_URL_LIST from '../../constants/test/SongUrlConstants'
 import { resolveUrl } from '../../constants/ApiConstants'
@@ -33,22 +29,18 @@ class Home extends Component {
               this.setState({
                 songInfos: this.state.songInfos.concat(response.data)
               }) 
-              //return response.data;
             })
     })
   }
-  _fetchSong = (songInfo) => {
-    console.log('click',songInfo);
-    this.props.selectSong(songInfo.id) // 속성 뭔지 확인해서 고치기 
-  }
+
   _rederDiscover = () => {
     const songs = this.state.songInfos.map((songInfo, index) => {
-      //console.log('songinfo',songInfo)
       return <ArtworkPlay key={index}
                           singerName= {songInfo.user.permalink}
                           title = {songInfo.title}
                           artwork = {songInfo.artwork_url}
-                          selected={()=>{ this._fetchSong(songInfo) }}
+                          songId = {songInfo.id}
+                          
               />
     })
     return songs  
@@ -68,9 +60,4 @@ class Home extends Component {
     )
   }
 }
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({selectSong} , dispatch)
-}
-
-export default connect(null, mapDispatchToProps)(Home)
-
+export default Home;

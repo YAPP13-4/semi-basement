@@ -1,11 +1,9 @@
 import * as types from './ActionType';
 
-export function selectSong(song){
-    return {
+export const selectSong = song=> ({
         type: types.SELECT_SONG,
-        song
-    }
-};
+        song : song
+})
 
 export const landing = (landing_state) => ({
     type: types.LANDING,
