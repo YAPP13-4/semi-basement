@@ -15,23 +15,17 @@ const moduleName = 'BottomPlayer'
     render() {
         return (
           <div className={cx(`${moduleName}`)}>
-            {console.log('song :' +this.props.song)}
-            <ReactPlayer className={cx(`${moduleName}-player`) } 
-                        url={this.props.song} 
-                        controls={true}
-                        />
+
+            <ReactPlayer className={cx(`${moduleName}-player`) } url={this.props.song} controls={true}/>
           </div>
         )
       }
 }
-//function mapDispatchToProps
-function mapStateToProps({song}) {
-  const songurl = (SONG_URL.replace(':id', song));
+
+function mapStateToProps(state) {
+  console.log('state to props :',state);
+  const songurl = (SONG_URL.replace(':id', state.music.song));
   return { song : songurl}
 } 
-function mapDispatchToProps(dispatch) {
-  // selectBook 이 호출되면, 결과는 
-  // 모든 reducers에게 전달. 
-  return bindActionCreators({ heardSong : heardSong}, dispatch)
-}
-export default connect(mapStateToProps,mapDispatchToProps)(BottomPlayer)
+
+export default connect(mapStateToProps)(BottomPlayer)

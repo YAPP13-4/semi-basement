@@ -9,6 +9,7 @@ const initialState = {
 function selectSong(state=initialState, action) {
     switch (action.type) {
         case types.SELECT_SONG:
+            console.log("ssold")
             return {
                 ...state,
                 song: action.song
