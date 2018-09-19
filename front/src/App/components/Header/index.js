@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import classnames from 'classnames/bind'
-
-import menuIcon from '../../../assets/icons/menu.png'
 import logo from '../../../assets/logos/logo.png'
 import css from './index.scss'
 
