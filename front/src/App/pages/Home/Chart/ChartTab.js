@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { selectSong } from '../../../../actions/index'
+import { selectSong } from '../../../../redux/music/actions'
 import axios from 'axios';
 import { resolveUrl } from '../../../constants/ApiConstants'
 import classnames from 'classnames/bind'

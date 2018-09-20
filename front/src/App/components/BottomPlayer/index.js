@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import ReactPlayer from 'react-player'
 import classnames from 'classnames/bind'
-import { heardSong } from '../../../actions/index'
-import { bindActionCreators } from 'redux'
 import {connect} from 'react-redux' 
 import css from './index.scss'
 import { SONG_URL } from '../../constants/ApiConstants'

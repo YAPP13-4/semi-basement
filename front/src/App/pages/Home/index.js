@@ -53,9 +53,7 @@ class Home extends Component {
           <div></div> <div className={cx(`${moduleName}-category-title`)}>SEBA's Choice</div> 
         </div>
         <div className={cx(`${moduleName}-songWrapper`)}>
-          {this.state.songInfos ? this._rederDiscover() : 'Loading'}
-          {/* temp test !!! */}
-          <MyPlayer />                                      
+          {this.state.songInfos ? this._rederDiscover() : 'Loading'}                                    
         </div>
 
       </div>
