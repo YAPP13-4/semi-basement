@@ -1,4 +1,4 @@
-// '/playlist' 에 접속하면 내가 플레이리스트로 등록해둔곡 리스트 뜨게 하기
+// '/playlist:user_id' 에 접속하면 내가 플레이리스트로 등록해둔곡 리스트 뜨게 하기
 
 const express = require('express');
 const bodyparser = require('body-parser');
@@ -16,7 +16,6 @@ conn.connect();
 const app = express();
 
 app.use(express.static('public'));
-// false 로 할지 true로 할지 찾아보기
 app.use(bodyparser.urlencoded({ extended: false }));
 
 app.get('/playlist/:user_id', function(req, res) {
