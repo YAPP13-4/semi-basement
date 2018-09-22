@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import classnames from 'classnames/bind'
@@ -10,7 +10,8 @@ const moduleName = 'Header'
 class Header extends Component {
   render() {
     return (
-      <header
+      <Fragment>  
+        <header
         className={cx(`${moduleName}`)}
         style={{
           backgroundColor: this.props.pathname === '/' ? 'none' : '#000000'
@@ -31,10 +32,22 @@ class Header extends Component {
             >Sign Up</a>
           </div>
           <div className={cx(`${moduleName}-rightSide-playlist`)}>
-            <span></span>
+            <button onClick={this.onSwitch} className="drawer-handle" style={{color:"#ffffff"}}> btn btn  <span></span> </button>
+           
           </div>
         </div>
+        
       </header>
+
+      <div> 
+        {/*
+        <MyPlayer open ={this.state.open}
+
+        onMaskClick={this.onTouchEnd} /> */}
+                  </div>
+     
+      </Fragment>
+
     )
   }
 }

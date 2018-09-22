@@ -47,6 +47,7 @@ class ChartTab extends Component {
                         duration = {songInfo.duration}
                         favoriteCount = {songInfo.favoritings_count}
                         playCount = {songInfo.playback_count}
+                        songId = {songInfo.id}
                         selected = {()=>{this._fetchSong(songInfo)}}
                     />
         })

@@ -1,12 +1,17 @@
 import React ,{Component} from 'react'
 import classnames from 'classnames/bind'
 import css from './ChartTabContainer.scss';
+import {addHistory} from '../../../../../redux/music/actions'
 import getImageUrl from '../../../../../utils/ImageUtils'
 import IMAGE_SIZES from '../../../../constants/ImageConstants'
-
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 const cx         = classnames.bind(css)
 const moduleName = 'ChartTabContainer'
 class ChartTabItem extends Component{
+    _addSong = () => {
+        this.props.addHistory(this.props.songId)
+    }
     render() {
         const min = Math.ceil( (this.props.duration/1000) / 60);
         const sec = (Math.ceil(this.props.duration/1000)) % 60;
@@ -27,10 +32,16 @@ class ChartTabItem extends Component{
                 <td>{likeCount}m</td>
                 <td> <span className={cx(`${moduleName}-playIcon`)}></span> </td>
                 <td>{playCount}m</td>
-                <td> <span className={cx(`${moduleName}-addListIcon`)}></span> </td>
+                <td> <span onClick={this._addSong} className={cx(`${moduleName}-addListIcon`)}></span> </td>
             </tr>
         )
     }
 }
 
-export default ChartTabItem
+function mapDispatchToProps(dispatch) {
+    console.log('chart tab container mapdispatchTo props')
+    return bindActionCreators({addHistory} , dispatch)
+}
+  
+ //export default ChartTabItem
+export default connect(null, mapDispatchToProps)(ChartTabItem)
