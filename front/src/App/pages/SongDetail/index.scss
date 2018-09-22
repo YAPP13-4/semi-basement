@@ -1,3 +1,15 @@
 .SongDetail {
   background: ivory;
+  &-music {
+    background: olive;
+    height: 300px;
+  }
+  &-infoWrapper {
+    min-height: 600px;
+    display: flex;
+  }
+  &-songInfo {
+    background: gray;
+    width: 500px;
+  }
 }
