@@ -14,10 +14,11 @@ function selectSong(state=initialState, action) {
                 ...state,
                 song: action.song
             };
-        case types.LANDING:
-            return {
+        case types.HISTORY_SONG:
+            console.log("history reducer1")
+            return { 
                 ...state,
-                landing_state : action.landing_state
+                arr: [...state.arr, action.newItem]
             }
         default:
             return state;
