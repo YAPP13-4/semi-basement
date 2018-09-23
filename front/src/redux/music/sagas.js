@@ -1,4 +1,5 @@
-import { takeEvery, all, put } from 'redux-saga/effects'
+import { takeEvery, all, put, call } from 'redux-saga/effects'
+import { getSoundCloudSong } from 'src/api'
 import {
   LOAD_SONG_DETAIL,
   loadSongDetailRequest,
@@ -6,13 +7,13 @@ import {
   loadSongDetailFailure
 } from './actions'
 
-export function* loadSongDetailFlow() {
+export function* loadSongDetailFlow(action) {
+  const { songId } = action
   yield put(loadSongDetailRequest())
   try {
+    const { data } = yield call(getSoundCloudSong, songId)
 
-    // const data = api call
-
-    // yield put(loadSongDetailSuccess(data))
+    yield put(loadSongDetailSuccess(data))
   } catch (error) {
     yield put(loadSongDetailFailure(error))
   }

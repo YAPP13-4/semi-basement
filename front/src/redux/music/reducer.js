@@ -7,7 +7,7 @@ import {
 } from './actions'
 
 const music = (
-  state = { song: '', loading: false, songDetail: [] },
+  state = { song: '', loading: false, songDetail: {} },
   action
 ) => {
   switch (action.type) {
@@ -25,7 +25,7 @@ const music = (
       return {
         ...state,
         loading: false,
-        songDetail: [...action.data]
+        songDetail: { ...action.data }
       }
     case LOAD_SONG_DETAIL_FAILURE:
       return {
