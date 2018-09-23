@@ -28,8 +28,8 @@ class ArtworkPlay extends Component {
     this.props.selectSong(this.props.songId) // 속성 뭔지 확인해서 고치기
   }
 
-  loadSongDetail = musicId => {
-    alert('asdf')
+  loadSongDetail = () => {
+    alert(`songId is ${this.props.songId}`)
     // action을 통해, 그 음악의 id를 넘겨주어, songDetail의 정보를 서버에서 받아와서,
   }
 
@@ -53,7 +53,11 @@ class ArtworkPlay extends Component {
                 <div className={cx(`${moduleName}-song-body-card-playicon`)} />
               </div>
 
-              <Link className={cx(`${moduleName}-song-body-card-link`)} to="/songDetail" onClick={this.loadSongDetail}>
+              <Link
+                className={cx(`${moduleName}-song-body-card-link`)}
+                to="/songDetail"
+                onClick={this.loadSongDetail}
+              >
                 <div className={cx(`${moduleName}-song-body-card-info`)}>
                   <div className={cx(`${moduleName}-song-body-card-title`)}>
                     {this.props.title}
