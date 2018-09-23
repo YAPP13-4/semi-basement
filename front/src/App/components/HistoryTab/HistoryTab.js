@@ -44,6 +44,7 @@ class HistoryTab extends Component {
         const historySongs = this.state.songData.map( (song, index) => {
             console.log('song data',song)
             return <HistoryComponent    key = {index}
+                                        songId = {song.id}
                                         artwork = {song.artwork_url}
                                         title = {song.title}
                                         singer = {song.user.username}
