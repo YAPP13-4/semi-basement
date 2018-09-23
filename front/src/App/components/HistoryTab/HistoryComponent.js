@@ -37,7 +37,6 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({selectSong} , dispatch)
 }
 function mapStateToProps(state) {
-    console.log('m s t ',state.meta.toggleHistory)
     return { toggleHistory : state.meta.toggleHistory}
   } 
 export default connect(mapStateToProps, mapDispatchToProps)(HistoryComponent)

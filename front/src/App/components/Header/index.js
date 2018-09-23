@@ -32,7 +32,7 @@ class Header extends Component {
             >Sign Up</a>
           </div>
           <div className={cx(`${moduleName}-rightSide-playlist`)}>
-            <button onClick={this.onSwitch} className="drawer-handle" style={{color:"#ffffff"}}> btn btn  <span></span> </button>
+            <span></span>
            
           </div>
         </div>

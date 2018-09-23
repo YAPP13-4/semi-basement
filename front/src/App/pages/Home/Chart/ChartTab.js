@@ -77,7 +77,7 @@ class ChartTab extends Component {
                     </table>
                     
                 </div>
-                <HistoryTab />
+                
             </div>
         )
     }

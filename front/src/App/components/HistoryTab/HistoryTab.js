@@ -51,7 +51,6 @@ class HistoryTab extends Component {
        // ()
         return(
             <div className={cx(`${moduleName}`)}>
-                 <h2 style={{color:'#ffffff'}}>its history tab </h2>
                  <div className={cx(`${moduleName}__Wrapper`)}>
                     <button onClick={this._getHistorySong} >butn</button>
                     {this.state.songData ? this._renderHistory() : 'Loading'}
@@ -62,10 +61,8 @@ class HistoryTab extends Component {
     }
 }
 function mapStateToProps(state) {
-    localStorage.historyData = JSON.stringify(state.music.historySong)
-
     const historyData = localStorage.historyData
-
+    localStorage.historyData = JSON.stringify(state.music.historySong)
     console.log('local Storage ', JSON.parse(historyData))
     //console.log('state.music.historySong',state.music.historySong)
     return { 
