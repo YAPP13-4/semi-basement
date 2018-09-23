@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import classnames from 'classnames/bind'
+import { loadSongDetail } from 'src/redux/music/actions'
+
 import css from './ArtworkPlay.scss'
 import getImageUrl from '../../../../utils/ImageUtils'
 import IMAGE_SIZES from '../../../constants/ImageConstants'
 import { selectSong } from '../../../../redux/music/actions'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+
 const cx = classnames.bind(css)
 const moduleName = 'ArtworkPlay'
 
@@ -31,7 +34,7 @@ class ArtworkPlay extends Component {
   loadSongDetail = () => {
     alert(`songId is ${this.props.songId}`)
     // action을 통해, 그 음악의 id를 넘겨주어, songDetail의 정보를 서버에서 받아와서,
-    // this.props.loadSongDetail(this.props.songId)
+    this.props.loadSongDetail(this.props.songId)
   }
 
   render() {
@@ -77,7 +80,7 @@ class ArtworkPlay extends Component {
 }
 ArtworkPlay.propTypes = propTypes
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ selectSong }, dispatch)
+  return bindActionCreators({ selectSong, loadSongDetail }, dispatch)
 }
 
 export default connect(
