@@ -9,6 +9,9 @@ import SongChartList from './constants/test/SongChartList'
 import Navigation from '../components/Navigation/index'
 import css from './ChartTab.scss'
 import ChartTabItem from './containers/ChartTabContainer'
+
+import HistoryTab from '../../../components/HistoryTab/HistoryTab'
+
 const cx         = classnames.bind(css)
 const moduleName = 'ChartTab'
 
@@ -74,6 +77,7 @@ class ChartTab extends Component {
                     </table>
                     
                 </div>
+                <HistoryTab />
             </div>
         )
     }

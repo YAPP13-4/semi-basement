@@ -4,7 +4,6 @@ import classnames from 'classnames/bind'
 import {connect} from 'react-redux' 
 import css from './index.scss'
 import { SONG_URL } from '../../constants/ApiConstants'
-
 const cx = classnames.bind(css)
 const moduleName = 'BottomPlayer'
 
@@ -21,7 +20,6 @@ const moduleName = 'BottomPlayer'
 }
 
 function mapStateToProps(state) {
-  console.log('state to props :',state);
   const songurl = (SONG_URL.replace(':id', state.music.song));
   return { song : songurl}
 } 
