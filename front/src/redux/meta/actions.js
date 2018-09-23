@@ -33,7 +33,6 @@ export function exampleFailure(error) {
 }
 
 export function toggleHistory() {
-  console.log('toggle')
   return {
     type: TOGGLE_HISTORY
   }

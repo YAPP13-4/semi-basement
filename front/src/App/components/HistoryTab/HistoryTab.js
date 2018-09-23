@@ -14,8 +14,6 @@ class HistoryTab extends Component {
     }
     
     static getDerivedStateFromProps(nextProps , prevState) {
-        console.log('14',nextProps.historySong)
-        console.log('prevState',prevState.songId)
         if(nextProps.historySong.length !== prevState.songId.length) {
             return { songId : nextProps.historySong 
             }
@@ -38,9 +36,6 @@ class HistoryTab extends Component {
         })
     }
     _renderHistory = () => {
-        //await this._getHistorySong()
-        console.log('render history',this.state.songData)
-        
         const historySongs = this.state.songData.map( (song, index) => {
             console.log('song data',song)
             return <HistoryComponent    key = {index}

@@ -9,13 +9,17 @@ import { bindActionCreators } from 'redux'
 const cx         = classnames.bind(css)
 const moduleName = 'HistoryComponent'
 class HistoryComponent extends Component {
+    state = {
+        toggle : false,
+    }
     _fetchSong = () => {
         console.log('click',this.props.songId);
         this.props.selectSong(this.props.songId) // 속성 뭔지 확인해서 고치기 
     }
+
     render() {
         return(
-            <div className={cx(`${moduleName}`)}>
+            <div style={{display : (this.props.toggleHistory? 'flex' : 'none') }} className={cx(`${moduleName}`)}>
                 <div className={cx(`${moduleName}__artwork`)}
                     onClick={this._fetchSong}
                     style= {{backgroundImage: `url(${getImageUrl(this.props.artwork, IMAGE_SIZES.XLARGE)})`}}
@@ -32,5 +36,8 @@ class HistoryComponent extends Component {
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({selectSong} , dispatch)
 }
-  
-export default connect(null, mapDispatchToProps)(HistoryComponent)
+function mapStateToProps(state) {
+    console.log('m s t ',state.meta.toggleHistory)
+    return { toggleHistory : state.meta.toggleHistory}
+  } 
+export default connect(mapStateToProps, mapDispatchToProps)(HistoryComponent)
