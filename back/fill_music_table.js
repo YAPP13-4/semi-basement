@@ -23,7 +23,6 @@ app.use(bodyparser.urlencoded({ extended: false }));
 //      --> 날짜
 // 2. music 테이블에 삽입
 
-//사전 정보 
 const API_HOSTNAME = '//api.soundcloud.com';
 const CLIENT_ID = 'a281614d7f34dc30b665dfcaa3ed7505';
 const resolveUrl = songUrl => `https:${API_HOSTNAME}/resolve.json?url=${songUrl}&client_id=${CLIENT_ID}`
