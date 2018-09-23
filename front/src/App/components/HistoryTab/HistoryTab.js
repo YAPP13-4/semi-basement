@@ -1,50 +1,65 @@
 import React, { Component } from 'react'
-import './HistoryTab.css'
+import css from './HistoryTab.scss'
+import classnames from 'classnames/bind'
 import { SONG_URL } from '../../constants/ApiConstants'
 import axios from 'axios'
 import HistoryComponent from './HistoryComponent'
 import { connect } from 'react-redux'
+const cx         = classnames.bind(css)
+const moduleName = 'HistoryTab'
 class HistoryTab extends Component {
     state = {
-        tmpData : []
+        songId : [],
+        songData : []
     }
+    
     static getDerivedStateFromProps(nextProps , prevState) {
-        if(nextProps.historySong.length !== prevState.tmpData.length) {
-            return { tmpData : nextProps.historySong }
+        console.log('14',nextProps.historySong)
+        console.log('prevState',prevState.songId)
+        if(nextProps.historySong.length !== prevState.songId.length) {
+            return { songId : nextProps.historySong 
+            }
         }
     }
-    /*
-    componentDidMount() {
-        this._getHistorySong();
-    }*/
+    
     _getHistorySong = () => {
-        const historySongArray = JSON.parse(localStorage.historyData)
-        console.log('history song',this.state.historySong)
-        /*
-        this.setState({
-            tmpData: historySongArray
-        })*/
-        this._renderHistory();
-    }
-    _renderHistory = () => {
-        this.state.tmpData.map((song, index)=> {
+       console.log('history song', this.props.historySong)
+        this.state.songId.map((song)=> {
             return axios.get( SONG_URL.replace(':id', song))
             .then(response=>{
-                console.log('history tab', response.data)
-               this.setState({
-                tmpData : this.state.tmpData.concat(response.data)
-               })
+                //console.log('history tab', response.data)
+                this.setState({
+                    songData : this.state.songData.concat(response.data)
+                })
             })
             .catch(err => {
                 console.log(err)
             })
         })
     }
+    _renderHistory = () => {
+        //await this._getHistorySong()
+        console.log('render history',this.state.songData)
+        
+        const historySongs = this.state.songData.map( (song, index) => {
+            console.log('song data',song)
+            return <HistoryComponent    key = {index}
+                                        artwork = {song.artwork_url}
+                                        title = {song.title}
+                                        singer = {song.user.username}
+                    />
+        })
+        return historySongs
+    }
     render() {
+       // ()
         return(
-            <div>
+            <div className={cx(`${moduleName}`)}>
                  <h2 style={{color:'#ffffff'}}>its history tab </h2>
-                 <button style={{color:'#ffffff'}} onClick={this._renderHistory} > button </button>
+                 <div className={cx(`${moduleName}__Wrapper`)}>
+                    <button onClick={this._getHistorySong} >butn</button>
+                    {this.state.songData ? this._renderHistory() : 'Loading'}
+                 </div>
                  
             </div>
         )
@@ -56,7 +71,7 @@ function mapStateToProps(state) {
     const historyData = localStorage.historyData
 
     console.log('local Storage ', JSON.parse(historyData))
-    
+    //console.log('state.music.historySong',state.music.historySong)
     return { 
         historySong : state.music.historySong
     }
