@@ -40,8 +40,9 @@ export function loadSongDetailSuccess(data) {
     }
 }
 
-export function loadSongDetailFailure() {
+export function loadSongDetailFailure(err) {
     return {
-        type: LOAD_SONG_DETAIL_FAILURE
+        type: LOAD_SONG_DETAIL_FAILURE,
+        err
     }
 }

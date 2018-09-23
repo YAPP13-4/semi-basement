@@ -31,6 +31,7 @@ class ArtworkPlay extends Component {
   loadSongDetail = () => {
     alert(`songId is ${this.props.songId}`)
     // action을 통해, 그 음악의 id를 넘겨주어, songDetail의 정보를 서버에서 받아와서,
+    // this.props.loadSongDetail(this.props.songId)
   }
 
   render() {
