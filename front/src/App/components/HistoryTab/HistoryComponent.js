@@ -10,12 +10,13 @@ class HistoryComponent extends Component {
         return(
             <div className={cx(`${moduleName}`)}>
                 <div className={cx(`${moduleName}__artwork`)}
+                    style= {{backgroundImage: `url(${getImageUrl(this.props.artwork, IMAGE_SIZES.XLARGE)})`}}
                     >
-                
+                    thumbnail ? 
                 </div>
                 <div>
-                    <div>title</div>
-                    <div>creator</div>
+                    <div>{this.props.title}</div>
+                    <div>{this.props.singer}</div>
                 </div>
             </div>
         )

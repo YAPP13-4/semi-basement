@@ -40,7 +40,7 @@ class ChartTab extends Component {
     }
     _renderChart = () => {
         const songs = this.state.songInfos.map( (songInfo,index)=> {
-            console.log('data',songInfo)
+            //console.log('data',songInfo)
             return <ChartTabItem 
                         key      = {index}
                         ind      = {index}
