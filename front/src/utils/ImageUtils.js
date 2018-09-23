@@ -12,6 +12,8 @@ const getImageUrl = (s, size = null) => {
       return url.replace('large', IMAGE_SIZES.LARGE);
     case IMAGE_SIZES.XLARGE:
       return url.replace('large', IMAGE_SIZES.XLARGE);
+    case IMAGE_SIZES.SMALL:
+      return url.replace('large', IMAGE_SIZES.XLARGE);
     default:
       return url;
   }
