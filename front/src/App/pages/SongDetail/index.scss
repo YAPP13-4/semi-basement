@@ -2,7 +2,19 @@
   background: ivory;
   &-music {
     background: olive;
-    height: 300px;
+    height: 240px;
+    padding: 30px 60px;
+  }
+  &-albumCover {
+    height: 240px;
+    width: 240px;
+    background-color: tomato;
+    display: inline-block;
+  }
+  &-wordings {
+    background-color: aquamarine;
+    width: 500px;
+    display: inline-block;
   }
   &-infoWrapper {
     min-height: 600px;
