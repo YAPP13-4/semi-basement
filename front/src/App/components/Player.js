@@ -1,16 +1,23 @@
 import React from 'react';
 import audio from './audio'
-
+import getImageUrl from '../../utils/ImageUtils'
+import IMAGE_SIZES from '../constants/ImageConstants'
 const Player = ({
-    audioUrl
-  }) => {  
+    song,
+    togglePlay
+  }) => { 
+    console.log('player',song)
+    const artworkUrl = song[2]
+    const title = song[1] 
     return (
       <div className="player">
         <div className="player__inner container">
           <div className="player__section player__section--song">
             <div className="player__song">
               <div className="player__song__main">
-                <h2 style={{color:"#ffffff"}} >Hi Hi</h2>
+              <div className="player__song__artwork" style={{ backgroundImage: `url(${getImageUrl(artworkUrl, IMAGE_SIZES.SMALL)})` }} />
+                <h3 style={{color:"#ffffff"}} >{title}</h3>
+                
               </div>
             </div>
           </div>
@@ -26,8 +33,12 @@ const Player = ({
               <div
                 className="player__button"
                 role="button"
+                onClick={togglePlay}
                 tabIndex="0"
+
+                style={{color:'#ffffff'}}
               >
+                Play
               </div>
               <div
                 className="player__button"

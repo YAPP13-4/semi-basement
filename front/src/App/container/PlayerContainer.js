@@ -14,23 +14,25 @@ import {
 import Player from '../components/Player'
 
 const defaultProps = {
-    audioUrl: null,
+    song: null,
 };
 
 const PlayerContainer = (props) => {
     console.log('container test')
-    const { audioUrl } = props;
-    console.log('song',audioUrl)
-    //return song ? <Player {...props} /> : null;
-    return <Player {...props} />
+    const { song } = props;
+    console.log('song',song)
+    console.log('props',{...props})
+    return song ? <Player {...props} /> : null;
+    //return <Player {...props} />
 }
 PlayerContainer.defaultProps = defaultProps;
 
 const mapStateToProps = (state) => {
-    const songurl = (SONG_URL.replace(':id', state.music.song));
+    //const songurl = (SONG_URL.replace(':id', state.music.song));\
+    console.log('state to props',state.music.song)
     return {
       //song : songUrl
-      audioUrl: songurl,
+      song: state.music.song,
     };
   };
   export default connect(mapStateToProps, {

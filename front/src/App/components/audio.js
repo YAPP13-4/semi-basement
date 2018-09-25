@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-
+import { SONG_STREAM_URL } from '../constants/ApiConstants'
 const audio = (InnerComponent) => {
     class AudioComponent extends Component {
         constructor() {
@@ -18,10 +18,9 @@ const audio = (InnerComponent) => {
             this.toggleMuted = this.toggleMuted.bind(this);
             this.togglePlay = this.togglePlay.bind(this);
         }
-        /*
+        
         componentDidMount() {
             const { audioElement } = this;
-            console.log('audioElement',audioElement)
             audioElement.play();
           }
       
@@ -31,7 +30,7 @@ const audio = (InnerComponent) => {
             if (prevProps.audioUrl !== audioUrl) {
               audioElement.play();
             }
-        }*/
+        }
         onLoadStart() {
             const { onLoadStart } = this.props;
             onLoadStart();
@@ -50,7 +49,7 @@ const audio = (InnerComponent) => {
         onTimeUpdate() {
             const { audioElement, props } = this;
             const { onTimeUpdate } = props;
-            //onTimeUpdate(Math.floor(audioElement.currentTime));
+            onTimeUpdate(Math.floor(audioElement.currentTime));
         }
       
         onVolumeChange() {
@@ -85,7 +84,8 @@ const audio = (InnerComponent) => {
             }
         }
         render() {
-            const { audioUrl } = this.props;
+            const { song } = this.props;
+            const songUrl = 'https://'+SONG_STREAM_URL.replace(':id',song[0])
            return(
                <div>
                    <audio
@@ -95,7 +95,8 @@ const audio = (InnerComponent) => {
                     onPlay={this.onPlay}
                     onTimeUpdate={this.onTimeUpdate}
                     onVolumeChange={this.onVolumeChange}
-                    src={audioUrl}
+                    ref={(node) => { this.audioElement = node; }}
+                    src={songUrl}
                    ></audio>
                     <h2 style={{color:"#ffffff"}} >its audio element</h2>
                     <InnerComponent
