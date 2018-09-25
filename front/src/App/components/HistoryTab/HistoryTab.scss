@@ -1,0 +1,9 @@
+.HistoryTab {
+  overflow-x: scroll;
+  &__Wrapper {
+    display: flex;
+    //딱 맞게 어떻게 하지... 아직 모르겠다. ㅠ
+    width: 5000px;
+  }
+  
+}

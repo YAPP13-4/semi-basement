@@ -4,7 +4,7 @@ import classnames from 'classnames/bind'
 import css from './ArtworkPlay.scss'
 import getImageUrl from '../../../../utils/ImageUtils'
 import IMAGE_SIZES from '../../../constants/ImageConstants'
-import {selectSong} from '../../../../redux/music/actions'
+import { selectSong } from '../../../../redux/music/actions'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 const cx = classnames.bind(css)
@@ -24,7 +24,7 @@ class ArtworkPlay extends Component {
     }
     _fetchSong = () => {
         console.log('click',this.props.songId);
-        this.props.selectSong(this.props.songId) // 속성 뭔지 확인해서 고치기 
+        this.props.selectSong(this.props.songId)
     }
     render() {
         const artworkUrl = this.props.artwork;

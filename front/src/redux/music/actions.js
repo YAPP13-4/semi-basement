@@ -5,6 +5,13 @@ export function selectSong(song) {
         song
     }
 }
+export function addHistory(historySong) {
+    return {
+        type: types.HISTORY_SONG,
+        historySong
+    }
+        
+}
 /*
 export const selectSong = song=> ({
     type: types.SELECT_SONG,
