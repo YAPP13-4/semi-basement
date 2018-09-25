@@ -51,6 +51,7 @@ app.get('/fillMusicTable', function(req, res) {
         } else {
             var updateTrigger = 0;
             _requestId = () => {
+                // LIST에 한곡만 넣을거면 map사용하지 않는 코드로 변경하기
                 SONG_URL_LIST.map( (url)=> {
                   return axios.get(resolveUrl(url))
                         .then(response => {
