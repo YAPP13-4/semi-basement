@@ -15,7 +15,7 @@ const music =(
         case types.HISTORY_SONG:
            return { 
                 ...state,
-                historySong: [...state.historySong, action.historySong]
+                historySong: action.historySong
             }       
         default:
             return state

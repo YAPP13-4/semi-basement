@@ -12,11 +12,41 @@ class HistoryTab extends Component {
         songId : [],
         songData : []
     }
-    
+
+    componentDidMount() {
+        //cart state가 local storage에 있으면 불러오기
+        let localHistory = localStorage.historySong;
+        console.log('local history' , localHistory)
+        if(localHistory) {
+            this.setState({
+                songId: JSON.parse(localHistory)
+            })
+        }
+    };
+
+    componentDidUpdate(prevProps, prevState) {
+        if(prevState.songId !== this.state.songId) {
+            console.log('prevState.songId',prevState.songId)
+            console.log('this.state.songId',this.state.songId)
+            localStorage.historySong = JSON.stringify(this.state.songId);
+        }
+    }
+
     static getDerivedStateFromProps(nextProps , prevState) {
-        if(nextProps.historySong.length !== prevState.songId.length) {
-            return { songId : nextProps.historySong 
+        //songId 에 새로 추가한 곡이 없으면
+        console.log('static method')
+        let prevSongId = prevState.songId;
+        const is = prevSongId.some(item => {
+            return item === nextProps.historySong;
+        });
+
+        if(!is) {
+            console.log('static method2')
+            return {
+                songId : prevState.songId.concat(nextProps.historySong)
             }
+        }else {
+            return null;
         }
     }
     
@@ -61,14 +91,9 @@ class HistoryTab extends Component {
     }
 }
 function mapStateToProps(state) {
-    const historyData = localStorage.historyData
-    localStorage.historyData = JSON.stringify(state.music.historySong)
-    console.log('local Storage ', JSON.parse(historyData))
-    //console.log('state.music.historySong',state.music.historySong)
     return { 
         historySong : state.music.historySong
     }
 } 
 
 export default connect(mapStateToProps)(HistoryTab)
-//export default MyPlayer

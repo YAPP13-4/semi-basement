@@ -39,7 +39,6 @@ class ChartTabItem extends Component{
 }
 
 function mapDispatchToProps(dispatch) {
-    console.log('chart tab container mapdispatchTo props')
     return bindActionCreators({addHistory} , dispatch)
 }
   
