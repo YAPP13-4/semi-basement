@@ -12,6 +12,17 @@
         height: 56px;
         border-radius: 28px;
         margin-right: 32px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    &__artwork:hover {
+        div {
+            background: url('../../../assets/icons/icon2.png') no-repeat -115px -236px;
+            width: 22px;
+            height: 26px;
+
+        }
     }
     &__title {
         font-family: 'AvertaCYExtrabold';

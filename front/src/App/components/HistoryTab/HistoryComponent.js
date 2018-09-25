@@ -24,6 +24,7 @@ class HistoryComponent extends Component {
                     onClick={this._fetchSong}
                     style= {{backgroundImage: `url(${getImageUrl(this.props.artwork, IMAGE_SIZES.XLARGE)})`}}
                     >
+                    <div></div>
                 </div>
                 <div>
                     <div className={cx(`${moduleName}__title`)}>{this.props.title}</div>
