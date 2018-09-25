@@ -1,5 +1,8 @@
 // '/fillMusicTable 접속시 --> DB의 music_table에 값이 채워지도록 하기
 
+// 나중에 해결해야할 것
+// - LIST에 한곡만 넣을거면 map사용하지 않는 코드로 변경하기
+
 const express = require('express');
 const bodyparser = require('body-parser');
 const axios = require('axios');
@@ -51,7 +54,6 @@ app.get('/fillMusicTable', function(req, res) {
         } else {
             var updateTrigger = 0;
             _requestId = () => {
-                // LIST에 한곡만 넣을거면 map사용하지 않는 코드로 변경하기
                 SONG_URL_LIST.map( (url)=> {
                   return axios.get(resolveUrl(url))
                         .then(response => {
