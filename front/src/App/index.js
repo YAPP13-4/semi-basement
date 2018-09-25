@@ -25,7 +25,6 @@ class App extends Component {
               <Route {...routeProps} key={routeProps.path || ''} />
             ))}
           </Switch>
-          <h2 style={{color:"#ffffff"}} >Hi Player</h2>
           <PlayerContainer />
           {/*
             <BottomPlayer />

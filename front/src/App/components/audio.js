@@ -98,7 +98,6 @@ const audio = (InnerComponent) => {
                     ref={(node) => { this.audioElement = node; }}
                     src={songUrl}
                    ></audio>
-                    <h2 style={{color:"#ffffff"}} >its audio element</h2>
                     <InnerComponent
                         {...this.state}
                         {...this.props}
