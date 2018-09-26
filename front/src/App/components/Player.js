@@ -6,22 +6,26 @@ import getImageUrl from '../../utils/ImageUtils'
 import IMAGE_SIZES from '../constants/ImageConstants'
 import Slider from './Slider'
 import { formatSeconds } from '../../utils/NumberUtils'
+import HistoryTab from './HistoryTab/HistoryTab'
+
 const cx = classnames.bind(css)
 const moduleName = 'Player'
 const Player = ({
+    meta,
     song,
     player,
     changeCurrentTime,
-    togglePlay
+    togglePlay,
+    toggleHistory
   }) => {
 
     const artworkUrl = song[2]
     const title = song[1] 
     const duration = song[3]
     const { currentTime } = player
-    console.log('current time ',currentTime)
+    const { toggleHistoryTab } = meta
     return (
-      <div className={cx(`${moduleName}`)}>
+        <div className={cx(`${moduleName}`)}>
         <div className={cx(`${moduleName}__inner`)}>
         <div className={cx(`${moduleName}__section`)}>
             <div className={cx(`${moduleName}__buttons`)}>
@@ -89,27 +93,30 @@ const Player = ({
             </div>
           </div>
           <div className="player__section player__section--options">
-            <div className="player__buttons player__buttons--options">
+            <div className={cx(`${moduleName}__buttons`)}>
               <div
 
                 role="button"
                 tabIndex="0"
               >
-                <i className="player__button__icon ion-loop" />
+                <span className={cx(`${moduleName}__add_playlist`)}></span>
+
               </div>
               <div
 
                 role="button"
                 tabIndex="0"
               >
-                <i className="player__button__icon ion-shuffle" />
+                <span className={cx(`${moduleName}__heart`)}></span>
               </div>
               <div
 
                 role="button"
                 tabIndex="0"
               >
-                <i className="player__button__icon ion-android-list" />
+                <span className={cx(`${moduleName}__toggle__history`)}
+                        onClick={toggleHistory}
+                ></span>
               </div>
               <div
                 className="player__button player__button--volume"

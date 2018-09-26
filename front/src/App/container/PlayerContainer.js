@@ -12,6 +12,7 @@ import {
 } from '../../redux/player/actions'
 //title, artwork, songId, singerName
 import Player from '../components/Player'
+import { toggleHistory } from '../../redux/meta/actions'
 
 const defaultProps = {
     song: null,
@@ -27,8 +28,10 @@ PlayerContainer.defaultProps = defaultProps;
 const mapStateToProps = (state) => {
     //const songurl = (SONG_URL.replace(':id', state.music.song));\
     const { player } = state
+    const { meta } = state
     return {
       //song : songUrl
+      meta,
       player,
       song: state.music.song,
     };
@@ -40,5 +43,6 @@ const mapStateToProps = (state) => {
     onPlay,
     onTimeUpdate,
     onVolumeChange,
+    toggleHistory,
     playSong,
   })(PlayerContainer);

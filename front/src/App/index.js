@@ -9,8 +9,6 @@ import Header from './components/Header'
 
 import PlayerContainer from '../App/container/PlayerContainer'
 
-import BottomPlayer from './components/BottomPlayer'
-
 const cx = classnames.bind(css)
 const moduleName = 'App'
 

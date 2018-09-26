@@ -1,6 +1,5 @@
 .Player{
     color: white;
-    padding-left: 50px;
     position: fixed;
     left: 0;
     bottom: 0;
@@ -14,7 +13,9 @@
         justify-content: center;
         align-items: center;
     }
+
     &__inner {
+       
         display: flex;
         flex-direction: row;
         height: 100%;
@@ -26,6 +27,7 @@
         flex-direction: row;
         align-items: center;
         height: 100%;
+        flex: 3;
         & + .player__section {
           margin-left: 40px;
         }
@@ -36,8 +38,28 @@
         align-items: center;
         height: 100%;
 
-        flex: 1;
+        span {
+            display: block;
+        }
     }
+
+    &__add_playlist {
+        background: url('../../assets/icons/icon2.png') no-repeat -224px -91px;
+        width: 17px;
+        height: 16px;
+    }
+    &__heart {
+        background: url('../../assets/icons/icon2.png')   no-repeat -276px -39px;
+        width: 17px;
+        height: 16px;
+    }
+
+    &__toggle__history {
+        background: url('../../assets/icons/icon2.png') no-repeat    -326px -37px;
+        width: 22px;
+        height: 19px;
+    }
+
     &__button {
         position: relative;
         padding: 4px;
@@ -63,7 +85,8 @@
       }
     }
     &__section--seek {
-        flex: 2;
+        flex: 5;
+        //width: 337px;
         padding-top: 30px;
     }
     &__section--time {
@@ -81,15 +104,24 @@
     }
     &__song__title {
         display: block;
+        overflow: hidden;
+        white-space: nowrap;
         font-size: 17px;
+        text-overflow: ellipsis;
     }
     &__song__username  {
         display: block;
         font-size: 15px;
         position: absolute;
         bottom: 5px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
     &__song__main {
         display: flex;
+    }
+    &-historyTab {
+        bottom: 0;
     }
 }
