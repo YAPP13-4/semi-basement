@@ -53,7 +53,7 @@ const Player = ({
               </div>
             </div>
           </div>
-          <div className="player__section player__section--seek">
+          <div className={cx(`${moduleName}__section--seek`)}>
             <Slider
                 max={duration}
                 onChange={changeCurrentTime}
@@ -62,7 +62,7 @@ const Player = ({
           </div>
           <div className="player__section player__section--time">
             <div className="player__time">
-            Whole Time
+            Time
             </div>
           </div>
           <div className={cx(`${moduleName}__section`) }>
