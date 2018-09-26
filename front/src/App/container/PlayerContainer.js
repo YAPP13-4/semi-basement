@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { SONG_URL } from '../constants/ApiConstants'
 import {
+    onLoadedMetadata,
     onLoadStart,
     onPause,
     onPlay,
@@ -29,13 +30,17 @@ PlayerContainer.defaultProps = defaultProps;
 
 const mapStateToProps = (state) => {
     //const songurl = (SONG_URL.replace(':id', state.music.song));\
+    const { player } = state
+    console.log('player',player)
     console.log('state to props',state.music.song)
     return {
       //song : songUrl
+      player,
       song: state.music.song,
     };
   };
   export default connect(mapStateToProps, {
+    onLoadedMetadata, 
     onLoadStart,
     onPause,
     onPlay,

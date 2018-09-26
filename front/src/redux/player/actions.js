@@ -1,5 +1,9 @@
 import * as types from './ActionType';
 
+export const onLoadedMetadata = duration => ({
+    type: types.ON_LOADED_METADATA,
+    duration,
+  });
 export const onLoadStart = () => ({
     type: types.ON_LOAD_START,
   });

@@ -31,6 +31,11 @@ const audio = (InnerComponent) => {
               audioElement.play();
             }
         }
+        onLoadedMetadata() {
+            const { audioElement, props } = this;
+            const { onLoadedMetadata } = props;
+            onLoadedMetadata(Math.floor(audioElement.duration));
+        }
         onLoadStart() {
             const { onLoadStart } = this.props;
             onLoadStart();
@@ -90,6 +95,7 @@ const audio = (InnerComponent) => {
                <div>
                    <audio
                     id="audio"
+                    onLoadedMetadata={this.onLoadedMetadata}
                     onLoadStart={this.onLoadStart}
                     onPause={this.onPause}
                     onPlay={this.onPlay}

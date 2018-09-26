@@ -17,34 +17,38 @@ const player = (state = initialState, action) => {
                 ...state,
                 isPlaying: false,
             };
+        case types.ON_LOADED_METADATA:
+            return {
+              ...state,
+              duration: action.duration,
+            };
+        case types.ON_PLAY:
+            return {
+                ...state,
+                isPlaying: true,
+            };
 
-    case types.ON_PLAY:
-        return {
-            ...state,
-            isPlaying: true,
-        };
+        case types.ON_TIME_UPDATE:
+            return {
+                ...state,
+                currentTime: action.currentTime,
+            };
 
-    case types.ON_TIME_UPDATE:
-        return {
-            ...state,
-            currentTime: action.currentTime,
-        };
+        case types.ON_VOLUME_CHANGE:
+            return {
+                ...state,
+                muted: action.muted,
+                volume: action.volume,
+            };
 
-    case types.ON_VOLUME_CHANGE:
-        return {
-            ...state,
-            muted: action.muted,
-            volume: action.volume,
-        };
-
-    case types.PLAY_SONG:
-        return {
-            ...state,
-            playingIndex: action.playingIndex,
-            playlist: action.playlist,
-        };
-      default:
-        return state;
+        case types.PLAY_SONG:
+            return {
+                ...state,
+                playingIndex: action.playingIndex,
+                playlist: action.playlist,
+            };
+        default:
+            return state;
     }
 }
 

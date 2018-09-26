@@ -4,16 +4,19 @@ import css from './Player.scss'
 import audio from './audio'
 import getImageUrl from '../../utils/ImageUtils'
 import IMAGE_SIZES from '../constants/ImageConstants'
-
+import Slider from './Slider'
 const cx = classnames.bind(css)
 const moduleName = 'Player'
 const Player = ({
     song,
+    player,
     togglePlay
   }) => { 
-    console.log('player',song)
+    console.log('player',player)
     const artworkUrl = song[2]
     const title = song[1] 
+
+    const { currentTime } = player
     return (
       <div className={cx(`${moduleName}`)}>
         <div className={cx(`${moduleName}__inner`)}>
@@ -49,6 +52,14 @@ const Player = ({
               </div>
             </div>
           </div>
+          <div className="player__section player__section--seek">
+            Slider 
+          </div>
+          <div className="player__section player__section--time">
+            <div className="player__time">
+            Whole Time
+            </div>
+          </div>
           <div className={cx(`${moduleName}__section`) }>
             <div className="player__song">
               <div className={cx(`${moduleName}__song__main`)}>
@@ -63,13 +74,6 @@ const Player = ({
                     </div>
                 </div>
               </div>
-            </div>
-          </div>
-
-          <div className="player__section player__section--seek">
-          </div>
-          <div className="player__section player__section--time">
-            <div className="player__time">
             </div>
           </div>
           <div className="player__section player__section--options">
