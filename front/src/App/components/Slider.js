@@ -36,7 +36,6 @@ class Slider extends Component {
     }
   
     onClick(e) {
-        console.log('onclick',this.props)
       const { max, onChange } = this.props;
 
       const percent = (e.clientX - offsetLeft(e.currentTarget)) / e.currentTarget.offsetWidth;
@@ -65,7 +64,6 @@ class Slider extends Component {
   
     render() {
       const { className, max, value } = this.props;
-      console.log('slider',this.props)
       const width = `${(value / max) * 100}%`;
     
       return (
