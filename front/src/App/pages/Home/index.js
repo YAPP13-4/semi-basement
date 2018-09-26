@@ -37,6 +37,7 @@ class Home extends Component {
     const songs = this.state.songInfos.map((songInfo, index) => {
       return <ArtworkPlay key={index}
                           singerName= {songInfo.user.permalink}
+                          duration = {songInfo.duration}
                           title = {songInfo.title}
                           artwork = {songInfo.artwork_url}
                           songId = {songInfo.id}

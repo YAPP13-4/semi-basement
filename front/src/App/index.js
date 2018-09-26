@@ -7,7 +7,7 @@ import routes from './routes'
 import css from './index.scss'
 import Header from './components/Header'
 
-import BottomPlayer from './components/BottomPlayer'
+import PlayerContainer from '../App/container/PlayerContainer'
 
 const cx = classnames.bind(css)
 const moduleName = 'App'
@@ -23,8 +23,8 @@ class App extends Component {
               <Route {...routeProps} key={routeProps.path || ''} />
             ))}
           </Switch>
-
-          <BottomPlayer />
+          <PlayerContainer />
+          
         </div>
         
       </div>
