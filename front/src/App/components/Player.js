@@ -26,9 +26,9 @@ const Player = ({
     const { toggleHistoryTab } = meta
     return (
         <div className={cx(`${moduleName}`)}>
-        <div className={cx(`${moduleName}__inner`)}>
-        <div className={cx(`${moduleName}__section`)}>
-            <div className={cx(`${moduleName}__buttons`)}>
+          <div className={cx(`${moduleName}__inner`)}>
+            <div className={cx(`${moduleName}__section`)}>
+              <div className={cx(`${moduleName}__buttons`)}>
               {/*TODO : prevButton*/}
               <div
                 className={cx(`${moduleName}__button`)}
@@ -130,7 +130,8 @@ const Player = ({
 
           </div>
         </div>
-      </div>
+          <div className={cx(`${moduleName}__historyTab`)}> <HistoryTab />  </div>
+        </div>
     );
   };
 

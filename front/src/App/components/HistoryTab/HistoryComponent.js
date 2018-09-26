@@ -13,8 +13,8 @@ class HistoryComponent extends Component {
         toggle : false,
     }
     _fetchSong = () => {
-        console.log('click',this.props.songId);
-        this.props.selectSong(this.props.songId) // 속성 뭔지 확인해서 고치기 
+        const songInfo = [this.props.songId, this.props.title, this.props.artwork, (this.props.duration/1000)]
+        this.props.selectSong(songInfo) 
     }
 
     render() {
