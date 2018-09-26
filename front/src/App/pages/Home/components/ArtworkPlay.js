@@ -25,7 +25,7 @@ class ArtworkPlay extends Component {
     _fetchSong = () => {
         //이 부분에 배열로 담아서 store에 저장하기. 
         console.log('click',this.props.songId);
-        const songInfo = [this.props.songId, this.props.title, this.props.artwork]
+        const songInfo = [this.props.songId, this.props.title, this.props.artwork, this.props.duration]
         console.log('songinfo',songInfo)
         this.props.selectSong(songInfo)
     }
