@@ -47,15 +47,35 @@ app.get('/add_albumlist/:user_id', function(req, res){
     var user_id = req.params.user_id;
     user_id = parseInt(user_id);
 
-    // 0. 프론트로부터 버튼이 눌렸을때 url 받기 & 테이블 생성 (테이블이 없을때만 생성)
+    // 0. 프론트로부터 버튼이 눌렸을때 url 받기 (나중에 처리해야할 사항)
 
     var testurl = 'https://soundcloud.com/youngma/young-ma-ooouuu-1';
 
     SONG_URL = testurl;
 
+    // 1. 테이블 생성 (테이블이 없을때만 생성 - IF NOT EXISTS 를 이용) 
+
+    var sql_createA = 'CREATE TABLE IF NOT EXISTS `new_semibasement`.`album_?` (`album_id` INT(11) NOT NULL, `album_name` VARCHAR(45) NULL DEFAULT NULL, PRIMARY KEY (`album_id`));'
+    var sql_createAc = 'CREATE TABLE IF NOT EXISTS `new_semibasement`.`album_connect_?` (`album_id` INT(11) NULL DEFAULT NULL, `music_id` INT(11) NULL DEFAULT NULL, INDEX `c_album_?_idx` (`album_id` ASC), CONSTRAINT `c_album_?` FOREIGN KEY (`album_id`) REFERENCES `new_semibasement`.`album_?` (`album_id`) ON DELETE CASCADE ON UPDATE CASCADE);';
+
+    conn.query(sql_createA, [user_id], function(err, rows){
+        if(err){
+            console.log(err);
+        }else{
+            console.log('album_' + user_id +' 테이블이 생성됨.');
+        }
+    });
+
+    conn.query(sql_createAc, [user_id, user_id, user_id, user_id], function(err, rows){
+        if(err){
+            console.log(err);
+        }else{
+            console.log('album_connect' + user_id +' 테이블이 생성됨.');
+        }
+    });
 
 
-    // 1. 프론트에서 받은 url로 먼저 sc_id를 커넥트 테이블에 저장 & 중복 처리
+    // 2. 프론트에서 받은 url로 먼저 sc_id를 커넥트 테이블에 저장 & 중복 처리
 
     var sql_albumC = 'INSERT INTO album_connect_? (music_id) VALUES (?);';
     var sql_musicUrl = 'SELECT sc_id FROM music WHERE play_url = ?;'
@@ -75,7 +95,7 @@ app.get('/add_albumlist/:user_id', function(req, res){
                                     console.log(err);
                                 }else{
                                     console.log("insert to album_connect done");
-                                    // 2. 해당 url를 '/fillMusicTable' 으로 리다이렉트 시켜서 뮤직테이블에 정보 저장 
+                                    // 3. 해당 url를 '/fillMusicTable' 으로 리다이렉트 시켜서 뮤직테이블에 정보 저장 
                                     res.redirect('/fillMusicTable');
                                 }
                             });
@@ -86,7 +106,6 @@ app.get('/add_albumlist/:user_id', function(req, res){
                 }
                 _requestId();
             }else{
-                console.log(re_overlap);
                 console.log("중복되는 url임. 삽입 불가");
             }
         }
