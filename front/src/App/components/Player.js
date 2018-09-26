@@ -12,12 +12,13 @@ const Player = ({
     player,
     changeCurrentTime,
     togglePlay
-  }) => { 
-    console.log('player',player)
+  }) => {
+
     const artworkUrl = song[2]
     const title = song[1] 
     const duration = song[3]
     const { currentTime } = player
+    console.log('current time ',currentTime)
     return (
       <div className={cx(`${moduleName}`)}>
         <div className={cx(`${moduleName}__inner`)}>

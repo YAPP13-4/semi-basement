@@ -65,8 +65,9 @@ class Slider extends Component {
   
     render() {
       const { className, max, value } = this.props;
+      console.log('slider',this.props)
       const width = `${(value / max) * 100}%`;
-  
+    
       return (
         <div className={cx(`${moduleName}`)}>
             <div
@@ -79,7 +80,7 @@ class Slider extends Component {
                 <div className={cx(`${moduleName}__bar`)}>
                     {max > 0
                     ? (
-                        <div className={cx(`${moduleName}__bar__fill`)} style={{ width }}>
+                        <div className={cx(`${moduleName}__bar__fill`)} style={{ width}}>
                         <div
                             className={cx(`${moduleName}__handle`)}
                             onClick={prevent}
