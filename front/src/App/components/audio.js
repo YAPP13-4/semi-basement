@@ -55,6 +55,7 @@ const audio = (InnerComponent) => {
         onTimeUpdate() {
             const { audioElement, props } = this;
             const { onTimeUpdate } = props;
+            console.log('audio time update',audioElement.currentTime)
             onTimeUpdate(Math.floor(audioElement.currentTime));
         }
       
@@ -67,6 +68,7 @@ const audio = (InnerComponent) => {
         }
       
         changeCurrentTime(currentTime) {
+            console.log('currenttime',currentTime)
             this.audioElement.currentTime = currentTime;
         }
       
