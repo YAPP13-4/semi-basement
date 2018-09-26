@@ -8,6 +8,7 @@ const audio = (InnerComponent) => {
             this.audioElement = null;
 
             this.onLoadStart = this.onLoadStart.bind(this);
+            this.onLoadedMetadata = this.onLoadedMetadata.bind(this);
             this.onPause = this.onPause.bind(this);
             this.onPlay = this.onPlay.bind(this);
             this.onTimeUpdate = this.onTimeUpdate.bind(this);
@@ -59,6 +60,7 @@ const audio = (InnerComponent) => {
       
         onVolumeChange() {
             const { audioElement, props } = this;
+            
             const { muted, volume } = audioElement;
             const { onVolumeChange } = props;
             onVolumeChange(muted, volume);
@@ -90,7 +92,7 @@ const audio = (InnerComponent) => {
         }
         render() {
             const { song } = this.props;
-            const songUrl = 'https://'+SONG_STREAM_URL.replace(':id',song[0])
+            const songUrl = 'https:'+SONG_STREAM_URL.replace(':id',song[0])
            return(
                <div>
                    <audio

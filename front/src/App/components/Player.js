@@ -10,12 +10,13 @@ const moduleName = 'Player'
 const Player = ({
     song,
     player,
+    changeCurrentTime,
     togglePlay
   }) => { 
     console.log('player',player)
     const artworkUrl = song[2]
     const title = song[1] 
-
+    const duration = song[3]
     const { currentTime } = player
     return (
       <div className={cx(`${moduleName}`)}>
@@ -53,7 +54,11 @@ const Player = ({
             </div>
           </div>
           <div className="player__section player__section--seek">
-            Slider 
+            <Slider
+                max={duration}
+                onChange={changeCurrentTime}
+                value={currentTime}
+            /> 
           </div>
           <div className="player__section player__section--time">
             <div className="player__time">
