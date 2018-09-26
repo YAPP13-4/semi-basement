@@ -64,6 +64,10 @@
     }
     &__section--seek {
         flex: 2;
+        padding-top: 30px;
+    }
+    &__section--time {
+        padding: 30px 20px 0px 17px;
     }
     &__song__artwork {
         width: 56px;

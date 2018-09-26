@@ -5,6 +5,7 @@ import audio from './audio'
 import getImageUrl from '../../utils/ImageUtils'
 import IMAGE_SIZES from '../constants/ImageConstants'
 import Slider from './Slider'
+import { formatSeconds } from '../../utils/NumberUtils'
 const cx = classnames.bind(css)
 const moduleName = 'Player'
 const Player = ({
@@ -54,6 +55,11 @@ const Player = ({
               </div>
             </div>
           </div>
+          <div className={cx(`${moduleName}__section--time`)}>
+            <div style={{color :'#45f7aa'}}>
+                {formatSeconds(currentTime)}
+            </div>
+          </div>
           <div className={cx(`${moduleName}__section--seek`)}>
             <Slider
                 max={duration}
@@ -61,9 +67,9 @@ const Player = ({
                 value={currentTime}
             /> 
           </div>
-          <div className="player__section player__section--time">
+          <div className={cx(`${moduleName}__section--time`)}>
             <div className="player__time">
-            Time
+                {formatSeconds(duration)}
             </div>
           </div>
           <div className={cx(`${moduleName}__section`) }>
