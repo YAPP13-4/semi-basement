@@ -1,13 +1,24 @@
 .Player{
+    & > div {
+        
+        width: 100%;
+        height: 76px;
+        background-color: #252525;
+        user-select: none;
+        z-index: 999;
+        position: fixed;
+        left: 0;
+    }
     color: white;
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 76px;
-    background-color: #252525;
-    user-select: none;
-    z-index: 999;
+    &-none {
+        bottom: 0;
+    }
+    &-history {
+        bottom: 75px;       
+    }
+    &__historyTab {
+        bottom: 0;
+    }
     &__section--song {
         display: flex;
         justify-content: center;

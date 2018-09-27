@@ -19,7 +19,7 @@ class HistoryComponent extends Component {
 
     render() {
         return(
-            <div style={{display : (this.props.toggleHistory? 'flex' : 'none') }} className={cx(`${moduleName}`)}>
+            <div className={cx(`${moduleName}`)} style={{display:'flex'}}>
                 <div className={cx(`${moduleName}__artwork`)}
                     onClick={this._fetchSong}
                     style= {{backgroundImage: `url(${getImageUrl(this.props.artwork, IMAGE_SIZES.XLARGE)})`}}
