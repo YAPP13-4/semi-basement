@@ -1,7 +1,10 @@
 import * as types from './ActionType';
 
 const music =(
-    state = {song:''}, action
+    state = {   song:'',
+                historySong: []
+            }, 
+    action
 ) => {
     switch (action.type) {
         case types.SELECT_SONG:
@@ -9,6 +12,11 @@ const music =(
                 ...state,
                 song : action.song
             }
+        case types.HISTORY_SONG:
+           return { 
+                ...state,
+                historySong: action.historySong
+            }       
         default:
             return state
     }

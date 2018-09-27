@@ -1,0 +1,127 @@
+.Player{
+    color: white;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 76px;
+    background-color: #252525;
+    user-select: none;
+    z-index: 999;
+    &__section--song {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__inner {
+       
+        display: flex;
+        flex-direction: row;
+        height: 100%;
+        width: 1340px;
+        margin: 0 auto;
+    }
+    &__section {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 100%;
+        flex: 3;
+        & + .player__section {
+          margin-left: 40px;
+        }
+    }
+    &__buttons {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 100%;
+
+        span {
+            display: block;
+        }
+    }
+
+    &__add_playlist {
+        background: url('../../assets/icons/icon2.png') no-repeat -224px -91px;
+        width: 17px;
+        height: 16px;
+    }
+    &__heart {
+        background: url('../../assets/icons/icon2.png')   no-repeat -276px -39px;
+        width: 17px;
+        height: 16px;
+    }
+
+    &__toggle__history {
+        background: url('../../assets/icons/icon2.png') no-repeat    -326px -37px;
+        width: 22px;
+        height: 19px;
+    }
+
+    &__button {
+        position: relative;
+        padding: 4px;
+        outline: 0;
+      
+        &:hover {
+          cursor: pointer;
+        }
+        & + .player__button {
+          margin-left: 30px;
+        }
+      
+      i {
+        position: relative;
+        z-index: 1;
+      }
+      //temp...
+      span {
+        background: url('../../assets/icons/icon2.png') no-repeat -117px -92px;
+        width: 12px;
+        height: 14px;
+        display: inline-block;
+      }
+    }
+    &__section--seek {
+        flex: 5;
+        //width: 337px;
+        padding-top: 30px;
+    }
+    &__section--time {
+        padding: 30px 20px 0px 17px;
+    }
+    &__song__artwork {
+        width: 56px;
+        height: 56px;
+        background: no-repeat center center;
+        background-size: cover;
+        margin-right: 25px;
+    }
+    &__song_infoWrapper {
+        position: relative;
+    }
+    &__song__title {
+        display: block;
+        overflow: hidden;
+        white-space: nowrap;
+        font-size: 17px;
+        text-overflow: ellipsis;
+    }
+    &__song__username  {
+        display: block;
+        font-size: 15px;
+        position: absolute;
+        bottom: 5px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    &__song__main {
+        display: flex;
+    }
+    &-historyTab {
+        bottom: 0;
+    }
+}

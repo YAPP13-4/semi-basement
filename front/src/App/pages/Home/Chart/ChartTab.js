@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { selectSong } from '../../../../actions/index'
+import { selectSong } from '../../../../redux/music/actions'
 import axios from 'axios';
 import { resolveUrl } from '../../../constants/ApiConstants'
 import classnames from 'classnames/bind'
@@ -9,6 +9,7 @@ import SongChartList from './constants/test/SongChartList'
 import Navigation from '../components/Navigation/index'
 import css from './ChartTab.scss'
 import ChartTabItem from './containers/ChartTabContainer'
+
 const cx         = classnames.bind(css)
 const moduleName = 'ChartTab'
 
@@ -37,7 +38,7 @@ class ChartTab extends Component {
     }
     _renderChart = () => {
         const songs = this.state.songInfos.map( (songInfo,index)=> {
-            console.log('data',songInfo)
+            //console.log('data',songInfo)
             return <ChartTabItem 
                         key      = {index}
                         ind      = {index}
@@ -47,6 +48,7 @@ class ChartTab extends Component {
                         duration = {songInfo.duration}
                         favoriteCount = {songInfo.favoritings_count}
                         playCount = {songInfo.playback_count}
+                        songId = {songInfo.id}
                         selected = {()=>{this._fetchSong(songInfo)}}
                     />
         })
@@ -73,6 +75,7 @@ class ChartTab extends Component {
                     </table>
                     
                 </div>
+                
             </div>
         )
     }

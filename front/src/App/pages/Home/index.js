@@ -7,7 +7,6 @@ import ArtworkPlay from './components/ArtworkPlay'
 
 import classnames from 'classnames/bind'
 import css from './index.scss'
-import MyPlayer from '../../components/MyPlayer/MyPlayer'
 const cx = classnames.bind(css)
 const moduleName = 'Home'
 
@@ -26,6 +25,7 @@ class Home extends Component {
     SONG_URL_LIST.map( (url)=> {
       return axios.get(resolveUrl(url))
             .then(response => {
+              //console.log('resolveUrl(url)',resolveUrl(url));
               this.setState({
                 songInfos: this.state.songInfos.concat(response.data)
               }) 
@@ -37,6 +37,7 @@ class Home extends Component {
     const songs = this.state.songInfos.map((songInfo, index) => {
       return <ArtworkPlay key={index}
                           singerName= {songInfo.user.permalink}
+                          duration = {songInfo.duration}
                           title = {songInfo.title}
                           artwork = {songInfo.artwork_url}
                           songId = {songInfo.id}
@@ -53,11 +54,8 @@ class Home extends Component {
           <div></div> <div className={cx(`${moduleName}-category-title`)}>SEBA's Choice</div> 
         </div>
         <div className={cx(`${moduleName}-songWrapper`)}>
-          {this.state.songInfos ? this._rederDiscover() : 'Loading'}
-          {/* temp test !!! */}
-          <MyPlayer />                                      
+          {this.state.songInfos ? this._rederDiscover() : 'Loading'}                                    
         </div>
-
       </div>
     )
   }
