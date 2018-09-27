@@ -34,14 +34,12 @@ class HistoryTab extends Component {
 
     static getDerivedStateFromProps(nextProps , prevState) {
         //songId 에 새로 추가한 곡이 없으면
-        console.log('static method')
         let prevSongId = prevState.songId;
         const is = prevSongId.some(item => {
             return item === nextProps.historySong;
         });
 
         if(!is) {
-            console.log('static method2')
             return {
                 songId : prevState.songId.concat(nextProps.historySong)
             }
@@ -71,6 +69,7 @@ class HistoryTab extends Component {
             return <HistoryComponent    key = {index}
                                         songId = {song.id}
                                         artwork = {song.artwork_url}
+                                        duration = {song.duration}
                                         title = {song.title}
                                         singer = {song.user.username}
                     />

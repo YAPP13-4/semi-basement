@@ -33,8 +33,8 @@ class ChartTab extends Component {
       })
     }
     _fetchSong = (songInfo) => {
-      console.log('click',songInfo);
-      this.props.selectSong(songInfo.id) // 속성 뭔지 확인해서 고치기 
+        const info = [songInfo.id, songInfo.title, songInfo.artwork_url, (songInfo.duration/1000)]
+        this.props.selectSong(info) 
     }
     _renderChart = () => {
         const songs = this.state.songInfos.map( (songInfo,index)=> {

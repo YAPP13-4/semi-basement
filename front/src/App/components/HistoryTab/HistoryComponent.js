@@ -13,13 +13,13 @@ class HistoryComponent extends Component {
         toggle : false,
     }
     _fetchSong = () => {
-        console.log('click',this.props.songId);
-        this.props.selectSong(this.props.songId) // 속성 뭔지 확인해서 고치기 
+        const songInfo = [this.props.songId, this.props.title, this.props.artwork, (this.props.duration/1000)]
+        this.props.selectSong(songInfo) 
     }
 
     render() {
         return(
-            <div style={{display : (this.props.toggleHistory? 'flex' : 'none') }} className={cx(`${moduleName}`)}>
+            <div className={cx(`${moduleName}`)} style={{display:'flex'}}>
                 <div className={cx(`${moduleName}__artwork`)}
                     onClick={this._fetchSong}
                     style= {{backgroundImage: `url(${getImageUrl(this.props.artwork, IMAGE_SIZES.XLARGE)})`}}
