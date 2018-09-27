@@ -25,10 +25,19 @@ class Header extends Component {
         <div className={cx(`${moduleName}-rightSide`)}>
           <div className={cx(`${moduleName}-rightSide-user`)}>
             {/* sing up, sign in btn  a tag must be Link!!!*/}
-            <a style={{marginRight:"21px"}}>Sign In</a>
-            <a
+{/*}
+            <button style={{marginRight:"21px"}}
+                    onClick={/JwModal.open('signIn')}>Sign In</button>
+            <button
               style={{backgroundColor:"#45f7aa", color:"#020202", border:"none"}}
-            >Sign Up</a>
+              onClick={JwModal.open('signUp')}>Sign Up</button>
+
+              < id="signIn" className={cx(`${moduleName}-modal`)}>
+                <h2>Welcome to Semibasement!</h2>
+                <button className={StyleSheet.kakao}>kakao</button>
+              
+              
+*/}
           </div>
           <div className={cx(`${moduleName}-rightSide-playlist`)}>
             <span></span>

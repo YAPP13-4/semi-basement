@@ -1,3 +1,7 @@
 {
-  "dependencies": {}
+  "dependencies": {
+    "history": "^4.7.2",
+    "jw-react-modal": "^1.0.3",
+    "react-router": "^4.3.1"
+  }
 }
