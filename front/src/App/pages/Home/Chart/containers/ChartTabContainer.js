@@ -10,7 +10,18 @@ const cx         = classnames.bind(css)
 const moduleName = 'ChartTabContainer'
 class ChartTabItem extends Component{
     _addSong = () => {
-        this.props.addHistory(this.props.songId)
+        if(localStorage.historySong) {
+            let localHistoryRaw = localStorage.historySong;
+            let localHistoryArr = JSON.parse(localHistoryRaw)
+            if(!localHistoryArr.includes(this.props.songId)) {
+                console.log('not contains')
+                this.props.addHistory(this.props.songId)
+            }
+        }else {
+            console.log('not declared')
+            this.props.addHistory(this.props.songId)
+        }
+
     }
     render() {
         const min = Math.ceil( (this.props.duration/1000) / 60);
