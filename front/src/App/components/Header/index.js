@@ -1,17 +1,17 @@
-import React, { Component, Fragment } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import classnames from 'classnames/bind'
 import logo from '../../../assets/logos/logo.png'
 import css from './index.scss'
+import Popup from "reactjs-popup";
 
 const cx = classnames.bind(css)
 const moduleName = 'Header'
-class Header extends Component {
+class Header extends React.Component {
   render() {
     return (
-      <Fragment>  
-        <header
+      <header
         className={cx(`${moduleName}`)}
         style={{
           backgroundColor: this.props.pathname === '/' ? 'none' : '#000000'
@@ -24,39 +24,44 @@ class Header extends Component {
             <img src={logo} alt="logo" />
         </div>
         <div className={cx(`${moduleName}-rightSide`)}>
+          
           <div className={cx(`${moduleName}-rightSide-user`)}>
             {/* sing up, sign in btn  a tag must be Link!!!*/}
-{/*}
-            <button style={{marginRight:"21px"}}
-                    onClick={/JwModal.open('signIn')}>Sign In</button>
-            <button
-              style={{backgroundColor:"#45f7aa", color:"#020202", border:"none"}}
-              onClick={JwModal.open('signUp')}>Sign Up</button>
+            
+            </div>
+            <button className={cx(`${moduleName}-button-signIn`)}>sign In</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <Popup trigger={<button className={cx(`${moduleName}-button-signUp`)}>sign Up</button>} modal>
+              {close => (
+                <div className={cx(`${moduleName}-modal`)}>
+                     <a className={cx(`${moduleName}-modal-close`)} onClick={close}>
+                        &times;
+                      </a>
+                    <div className={cx(`${moduleName}-modal-title`)}> Welcome semibasement </div>
+                    <br></br><br></br><br></br>
+                    <div className={cx(`${moduleName}-modal-content`)}>
+                    <button className={cx(`${moduleName}-modal-content-login`)}>Continue with KakaoTalk</button>
+                    <br></br> <br></br> <br></br>
+                    <hr/>
+                    <br></br>
+                    <button className={cx(`${moduleName}-modal-content-login2`)}>Continue with Facebook</button>
+                    <br></br> <br></br>
+                    <button className={cx(`${moduleName}-modal-content-login2`)}>Continue with Twitter</button>
+                    <br></br><br></br><br></br>
+                      
+                    </div>
+                   
+                  </div>
+               )}
+             </Popup>
+          
 
-              < id="signIn" className={cx(`${moduleName}-modal`)}>
-                <h2>Welcome to Semibasement!</h2>
-                <button className={StyleSheet.kakao}>kakao</button>
-              
-              
-*/}
-          </div>
           <div className={cx(`${moduleName}-rightSide-playlist`)}>
             <span></span>
-           
           </div>
+
         </div>
-        
       </header>
-
-      <div> 
-        {/*
-        <MyPlayer open ={this.state.open}
-
-        onMaskClick={this.onTouchEnd} /> */}
-                  </div>
-     
-      </Fragment>
-
     )
   }
 }
@@ -69,3 +74,5 @@ export default compose(
     }
   })
 )(Header)
+
+
