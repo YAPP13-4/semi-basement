@@ -7,7 +7,7 @@ import {
 } from './actions'
 
 const music = (
-  state = { song: '', loading: false, songDetail: {} },
+  state = { song: '', loading: false, songDetail: null },
   action
 ) => {
   switch (action.type) {

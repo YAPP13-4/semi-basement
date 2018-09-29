@@ -10,11 +10,21 @@ const moduleName = 'SongDetail'
 
 class SongDetail extends Component {
   render() {
+    const { songDetail } = this.props
+    // debugger
+    if (!songDetail) return <h1 style={{ color: 'white' }}>Loading</h1>
     return (
       <div className={cx(`${moduleName}`)}>
         <div className={cx(`${moduleName}-music`)}>
-          <img className={cx(`${moduleName}-albumCover`)} alt="albumCover" />
-          <div className={cx(`${moduleName}-wordings`)}>wordings</div>
+          <img
+            className={cx(`${moduleName}-albumCover`)}
+            alt="albumCover"
+            src={songDetail.artwork_url.replace('large', 'crop')}
+          />
+          <div className={cx(`${moduleName}-wordings`)}>
+            wordings
+            {songDetail.user.username}
+          </div>
         </div>
         <div className={cx(`${moduleName}-infoWrapper`)}>
           <div className={cx(`${moduleName}-songInfo`)}>앨범소개</div>
