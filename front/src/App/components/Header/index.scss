@@ -53,4 +53,126 @@
     };
   };
 
+  &-modal{
+    width:400px;
+    height: 500px;
+    object-fit: contain;
+    vertical-align:middle;
+    margin: auto;
+   
+    &-close{
+      cursor: pointer;
+      position: relative;
+      margin-left: 400px;
+      padding: 2px 5px;
+      line-height: 20px;     
+      font-size: 24px;
+      color:black;
+
+    };
+    
+    &-title{
+      margin-top: 30px;
+      width: 100%;
+      font-size: 18px;
+      text-align: center;
+      padding: 5px;
+      font-family: AvertaCY;
+      font-size: 24px;
+      font-weight: 900;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: center;
+      color: #000000;
+
+      
+    };
+
+    &-content{
+      width: 100%;
+      font-size: 18px;
+      text-align: center;
+      padding: 5px;
+      text-align: center;
+        &-login{
+          width: 393.8px;
+          height: 52.6px;
+          border-radius: 3px;
+          background-color: #000000;
+          font-family: AvertaCY;
+          font-size: 18px;
+          font-weight: bold;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: normal;
+          text-align: center;
+          color: #face02;
+        };
+        &-login2{
+          width: 393.8px;
+          height: 52.6px;
+          border-radius: 3px;
+          border: solid 0.5px #000000;
+          font-family: AvertaCY;
+          font-size: 18px;
+          font-weight: 600;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: normal;
+          text-align: center;
+          color: #000000;
+          background-color: none;
+        };
+      };
+  
+    &-close{
+      width: 21px;
+      height: 21px;
+      transform: rotate(45deg);
+    
+    };
+  };
+
+  &-button{
+    &-signIn{
+      border: solid 1px #979797;
+      color:white;
+      background-color: transparent;
+      padding: 10px 20px;
+      border-radius: 18.5px;
+      font-family: AvertaCY;
+      font-size: 14px;
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: center;
+      color: #ffffff;
+    };
+
+    &-signUp{
+      border: solid 1px #979797;
+      border-radius: 18.5px;
+      background-color: #45f7aa;
+      padding: 10px 20px;
+      font-family: AvertaCY;
+      font-size: 14px;
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: center;
+      color: #020202;
+    };
+ 
+  };
+
 };
+ 
+
