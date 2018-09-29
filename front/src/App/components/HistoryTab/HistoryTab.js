@@ -26,8 +26,6 @@ class HistoryTab extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         if(prevState.songId !== this.state.songId) {
-            console.log('prevState.songId',prevState.songId)
-            console.log('this.state.songId',this.state.songId)
             localStorage.historySong = JSON.stringify(this.state.songId);
         }
     }

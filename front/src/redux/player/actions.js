@@ -1,5 +1,5 @@
 import * as types from './ActionType';
-
+import { selectSong } from '../music/actions'
 export const onLoadedMetadata = duration => ({
     type: types.ON_LOADED_METADATA,
     duration,
@@ -32,3 +32,20 @@ export const onLoadStart = () => ({
     playlist,
     playingIndex,
   });
+  export const playNextSong = () => (dispatch, getState) => {
+    const state = getState();
+    const currentSongInfoArray = state.music.song;
+
+    if(localStorage.historySong) {
+      const historyArr = JSON.parse(localStorage.historySong)
+      //find currentSong index 
+      //const currentSongIndex = historyArr.indexOf(currentSong)
+
+      //have to play first music
+      /*
+      if(currentSongIndex === historyArr.length ) {
+        dispatch(selectSong(0))
+      }*/
+    }
+  }
+  export const playNextSongFromButton = () => dispatch => dispatch(playNextSong())
