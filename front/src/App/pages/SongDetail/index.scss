@@ -1,9 +1,13 @@
 .SongDetail {
-  background: ivory;
+  // background: ivory;
   &-music {
     background: olive;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
     height: 240px;
     padding: 30px 60px;
+    display: flex;
   }
   &-albumCover {
     height: 240px;
@@ -12,16 +16,69 @@
     display: inline-block;
   }
   &-wordings {
-    background-color: aquamarine;
-    width: 500px;
-    display: inline-block;
+    margin-left: 40px;
+    color: #ffffff;
+    top: 10px;
+    h3 {
+      background: black;
+      margin: 0;
+      font-size: 22px;
+      display: inline-block;
+      padding: 5px 10px 5px 10px;
+    }
+    h2 {
+      background: black;
+      margin: 0;
+      margin-top: 15px;
+      font-size: 30px;
+      font-weight: 800;
+      padding: 1px 10px 1px 10px;
+    }
   }
   &-infoWrapper {
     min-height: 600px;
     display: flex;
   }
   &-songInfo {
-    background: gray;
+    // background: tomato;
+    background: #000000;
+    color: #ffffff;
     width: 500px;
+    border-right: 1px solid #979797;
+    &-profile {
+      display: flex;
+      height: 200px;
+      img {
+        height: 115px;
+        width: 115px;
+        border-radius: 70px;
+        margin: 50px 50px 0 50px;
+      }
+      div {
+        margin-top: 60px;
+      }
+      div > p {
+        margin: 0;
+        font-weight: 100;
+        font-size: 12px;
+      }
+      div > h4 {
+        margin: 0;
+        font-weight: 100;
+        font-size: 18px;
+      }
+      div > h3 {
+        font-size: 24px;
+        margin-top: 15px;
+      }
+    }
+    &-description {
+      margin-left: 50px;
+      margin-right: 50px;
+      h4 {
+        font-size: 20px;
+        font-weight: 100;
+      }
+    }
   }
 }

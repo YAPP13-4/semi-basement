@@ -17,7 +17,15 @@ class SongDetail extends Component {
     if (!songDetail) return <h1 style={{ color: 'white' }}>Loading</h1>
     return (
       <div className={cx(`${moduleName}`)}>
-        <div className={cx(`${moduleName}-music`)}>
+        <div
+          style={{
+            backgroundImage: `url(${songDetail.artwork_url.replace(
+              'large',
+              'crop'
+            )})`
+          }}
+          className={cx(`${moduleName}-music`)}
+        >
           <img
             className={cx(`${moduleName}-albumCover`)}
             alt="albumCover"
@@ -30,19 +38,19 @@ class SongDetail extends Component {
         </div>
         <div className={cx(`${moduleName}-infoWrapper`)}>
           <div className={cx(`${moduleName}-songInfo`)}>
-            앨범소개
-            <div>
+            <div className={cx(`${moduleName}-songInfo-profile`)}>
               <img
-                // className={cx(`${moduleName}`)}
                 alt="artistProfile"
                 src={songDetail.user.avatar_url.replace('large', 'crop')}
               />
-              Released date
-              <p>{formatDdMonthYyyy(songDetail.created_at)}</p>
-              <h3>{songDetail.user.username}</h3>
+              <div>
+                <p>Released date</p>
+                <h4>{formatDdMonthYyyy(songDetail.created_at)}</h4>
+                <h3>{songDetail.user.username}</h3>
+              </div>
             </div>
-            <div>
-              <h1>Description</h1>
+            <div className={cx(`${moduleName}-songInfo-description`)}>
+              <h4>Description</h4>
               <p>{songDetail.description}</p>
             </div>
           </div>
