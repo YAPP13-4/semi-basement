@@ -8,21 +8,14 @@
 const express = require('express');
 const bodyparser = require('body-parser');
 const axios = require('axios');
-// const db_config = require('./db_config.json');
+const db_config = require('./db_config.json');
 const mysql = require('mysql');
 
-// const conn = mysql.createConnection({
-//     host      : db_config.host,
-//     user      : db_config.user,
-//     password  : db_config.password,
-//     database  : db_config.database
-// })
-
 const conn = mysql.createConnection({
-    host      : 'localhost',
-    user      : 'root',
-    password  : 'rlaqhdnjs96',
-    database  : 'new_semibasement'
+    host      : db_config.host,
+    user      : db_config.user,
+    password  : db_config.password,
+    database  : db_config.database
 })
 
 conn.connect();
