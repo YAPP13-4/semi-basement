@@ -8,14 +8,21 @@
 const express = require('express');
 const bodyparser = require('body-parser');
 const axios = require('axios');
-const db_config = require('./db_config.json');
+// const db_config = require('./db_config.json');
 const mysql = require('mysql');
 
+// const conn = mysql.createConnection({
+//     host      : db_config.host,
+//     user      : db_config.user,
+//     password  : db_config.password,
+//     database  : db_config.database
+// })
+
 const conn = mysql.createConnection({
-    host      : db_config.host,
-    user      : db_config.user,
-    password  : db_config.password,
-    database  : db_config.database
+    host      : 'localhost',
+    user      : 'root',
+    password  : 'rlaqhdnjs96',
+    database  : 'new_semibasement'
 })
 
 conn.connect();
@@ -49,7 +56,7 @@ app.get('/add_albumlist/:user_id', function(req, res){
 
     // 0. 프론트로부터 버튼이 눌렸을때 url 받기 (나중에 처리해야할 사항)
 
-    var testurl = 'https://soundcloud.com/youngma/young-ma-ooouuu-1';
+    var testurl = 'https://soundcloud.com/amirarief/love-will-set-you-free-amirarief-kodaline-cover-mp3';
 
     SONG_URL = testurl;
 
@@ -106,7 +113,7 @@ app.get('/add_albumlist/:user_id', function(req, res){
                 }
                 _requestId();
             }else{
-                console.log("중복되는 url임. 삽입 불가");
+                console.log("중복되는 url임. music 테이블에 삽입 불가");
             }
         }
     });
@@ -128,6 +135,57 @@ app.get('/show_albumlist/:user_id', function(req, res) {
         else{
             res.send(result_music_url);
             console.log("result_music_url : " + JSON.stringify(result_music_url));
+        }
+    });
+});
+
+
+// 사용자의 앨범 리스트에서 삭제 
+// album_connect_(user_id) 테이블에서 해당 music_url을 삭제 
+// music 테이블에서 해당 music_url을 가지는 행 삭제 
+
+// 예외처리 할게 있나..?
+app.get('/delete_albumlist/:user_id', function(req, res){
+    console.log("@" + req.method + " " + req.url);
+    var user_id = req.params.user_id;
+    user_id = parseInt(user_id);
+
+    // 임시로 받아오는 url (프론트단에서 어떤 값 가져올지 결정 후 구현)
+    var testurl = 'https://soundcloud.com/amirarief/love-will-set-you-free-amirarief-kodaline-cover-mp3';
+    SONG_URL = testurl;
+
+    var sql_musicUrl = 'SELECT sc_id FROM music WHERE play_url = ?;'
+    var sql_del_conn = 'delete from album_connect_? where music_id = ?;';
+    var sql_del_music = 'delete from music where sc_id = ?;';
+
+    conn.query(sql_musicUrl, [SONG_URL], function(err, re_overlap){
+        if(err){
+            console.log("1" + err)
+        }else{
+            _requestId = () =>{
+                return axios.get(resolveUrl(SONG_URL))
+                .then(response => {
+                        let music_id = response.data.id;
+                        conn.query(sql_del_conn, [user_id, music_id], function(err, rows){
+                            if(err){
+                                console.log(err);
+                            }else{
+                                console.log("delete album_connect done");
+                            }
+                        });
+                        conn.query(sql_del_music, [music_id], function(err, rows){
+                            if(err){
+                                console.log(err);
+                            }else{
+                                console.log("delete music done");
+                            }
+                        });                    
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
+            }
+            _requestId();
         }
     });
 });
