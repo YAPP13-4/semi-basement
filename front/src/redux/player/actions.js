@@ -1,7 +1,6 @@
 import * as types from "./ActionType";
 import * as musicActions from "../music/ActionType";
 import axios from "axios";
-import { selectSong } from "../music/actions";
 import { SONG_URL } from "../../App/constants/ApiConstants";
 
 export const onLoadedMetadata = duration => ({
@@ -38,7 +37,6 @@ export const playSong = (playlist, playingIndex) => ({
 });
 
 export const playNextSongFromButton = targetId => (dispatch, getState) => {
-  console.log("targetid", targetId);
   const state = getState();
   const currentSongInfoArray = state.music.song;
   dispatch({ type: types.PLAY_NEXT_SONG });
@@ -76,52 +74,3 @@ export const playNextSongFromButton = targetId => (dispatch, getState) => {
       });
   }
 };
-
-/*
-export const playNextSong = () => (dispatch, getState) => {
-  const state = getState();
-  const currentSongInfoArray = state.music.song;
-
-  if (localStorage.historySong) {
-    const historyArr = JSON.parse(localStorage.historySong);
-    //find currentSong index
-    const currentSongIndex = historyArr.indexOf(currentSongInfoArray[0]);
-
-    let targetId;
-    //have to play first music
-    if (currentSongIndex === historyArr.length) {
-      //dispatch(selectSong(0))
-      targetId = historyArr[0];
-    } else {
-      targetId = historyArr[currentSongIndex + 1];
-    }
-    let songInfos;
-    axios
-      .get(SONG_URL.replace(":id", targetId))
-      .then(response => {
-        songInfos = response;
-        dispatch(
-          selectSong(
-            songInfos.id,
-            songInfos.artwork_url,
-            songInfos.title,
-            songInfos.duration / 1000
-          )
-        );
-      })
-      .catch(err => {
-        console.log(err);
-      });
-    console.log("next song", songInfos);
-    
-    dispatch(
-      selectSong(
-        songInfos.id,
-        songInfos.artwork_url,
-        songInfos.title,
-        songInfos.duration / 1000
-      )
-    );
-  } else {
-  }
-};*/
