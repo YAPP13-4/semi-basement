@@ -21,13 +21,16 @@ const audio = InnerComponent => {
     }
 
     componentDidMount() {
+      //console.log("audio", this.props);
       const { audioElement } = this;
       audioElement.play();
     }
 
     componentDidUpdate(prevProps) {
       const { audioElement, props } = this;
-      const { audioUrl } = props;
+      const { song } = props;
+      const audioUrl = song[0];
+
       if (prevProps.audioUrl !== audioUrl) {
         audioElement.play();
       }
@@ -43,6 +46,7 @@ const audio = InnerComponent => {
     }
 
     onPlay() {
+      console.log("play check");
       const { onPlay } = this.props;
       onPlay();
     }
@@ -93,7 +97,6 @@ const audio = InnerComponent => {
     render() {
       const { song } = this.props;
       const songUrl = "https:" + SONG_STREAM_URL.replace(":id", song[0]);
-      console.log("songUrl", songUrl);
       return (
         <div>
           <audio

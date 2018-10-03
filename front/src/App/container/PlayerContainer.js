@@ -30,11 +30,12 @@ const mapStateToProps = state => {
   //const songurl = (SONG_URL.replace(':id', state.music.song));\
   const { player } = state;
   const { meta } = state;
+  const { music } = state;
   return {
     //song : songUrl
     meta,
     player,
-    song: state.music.song
+    song: music.song
   };
 };
 export default connect(
