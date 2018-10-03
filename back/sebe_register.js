@@ -73,7 +73,7 @@ app.get('/auth/register', function (req, res) {
      <p>
       <input type="submit">
      </p>
-    </fhaporm>
+    </form>
     `;
     res.send(output);
 });
