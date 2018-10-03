@@ -1,8 +1,6 @@
 const express = require('express');
 const bodyparser = require('body-parser');
-const axios = require('axios');
 const mysql = require('mysql');
-
 const db_config = require('./db_config.json');
 const conn = mysql.createConnection({
     host      : db_config.host,
@@ -25,6 +23,9 @@ function isEmpty(obj) {
 
 // 2. 있는 경우 화면에 뮤직에 대한 unlike 표시를 하게 한다.
 //    없는 경우 화면에 뮤직에 대한 like 표시를 하게 한다.
+
+// 3. 버튼을 누르면 post Request를 보내게 되고 like를 누른 경우 +1, 반대의 경우 -1 하여 update문으로 music 테이블을 수정하고
+// heartlist_? 에서 컬럼을 insert 또는 delete 함
 
 conn.connect();
 const app = express();
@@ -54,7 +55,6 @@ app.get('/heartlist/:user_id', function(req, res) {
             console.log(err);
         } else {
             if (isEmpty(result)) {
-                console.log(result);
                 console.log('아무 음악도 좋아요 한 적이 없음');
                 conn.query(sql_select, function(err, musiclist) {
                     if(err) {
@@ -83,14 +83,12 @@ app.get('/heartlist/:user_id', function(req, res) {
                     }
                 });
             } else {
-                console.log(result);
                 console.log('몇몇 음악을 이미 좋아요 누름');
                 display='';
                 for (let i = 0; i < Object.keys(result).length; i++) {
                     display += '<li>' + result[i].music_name + ' : ' + result[i].like_count + '<button type="submit" style="padding:0; border:none; background:none;" name="' + result[i].sc_id + '" value="unlike,' + user_id + '"><img src="/unheart.jpg" width="24" height="24"></button></li>'
                 }
                 conn.query(sql_check2, [user_id], function (err, result2) {
-                    console.log(result2);
                     if (err) {
                         console.log(err);
                     } else {
@@ -126,7 +124,6 @@ app.post('/updateHL', function(req, res) {
     let sc_id = Object.keys(req.body)[0];
     let checkLike = Object.values(req.body)[0].split(',')[0];
     let user_id = Object.values(req.body)[0].split(',')[1];
-    console.log(req.body);
     user_id = parseInt(user_id);
     let like_count = 0;
     let sql_insertH = 'insert into heartlist_? (music_id) values ('+sc_id+')';
