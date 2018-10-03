@@ -1,8 +1,7 @@
-import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
-import { routerReducer, routerMiddleware } from 'react-router-redux';
-
-import reducer from 'src/redux/reducers';
-
+import { combineReducers, createStore, applyMiddleware, compose } from "redux";
+import { routerReducer, routerMiddleware } from "react-router-redux";
+import ReduxThunk from "redux-thunk";
+import reducer from "src/redux/reducers";
 
 export default function createNewStore(history) {
   const routerMw = routerMiddleware(history);
@@ -10,12 +9,12 @@ export default function createNewStore(history) {
   const store = createStore(
     combineReducers({
       router: routerReducer,
-      ...reducer,
+      ...reducer
     }),
     {},
     compose(
-      applyMiddleware(routerMw),
-      typeof window.__REDUX_DEVTOOLS_EXTENSION__ !== 'undefined'
+      applyMiddleware(routerMw, ReduxThunk),
+      typeof window.__REDUX_DEVTOOLS_EXTENSION__ !== "undefined"
         ? window.__REDUX_DEVTOOLS_EXTENSION__()
         : f => f
     )
@@ -23,7 +22,7 @@ export default function createNewStore(history) {
 
   if (module.hot) {
     module.hot.accept(() => {
-      store.replaceReducer(require('src/redux/reducers').default);
+      store.replaceReducer(require("src/redux/reducers").default);
     });
   }
 
