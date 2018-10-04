@@ -30,8 +30,8 @@ const audio = InnerComponent => {
       const { audioElement, props } = this;
       const { song } = props;
       const audioUrl = song[0];
-
-      if (prevProps.audioUrl !== audioUrl) {
+      const prevSong = prevProps.song[0];
+      if (prevSong !== audioUrl) {
         audioElement.play();
       }
     }
@@ -46,7 +46,6 @@ const audio = InnerComponent => {
     }
 
     onPlay() {
-      console.log("play check");
       const { onPlay } = this.props;
       onPlay();
     }
@@ -88,10 +87,10 @@ const audio = InnerComponent => {
 
     togglePlay() {
       const { audioElement } = this;
-      if (audioElement.paused) {
-        audioElement.play();
-      } else {
+      if (this.props.player.isPlaying) {
         audioElement.pause();
+      } else {
+        audioElement.play();
       }
     }
     render() {
