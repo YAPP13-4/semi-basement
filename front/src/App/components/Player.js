@@ -16,6 +16,7 @@ const Player = ({
   player,
   changeCurrentTime,
   togglePlay,
+  toggleMuted,
   toggleHistory,
   playNextSongFromButton,
   playPrevSongFromButton
@@ -83,7 +84,21 @@ const Player = ({
           <div className={cx(`${moduleName}__section--time`)}>
             <div className="player__time">{formatSeconds(duration)}</div>
           </div>
+
           <div className={cx(`${moduleName}__section`)}>
+            <div
+              className={cx(`${moduleName}__button`)}
+              role="button"
+              onClick={toggleMuted}
+              tabIndex="0"
+              style={{
+                marginRight: "2em",
+                marginLeft: "2em",
+                paddingTop: "11px"
+              }}
+            >
+              <i className={cx(`${moduleName}__button__mute`)} />
+            </div>
             <div className="player__song">
               <div className={cx(`${moduleName}__song__main`)}>
                 <div

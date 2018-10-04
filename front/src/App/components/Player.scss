@@ -108,6 +108,11 @@
     width: 13px;
     height: 13px;
   }
+  &__button__mute {
+    background: url("../../assets/icons/icon2.png") no-repeat -498px -91px;
+    width: 19px;
+    height: 18px;
+  }
   &__section--seek {
     flex: 5;
     //width: 337px;
@@ -125,6 +130,7 @@
   }
   &__song_infoWrapper {
     position: relative;
+    width: 230px;
   }
   &__song__title {
     display: block;
