@@ -17,12 +17,13 @@ const Player = ({
   changeCurrentTime,
   togglePlay,
   toggleHistory,
-  playNextSongFromButton
+  playNextSongFromButton,
+  playPrevSongFromButton
 }) => {
   const artworkUrl = song[2];
   const title = song[1];
   const duration = song[3];
-  const { currentTime } = player;
+  const { currentTime, isPlaying } = player;
 
   return (
     <div className={cx(`${moduleName}`)}>
@@ -39,8 +40,9 @@ const Player = ({
                 className={cx(`${moduleName}__button`)}
                 role="button"
                 tabIndex="0"
+                onClick={playPrevSongFromButton}
               >
-                <i className="player__button__icon ion-ios-rewind" />
+                <i className={cx(`${moduleName}__button__prev`)} />
               </div>
               <div
                 className={cx(`${moduleName}__button`)}
@@ -49,9 +51,11 @@ const Player = ({
                 tabIndex="0"
                 style={{ color: "#ffffff" }}
               >
-                <i className={cx(`${moduleName}__button__icon`)} />
-
-                <span />
+                <i
+                  className={cx(
+                    `${moduleName}__button__` + (isPlaying ? "play" : "pause")
+                  )}
+                />
               </div>
               {/*TODO : nextButton*/}
               <div
@@ -62,8 +66,7 @@ const Player = ({
                   playNextSongFromButton(song[0]);
                 }}
               >
-                next
-                <i className="player__button__icon ion-ios-fastforward" />
+                <i className={cx(`${moduleName}__button__forward`)} />
               </div>
             </div>
           </div>
