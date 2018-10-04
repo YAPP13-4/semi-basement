@@ -7,3 +7,4 @@ export const ON_VOLUME_CHANGE = "ON_VOLUME_CHANGE";
 export const PLAY_SONG = "PLAY_SONG";
 
 export const PLAY_NEXT_SONG = " PLAY_NEXT_SONG";
+export const PLAY_PREV_SONG = " PLAY_PREV_SONG";
