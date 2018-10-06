@@ -55,4 +55,13 @@
       height: 80px;
     }
   }
+  &-close {
+    position: absolute;
+    top: 30px;
+    right: 35px;
+    background: url('src/assets/icons/Artboard.png') no-repeat -449px -187px;
+    width: 16px;
+    height: 16px;
+    z-index: 101;
+  }
 }
