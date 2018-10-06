@@ -59,11 +59,17 @@
     object-fit: contain;
     vertical-align:middle;
     margin: auto;
+    border-radius: 2px;
+    background-blend-mode: multiply, multiply;
+    background-image: linear-gradient( rgba(175, 25, 25, 0.39), rgba(6, 54, 56, 0.253));
    
+   //background-color: rgba(175, 25, 25, 0.39);
+    box-shadow: -6px 0 6px 0 rgba(255, 0, 0, 0.4);
+    
     &-close{
       cursor: pointer;
       position: relative;
-      margin-left: 400px;
+      margin-left: 380px;
       padding: 2px 5px;
       line-height: 20px;     
       font-size: 24px;
@@ -78,7 +84,7 @@
       text-align: center;
       padding: 5px;
       font-family: AvertaCY;
-      font-size: 24px;
+     // font-size: 24px;
       font-weight: 900;
       font-style: normal;
       font-stretch: normal;
@@ -94,26 +100,40 @@
       width: 100%;
       font-size: 18px;
       text-align: center;
-      padding: 5px;
-      text-align: center;
         &-login{
-          width: 393.8px;
-          height: 52.6px;
+          padding: 0;
+          border: 0;
+          width: 316px;
+          height: 46px;
           border-radius: 3px;
-          background-color: #000000;
+          background-color: #4286f5;
           font-family: AvertaCY;
           font-size: 18px;
-          font-weight: bold;
+          font-weight: 600;
           font-style: normal;
           font-stretch: normal;
           line-height: normal;
           letter-spacing: normal;
           text-align: center;
-          color: #face02;
+          color: #fffdff;
+
+          &-google {
+            width: 25px;
+            height: 25px;
+            position: relative;
+            bottom: auto;
+            right: 10px;
+            top: 3px;
+            align-self: left;
+            margin-right: 10px;
+          };
+
         };
         &-login2{
-          width: 393.8px;
-          height: 52.6px;
+          padding: 0;
+          border: 0;
+          width: 316px;
+          height: 46px;
           border-radius: 3px;
           border: solid 0.5px #000000;
           font-family: AvertaCY;
@@ -125,7 +145,21 @@
           letter-spacing: normal;
           text-align: center;
           color: #000000;
-          background-color: none;
+          background-color: #ffffff00;
+          margin-right: 10px;
+          
+          &-facebook{
+            position: relative;
+            bottom: auto;
+            right: 35px;
+            top: 3px;
+          };
+          &-twitter{
+            position: relative;
+            bottom: auto;
+            right: 35px;
+            top: 3px;
+          };
         };
       };
   
@@ -139,6 +173,7 @@
 
   &-button{
     &-signIn{
+      
       border: solid 1px #979797;
       color:white;
       background-color: transparent;
@@ -173,6 +208,7 @@
  
   };
 
+  
 };
  
 
