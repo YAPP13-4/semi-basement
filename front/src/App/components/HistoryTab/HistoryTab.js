@@ -8,13 +8,18 @@ import { connect } from "react-redux";
 const cx = classnames.bind(css);
 const moduleName = "HistoryTab";
 class HistoryTab extends Component {
-  state = {
-    songId: [],
-    songData: []
-  };
+  constructor(props) {
+    super(props);
 
+    this.state = {
+      songId: [],
+      songData: []
+    };
+  }
+  //그려지고 난 다음에 localStorage 랑 동기화
   componentDidMount() {
     //cart state가 local storage에 있으면 불러오기
+
     let localHistory = localStorage.historySong;
     console.log("local history", localHistory);
     if (localHistory) {
@@ -27,6 +32,8 @@ class HistoryTab extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevState.songId !== this.state.songId) {
       localStorage.historySong = JSON.stringify(this.state.songId);
+      //TODO : fix ..where..calll.... _getHistorySong
+      this._getHistorySong();
     }
   }
 
@@ -39,13 +46,14 @@ class HistoryTab extends Component {
 
     if (!is) {
       return {
-        songId: prevState.songId.concat(nextProps.historySong)
+        ...prevState,
+        songId: [...prevState.songId, nextProps.historySong]
       };
     } else {
       return null;
     }
   }
-
+  //get Data From SoundColud
   _getHistorySong = () => {
     console.log("history song", this.props.historySong);
     this.state.songId.map(song => {
@@ -62,6 +70,7 @@ class HistoryTab extends Component {
         });
     });
   };
+  //Redner HistoryComponent from songData
   _renderHistory = () => {
     const historySongs = this.state.songData.map((song, index) => {
       return (
@@ -81,8 +90,11 @@ class HistoryTab extends Component {
     // ()
     return (
       <div className={cx(`${moduleName}`)}>
-        <div className={cx(`${moduleName}__Wrapper`)}>
-          <button onClick={this._getHistorySong}>butn</button>
+        <div
+          className={cx(`${moduleName}__Wrapper`)}
+          style={{ color: "#ffffff" }}
+        >
+          {/*<button onClick={this._getHistorySong}>butn</button> */}
           {this.state.songData ? this._renderHistory() : "Loading"}
         </div>
       </div>
