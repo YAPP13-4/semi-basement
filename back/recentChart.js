@@ -1,20 +1,13 @@
 const express = require('express');
 const bodyparser = require('body-parser');
 const mysql = require('mysql');
-// const db_config = require('./db_config.json');
-// const conn = mysql.createConnection({
-//     host      : db_config.host,
-//     user      : db_config.user,
-//     password  : db_config.password,
-//     database  : db_config.database
-// });
-
+const db_config = require('./db_config.json');
 const conn = mysql.createConnection({
-    host      : 'localhost',
-    user      : 'root',
-    password  : 'rlaqhdnjs96',
-    database  : 'new_semibasement'
-})
+    host      : db_config.host,
+    user      : db_config.user,
+    password  : db_config.password,
+    database  : db_config.database
+});
 
 // 1. music 테이블에 있는 데이터들을 date 컬럼에 기반하여 오름차순으로 데이터들을 가져온다.
 
@@ -25,7 +18,7 @@ const app = express();
 app.use(express.static('public'));
 app.use(bodyparser.urlencoded({ extended: false }));
 
-// 좋아요 수에 기반한 music 테이블 데이터들을 오름차순으로 가져옴
+// 날짜에 기반한 music 테이블 데이터들을 오름차순으로 가져옴
 app.get('/recentChart', function(req, res) {
     let sql_recentChart = 'SELECT music_name, author, date FROM music ORDER BY date DESC;'
 
