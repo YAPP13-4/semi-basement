@@ -11,8 +11,3 @@ export function addHistory(historySong) {
     historySong
   };
 }
-/*
-export const selectSong = song=> ({
-    type: types.SELECT_SONG,
-    song
-})*/
