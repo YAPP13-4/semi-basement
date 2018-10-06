@@ -1,38 +1,45 @@
 .SongDetail {
-  // background: ivory;
+  background: black;
+  margin-bottom: 73px;
+  position: relative;
   &-music {
-    background: olive;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     height: 240px;
     padding: 30px 60px;
+    filter: blur(5px);
+  }
+  &-albumCoverWrapper {
+    position: absolute;
+    top: 30px;
+    left: 40px;
     display: flex;
   }
   &-albumCover {
     height: 240px;
     width: 240px;
-    background-color: tomato;
     display: inline-block;
+    background-size: contain;
   }
   &-wordings {
     margin-left: 40px;
     color: #ffffff;
     top: 10px;
     h3 {
-      background: black;
       margin: 0;
       font-size: 22px;
       display: inline-block;
       padding: 5px 10px 5px 10px;
+      background-color: black;
     }
     h2 {
-      background: black;
       margin: 0;
       margin-top: 15px;
       font-size: 30px;
       font-weight: 800;
       padding: 1px 10px 1px 10px;
+      background-color: black;
     }
   }
   &-infoWrapper {
@@ -40,11 +47,11 @@
     display: flex;
   }
   &-songInfo {
-    // background: tomato;
-    background: #000000;
     color: #ffffff;
     width: 500px;
     border-right: 1px solid #979797;
+    margin-top: 40px;
+    margin-bottom: 40px;
     &-profile {
       display: flex;
       height: 200px;
