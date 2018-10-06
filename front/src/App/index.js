@@ -3,11 +3,13 @@ import { hot } from "react-hot-loader"
 import { Switch, Route, withRouter } from "react-router-dom"
 import classnames from "classnames/bind"
 
+import PlayerContainer from "src/App/container/PlayerContainer"
+import MyPlayer from 'src/App/components/MyPlayer'
+
 import routes from "./routes"
 import css from "./index.scss"
 import Header from "./components/Header"
 
-import PlayerContainer from "../App/container/PlayerContainer"
 const cx = classnames.bind(css)
 const moduleName = "App"
 
@@ -16,6 +18,7 @@ class App extends Component {
     return (
       <div className={cx(`${moduleName}`)}>
         <Header />
+        <MyPlayer />
         <div className={cx(`${moduleName}-body`)}>
           <Switch>
             {routes.map(({ ...routeProps }) => (
