@@ -12,6 +12,7 @@ import {
   playNextSongFromButton,
   playPrevSongFromButton
 } from "../../redux/player/actions";
+import { addPlaylist } from 'src/redux/myPlayer/actions.js'
 //title, artwork, songId, singerName
 import Player from "../components/Player";
 import { toggleHistory } from "../../redux/meta/actions";
@@ -51,6 +52,7 @@ export default connect(
     toggleHistory,
     playSong,
     playNextSongFromButton,
-    playPrevSongFromButton
+    playPrevSongFromButton,
+    addPlaylist
   }
 )(PlayerContainer);
