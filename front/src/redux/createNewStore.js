@@ -1,10 +1,14 @@
 import { combineReducers, createStore, applyMiddleware, compose } from "redux";
 import { routerReducer, routerMiddleware } from "react-router-redux";
+import createSagaMiddleware from 'redux-saga'
+
 import ReduxThunk from "redux-thunk";
+import rootSaga from 'src/redux/rootSagas';
 import reducer from "src/redux/reducers";
 
 export default function createNewStore(history) {
   const routerMw = routerMiddleware(history);
+  const sagaMiddleware = createSagaMiddleware()
 
   const store = createStore(
     combineReducers({
@@ -13,7 +17,7 @@ export default function createNewStore(history) {
     }),
     {},
     compose(
-      applyMiddleware(routerMw, ReduxThunk),
+      applyMiddleware(routerMw, sagaMiddleware, ReduxThunk),
       typeof window.__REDUX_DEVTOOLS_EXTENSION__ !== "undefined"
         ? window.__REDUX_DEVTOOLS_EXTENSION__()
         : f => f
@@ -25,6 +29,8 @@ export default function createNewStore(history) {
       store.replaceReducer(require("src/redux/reducers").default);
     });
   }
+
+  sagaMiddleware.run(rootSaga);
 
   return store;
 }

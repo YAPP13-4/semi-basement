@@ -32,13 +32,48 @@
   text-rendering: optimizeLegibility;
 }
 .ArtworkPlay {
-  font-family: "AvertaCY";
-  &-song-body-card {
-    width: 188px;
-    border-radius: 3px;
-  }
-  &-song-body-card:hover {
-    background-color: #393939;
+    font-family: 'AvertaCY';
+    &-song-body-card {
+        width: 188px;
+        border-radius: 3px;
+    }
+    &-song-body-card:hover {
+        background-color: #393939;
+        &-song-body-card-singer {
+            color: white;
+        }
+    }  
+    &-song-body-card-artwork {
+        position: relative;
+        cursor: pointer;
+        height: 188px;
+    }
+    &-song-body-card-playicon {
+        position: absolute;
+        display: none;
+        background: url('../../../../assets/icons/icon2.png') no-repeat -446px -209px;
+        width: 79px;
+        height: 80px;
+        top: 30%;
+        left: 31%;
+    }
+    &-song-body-card-artwork:hover{
+        div{ display: block; }
+    }
+
+    &-song-body-card-link{
+        text-decoration: none;
+        color: white;
+    }
+
+    &-song-body-card-info{
+        padding: 8px 0px 10px 7px;    
+    }
+    &-song-body-card-title {
+        font-family: 'AvertaCYBold';
+        padding-bottom: 5px;
+        font-size: 17px;
+    }
     &-song-body-card-singer {
       color: white;
     }

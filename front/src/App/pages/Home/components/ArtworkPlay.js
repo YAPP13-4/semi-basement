@@ -1,6 +1,9 @@
+
 import React, { Component } from "react";
+import { Link } from 'react-router-dom'
 import PropTypes from "prop-types";
 import classnames from "classnames/bind";
+import { loadSongDetail } from 'src/redux/music/actions'
 import css from "./ArtworkPlay.scss";
 import getImageUrl from "../../../../utils/ImageUtils";
 import IMAGE_SIZES from "../../../constants/ImageConstants";
@@ -36,6 +39,9 @@ class ArtworkPlay extends Component {
     this.props.selectSong(songInfo);
     this.props.addHistory(songInfo[0]);
   };
+   getSongDetail = () => {
+    this.props.loadSongDetail(this.props.songId)
+  }
   render() {
     const artworkUrl = this.props.artwork;
     return (
@@ -56,27 +62,34 @@ class ArtworkPlay extends Component {
                 <div className={cx(`${moduleName}-song-body-card-playicon`)} />
               </div>
 
-              <div className={cx(`${moduleName}-song-body-card-info`)}>
-                <div className={cx(`${moduleName}-song-body-card-title`)}>
-                  {this.props.title}
+
+              <Link
+                className={cx(`${moduleName}-song-body-card-link`)}
+                to="/songDetail"
+                onClick={this.getSongDetail}
+              >
+                <div className={cx(`${moduleName}-song-body-card-info`)}>
+                  <div className={cx(`${moduleName}-song-body-card-title`)}>
+                    {this.props.title}
+                  </div>
+                  <div className={cx(`${moduleName}-song-body-card-singer`)}>
+                    {this.props.singerName}
+                  </div>
                 </div>
-                <div className={cx(`${moduleName}-song-body-card-singer`)}>
-                  {this.props.singerName}
-                </div>
-              </div>
+              </Link>
             </div>
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
-ArtworkPlay.propTypes = propTypes;
+ArtworkPlay.propTypes = propTypes
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ selectSong, addHistory }, dispatch);
+  return bindActionCreators({ selectSong, loadSongDetail, addHistory }, dispatch)
 }
 
 export default connect(
   null,
   mapDispatchToProps
-)(ArtworkPlay);
+)(ArtworkPlay)
