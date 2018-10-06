@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { SONG_STREAM_URL } from "../constants/ApiConstants";
 const audio = InnerComponent => {
@@ -6,7 +5,7 @@ const audio = InnerComponent => {
     constructor() {
       super();
       this.audioElement = null;
-
+      this.onEnded = this.onEnded.bind(this);
       this.onLoadStart = this.onLoadStart.bind(this);
       this.onLoadedMetadata = this.onLoadedMetadata.bind(this);
       this.onPause = this.onPause.bind(this);
@@ -34,6 +33,12 @@ const audio = InnerComponent => {
       if (prevSong !== audioUrl) {
         audioElement.play();
       }
+    }
+    onEnded() {
+      console.log(this.props);
+      const { props } = this;
+      const { playNextSongFromButton } = props;
+      playNextSongFromButton();
     }
     onLoadedMetadata() {
       const { audioElement, props } = this;
@@ -100,6 +105,7 @@ const audio = InnerComponent => {
         <div>
           <audio
             id="audio"
+            onEnded={this.onEnded}
             onLoadedMetadata={this.onLoadedMetadata}
             onLoadStart={this.onLoadStart}
             onPause={this.onPause}

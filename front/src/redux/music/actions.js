@@ -14,11 +14,6 @@ export function addHistory(historySong) {
     historySong
   };
 }
-/*
-export const selectSong = song=> ({
-    type: types.SELECT_SONG,
-    song
-})*/
 
 export const LOAD_SONG_DETAIL = `${NAME}/LOAD_SONG_DETAIL`
 export const LOAD_SONG_DETAIL_REQUEST = `${NAME}/LOAD_SONG_DETAIL_REQUEST`
@@ -51,3 +46,4 @@ export function loadSongDetailFailure(err) {
         err
     }
 }
+

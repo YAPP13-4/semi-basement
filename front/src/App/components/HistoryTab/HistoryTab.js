@@ -1,53 +1,62 @@
-import React, { Component } from "react";
-import css from "./HistoryTab.scss";
-import classnames from "classnames/bind";
-import { SONG_URL } from "../../constants/ApiConstants";
-import axios from "axios";
-import HistoryComponent from "./HistoryComponent";
-import { connect } from "react-redux";
-const cx = classnames.bind(css);
-const moduleName = "HistoryTab";
+import React, { Component } from "react"
+import css from "./HistoryTab.scss"
+import classnames from "classnames/bind"
+import { SONG_URL } from "../../constants/ApiConstants"
+import axios from "axios"
+import HistoryComponent from "./HistoryComponent"
+import { connect } from "react-redux"
+const cx = classnames.bind(css)
+const moduleName = "HistoryTab"
 class HistoryTab extends Component {
-  state = {
-    songId: [],
-    songData: []
-  };
-
+  constructor(props) {
+    super(props)
+    console.log("constructor props ", props)
+    this.state = {
+      songId: [props.historySong],
+      songData: []
+    }
+    console.log(this.state.songId)
+    this.getHistorySong()
+  }
+  //그려지고 난 다음에 localStorage 랑 동기화
   componentDidMount() {
     //cart state가 local storage에 있으면 불러오기
-    let localHistory = localStorage.historySong;
-    console.log("local history", localHistory);
+    let localHistory = localStorage.historySong
+    console.log("local history", localHistory)
     if (localHistory) {
       this.setState({
         songId: JSON.parse(localHistory)
-      });
+      })
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.songId !== this.state.songId) {
-      localStorage.historySong = JSON.stringify(this.state.songId);
+      localStorage.historySong = JSON.stringify(this.state.songId)
+      //TODO : fix ..where..calll.... getHistorySong
+      this.getHistorySong()
     }
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
     //songId 에 새로 추가한 곡이 없으면
-    let prevSongId = prevState.songId;
+    let prevSongId = prevState.songId
     const is = prevSongId.some(item => {
-      return item === nextProps.historySong;
-    });
-
+      return item === nextProps.historySong
+    })
     if (!is) {
+      console.log("not contains")
       return {
-        songId: prevState.songId.concat(nextProps.historySong)
-      };
+        ...prevState,
+        songId: [...prevState.songId, nextProps.historySong]
+      }
     } else {
-      return null;
+      return null
     }
   }
-
-  _getHistorySong = () => {
-    console.log("history song", this.props.historySong);
+  //get Data From SoundColud
+  getHistorySong = () => {
+    console.log("history song", this.props.historySong)
     this.state.songId.map(song => {
       return axios
         .get(SONG_URL.replace(":id", song))
@@ -55,14 +64,15 @@ class HistoryTab extends Component {
           //console.log('history tab', response.data)
           this.setState({
             songData: this.state.songData.concat(response.data)
-          });
+          })
         })
         .catch(err => {
-          console.log(err);
-        });
-    });
-  };
-  _renderHistory = () => {
+          console.log(err)
+        })
+    })
+  }
+  //Redner HistoryComponent from songData
+  renderHistory = () => {
     const historySongs = this.state.songData.map((song, index) => {
       return (
         <HistoryComponent
@@ -73,26 +83,29 @@ class HistoryTab extends Component {
           title={song.title}
           singer={song.user.username}
         />
-      );
-    });
-    return historySongs;
-  };
+      )
+    })
+    return historySongs
+  }
   render() {
     // ()
     return (
       <div className={cx(`${moduleName}`)}>
-        <div className={cx(`${moduleName}__Wrapper`)}>
-          <button onClick={this._getHistorySong}>butn</button>
-          {this.state.songData ? this._renderHistory() : "Loading"}
+        <div
+          className={cx(`${moduleName}__Wrapper`)}
+          style={{ color: "#ffffff" }}
+        >
+          {/*<button onClick={this._getHistorySong}>butn</button> */}
+          {this.state.songData ? this.renderHistory() : "Loading"}
         </div>
       </div>
-    );
+    )
   }
 }
 function mapStateToProps(state) {
   return {
     historySong: state.music.historySong
-  };
+  }
 }
 
-export default connect(mapStateToProps)(HistoryTab);
+export default connect(mapStateToProps)(HistoryTab)

@@ -7,7 +7,7 @@ import { loadSongDetail } from 'src/redux/music/actions'
 import css from "./ArtworkPlay.scss";
 import getImageUrl from "../../../../utils/ImageUtils";
 import IMAGE_SIZES from "../../../constants/ImageConstants";
-import { selectSong } from "../../../../redux/music/actions";
+import { selectSong, addHistory } from "../../../../redux/music/actions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 const cx = classnames.bind(css);
@@ -37,6 +37,7 @@ class ArtworkPlay extends Component {
     ];
     console.log("songinfo", songInfo);
     this.props.selectSong(songInfo);
+    this.props.addHistory(songInfo[0]);
   };
    getSongDetail = () => {
     this.props.loadSongDetail(this.props.songId)
@@ -85,7 +86,7 @@ class ArtworkPlay extends Component {
 }
 ArtworkPlay.propTypes = propTypes
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ selectSong, loadSongDetail }, dispatch)
+  return bindActionCreators({ selectSong, loadSongDetail, addHistory }, dispatch)
 }
 
 export default connect(

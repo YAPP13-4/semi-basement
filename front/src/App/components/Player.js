@@ -1,28 +1,30 @@
-import React from "react";
-import classnames from "classnames/bind";
-import css from "./Player.scss";
-import audio from "./audio";
-import getImageUrl from "../../utils/ImageUtils";
-import IMAGE_SIZES from "../constants/ImageConstants";
-import Slider from "./Slider";
-import { formatSeconds } from "../../utils/NumberUtils";
-import HistoryTab from "./HistoryTab/HistoryTab";
+import React from "react"
+import classnames from "classnames/bind"
+import css from "./Player.scss"
+import audio from "./audio"
+import getImageUrl from "../../utils/ImageUtils"
+import IMAGE_SIZES from "../constants/ImageConstants"
+import Slider from "./Slider"
+import { formatSeconds } from "../../utils/NumberUtils"
+import HistoryTab from "./HistoryTab/HistoryTab"
 
-const cx = classnames.bind(css);
-const moduleName = "Player";
+const cx = classnames.bind(css)
+const moduleName = "Player"
 const Player = ({
   meta,
   song,
   player,
   changeCurrentTime,
   togglePlay,
+  toggleMuted,
   toggleHistory,
-  playNextSongFromButton
+  playNextSongFromButton,
+  playPrevSongFromButton
 }) => {
-  const artworkUrl = song[2];
-  const title = song[1];
-  const duration = song[3];
-  const { currentTime } = player;
+  const artworkUrl = song[2]
+  const title = song[1]
+  const duration = song[3]
+  const { currentTime, isPlaying } = player
 
   return (
     <div className={cx(`${moduleName}`)}>
@@ -39,8 +41,9 @@ const Player = ({
                 className={cx(`${moduleName}__button`)}
                 role="button"
                 tabIndex="0"
+                onClick={playPrevSongFromButton}
               >
-                <i className="player__button__icon ion-ios-rewind" />
+                <i className={cx(`${moduleName}__button__prev`)} />
               </div>
               <div
                 className={cx(`${moduleName}__button`)}
@@ -49,9 +52,11 @@ const Player = ({
                 tabIndex="0"
                 style={{ color: "#ffffff" }}
               >
-                <i className={cx(`${moduleName}__button__icon`)} />
-
-                <span />
+                <i
+                  className={cx(
+                    `${moduleName}__button__` + (isPlaying ? "play" : "pause")
+                  )}
+                />
               </div>
               {/*TODO : nextButton*/}
               <div
@@ -59,11 +64,10 @@ const Player = ({
                 role="button"
                 tabIndex="0"
                 onClick={() => {
-                  playNextSongFromButton(song[0]);
+                  playNextSongFromButton(song[0])
                 }}
               >
-                next
-                <i className="player__button__icon ion-ios-fastforward" />
+                <i className={cx(`${moduleName}__button__forward`)} />
               </div>
             </div>
           </div>
@@ -80,7 +84,20 @@ const Player = ({
           <div className={cx(`${moduleName}__section--time`)}>
             <div className="player__time">{formatSeconds(duration)}</div>
           </div>
+
           <div className={cx(`${moduleName}__section`)}>
+            <div
+              className={cx(`${moduleName}__button`)}
+              role="button"
+              onClick={toggleMuted}
+              tabIndex="0"
+              style={{
+                marginLeft: "2em",
+                paddingTop: "11px"
+              }}
+            >
+              <i className={cx(`${moduleName}__button__mute`)} />
+            </div>
             <div className="player__song">
               <div className={cx(`${moduleName}__song__main`)}>
                 <div
@@ -136,7 +153,7 @@ const Player = ({
         <HistoryTab />{" "}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default audio(Player);
+export default audio(Player)

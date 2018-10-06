@@ -9,7 +9,8 @@ import {
   onTimeUpdate,
   onVolumeChange,
   playSong,
-  playNextSongFromButton
+  playNextSongFromButton,
+  playPrevSongFromButton
 } from "../../redux/player/actions";
 //title, artwork, songId, singerName
 import Player from "../components/Player";
@@ -49,6 +50,7 @@ export default connect(
     onVolumeChange,
     toggleHistory,
     playSong,
-    playNextSongFromButton
+    playNextSongFromButton,
+    playPrevSongFromButton
   }
 )(PlayerContainer);
