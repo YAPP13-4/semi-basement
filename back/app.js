@@ -172,16 +172,19 @@ app.get('/loginOk', function(req, res){
 
 //1. 앨범 리스트
 // 사용자가 자신의 곡을 앨범으로 업로드 
-app.get('/add_albumlist/:user_id', function(req, res){
+app.post('/add_albumlist', function(req, res){
     console.log("@" + req.method + " " + req.url);
-    var user_id = req.params.user_id;
-    user_id = parseInt(user_id);
 
     // 0. 프론트로부터 버튼이 눌렸을때 url 받기 (나중에 처리해야할 사항)
 
-    var testurl = 'https://soundcloud.com/amirarief/love-will-set-you-free-amirarief-kodaline-cover-mp3';
+    //var testurl = 'https://soundcloud.com/amirarief/love-will-set-you-free-amirarief-kodaline-cover-mp3';
 
-    SONG_URL = testurl;
+    var user_id = req.body.user_id;
+    console.log(req.body);
+    user_id = parseInt(user_id);
+    console.log(user_id);
+    SONG_URL = req.body.url;
+    console.log(SONG_URL);
 
     // 1. 테이블 생성 (테이블이 없을때만 생성 - IF NOT EXISTS 를 이용) 
 
@@ -214,7 +217,7 @@ app.get('/add_albumlist/:user_id', function(req, res){
         if(err){
             console.log(err)
         }else{
-            if(JSON.stringify(re_overlap) == '[]'){
+            //if(JSON.stringify(re_overlap) == '[]'){
                 // 중복되는 url 없음
                 _requestId = () =>{
                     return axios.get(resolveUrl(SONG_URL))
@@ -235,9 +238,9 @@ app.get('/add_albumlist/:user_id', function(req, res){
                         })
                 }
                 _requestId();
-            }else{
-                console.log("중복되는 url임. music 테이블에 삽입 불가");
-            }
+            //}else{
+            //    console.log("중복되는 url임. music 테이블에 삽입 불가");
+            //}
         }
     });
 });
@@ -266,48 +269,31 @@ app.get('/show_albumlist/:user_id', function(req, res) {
 // 사용자의 앨범 리스트에서 삭제 
 // album_connect_(user_id) 테이블에서 해당 music_url을 삭제 
 // music 테이블에서 해당 music_url을 가지는 행 삭제 
-
-app.get('/delete_albumlist/:user_id', function(req, res){
+app.post('/delete_albumlist', function(req, res){
     console.log("@" + req.method + " " + req.url);
-    var user_id = req.params.user_id;
+
+    // 임시로 받아오는 url (프론트단에서 어떤 값 가져올지 결정 후 구현) --> sc_id 가져옴
+    //var testurl = 'https://soundcloud.com/amirarief/love-will-set-you-free-amirarief-kodaline-cover-mp3';
+
+    var user_id = req.body.user_id;
     user_id = parseInt(user_id);
+    var sc_id = req.body.sc_id;
 
-    // 임시로 받아오는 url (프론트단에서 어떤 값 가져올지 결정 후 구현)
-    var testurl = 'https://soundcloud.com/amirarief/love-will-set-you-free-amirarief-kodaline-cover-mp3';
-    SONG_URL = testurl;
-
-    var sql_musicUrl = 'SELECT sc_id FROM music WHERE play_url = ?;'
     var sql_del_conn = 'delete from album_connect_? where music_id = ?;';
     var sql_del_music = 'delete from music where sc_id = ?;';
 
-    conn.query(sql_musicUrl, [SONG_URL], function(err, re_overlap){
+    conn.query(sql_del_conn, [user_id, sc_id], function(err, rows){
         if(err){
-            console.log("1" + err)
+            console.log(err);
         }else{
-            _requestId = () =>{
-                return axios.get(resolveUrl(SONG_URL))
-                .then(response => {
-                        let music_id = response.data.id;
-                        conn.query(sql_del_conn, [user_id, music_id], function(err, rows){
-                            if(err){
-                                console.log(err);
-                            }else{
-                                console.log("delete album_connect done");
-                            }
-                        });
-                        conn.query(sql_del_music, [music_id], function(err, rows){
-                            if(err){
-                                console.log(err);
-                            }else{
-                                console.log("delete music done");
-                            }
-                        });                    
-                    })
-                    .catch(err => {
-                        console.log(err);
-                    })
-            }
-            _requestId();
+            console.log("delete album_connect done");
+        }
+    });
+    conn.query(sql_del_music, [sc_id], function(err, rows){
+        if(err){
+            console.log(err);
+        }else{
+            console.log("delete music done");
         }
     });
 });
@@ -319,9 +305,10 @@ app.get('/delete_albumlist/:user_id', function(req, res){
 // '/add_albumlist/:user_id' 에서 설정한 SONG_URL 값을 이용해서 music 테이블 채우기
 app.get('/fillMusicTable', function(req, res) {
 
+    console.log(SONG_URL);
     console.log("@" + req.method + " " + req.url);
 
-    let sql_insert = 'INSERT INTO music (date, music_name, play_url, hashtag_1, hashtag_2, hashtag_3, author, sc_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+    let sql_insert = 'INSERT INTO music (date, music_name, play_url, hashtag_1, hashtag_2, hashtag_3, author, sc_id, duration) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
     let sql_update = 'UPDATE music SET music_name = ?, hashtag_1 = ?, hashtag_2 = ?, hashtag_3 = ? WHERE sc_id = ?';
 
     conn.query('select m.sc_id from music m;', function(err, count_row, fields) {
@@ -340,6 +327,7 @@ app.get('/fillMusicTable', function(req, res) {
                             var hashtag_1 = '';
                             var hashtag_2 = '';
                             var hashtag_3 = '';
+                            var duration = response.data.duration;
 
                             var rr = new Array();
                             rr = response.data.tag_list.split('\"');
@@ -354,7 +342,7 @@ app.get('/fillMusicTable', function(req, res) {
                                 hashtag_3 = rr[3];
                             }
 
-                            res.send(response.data);
+                            //res.send(response.data);
 
 
                             for (var i = 0; i < count_row.length; i++){
@@ -374,7 +362,7 @@ app.get('/fillMusicTable', function(req, res) {
                                     }
                                 })
                             }else if(updateTrigger == 0){
-                                conn.query(sql_insert, [date, music_name, play_url, hashtag_1, hashtag_2, hashtag_3, author, sc_id], function(err, rows) {
+                                conn.query(sql_insert, [date, music_name, play_url, hashtag_1, hashtag_2, hashtag_3, author, sc_id, duration], function(err, rows) {
                                     if(err) {
                                         console.log(err);
                                     } else {
@@ -400,15 +388,16 @@ app.get('/fillMusicTable', function(req, res) {
 //3. 플레이 리스트 
 
 // 사용자의 플레이 리스트에 추가
-app.get('/add_playlist/:user_id', function(req, res) {
+app.post('/add_playlist', function(req, res) {
     console.log("@" + req.method + " " + req.url);
-    var user_id = req.params.user_id;
-    user_id = parseInt(user_id);
 
     // 0. 프론트로부터 버튼이 눌렸을때 url 받기 (나중에 처리해야할 사항)
 
-    var testurl = 'https://soundcloud.com/youngma/young-ma-ooouuu-1';
-    SONG_URL = testurl;
+    //var testurl = 'https://soundcloud.com/youngma/young-ma-ooouuu-1';
+
+    var user_id = req.body.user_id;
+    user_id = parseInt(user_id);
+    var sc_id = req.body.sc_id;
 
     // 1. 테이블이 없으면 생성 (list_테이블만)
 
@@ -425,32 +414,14 @@ app.get('/add_playlist/:user_id', function(req, res) {
     // 2. list 테이블에 값 대입 (중복되는 노래는 삽입하지 않도록 예외처리) 
     
     var sql_list = 'insert into list_? (music_id) select ? from dual where not exists (select music_id from list_? where music_id=?);';
-    var sql_scid = 'SELECT sc_id FROM music WHERE play_url = ?;'
 
-    conn.query(sql_scid, [SONG_URL], function(err, re_overlap){
+    conn.query(sql_list, [user_id, sc_id,user_id, sc_id], function(err, rows){
         if(err){
-            console.log(err)
+            console.log(err);
         }else{
-            _requestId = () =>{
-                return axios.get(resolveUrl(SONG_URL))
-                    .then(response => {
-                        let music_id = response.data.id;
-                        conn.query(sql_list, [user_id, music_id,user_id, music_id], function(err, rows){
-                            if(err){
-                                console.log(err);
-                            }else{
-                                console.log("insert to list table done");
-                            }
-                        });
-                    })
-                    .catch(err => {
-                        console.log(err);
-                    })
-            }
-            _requestId();
+            console.log("insert to list table done");
         }
     });
-
 });
 
 
@@ -474,41 +445,25 @@ app.get('/show_playlist/:user_id', function(req, res){
 
 
 // 사용자의 플레이 리스트에서 삭제 
-app.get('/delete_playlist/:user_id', function(req, res){
+app.post('/delete_playlist', function(req, res){
     console.log("@" + req.method + " " + req.url);
-    var user_id = req.params.user_id;
-    user_id = parseInt(user_id);
 
-        // 임시로 받아오는 url (프론트단에서 어떤 값 가져올지 결정 후 구현)
-        var testurl = 'https://soundcloud.com/amirarief/love-will-set-you-free-amirarief-kodaline-cover-mp3';
-        SONG_URL = testurl;
-    
-        var sql_musicUrl = 'SELECT sc_id FROM music WHERE play_url = ?;'
-        var sql_del_conn = 'delete from list_? where music_id = ?;';
-    
-        conn.query(sql_musicUrl, [SONG_URL], function(err, re_overlap){
-            if(err){
-                console.log(err)
-            }else{
-                _requestId = () =>{
-                    return axios.get(resolveUrl(SONG_URL))
-                    .then(response => {
-                            let music_id = response.data.id;
-                            conn.query(sql_del_conn, [user_id, music_id], function(err, rows){
-                                if(err){
-                                    console.log(err);
-                                }else{
-                                    console.log("delete list table done");
-                                }
-                            });                  
-                        })
-                        .catch(err => {
-                            console.log(err);
-                        })
-                }
-                _requestId();
-            }
-        });
+    // 임시로 받아오는 url (프론트단에서 어떤 값 가져올지 결정 후 구현)
+    // var testurl = 'https://soundcloud.com/amirarief/love-will-set-you-free-amirarief-kodaline-cover-mp3';
+
+    var user_id = req.body.user_id;
+    user_id = parseInt(user_id);
+    var sc_id = req.body.sc_id;
+
+    var sql_del_conn = 'delete from list_? where music_id = ?;';
+
+    conn.query(sql_del_conn, [user_id, sc_id], function(err, rows){
+        if(err){
+            console.log(err);
+        }else{
+            console.log("delete list table done");
+        }
+    });  
 
 });
 
@@ -516,14 +471,16 @@ app.get('/delete_playlist/:user_id', function(req, res){
 
 //4. 하트 리스트 
 
-app.get('/heartlist/:user_id', function(req, res) {  
-    let user_id = req.params.user_id;
+app.post('/heartlist', function(req, res) {
+    let user_id = req.body.user_id;
+   // console.log(req);
+    console.log(req.body)
+    console.log(user_id);
     user_id = parseInt(user_id);
     let sql_createH = 'CREATE TABLE IF NOT EXISTS `new_semibasement`.`heartlist_?` (`heartlist_id` INT(11) NOT NULL AUTO_INCREMENT, `music_id` INT(11) NULL DEFAULT NULL, PRIMARY KEY (`heartlist_id`));'
     let sql_select = 'SELECT music_name, like_count, sc_id from music;'
     let sql_check = 'SELECT DISTINCT m.music_name, m.like_count, m.sc_id FROM (music m INNER JOIN heartlist_? h on m.sc_id=h.music_id);'
     let sql_check2 = 'SELECT DISTINCT m.music_name, m.like_count, m.sc_id FROM music m LEFT JOIN heartlist_? h on m.sc_id = h.music_id WHERE h.music_id IS NULL;'
-    let display = '';
 
     conn.query(sql_createH, [user_id], function(err, result_music_url){
         if(err){
@@ -544,58 +501,17 @@ app.get('/heartlist/:user_id', function(req, res) {
                     if(err) {
                         console.log(err);
                     } else {
-                        display='';
-                        for (let i = 0; i < Object.keys(musiclist).length; i++) {
-                            display += '<li>' + musiclist[i].music_name + ' : ' + musiclist[i].like_count + '<button type="submit" style="padding:0; border:none; background:none;" name="' + musiclist[i].sc_id + '" value="like,' + user_id + '"><img src="/heart.png" width="24" height="24"></button></li>'
-                        }
-                        res.send(`
-                            <!DOCTYPE html>
-                            <html>
-                            <head>
-                            <meta charset="utf-8">
-                            <title></title>
-                            </head>
-                            <body>
-                                Music list
-                            <form action="/updateHL" method="post">
-                            <ul>
-                                ${display}
-                            </ul>
-                            </form>
-                            </body>
-                            </html>`);            
+                        res.send(musiclist);            
                     }
                 });
             } else {
                 console.log('몇몇 음악을 이미 좋아요 누름');
-                display='';
-                for (let i = 0; i < Object.keys(result).length; i++) {
-                    display += '<li>' + result[i].music_name + ' : ' + result[i].like_count + '<button type="submit" style="padding:0; border:none; background:none;" name="' + result[i].sc_id + '" value="unlike,' + user_id + '"><img src="/unheart.jpg" width="24" height="24"></button></li>'
-                }
                 conn.query(sql_check2, [user_id], function (err, result2) {
                     if (err) {
                         console.log(err);
                     } else {
-                        for (let i = 0; i < Object.keys(result2).length; i++) {
-                            display += '<li>' + result2[i].music_name + ' : ' + result2[i].like_count + '<button type="submit" style="padding:0; border:none; background:none;" name="' + result2[i].sc_id + '" value="like,' + user_id + '"><img src="/heart.png" width="24" height="24"></button></li>'
-                        }
+                        res.send(result + "," + result2);
                     }
-                    res.send(`
-                    <!DOCTYPE html>
-                    <html>
-                    <head>
-                        <meta charset="utf-8">
-                        <title></title>
-                    </head>
-                    <body>
-                        Music list
-                    <form action="/updateHL" method="post">
-                    <ul>
-                        ${display}
-                    </ul>
-                    </form>
-                    </body>
-                    </html>`);
                 });
             } 
         }
@@ -690,6 +606,20 @@ app.get('/recentChart', function(req, res) {
     let sql_recentChart = 'SELECT music_name, author, date FROM music ORDER BY date DESC;'
 
     conn.query(sql_recentChart, function(err, result){
+        if(err){
+            console.log(err);
+        }
+        else{
+            res.send(result);
+        }
+    });
+});
+
+// 태그에 기반한 music 테이블 데이터들을 가져옴
+app.get('/tagChart', function(req, res){
+    let sql_genre = 'select music_name, author, hashtag_1 from music;';
+
+    conn.query(sql_genre, function(err, result){
         if(err){
             console.log(err);
         }
