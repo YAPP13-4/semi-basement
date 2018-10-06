@@ -6,8 +6,11 @@ import { Link } from "react-router-dom";
 import classnames from "classnames/bind";
 import css from "./Landing.scss";
 import landingBtn from "../../assets/get-into-button@2x.png";
-import landingtitle from "../../assets/landing-title.png";
+import landingtitle_ from "../../assets/title.gif";
+import landingtitle from "../../assets/video.mp4";
 // import { landing } from '../../actions/index'
+
+
 
 const cx = classnames.bind(css);
 const moduleName = "Landing";
@@ -29,16 +32,21 @@ class Landing extends Component {
     console.log("_getInto : " + this.state.term);
     // this.props.landing(this.state.term)
   }
+
+
   render() {
     return (
       <div className={cx(`${moduleName}`)}>
+        <video autoPlay muted loop className={cx(`${moduleName}-glitch__img`)} style={{objectFit:"cover"}}>
+          <source src={landingtitle} type="video/mp4" />
+        </video>
         <div className={cx(`${moduleName}-logoWrapper`)}>
-          <img src={landingtitle} alt="landing title" />
+          <img  src={landingtitle_} alt="landing title" />
           <div onClick={this._getInto}>
             <Link to="/main">
               <div>
                 {" "}
-                <img src={landingBtn} alt="mainBtn" />{" "}
+                <img src={landingBtn} alt="mainBtn" />
               </div>
             </Link>
           </div>
