@@ -1,53 +1,97 @@
-import React, { Component, Fragment } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import classnames from 'classnames/bind'
 import logo from '../../../assets/logos/logo.png'
+import google from '../../../assets/icons/google.png'
+import facebook from '../../../assets/icons/facebook.png'
+import twitter from '../../../assets/icons/twitter.png'
+
 import css from './index.scss'
+import Popup from "../../../../node_modules/reactjs-popup";
 
 const cx = classnames.bind(css)
 const moduleName = 'Header'
-class Header extends Component {
+
+class Header extends React.Component {
   render() {
     return (
-      <Fragment>  
-        <header
+      <header
         className={cx(`${moduleName}`)}
         style={{
           backgroundColor: this.props.pathname === '/' ? 'none' : '#000000'
         }}
       >
         <div className={cx(`${moduleName}-menu`)}>
-          <span></span>
+
+ <Popup trigger={<button  className={cx(`${moduleName}-button-gnb`)}><span></span></button>} modal2>
+              {close => (
+                <div className={cx(`${moduleName}-modal2`)}>
+                     <a className={cx(`${moduleName}-modal2-close`)} onClick={close}>
+                        &times;
+                      </a>
+                    <br/>
+                    <div className={cx(`${moduleName}-modal2-content`)}>
+                      <p className={cx(`${moduleName}-line`)}>HOME</p>
+                      MY PAGE <br/>
+                      ABOUT US <br/>
+                      CONTACT <br/>
+                      <br/> <br/> <br/>
+                      LOGOUT
+                    </div>
+                  </div>
+               )}
+             </Popup>
+
         </div>
         <div className={cx(`${moduleName}-logo`)}>
             <img src={logo} alt="logo" />
         </div>
         <div className={cx(`${moduleName}-rightSide`)}>
+          
           <div className={cx(`${moduleName}-rightSide-user`)}>
             {/* sing up, sign in btn  a tag must be Link!!!*/}
-            <a style={{marginRight:"21px"}}>Sign In</a>
-            <a
-              style={{backgroundColor:"#45f7aa", color:"#020202", border:"none"}}
-            >Sign Up</a>
-          </div>
+            
+            </div>
+            <button className={cx(`${moduleName}-button-signIn`)}>sign In</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <Popup trigger={<button className={cx(`${moduleName}-button-signUp`)}>sign Up</button>} modal>
+              {close => (
+                <div className={cx(`${moduleName}-modal`)}>
+                     <a className={cx(`${moduleName}-modal-close`)} onClick={close}>
+                        &times;
+                      </a>
+                    <div className={cx(`${moduleName}-modal-title`)}> Welcome semibasement! </div>
+                    <br></br><br></br><br></br>
+                    <div className={cx(`${moduleName}-modal-content`)}>
+                    <button className={cx(`${moduleName}-modal-content-login`)}>
+                    <img style={{float:"left",marginLeft:10}} src={google} alt="google" />
+                    Continue with google</button>
+                    <br></br> <br></br> <br></br>
+                    <hr/>
+                    <br></br><br></br>
+                    <button className={cx(`${moduleName}-modal-content-login2`)}>
+                    <img  style={{float:"left",marginLeft:10}} src={facebook} alt="facebook" />
+                    Continue with Facebook</button>
+                    <br></br> <br></br>
+                    <button className={cx(`${moduleName}-modal-content-login2`)}>
+                    <img  style={{float:"left",marginLeft:10}} src={twitter} alt="twitter" />
+                    Continue with Twitter</button>
+                    <br></br><br></br><br></br>
+                      
+                    </div>
+                   
+                  </div>
+               )}
+             </Popup>
+          
+
           <div className={cx(`${moduleName}-rightSide-playlist`)}>
             <span></span>
-           
           </div>
+
         </div>
-        
       </header>
-
-      <div> 
-        {/*
-        <MyPlayer open ={this.state.open}
-
-        onMaskClick={this.onTouchEnd} /> */}
-                  </div>
-     
-      </Fragment>
-
     )
   }
 }
@@ -60,3 +104,5 @@ export default compose(
     }
   })
 )(Header)
+
+

@@ -1,3 +1,9 @@
 {
-  "dependencies": {}
+  "dependencies": {
+    "history": "^4.7.2",
+    "install": "^0.12.1",
+    "jw-react-modal": "^1.0.3",
+    "npm": "^6.4.1",
+    "react-router": "^4.3.1"
+  }
 }
