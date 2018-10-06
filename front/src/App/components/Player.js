@@ -72,7 +72,11 @@ const Player = ({
             </div>
           </div>
           <div className={cx(`${moduleName}__section--time`)}>
-            <div style={{ color: "#45f7aa" }}>{formatSeconds(currentTime)}</div>
+            <div
+              style={{ color: "#45f7aa", width: "50px", textAlign: "center" }}
+            >
+              {formatSeconds(currentTime)}
+            </div>
           </div>
           <div className={cx(`${moduleName}__section--seek`)}>
             <Slider

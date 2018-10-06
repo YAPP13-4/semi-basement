@@ -1,9 +1,9 @@
 import React from "react"
+import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
-import { compose } from "redux"
 import classnames from "classnames/bind"
 import logo from "../../../assets/logos/logo.png"
-import navBar from "./navBar"
+import { toggleGNB } from "../../.././redux/meta/actions"
 
 //TODO : Delete
 import google from "../../../assets/icons/google.png"
@@ -27,7 +27,10 @@ class Header extends React.Component {
         }}
       >
         <div className={cx(`${moduleName}-menu`)}>
-          <button className={cx(`${moduleName}-button-gnb`)}>
+          <button
+            className={cx(`${moduleName}-button-gnb`)}
+            onClick={this.props.toggleGNB}
+          >
             <span />
           </button>
         </div>
@@ -131,12 +134,15 @@ class Header extends React.Component {
     )
   }
 }
-
-export default compose(
-  connect(state => {
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ toggleGNB }, dispatch)
+}
+export default connect(
+  state => {
     const { router } = state
     return {
       pathname: router.location.pathname
     }
-  })
+  },
+  mapDispatchToProps
 )(Header)
