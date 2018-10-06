@@ -8,3 +8,6 @@ export const SONG_COMMENTS_URL = constructUrl('/tracks/:id/comments');
 export const SONGS_URL = constructUrl('/tracks?linked_partitioning=1&limit=50&offset=0');
 export const USER_URL = constructUrl('/users/:id');
 export const USER_SONGS_URL = constructUrl('/users/:id/tracks');
+
+//test
+export const SONG_STREAM_URL = constructUrl('/tracks/:id/stream?');

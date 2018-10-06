@@ -1,41 +1,48 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+
+import React, { Component } from "react";
 import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
-import classnames from 'classnames/bind'
+import PropTypes from "prop-types";
+import classnames from "classnames/bind";
 import { loadSongDetail } from 'src/redux/music/actions'
-
-import css from './ArtworkPlay.scss'
-import getImageUrl from '../../../../utils/ImageUtils'
-import IMAGE_SIZES from '../../../constants/ImageConstants'
-import { selectSong } from '../../../../redux/music/actions'
-
-const cx = classnames.bind(css)
-const moduleName = 'ArtworkPlay'
+import css from "./ArtworkPlay.scss";
+import getImageUrl from "../../../../utils/ImageUtils";
+import IMAGE_SIZES from "../../../constants/ImageConstants";
+import { selectSong } from "../../../../redux/music/actions";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+const cx = classnames.bind(css);
+const moduleName = "ArtworkPlay";
 
 const propTypes = {
   singerName: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   artwork: PropTypes.string.isRequired,
   selected: PropTypes.func
-}
+};
 class ArtworkPlay extends Component {
   static defaultProps = {
-    singerName: 'Creator',
-    title: 'Title',
-    artwork: 'ArtWork'
-  }
+    singerName: "Creator",
+    title: "Title",
+    artwork: "ArtWork"
+  };
   _fetchSong = () => {
-    console.log('click', this.props.songId)
-    this.props.selectSong(this.props.songId) // 속성 뭔지 확인해서 고치기
-  }
-  getSongDetail = () => {
+    //이 부분에 배열로 담아서 store에 저장하기.
+    console.log("click", this.props.songId);
+    //son id, title, artwork, duration --> song array
+    const songInfo = [
+      this.props.songId,
+      this.props.title,
+      this.props.artwork,
+      this.props.duration / 1000
+    ];
+    console.log("songinfo", songInfo);
+    this.props.selectSong(songInfo);
+  };
+   getSongDetail = () => {
     this.props.loadSongDetail(this.props.songId)
   }
-
   render() {
-    const artworkUrl = this.props.artwork
+    const artworkUrl = this.props.artwork;
     return (
       <div className={cx(`${moduleName}`)}>
         <div className={cx(`${moduleName}-row`)}>
@@ -53,6 +60,7 @@ class ArtworkPlay extends Component {
               >
                 <div className={cx(`${moduleName}-song-body-card-playicon`)} />
               </div>
+
 
               <Link
                 className={cx(`${moduleName}-song-body-card-link`)}

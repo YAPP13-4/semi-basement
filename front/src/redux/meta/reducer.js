@@ -2,10 +2,11 @@ import {
   EXAMPLE_REQUEST,
   EXAMPLE_SUCCESS,
   EXAMPLE_FAILURE,
+  TOGGLE_HISTORY
 } from './actions'
 
 const meta = (
-  state = { loading: false, data: null, error: null},
+  state = { loading: false, data: null, error: null, toggleHistory : false},
   action
 ) => {
   switch (action.type) {
@@ -28,7 +29,11 @@ const meta = (
         loading: false,
         error: { ...action.error}
       }
-      
+    case TOGGLE_HISTORY:
+      return {
+        ...state,
+        toggleHistory : !state.toggleHistory
+      }
     default:
       return state
   }

@@ -1,5 +1,6 @@
-import * as types from './ActionType'
-
+import * as types from "./ActionType";
+  
+  
 import {
   LOAD_SONG_DETAIL_REQUEST,
   LOAD_SONG_DETAIL_SUCCESS,
@@ -7,7 +8,12 @@ import {
 } from './actions'
 
 const music = (
-  state = { song: '', loading: false, songDetail: null },
+  state = {
+    song: "",
+    loading: false,
+    songDetail: null,
+    historySong: null
+  },
   action
 ) => {
   switch (action.type) {
@@ -16,6 +22,11 @@ const music = (
         ...state,
         song: action.song
       }
+    case types.HISTORY_SONG:
+      return {
+        ...state,
+        historySong: action.historySong
+      };
     case LOAD_SONG_DETAIL_REQUEST:
       return {
         ...state,

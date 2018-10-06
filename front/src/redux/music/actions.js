@@ -2,12 +2,17 @@ import * as types from './ActionType';
 
 export const NAME = 'MUSIC'
 
-
 export function selectSong(song) {
-    return {
-        type: types.SELECT_SONG,
-        song
-    }
+  return {
+    type: types.SELECT_SONG,
+    song
+  };
+}
+export function addHistory(historySong) {
+  return {
+    type: types.HISTORY_SONG,
+    historySong
+  };
 }
 /*
 export const selectSong = song=> ({
