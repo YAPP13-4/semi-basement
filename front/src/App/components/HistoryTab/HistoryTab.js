@@ -62,31 +62,27 @@ class HistoryTab extends Component {
         .get(SONG_URL.replace(":id", song))
         .then(response => {
           //console.log('history tab', response.data)
-          this.setState({
+          this.setState(() => ({
             songData: this.state.songData.concat(response.data)
-          })
+          }))
         })
         .catch(err => {
           console.log(err)
         })
     })
   }
-  //Redner HistoryComponent from songData
-  renderHistory = () => {
-    const historySongs = this.state.songData.map((song, index) => {
-      return (
-        <HistoryComponent
-          key={index}
-          songId={song.id}
-          artwork={song.artwork_url}
-          duration={song.duration}
-          title={song.title}
-          singer={song.user.username}
-        />
-      )
-    })
-    return historySongs
-  }
+  //Render HistoryComponent from songData
+  renderHistory = () =>
+    this.state.songData.map((song, index) => (
+      <HistoryComponent
+        key={`history-${index}`}
+        songId={song.id}
+        artwork={song.artwork_url}
+        duration={song.duration}
+        title={song.title}
+        singer={song.user.username}
+      />
+    ))
   render() {
     // ()
     return (

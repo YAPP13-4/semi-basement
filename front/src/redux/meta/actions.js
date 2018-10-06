@@ -6,6 +6,7 @@ export const EXAMPLE_REQUEST = `${MODULE_NAME}/EXAMPLE_REQUEST`
 export const EXAMPLE_SUCCESS = `${MODULE_NAME}/EXAMPLE_SUCCESS`
 export const EXAMPLE_FAILURE = `${MODULE_NAME}/EXAMPLE_FAILURE`
 export const TOGGLE_HISTORY = `${MODULE_NAME}/TOGGLE_HISTORY`
+export const SHOW_GNB = `${MODULE_NAME}/SHOW_GNB`
 
 export function example() {
   return {
@@ -35,5 +36,11 @@ export function exampleFailure(error) {
 export function toggleHistory() {
   return {
     type: TOGGLE_HISTORY
+  }
+}
+
+export function toggleGNB() {
+  return {
+    type: SHOW_GNB
   }
 }

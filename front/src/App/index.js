@@ -7,6 +7,8 @@ import routes from "./routes"
 import css from "./index.scss"
 import Header from "./components/Header"
 
+import NavBar from "../App/components/Header/navBar"
+
 import PlayerContainer from "../App/container/PlayerContainer"
 const cx = classnames.bind(css)
 const moduleName = "App"
@@ -24,6 +26,7 @@ class App extends Component {
           </Switch>
           <PlayerContainer />
         </div>
+        <NavBar />
       </div>
     )
   }
