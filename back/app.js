@@ -2,14 +2,11 @@ const express = require('express');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
 const bodyparser = require('body-parser');
-const pbkdf2Password = require('pbkdf2-password');
-const hasher = pbkdf2Password();
-const passport = require('passport')
-const LocalStrategy = require('passport-local').Strategy;
+const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth2').Strategy;
 const axios = require('axios');
-const db_config = require('./db_config.json');
 const mysql = require('mysql');
+const db_config = require('./db_config.json');
 
 const conn = mysql.createConnection({
     host      : db_config.host,
@@ -52,17 +49,10 @@ app.use(passport.session());
 const API_HOSTNAME = '//api.soundcloud.com';
 const CLIENT_ID = 'a281614d7f34dc30b665dfcaa3ed7505';
 const resolveUrl = songUrl => `https:${API_HOSTNAME}/resolve.json?url=${songUrl}&client_id=${CLIENT_ID}`
-const SONG_URL_LIST = [
-    'https://soundcloud.com/amirarief/love-will-set-you-free-amirarief-kodaline-cover-mp3',
-    'https://soundcloud.com/filous/kodaline-high-hopes-filous',
-    'https://soundcloud.com/amirarief/love-will-set-you-free-amirarief-kodaline-cover-mp3',
-    'https://soundcloud.com/filous/kodaline-high-hopes-filous',
-    'https://soundcloud.com/in-demand-scotland/kodaline-all-i-want-session',
-    'https://soundcloud.com/filous/kodaline-high-hopes-filous',
-    'https://soundcloud.com/youngma/young-ma-ooouuu-1'
 
-];
 var SONG_URL;
+
+var USER_ID;
 
 ////////////////////////////////////////////////////////////////
 
@@ -79,7 +69,6 @@ app.get('/welcome', function (req, res) {
         <h1>Welcome</h1>
         <ul>
         <li><a href="/auth/login">Login</a></li>
-        <li><a href="/auth/register">Register</a></li>
         </ul>
         `);
     }
@@ -100,12 +89,12 @@ app.get('/auth/login', function (req, res) {
 });
 passport.serializeUser(function (user, done) {
     //console.log('serializeUser', user);
-    done(null, user.authId);
+    done(null, user.auth_id);
 });
 
 passport.deserializeUser(function (id, done) {
     //console.log('deserializeUser', id);
-    let sql = 'SELECT * FROM users WHERE auth_id=?';
+    let sql = 'SELECT * FROM user_info WHERE auth_id=?';
     conn.query(sql, [id], function (err, results) {
         if (err) {
             console.log(err);
@@ -167,11 +156,17 @@ app.get(
     passport.authenticate(
         'google',
         {
-            successRedirect: '/heartlist',
+            successRedirect: '/loginOk',
             failureRedirect: '/auth/login'
         }
     )
 );
+
+app.get('/loginOk', function(req, res){
+    USER_ID = req.user.user_id;
+    console.log(USER_ID);
+    res.send(req.user);
+});
 
 /////////////////////////////////////////////////////////////////
 
@@ -254,7 +249,7 @@ app.get('/show_albumlist/:user_id', function(req, res) {
     var user_id = req.params.user_id;
     user_id = parseInt(user_id);
 
-    var sql_albumlist = 'SELECT m.play_url from (music m inner join album_connect_? c on m.sc_id=c.music_id) left join album_? l  on c.album_id=l.album_id;';
+    var sql_albumlist = 'SELECT m.* from (music m inner join album_connect_? c on m.sc_id=c.music_id) left join album_? l  on c.album_id=l.album_id;';
 
     conn.query(sql_albumlist, [user_id,user_id], function(err, result_music_url){
         if(err){
@@ -272,7 +267,6 @@ app.get('/show_albumlist/:user_id', function(req, res) {
 // album_connect_(user_id) 테이블에서 해당 music_url을 삭제 
 // music 테이블에서 해당 music_url을 가지는 행 삭제 
 
-// 예외처리 할게 있나..?
 app.get('/delete_albumlist/:user_id', function(req, res){
     console.log("@" + req.method + " " + req.url);
     var user_id = req.params.user_id;
@@ -376,6 +370,7 @@ app.get('/fillMusicTable', function(req, res) {
                                         console.log(err);
                                     }else{
                                         console.log("update done");
+                                        res.redirect('/rankingChart');
                                     }
                                 })
                             }else if(updateTrigger == 0){
@@ -384,6 +379,7 @@ app.get('/fillMusicTable', function(req, res) {
                                         console.log(err);
                                     } else {
                                         console.log("insert done");
+                                        res.redirect('/rankingChart');
                                     }
                                 });    
                             }
@@ -464,7 +460,7 @@ app.get('/show_playlist/:user_id', function(req, res){
     var user_id = req.params.user_id;
     user_id = parseInt(user_id);
 
-    var sql_music_id = 'SELECT m.play_url from (music m inner join list_? l on m.sc_id=l.music_id);';
+    var sql_music_id = 'SELECT m.* from (music m inner join list_? l on m.sc_id=l.music_id);';
     conn.query(sql_music_id, [user_id], function(err, result_music_url){
         if(err){
             console.log(err);
@@ -655,7 +651,7 @@ app.get('/show_heartlist/:user_id', function(req, res) {
     let user_id = req.params.user_id;
     user_id = parseInt(user_id);
 
-    let sql_heartlist = 'SELECT m.play_url from (music m inner join heartlist_? c on m.sc_id=c.music_id);';
+    let sql_heartlist = 'SELECT m.* from (music m inner join heartlist_? c on m.sc_id=c.music_id);';
 
     conn.query(sql_heartlist, [user_id], function(err, result_music_url){
         if(err){
