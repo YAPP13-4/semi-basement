@@ -36,7 +36,6 @@
     flex-direction: row;
     align-items: center;
     height: 100%;
-    flex: 3;
     & + .player__section {
       margin-left: 40px;
     }
@@ -114,8 +113,7 @@
     height: 18px;
   }
   &__section--seek {
-    flex: 5;
-    //width: 337px;
+    width: 437px;
     padding-top: 30px;
   }
   &__section--time {

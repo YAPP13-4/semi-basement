@@ -1,15 +1,15 @@
-import React from "react";
-import classnames from "classnames/bind";
-import css from "./Player.scss";
-import audio from "./audio";
-import getImageUrl from "../../utils/ImageUtils";
-import IMAGE_SIZES from "../constants/ImageConstants";
-import Slider from "./Slider";
-import { formatSeconds } from "../../utils/NumberUtils";
-import HistoryTab from "./HistoryTab/HistoryTab";
+import React from "react"
+import classnames from "classnames/bind"
+import css from "./Player.scss"
+import audio from "./audio"
+import getImageUrl from "../../utils/ImageUtils"
+import IMAGE_SIZES from "../constants/ImageConstants"
+import Slider from "./Slider"
+import { formatSeconds } from "../../utils/NumberUtils"
+import HistoryTab from "./HistoryTab/HistoryTab"
 
-const cx = classnames.bind(css);
-const moduleName = "Player";
+const cx = classnames.bind(css)
+const moduleName = "Player"
 const Player = ({
   meta,
   song,
@@ -21,10 +21,10 @@ const Player = ({
   playNextSongFromButton,
   playPrevSongFromButton
 }) => {
-  const artworkUrl = song[2];
-  const title = song[1];
-  const duration = song[3];
-  const { currentTime, isPlaying } = player;
+  const artworkUrl = song[2]
+  const title = song[1]
+  const duration = song[3]
+  const { currentTime, isPlaying } = player
 
   return (
     <div className={cx(`${moduleName}`)}>
@@ -64,7 +64,7 @@ const Player = ({
                 role="button"
                 tabIndex="0"
                 onClick={() => {
-                  playNextSongFromButton(song[0]);
+                  playNextSongFromButton(song[0])
                 }}
               >
                 <i className={cx(`${moduleName}__button__forward`)} />
@@ -92,7 +92,6 @@ const Player = ({
               onClick={toggleMuted}
               tabIndex="0"
               style={{
-                marginRight: "2em",
                 marginLeft: "2em",
                 paddingTop: "11px"
               }}
@@ -154,7 +153,7 @@ const Player = ({
         <HistoryTab />{" "}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default audio(Player);
+export default audio(Player)
