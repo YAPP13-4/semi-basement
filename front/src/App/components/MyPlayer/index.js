@@ -16,7 +16,22 @@ class MyPlayer extends Component {
   render() {
     return (
       <div className={cx(`${moduleName}`)}>
-        {/* <h1>안녕 나는 마이플레이어야 </h1> */}
+        <div className={cx(`${moduleName}-top`)}>
+          <div className={cx(`${moduleName}-top-musicCard`)}>
+            <div className={cx(`${moduleName}-top-musicCard-coverImg`)}>앨범이미지</div>
+            <div className={cx(`${moduleName}-top-musicCard-songInfo`)} >
+            title
+            createrName
+            </div>
+            <div className={cx(`${moduleName}-top-musicCard-player`)}>플레이어</div>
+          </div>
+          <div className={cx(`${moduleName}-top-musicController`)}>음악컨트롤러</div>
+        </div>
+        <div className={cx(`${moduleName}-bottom`)}>
+          <div className={cx(`${moduleName}-bottom-song`)}>음악이야1</div>
+          <div className={cx(`${moduleName}-bottom-song`)}>음악이야2</div>
+          <div className={cx(`${moduleName}-bottom-song`)}>음악이야3</div>
+        </div>
       </div>
     )
   }

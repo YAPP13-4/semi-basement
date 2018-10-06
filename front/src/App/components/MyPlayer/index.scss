@@ -1,8 +1,58 @@
 .MyPlayer {
-  background: olive;
   position: fixed;
-  right:0;
-  z-index: 6;
+  right: 0;
+  z-index: 1000;
   width: 600px;
-  height: 100vh;
+  &-top {
+    background: tomato;
+    position: relative;
+    height: 460px;
+    padding: 45px;
+    box-sizing: border-box;
+
+    &-musicCard {
+      position: relative;
+      background: olive;
+      height: 240px;
+      &-coverImg {
+        background: orange;
+        height: 240px;
+        width: 240px;
+      }
+      &-songInfo {
+        background: rebeccapurple;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        height: 120px;
+        width: 270px;
+      }
+      &-player {
+        background: darkcyan;
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        height: 120px;
+        width: 270px;
+      }
+    }
+    &-musicController {
+      background: darkkhaki;
+      position: absolute;
+      bottom: 50px;
+      height: 60px;
+      width: 510px;
+    }
+  }
+
+  &-bottom {
+    background: sandybrown;
+    padding-top: 20px;
+    height: 540px;
+    box-sizing: border-box;
+    &-song {
+      background: darkgray;
+      height: 80px;
+    }
+  }
 }
