@@ -8,7 +8,7 @@ import facebook from '../../../assets/icons/facebook.png'
 import twitter from '../../../assets/icons/twitter.png'
 
 import css from './index.scss'
-import Popup from "reactjs-popup";
+import Popup from "../../../../node_modules/reactjs-popup";
 
 const cx = classnames.bind(css)
 const moduleName = 'Header'
@@ -23,9 +23,26 @@ class Header extends React.Component {
         }}
       >
         <div className={cx(`${moduleName}-menu`)}>
-          <span>
 
-          </span>
+ <Popup trigger={<button  className={cx(`${moduleName}-button-gnb`)}><span></span></button>} modal2>
+              {close => (
+                <div className={cx(`${moduleName}-modal2`)}>
+                     <a className={cx(`${moduleName}-modal2-close`)} onClick={close}>
+                        &times;
+                      </a>
+                    <br/>
+                    <div className={cx(`${moduleName}-modal2-content`)}>
+                      <p className={cx(`${moduleName}-line`)}>HOME</p>
+                      MY PAGE <br/>
+                      ABOUT US <br/>
+                      CONTACT <br/>
+                      <br/> <br/> <br/>
+                      LOGOUT
+                    </div>
+                  </div>
+               )}
+             </Popup>
+
         </div>
         <div className={cx(`${moduleName}-logo`)}>
             <img src={logo} alt="logo" />
@@ -48,17 +65,17 @@ class Header extends React.Component {
                     <br></br><br></br><br></br>
                     <div className={cx(`${moduleName}-modal-content`)}>
                     <button className={cx(`${moduleName}-modal-content-login`)}>
-                    <img style={{marginright: 20}} src={google} alt="google" />
+                    <img style={{float:"left",marginLeft:10}} src={google} alt="google" />
                     Continue with google</button>
                     <br></br> <br></br> <br></br>
                     <hr/>
                     <br></br><br></br>
                     <button className={cx(`${moduleName}-modal-content-login2`)}>
-                    <img src={facebook} alt="facebook" />
+                    <img  style={{float:"left",marginLeft:10}} src={facebook} alt="facebook" />
                     Continue with Facebook</button>
                     <br></br> <br></br>
                     <button className={cx(`${moduleName}-modal-content-login2`)}>
-                    <img src={twitter} alt="twitter" />
+                    <img  style={{float:"left",marginLeft:10}} src={twitter} alt="twitter" />
                     Continue with Twitter</button>
                     <br></br><br></br><br></br>
                       

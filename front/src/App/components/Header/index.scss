@@ -118,14 +118,12 @@
           color: #fffdff;
 
           &-google {
-            width: 25px;
-            height: 25px;
             position: relative;
             bottom: auto;
             right: 10px;
             top: 3px;
             align-self: left;
-            margin-right: 10px;
+           
           };
 
         };
@@ -153,6 +151,8 @@
             bottom: auto;
             right: 35px;
             top: 3px;
+            float: left;
+            margin-left: 10px;
           };
           &-twitter{
             position: relative;
@@ -171,9 +171,65 @@
     };
   };
 
+
+
+
+
+
+
+
+  //////////
+  &-modal2{
+    width:650px;
+    height: 600px;
+    object-fit: contain;
+    vertical-align:middle;
+    margin: auto;
+    border-radius: 2px;
+    background-color: #ffffff;
+    &-close{
+      cursor: pointer;
+      position: relative;
+      margin-left: 40%;
+      padding: 2px 5px;
+      line-height: 20px;     
+      font-size: 24px;
+      color:black;
+
+    };
+    
+    &-content{
+      margin-left: 45%;
+      font-size: 35px;
+      text-align:left;
+      font-family: AvertaCY;
+      font-weight: 900;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      color: #000000;
+      line-height: 1.71;
+      };
+  
+    &-close{
+      width: 21px;
+      height: 21px;
+      transform: rotate(45deg);
+    
+    };
+  };
+
+  &-line{
+    text-decoration-line: underline;
+    text-decoration-color: #45f7aa;
+    margin-bottom: 0px;
+  };
+
+  
+
   &-button{
     &-signIn{
-      
       border: solid 1px #979797;
       color:white;
       background-color: transparent;
@@ -204,6 +260,12 @@
       letter-spacing: normal;
       text-align: center;
       color: #020202;
+    };
+
+    &-gnb{
+      background-color: transparent;
+      border: 0px;
+      cursor: pointer;
     };
  
   };
