@@ -15,6 +15,7 @@ const Player = ({
   song,
   player,
   changeCurrentTime,
+  changeVolume,
   togglePlay,
   toggleMuted,
   toggleHistory,
@@ -24,7 +25,9 @@ const Player = ({
   const artworkUrl = song[2]
   const title = song[1]
   const duration = song[3]
-  const { currentTime, isPlaying } = player
+  const { currentTime, isPlaying, muted } = player
+  //변수명때문에 굳이 .. 위에 안씀.
+  const volume = muted ? 0 : player.volume
 
   return (
     <div className={cx(`${moduleName}`)}>
@@ -96,11 +99,15 @@ const Player = ({
               onClick={toggleMuted}
               tabIndex="0"
               style={{
-                marginLeft: "2em",
-                paddingTop: "11px"
+                paddingTop: "11px",
+                display: "flex"
               }}
             >
               <i className={cx(`${moduleName}__button__mute`)} />
+
+              <div className={cx(`${moduleName}__section--volume`)}>
+                <Slider max={1} onChange={changeVolume} value={volume} />
+              </div>
             </div>
             <div className="player__song">
               <div className={cx(`${moduleName}__song__main`)}>
@@ -153,8 +160,7 @@ const Player = ({
         style={{ display: meta.toggleHistory ? "block" : "none" }}
         className={cx(`${moduleName}__historyTab`)}
       >
-        {" "}
-        <HistoryTab />{" "}
+        <HistoryTab />
       </div>
     </div>
   )
