@@ -72,7 +72,7 @@
     position: relative;
     padding: 4px;
     outline: 0;
-    margin-right: 4em;
+    margin-right: 3em;
     &:hover {
       cursor: pointer;
     }
@@ -119,6 +119,10 @@
   &__section--time {
     padding: 30px 20px 0px 17px;
   }
+  &__section--volume {
+    margin-left: 14px;
+    width: 100px;
+  }
   &__song__artwork {
     width: 56px;
     height: 56px;
@@ -128,7 +132,7 @@
   }
   &__song_infoWrapper {
     position: relative;
-    width: 230px;
+    width: 180px;
   }
   &__song__title {
     display: block;
