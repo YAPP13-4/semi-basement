@@ -85,8 +85,8 @@ class Home extends Component {
       this.props.changePlayList(songId)
     } else if (playlist === "YOU_KNOW") {
       const songId = this.state.knowSongInfo.map(info => {
-        console.log("info", info)
-        return [...songId, info.id]
+        if (!songId) return info.id
+        else return songId.concat(info.id)
       })
 
       this.props.changePlayList(songId)

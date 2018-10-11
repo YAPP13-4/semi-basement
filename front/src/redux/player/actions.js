@@ -71,61 +71,20 @@ export const playNexSong = targetId => (dispatch, getState) => {
       })
   }
 }
-//TODO : refactoring
-export const playNextSongFromButton = targetId => (dispatch, getState) => {
-  const state = getState()
-  const currentSongInfoArray = state.music.song
-  dispatch({ type: types.PLAY_NEXT_SONG })
-  if (localStorage.historySong) {
-    const historyArr = JSON.parse(localStorage.historySong)
-    //find currentSong index
-    const currentSongIndex = historyArr.indexOf(currentSongInfoArray[0])
-    console.log("currentSongIndex", currentSongIndex)
-    let nextId
-    //have to play first music
-    if (currentSongIndex === historyArr.length - 1) {
-      //dispatch(selectSong(0))
-      nextId = historyArr[0]
-    } else {
-      nextId = historyArr[currentSongIndex + 1]
-    }
-    return axios
-      .get(SONG_URL.replace(":id", nextId))
-      .then(response => {
-        const songInfo = [
-          response.data.id,
-          response.data.title,
-          response.data.artwork_url,
-          response.data.duration / 1000
-        ]
-        console.log("soninfo", songInfo)
-        dispatch({
-          type: musicActions.SELECT_SONG,
-          song: songInfo
-        })
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }
-}
 
-export const playPrevSongFromButton = targetId => (dispatch, getState) => {
+export const playPrevSong = targetId => (dispatch, getState) => {
   const state = getState()
   const currentSongInfoArray = state.music.song
+  const targetPlayList = state.playList.musicList
   dispatch({ type: types.PLAY_PREV_SONG })
-  if (localStorage.historySong) {
-    const historyArr = JSON.parse(localStorage.historySong)
-    //find currentSong index
-    const currentSongIndex = historyArr.indexOf(currentSongInfoArray[0])
-    console.log("currentSongIndex", currentSongIndex)
+
+  if (targetPlayList) {
     let nextId
-    //have to play first music
-    if (currentSongIndex === 0) {
-      nextId = historyArr[historyArr.length - 1]
-    } else {
-      nextId = historyArr[currentSongIndex - 1]
-    }
+    const currentSongIndex = targetPlayList.indexOf(currentSongInfoArray[0])
+
+    if (currentSongIndex === -1) nextId = targetPlayList[0]
+    else nextId = targetPlayList[(currentSongIndex - 1) % targetPlayList.length]
+
     return axios
       .get(SONG_URL.replace(":id", nextId))
       .then(response => {
