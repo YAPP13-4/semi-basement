@@ -1,3 +1,4 @@
+// EXplain : palylist reducer에서 정보를 받아와서 다음곡 재생하기.
 import * as types from "./ActionType"
 import * as musicActions from "../music/ActionType"
 import axios from "axios"
