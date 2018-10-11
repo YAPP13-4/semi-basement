@@ -1,6 +1,6 @@
 import * as types from "./ActionType"
 const initialState = {
-  playlist: null
+  musicList: null
 }
 
 const playList = (state = initialState, action) => {

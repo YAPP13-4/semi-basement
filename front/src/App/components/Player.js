@@ -19,7 +19,7 @@ const Player = ({
   togglePlay,
   toggleMuted,
   toggleHistory,
-  playNextSongFromButton,
+  playNexSong,
   playPrevSongFromButton
 }) => {
   const artworkUrl = song[2]
@@ -67,7 +67,7 @@ const Player = ({
                 role="button"
                 tabIndex="0"
                 onClick={() => {
-                  playNextSongFromButton(song[0])
+                  playNexSong(song[0])
                 }}
               >
                 <i className={cx(`${moduleName}__button__forward`)} />
