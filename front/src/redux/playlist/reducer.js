@@ -1,6 +1,6 @@
 import * as types from "./ActionType"
 const initialState = {
-  musicList: null
+  playlist: null
 }
 
 const playList = (state = initialState, action) => {
@@ -8,7 +8,7 @@ const playList = (state = initialState, action) => {
     case types.LOAD_NEW_LIST:
       return {
         ...state,
-        musicList: action.musicList
+        musicList: action.playlist
       }
     default:
       return state
