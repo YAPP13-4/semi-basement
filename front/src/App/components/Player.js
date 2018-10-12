@@ -19,8 +19,8 @@ const Player = ({
   togglePlay,
   toggleMuted,
   toggleHistory,
-  playNextSongFromButton,
-  playPrevSongFromButton
+  playNexSong,
+  playPrevSong
 }) => {
   const artworkUrl = song[2]
   const title = song[1]
@@ -44,7 +44,7 @@ const Player = ({
                 className={cx(`${moduleName}__button`)}
                 role="button"
                 tabIndex="0"
-                onClick={playPrevSongFromButton}
+                onClick={playPrevSong}
               >
                 <i className={cx(`${moduleName}__button__prev`)} />
               </div>
@@ -67,7 +67,7 @@ const Player = ({
                 role="button"
                 tabIndex="0"
                 onClick={() => {
-                  playNextSongFromButton(song[0])
+                  playNexSong(song[0])
                 }}
               >
                 <i className={cx(`${moduleName}__button__forward`)} />

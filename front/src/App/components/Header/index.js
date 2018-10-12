@@ -34,32 +34,6 @@ class Header extends React.Component {
             <span />
           </button>
         </div>
-        {/*}
-          <Popup
-            trigger={
-
-            }
-            modal2
-          >
-            {close => (
-              <div className={cx(`${moduleName}-modal2`)}>
-                <a className={cx(`${moduleName}-modal2-close`)} onClick={close}>
-                  &times;
-                </a>
-                <br />
-                <div className={cx(`${moduleName}-modal2-content`)}>
-                  <p className={cx(`${moduleName}-line`)}>HOME</p>
-                  MY PAGE <br />
-                  ABOUT US <br />
-                  CONTACT <br />
-                  <br /> <br /> <br />
-                  LOGOUT
-                </div>
-              </div>
-            )}
-          </Popup>
-            */}
-
         <div className={cx(`${moduleName}-logo`)}>
           <img src={logo} alt="logo" />
         </div>

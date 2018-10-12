@@ -62,9 +62,11 @@ class HistoryTab extends Component {
         .get(SONG_URL.replace(":id", song))
         .then(response => {
           //console.log('history tab', response.data)
-          this.setState(() => ({
-            songData: this.state.songData.concat(response.data)
-          }))
+          this.setState(prevState => {
+            return {
+              songData: [...prevState.songData, response.data]
+            }
+          })
         })
         .catch(err => {
           console.log(err)
