@@ -7,6 +7,7 @@ import HistoryComponent from "./HistoryComponent"
 import { connect } from "react-redux"
 const cx = classnames.bind(css)
 const moduleName = "HistoryTab"
+
 class HistoryTab extends Component {
   constructor(props) {
     super(props)
@@ -16,7 +17,6 @@ class HistoryTab extends Component {
       songData: []
     }
     console.log(this.state.songId)
-    this.getHistorySong()
   }
   //그려지고 난 다음에 localStorage 랑 동기화
   componentDidMount() {
@@ -33,19 +33,21 @@ class HistoryTab extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevState.songId !== this.state.songId) {
       localStorage.historySong = JSON.stringify(this.state.songId)
-      //TODO : fix ..where..calll.... getHistorySong
+      //FIXME : fix ..where..calll.... getHistorySong
       this.getHistorySong()
     }
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
     //songId 에 새로 추가한 곡이 없으면
+    // console.log("nextprops", nextProps.historySong)
+    // console.log("prevestate", prevState.songId)
     let prevSongId = prevState.songId
     const is = prevSongId.some(item => {
       return item === nextProps.historySong
     })
     if (!is) {
-      console.log("not contains")
+      // console.log("not contains")
       return {
         ...prevState,
         songId: [...prevState.songId, nextProps.historySong]
@@ -56,12 +58,11 @@ class HistoryTab extends Component {
   }
   //get Data From SoundColud
   getHistorySong = () => {
-    console.log("history song", this.props.historySong)
     this.state.songId.map(song => {
       return axios
         .get(SONG_URL.replace(":id", song))
         .then(response => {
-          //console.log('history tab', response.data)
+          // console.log("history tab", response.data)
           this.setState(prevState => {
             return {
               songData: [...prevState.songData, response.data]
@@ -87,6 +88,7 @@ class HistoryTab extends Component {
     ))
   render() {
     // ()
+    console.log("songdata", this.state.songData)
     return (
       <div className={cx(`${moduleName}`)}>
         <div
