@@ -12,18 +12,39 @@ import ArtworkPlay from "./components/ArtworkPlay"
 
 import classnames from "classnames/bind"
 import css from "./index.scss"
+
+import selectIcon from "../../../assets/icons/icon2.png"
+
 const cx = classnames.bind(css)
 const moduleName = "Home"
+
+const activePalyList = {
+  cursor: "pointer",
+  background: `url(${selectIcon}) no-repeat -49px -152px`,
+  width: "35px",
+  height: "35px"
+}
+
+const inactivePalyList = {
+  cursor: "pointer",
+  background: `url(${selectIcon}) no-repeat -111px -152px`,
+  width: "35px",
+  height: "35px"
+}
 
 class Home extends Component {
   constructor(props) {
     super(props)
     this.state = {
       sebaSongInfo: [],
-      knowSongInfo: []
+      knowSongInfo: [],
+      sebaChoiceActive: false,
+      knowListActive: false
     }
   }
   componentDidMount() {
+    //console.log("sebaChoiceActive ", this.state.sebaChoiceActive) false
+    //console.log("knowListActive ", this.state.knowListActive)  false
     this.requestSebaSongInfo()
     this.requestKnowSongInfo()
   }
@@ -83,6 +104,12 @@ class Home extends Component {
       })
       console.log("songid", songId)
       this.props.changePlayList(songId)
+      console.log("sebaChoiceActive ", this.state.sebaChoiceActive)
+      this.setState(prevState => {
+        return {
+          sebaChoiceActive: !prevState.sebaChoiceActive
+        }
+      })
     } else if (playlist === "YOU_KNOW") {
       const songId = this.state.knowSongInfo.map(info => {
         if (!songId) return info.id
@@ -90,6 +117,12 @@ class Home extends Component {
       })
 
       this.props.changePlayList(songId)
+      console.log("knowListActive ", this.state.knowListActive)
+      this.setState(prevState => {
+        return {
+          knowListActive: !prevState.knowListActive
+        }
+      })
     }
   }
   rederDiscover = infoArray => {
@@ -113,6 +146,9 @@ class Home extends Component {
         <Navigation />
         <div className={cx(`${moduleName}-category`)}>
           <div
+            style={
+              this.state.sebaChoiceActive ? activePalyList : inactivePalyList
+            }
             onClick={() => {
               this.dispatchPlayList("SEBA_CHOICE")
             }}
@@ -129,6 +165,9 @@ class Home extends Component {
 
         <div className={cx(`${moduleName}-category`)}>
           <div
+            style={
+              this.state.knowListActive ? activePalyList : inactivePalyList
+            }
             onClick={() => {
               this.dispatchPlayList("YOU_KNOW")
             }}
