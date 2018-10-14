@@ -14,6 +14,7 @@ import classnames from "classnames/bind"
 import css from "./index.scss"
 
 import selectIcon from "../../../assets/icons/icon2.png"
+import Loading from "../../components/Loading"
 
 const cx = classnames.bind(css)
 const moduleName = "Home"
@@ -144,43 +145,53 @@ class Home extends Component {
     return (
       <div className={cx(`${moduleName}`)}>
         <Navigation />
-        <div className={cx(`${moduleName}-category`)}>
-          <div
-            style={
-              this.state.sebaChoiceActive ? activePalyList : inactivePalyList
-            }
-            onClick={() => {
-              this.dispatchPlayList("SEBA_CHOICE")
-            }}
-          />
-          <div className={cx(`${moduleName}-category-title`)}>
-            SEBA's Choice
-          </div>
-        </div>
-        <div className={cx(`${moduleName}-songWrapper`)}>
-          {this.state.sebaSongInfo
-            ? this.rederDiscover(this.state.sebaSongInfo)
-            : "Loading"}
-        </div>
+        {/* TODO : 리팩토링 ! ! ! */}
+        {this.state.sebaSongInfo.length !== 6 ||
+        this.state.knowSongInfo.length !== 6 ? (
+          <Loading />
+        ) : (
+          <div>
+            <div className={cx(`${moduleName}-category`)}>
+              <div
+                style={
+                  this.state.sebaChoiceActive
+                    ? activePalyList
+                    : inactivePalyList
+                }
+                onClick={() => {
+                  this.dispatchPlayList("SEBA_CHOICE")
+                }}
+              />
+              <div className={cx(`${moduleName}-category-title`)}>
+                SEBA's Choice
+              </div>
+            </div>
+            <div className={cx(`${moduleName}-songWrapper`)}>
+              {this.state.sebaSongInfo
+                ? this.rederDiscover(this.state.sebaSongInfo)
+                : "Loading"}
+            </div>
 
-        <div className={cx(`${moduleName}-category`)}>
-          <div
-            style={
-              this.state.knowListActive ? activePalyList : inactivePalyList
-            }
-            onClick={() => {
-              this.dispatchPlayList("YOU_KNOW")
-            }}
-          />
-          <div className={cx(`${moduleName}-category-title`)}>
-            Artists you should know
+            <div className={cx(`${moduleName}-category`)}>
+              <div
+                style={
+                  this.state.knowListActive ? activePalyList : inactivePalyList
+                }
+                onClick={() => {
+                  this.dispatchPlayList("YOU_KNOW")
+                }}
+              />
+              <div className={cx(`${moduleName}-category-title`)}>
+                Artists you should know
+              </div>
+            </div>
+            <div className={cx(`${moduleName}-songWrapper`)}>
+              {this.state.knowSongInfo
+                ? this.rederDiscover(this.state.knowSongInfo)
+                : "Loading"}
+            </div>
           </div>
-        </div>
-        <div className={cx(`${moduleName}-songWrapper`)}>
-          {this.state.knowSongInfo
-            ? this.rederDiscover(this.state.knowSongInfo)
-            : "Loading"}
-        </div>
+        )}
       </div>
     )
   }
