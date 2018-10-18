@@ -1,22 +1,42 @@
-import React from "react"
-import { connect } from "react-redux"
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import {
   selectSong,
   addHistory,
   loadSongDetail,
   loadSongsInfo
-} from "src/redux/music/actions"
-import Loading from "src/App/components/Loading"
-import ArtworkPlay from "../components/ArtworkPlay"
+} from 'src/redux/music/actions'
+import Loading from 'src/App/components/Loading'
+import ArtworkPlay from '../components/ArtworkPlay'
 
-//여기서 맵돌기 ! ! ! !
-const ArtWorkPlayContainer = props => {
-  return props.music.musicInfo ? <ArtworkPlay {...props} /> : <Loading />
+// const ArtWorkPlayContainer = props => {
+//   return props.music.musicInfo ? <ArtworkPlay {...props} /> : <Loading />
+// }
+
+class ArtWorkPlayContainer extends Component {
+
+  renderArtworks = () => {
+    console.log(this.props.musicInfos)
+    return this.props.musicInfos.map((musicInfo) => {
+      console.log(musicInfo)
+      debugger
+      return <ArtworkPlay { ...musicInfo} />
+      // return <ArtworkPlay songId={musicInfo.id}  />
+    })
+  }
+
+  render() {
+    return this.props.musicInfos ? (
+    this.renderArtworks()
+    ) : (
+      <Loading />
+    )
+  }
 }
 
 const mapStateToProps = ({ music }) => {
   return {
-    music
+    musicInfos: music.musicInfo
   }
 }
 export default connect(

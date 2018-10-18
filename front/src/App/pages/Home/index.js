@@ -44,30 +44,8 @@ class Home extends Component {
     }
   }
   componentDidMount() {
-    //console.log("sebaChoiceActive ", this.state.sebaChoiceActive) false
-    //console.log("knowListActive ", this.state.knowListActive)  false
-    //this.requestSebaSongInfo()
-    // this.requestKnowSongInfo()
     this.props.loadSongsInfo(SONG_URL_LIST)
-    this.props.loadSongsInfo(SONG_URL_LIST1)
-  }
-
-  //TODO : 리팩토링.
-  requestSebaSongInfo = () => {
-    //console.log("hihi")
-    //debugger
-    //SONG_URL_LIST.map(url => {
-    //return this.props.loadSongsInfo(url)
-    /*
-      return axios.get(resolveUrl(url)).then(response => {
-        this.setState(prevState => {
-          return {
-            ...prevState,
-            sebaSongInfo: [...prevState.sebaSongInfo, response.data]
-          }
-        })
-      })*/
-    //}
+    // this.props.loadSongsInfo(SONG_URL_LIST1)
   }
 
   requestKnowSongInfo = () => {

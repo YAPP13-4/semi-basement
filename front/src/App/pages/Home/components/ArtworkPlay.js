@@ -9,9 +9,8 @@ const cx = classnames.bind(css)
 const moduleName = "ArtworkPlay"
 
 const ArtWorkPlay = ({ music, selectSong, addHistory, loadSongDetail }) => {
-  console.log("props music", music)
+  debugger
   const { musicInfo } = music
-  console.log("musicinfo ", musicInfo)
   const songId = musicInfo.id
   const title = musicInfo.title
   const creator = musicInfo.user.username
