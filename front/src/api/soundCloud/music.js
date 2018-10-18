@@ -2,9 +2,10 @@ import { SONG_URL, resolveUrl } from "../apiConstants"
 import axios from "axios"
 
 export function getSoundCloudSongInfo(url) {
+  //debugger
   return axios
     .get(resolveUrl(url))
-    .then(response => response)
+    .then(response => response.data)
     .catch(err => err)
 }
 

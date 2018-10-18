@@ -13,13 +13,19 @@ import {
 
 export function* loadSongsInfoFrom(action) {
   console.log("load song info from ", action)
-  const { songUrl } = action
+  const { songUrlArr } = action
   yield put(loadSongInfoRequest())
   try {
-    const { musicInfo } = yield call(getSoundCloudSongInfo, songUrl)
-    console.log(musicInfo)
-    yield put(loadSongInfoSuccess(musicInfo))
+    //yield all(urls.map((url) => call(url)));
+    const data = yield all(
+      songUrlArr.map(url => call(getSoundCloudSongInfo, url))
+    )
+    //const { musicInfo } = yield call(getSoundCloudSongInfo, songUrl)
+    //debugger
+    // console.log(musicInfo)
+    yield put(loadSongInfoSuccess(data))
   } catch (err) {
+    debugger
     yield put(loadSongInfoFailure(err))
   }
 }

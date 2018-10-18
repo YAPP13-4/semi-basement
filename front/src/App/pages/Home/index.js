@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
 import { changePlayList } from "../../../redux/playlist/actions"
 import Navigation from "./components/Navigation/index"
@@ -43,20 +42,23 @@ class Home extends Component {
       sebaChoiceActive: false,
       knowListActive: false
     }
-    this.requestSebaSongInfo()
   }
   componentDidMount() {
     //console.log("sebaChoiceActive ", this.state.sebaChoiceActive) false
     //console.log("knowListActive ", this.state.knowListActive)  false
     //this.requestSebaSongInfo()
     // this.requestKnowSongInfo()
+    this.props.loadSongsInfo(SONG_URL_LIST)
+    this.props.loadSongsInfo(SONG_URL_LIST1)
   }
 
   //TODO : 리팩토링.
   requestSebaSongInfo = () => {
-    SONG_URL_LIST.map(url => {
-      return loadSongsInfo(url)
-      /*
+    //console.log("hihi")
+    //debugger
+    //SONG_URL_LIST.map(url => {
+    //return this.props.loadSongsInfo(url)
+    /*
       return axios.get(resolveUrl(url)).then(response => {
         this.setState(prevState => {
           return {
@@ -65,8 +67,9 @@ class Home extends Component {
           }
         })
       })*/
-    })
+    //}
   }
+
   requestKnowSongInfo = () => {
     SONG_URL_LIST1.map(url => {
       return axios.get(resolveUrl(url)).then(response => {
@@ -235,10 +238,11 @@ class Home extends Component {
     )
   }
 }
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ changePlayList }, dispatch)
-}
+
 export default connect(
   null,
-  mapDispatchToProps
+  {
+    changePlayList,
+    loadSongsInfo
+  }
 )(Home)

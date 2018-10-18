@@ -6,10 +6,12 @@ import {
   loadSongDetail,
   loadSongsInfo
 } from "src/redux/music/actions"
+import Loading from "src/App/components/Loading"
 import ArtworkPlay from "../components/ArtworkPlay"
 
+//여기서 맵돌기 ! ! ! !
 const ArtWorkPlayContainer = props => {
-  return <ArtworkPlay {...props} />
+  return props.music.musicInfo ? <ArtworkPlay {...props} /> : <Loading />
 }
 
 const mapStateToProps = ({ music }) => {
