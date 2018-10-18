@@ -9,3 +9,5 @@
 > git checkout develop //check out develop branch
 > npm install
 ```
+## Stack
+React, Redux, Redux-saga, Node
