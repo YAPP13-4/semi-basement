@@ -11,16 +11,17 @@
   }
   &-category {
     display: flex;
+    /*
     div:first-child {
       cursor: pointer;
       background: url('../../../assets/icons/icon2.png') no-repeat -111px -152px;
       width: 35px;
       height: 35px;
     }
-
+*/
     div:first-child:hover {
       cursor: pointer;
-      background: url('../../../assets/icons/icon2.png') no-repeat -49px -152px;
+      background: url("../../../assets/icons/icon2.png") no-repeat -49px -152px;
       width: 35px;
       height: 35px;
     }

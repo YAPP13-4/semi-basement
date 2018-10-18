@@ -3,7 +3,8 @@ import {
   EXAMPLE_SUCCESS,
   EXAMPLE_FAILURE,
   TOGGLE_HISTORY,
-  TOGGLE_MYPLAYER
+  TOGGLE_MYPLAYER,
+  SHOW_GNB
 } from './actions'
 
 const meta = (
@@ -12,7 +13,8 @@ const meta = (
     data: null,
     error: null,
     toggleHistory: false,
-    showMyplayer: false
+    showMyplayer: false,
+    showGNB: false
   },
   action
 ) => {
@@ -45,6 +47,11 @@ const meta = (
       return {
         ...state,
         showMyplayer: !state.showMyplayer
+      }
+    case SHOW_GNB:
+      return {
+        ...state,
+        showGNB: !state.showGNB
       }
     default:
       return state

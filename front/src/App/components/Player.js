@@ -16,17 +16,19 @@ const Player = ({
   song,
   player,
   changeCurrentTime,
+  changeVolume,
   togglePlay,
   toggleMuted,
   toggleHistory,
-  playNextSongFromButton,
-  playPrevSongFromButton,
-  addPlaylist
+  playNexSong,
+  playPrevSong
 }) => {
   const artworkUrl = song[2]
   const title = song[1]
   const duration = song[3]
-  const { currentTime, isPlaying } = player
+  const { currentTime, isPlaying, muted } = player
+  //변수명때문에 굳이 .. 위에 안씀.
+  const volume = muted ? 0 : player.volume
 
   return (
     <div className={cx(`${moduleName}`)}>
@@ -43,7 +45,7 @@ const Player = ({
                 className={cx(`${moduleName}__button`)}
                 role="button"
                 tabIndex="0"
-                onClick={playPrevSongFromButton}
+                onClick={playPrevSong}
               >
                 <i className={cx(`${moduleName}__button__prev`)} />
               </div>
@@ -66,7 +68,7 @@ const Player = ({
                 role="button"
                 tabIndex="0"
                 onClick={() => {
-                  playNextSongFromButton(song[0])
+                  playNexSong(song[0])
                 }}
               >
                 <i className={cx(`${moduleName}__button__forward`)} />
@@ -74,7 +76,11 @@ const Player = ({
             </div>
           </div>
           <div className={cx(`${moduleName}__section--time`)}>
-            <div style={{ color: '#45f7aa' }}>{formatSeconds(currentTime)}</div>
+            <div
+              style={{ color: "#45f7aa", width: "50px", textAlign: "center" }}
+            >
+              {formatSeconds(currentTime)}
+            </div>
           </div>
           <div className={cx(`${moduleName}__section--seek`)}>
             <Slider
@@ -94,11 +100,15 @@ const Player = ({
               onClick={toggleMuted}
               tabIndex="0"
               style={{
-                marginLeft: '2em',
-                paddingTop: '11px'
+                paddingTop: "11px",
+                display: "flex"
               }}
             >
               <i className={cx(`${moduleName}__button__mute`)} />
+
+              <div className={cx(`${moduleName}__section--volume`)}>
+                <Slider max={1} onChange={changeVolume} value={volume} />
+              </div>
             </div>
             <div className="player__song">
               <div className={cx(`${moduleName}__song__main`)}>
@@ -128,7 +138,7 @@ const Player = ({
               <div role="button" tabIndex="0">
                 <span
                   className={cx(`${moduleName}__add_playlist`)}
-                  onClick={addPlaylist}
+                  // onClick={addPlaylist}
                 />
               </div>
               <div role="button" tabIndex="0">
@@ -154,8 +164,7 @@ const Player = ({
         style={{ display: meta.toggleHistory ? 'block' : 'none' }}
         className={cx(`${moduleName}__historyTab`)}
       >
-        {' '}
-        <HistoryTab />{' '}
+        <HistoryTab />
       </div>
     </div>
   )

@@ -7,6 +7,7 @@ export const EXAMPLE_SUCCESS = `${MODULE_NAME}/EXAMPLE_SUCCESS`
 export const EXAMPLE_FAILURE = `${MODULE_NAME}/EXAMPLE_FAILURE`
 export const TOGGLE_HISTORY = `${MODULE_NAME}/TOGGLE_HISTORY`
 export const TOGGLE_MYPLAYER = `${MODULE_NAME}/TOGGLE_MYPLAYER`
+export const SHOW_GNB = `${MODULE_NAME}/SHOW_GNB`
 
 export function example() {
   return {
@@ -42,5 +43,11 @@ export function toggleHistory() {
 export function toggleMyplayer() {
   return {
     type: TOGGLE_MYPLAYER
+  }
+}
+
+export function toggleGNB() {
+  return {
+    type: SHOW_GNB
   }
 }
