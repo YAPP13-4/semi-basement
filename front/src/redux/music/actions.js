@@ -1,16 +1,17 @@
 import * as types from "./ActionType"
 
 export const NAME = "MUSIC"
-export const LOAD_SONG_GENERAL_INFO = "LOAD_SONG_GENERAL_INFO"
+export const LOAD_SONG_INFO = "LOAD_SONG_INFO"
 export const LOAD_SONG_INFO_REQUEST = "LOAD_SONG_INFO_REQUEST"
 export const LOAD_SONG_INFO_SUCCESS = "LOAD_SONG_INFO_SUCCESS"
 export const LOAD_SONG_INFO_FAILURE = "LOAD_SONG_INFO_FAILURE"
 
 //new action
-export function loadSongsInfo(songInfo) {
+export function loadSongsInfo(songUrl) {
+  console.log("url t est", songUrl)
   return {
-    type: LOAD_SONG_GENERAL_INFO,
-    songInfo
+    type: LOAD_SONG_INFO,
+    songUrl
   }
 }
 

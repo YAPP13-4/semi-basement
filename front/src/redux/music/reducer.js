@@ -13,15 +13,24 @@ const music = (
   state = {
     song: "",
     loading: false,
+    infoLoading: false,
+    musicInfo: null,
     songDetail: null,
     historySong: null
   },
   action
 ) => {
   switch (action.type) {
+    case LOAD_SONG_INFO_REQUEST:
+      return {
+        ...state,
+        infoLoading: true
+      }
+
     case LOAD_SONG_INFO_SUCCESS:
       return {
         ...state,
+        infoLoading: false,
         musicInfo: { ...action.data }
       }
     case types.SELECT_SONG:

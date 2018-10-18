@@ -4,12 +4,13 @@ import { connect } from "react-redux"
 import { changePlayList } from "../../../redux/playlist/actions"
 import Navigation from "./components/Navigation/index"
 import axios from "axios"
+import { loadSongsInfo } from "src/redux/music/actions"
 //TODO : FIX (with BE)
 import SONG_URL_LIST from "../../constants/test/SongUrlConstants"
 import SONG_URL_LIST1 from "../../constants/test/SongUrlConstants1"
 import { resolveUrl } from "../../constants/ApiConstants"
-import ArtworkPlay from "./components/ArtworkPlay"
-
+//import ArtworkPlay from "./components/ArtworkPlay"
+import ArtWorkContainer from "../Home/container/ArtWrokContainer"
 import classnames from "classnames/bind"
 import css from "./index.scss"
 
@@ -42,17 +43,20 @@ class Home extends Component {
       sebaChoiceActive: false,
       knowListActive: false
     }
+    this.requestSebaSongInfo()
   }
   componentDidMount() {
     //console.log("sebaChoiceActive ", this.state.sebaChoiceActive) false
     //console.log("knowListActive ", this.state.knowListActive)  false
-    this.requestSebaSongInfo()
-    this.requestKnowSongInfo()
+    //this.requestSebaSongInfo()
+    // this.requestKnowSongInfo()
   }
 
   //TODO : 리팩토링.
   requestSebaSongInfo = () => {
     SONG_URL_LIST.map(url => {
+      return loadSongsInfo(url)
+      /*
       return axios.get(resolveUrl(url)).then(response => {
         this.setState(prevState => {
           return {
@@ -60,7 +64,7 @@ class Home extends Component {
             sebaSongInfo: [...prevState.sebaSongInfo, response.data]
           }
         })
-      })
+      })*/
     })
   }
   requestKnowSongInfo = () => {
@@ -126,6 +130,7 @@ class Home extends Component {
       })
     }
   }
+  /*
   rederDiscover = infoArray => {
     const songs = infoArray.map((songInfo, index) => {
       return (
@@ -140,12 +145,45 @@ class Home extends Component {
       )
     })
     return songs
-  }
+  }*/
   render() {
     return (
       <div className={cx(`${moduleName}`)}>
         <Navigation />
-        {/* TODO : 리팩토링 ! ! ! */}
+        <div>
+          <div className={cx(`${moduleName}-category`)}>
+            <div
+              style={
+                this.state.sebaChoiceActive ? activePalyList : inactivePalyList
+              }
+              onClick={() => {
+                this.dispatchPlayList("SEBA_CHOICE")
+              }}
+            />
+            <div className={cx(`${moduleName}-category-title`)}>
+              SEBA's Choice
+            </div>
+          </div>
+          <div className={cx(`${moduleName}-songWrapper`)}>
+            <ArtWorkContainer />
+          </div>
+
+          <div className={cx(`${moduleName}-category`)}>
+            <div
+              style={
+                this.state.knowListActive ? activePalyList : inactivePalyList
+              }
+              onClick={() => {
+                this.dispatchPlayList("YOU_KNOW")
+              }}
+            />
+            <div className={cx(`${moduleName}-category-title`)}>
+              Artists you should know
+            </div>
+          </div>
+          <div className={cx(`${moduleName}-songWrapper`)} />
+        </div>
+        {/*
         {this.state.sebaSongInfo.length !== 6 ||
         this.state.knowSongInfo.length !== 6 ? (
           <Loading />
@@ -192,6 +230,7 @@ class Home extends Component {
             </div>
           </div>
         )}
+              */}
       </div>
     )
   }
