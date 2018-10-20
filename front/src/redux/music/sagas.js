@@ -1,11 +1,38 @@
-import { takeEvery, all, put, call } from 'redux-saga/effects'
-import { getSoundCloudSong } from 'src/api'
+import { takeEvery, all, put, call } from "redux-saga/effects"
+import { getSoundCloudSong, getSoundCloudSongInfo } from "src/api"
 import {
   LOAD_SONG_DETAIL,
   loadSongDetailRequest,
   loadSongDetailSuccess,
-  loadSongDetailFailure
-} from './actions'
+  loadSongDetailFailure,
+  LOAD_SONG_INFO,
+  loadSongInfoRequest,
+  loadSongInfoSuccess,
+  loadSongInfoFailure
+} from "./actions"
+
+export function* loadSongsInfoFrom(action) {
+  console.log("load song info from ", action)
+  const { songUrlArr } = action
+  yield put(loadSongInfoRequest())
+  try {
+    //yield all(urls.map((url) => call(url)));
+    const data = yield all(
+      songUrlArr.map(url => call(getSoundCloudSongInfo, url))
+    )
+    //const { musicInfo } = yield call(getSoundCloudSongInfo, songUrl)
+    //debugger
+    // console.log(musicInfo)
+    yield put(loadSongInfoSuccess(data))
+  } catch (err) {
+    //console.log('err url',)
+    yield put(loadSongInfoFailure(err))
+  }
+}
+
+export function* watchLoadSongInfoFlow() {
+  yield takeEvery(LOAD_SONG_INFO, loadSongsInfoFrom)
+}
 
 export function* loadSongDetailFlow(action) {
   const { songId } = action
@@ -24,5 +51,5 @@ export function* watchLoadSongDtailFlow() {
 }
 
 export default function* musicRoot() {
-  yield all([watchLoadSongDtailFlow()])
+  yield all([watchLoadSongDtailFlow(), watchLoadSongInfoFlow()])
 }

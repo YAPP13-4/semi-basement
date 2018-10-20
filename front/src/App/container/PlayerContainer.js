@@ -28,7 +28,6 @@ const PlayerContainer = props => {
 PlayerContainer.defaultProps = defaultProps
 
 const mapStateToProps = ({ player, meta, music }) => {
-  //const songurl = (SONG_URL.replace(':id', state.music.song));\
   return {
     //song : songUrl
     meta,
