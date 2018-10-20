@@ -3,8 +3,9 @@ import {
   EXAMPLE_SUCCESS,
   EXAMPLE_FAILURE,
   TOGGLE_HISTORY,
+  TOGGLE_MYPLAYER,
   SHOW_GNB
-} from "./actions"
+} from './actions'
 
 const meta = (
   state = {
@@ -12,6 +13,7 @@ const meta = (
     data: null,
     error: null,
     toggleHistory: false,
+    showMyplayer: false,
     showGNB: false
   },
   action
@@ -40,6 +42,11 @@ const meta = (
       return {
         ...state,
         toggleHistory: !state.toggleHistory
+      }
+    case TOGGLE_MYPLAYER:
+      return {
+        ...state,
+        showMyplayer: !state.showMyplayer
       }
     case SHOW_GNB:
       return {
