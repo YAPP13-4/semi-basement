@@ -25,7 +25,7 @@ export function* loadSongsInfoFrom(action) {
     // console.log(musicInfo)
     yield put(loadSongInfoSuccess(data))
   } catch (err) {
-    debugger
+    //console.log('err url',)
     yield put(loadSongInfoFailure(err))
   }
 }
