@@ -1,12 +1,12 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import classnames from 'classnames/bind'
-import getImageUrl from 'src/utils/ImageUtils'
-import css from './ArtworkPlay.scss'
-import IMAGE_SIZES from '../../../constants/ImageConstants'
+import React from "react"
+import { Link } from "react-router-dom"
+import classnames from "classnames/bind"
+import getImageUrl from "src/utils/ImageUtils"
+import css from "./ArtworkPlay.scss"
+import IMAGE_SIZES from "../../../constants/ImageConstants"
 
 const cx = classnames.bind(css)
-const moduleName = 'ArtworkPlay'
+const moduleName = "ArtworkPlay"
 
 const ArtWorkPlay = ({ musicInfo, onClickPlay, onClickSongDetail }) => {
   const songId = musicInfo.id
