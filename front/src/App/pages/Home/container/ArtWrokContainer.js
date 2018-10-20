@@ -1,12 +1,7 @@
 import React, { PureComponent } from "react"
 import { connect } from "react-redux"
-import {
-  selectSong,
-  addHistory,
-  loadSongDetail,
-  loadSongsInfo
-} from "src/redux/music/actions"
-
+import { selectSong, addHistory, loadSongDetail } from "src/redux/music/actions"
+import { changePlayList } from "src/redux/playlist/actions"
 import Loading from "src/App/components/Loading"
 import ArtworkPlay from "../components/ArtworkPlay"
 import classnames from "classnames/bind"
@@ -39,7 +34,15 @@ class ArtWorkPlayContainer extends PureComponent {
   onClickSongDetail = songId => {
     this.props.loadSongDetail(songId)
   }
-
+  onClickChangePlayList = playlist => {
+    if (!this.props.currentList || this.props.currentList !== playlist) {
+      const songId = this.props.musicInfos.map(info => {
+        if (!songId) return info.id
+        else return songId.concat(info.id)
+      })
+      this.props.changePlayList(songId, playlist)
+    }
+  }
   renderArtworks = () => {
     return this.props.musicInfos.map(musicInfo => {
       return (
@@ -56,7 +59,13 @@ class ArtWorkPlayContainer extends PureComponent {
     return this.props.musicInfos ? (
       <div className={cx(`${moduleName}`)}>
         <div className={cx(`${moduleName}-category`)}>
-          <div style={activePalyList} className="patch-icon">
+          <div
+            style={activePalyList}
+            onClick={() => {
+              this.onClickChangePlayList(this.props.category)
+            }}
+            className="patch-icon"
+          >
             {/*index.js로부터 categoryTitle 넘겨받기*/}
           </div>
           {/* 여기에 onClick Event 달기 */}
@@ -74,12 +83,13 @@ class ArtWorkPlayContainer extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ music }) => {
+const mapStateToProps = ({ music, playList }) => {
   return {
-    musicInfos: music.musicInfo
+    musicInfos: music.musicInfo,
+    currentList: playList.currentList
   }
 }
 export default connect(
   mapStateToProps,
-  { selectSong, addHistory, loadSongDetail, loadSongsInfo }
+  { selectSong, addHistory, loadSongDetail, changePlayList }
 )(ArtWorkPlayContainer)
