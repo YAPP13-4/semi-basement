@@ -14,7 +14,6 @@ import classnames from "classnames/bind"
 import css from "./index.scss"
 
 import selectIcon from "../../../assets/icons/icon2.png"
-import Loading from "../../components/Loading"
 
 const cx = classnames.bind(css)
 const moduleName = "Home"
@@ -158,6 +157,7 @@ class Home extends Component {
                 this.dispatchPlayList("YOU_KNOW")
               }}
             />
+
             <div className={cx(`${moduleName}-category-title`)}>
               Artists you should know
             </div>
