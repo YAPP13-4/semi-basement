@@ -8,7 +8,6 @@ export const LOAD_SONG_INFO_FAILURE = "LOAD_SONG_INFO_FAILURE"
 
 //new action
 export function loadSongsInfo(songUrlArr) {
-  console.log("url t est", songUrlArr)
   return {
     type: LOAD_SONG_INFO,
     songUrlArr
