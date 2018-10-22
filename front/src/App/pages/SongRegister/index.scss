@@ -1,0 +1,71 @@
+@import "src/variable.scss";
+
+.SongRegist {
+  color: white;
+  background-color: #191b1c;
+  height: 100%;
+  margin: 0 auto;
+  &_top {
+    font-family: $font-Extra-bold;
+    color: $green;
+    text-align: center;
+    padding: 37px 0px 50px 0px;
+  }
+  &_body {
+    display: flex;
+    max-width: 895px;
+    margin: 0 auto;
+  }
+  &_left {
+    font-family: $font-bold;
+    font-size: 17px;
+    flex: 1;
+  }
+  input {
+    height: 2.65em;
+  }
+  input,
+  textarea {
+    border: none;
+    background-color: rgba(255, 255, 255, 0.04);
+    color: #d1d1d1;
+  }
+
+  //right area
+  &_right {
+    font-family: $font-bold;
+    font-size: 17px;
+    flex: 1;
+    margin-left: 69px;
+  }
+  &_right_top {
+    padding-bottom: 13px;
+  }
+  &_right_mid {
+    width: 366px;
+    height: 366px;
+    background-size: cover;
+    border: 1px solid #d1d1d1;
+    border-radius: 3px;
+  }
+  &_right_bot {
+    width: 375px;
+    height: 108px;
+    background-color: #000000;
+    margin-top: 20px;
+    padding: 19px 0px 19px 9px;
+    border-radius: 3px;
+    overflow: auto;
+  }
+  &_right_bot_wrapper {
+    display: flex;
+    //tmp width;
+    width: 560px;
+    div {
+      width: 70px;
+      height: 70px;
+      border: 1px solid #d1d1d1;
+      margin-right: 23px;
+    }
+  }
+}
