@@ -1,18 +1,8 @@
-@font-face {
-  font-family: 'AvertaCY';
-  src: url('../assets/font/Averta\ CY/AvertaCY-Regular.eot'); /* IE9 Compat Modes */
-  src: url('../assets/font/Averta\ CY/AvertaCY-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('../assets/font/Averta\ CY/AvertaCY-Regular.woff') format('woff'), /* Modern Browsers */
-       url('../assets/font/Averta\ CY/AvertaCY-Regular.ttf') format('truetype'), /* Safari, Android, iOS */
-       url('../assets/font/Averta\ CY/AvertaCY-Regular.svg#AvertaCY-Regular') format('svg'); /* Legacy iOS */
-  font-style: normal;
-  font-weight: normal;
-  text-rendering: optimizeLegibility;
-}
+@import "src/variable.scss";
 
 .App {
   height: 100vh;
-  font-family: 'AvertaCY';
+  font-family: $font-normal;
   &-body {
     padding-top: 94px; // top nav padding
     background: black;

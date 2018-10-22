@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react"
 import { connect } from "react-redux"
 
-import Navigation from "./components/Navigation/index"
+import Navigation from "./components/Navigation"
 import { loadSongsInfo } from "src/redux/music/actions"
 import { loadFirstSubSongInfo } from "src/redux/submusic1/actions"
 //TODO : FIX (with BE)
