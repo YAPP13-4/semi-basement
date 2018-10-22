@@ -17,7 +17,7 @@ class RightSideForm extends PureComponent {
                 this.props.change("thumbnail", 1)
               }}
             >
-              1
+              잠만보
             </div>
             <div
               onClick={() => {
@@ -25,11 +25,32 @@ class RightSideForm extends PureComponent {
                 this.props.change("thumbnail", 2)
               }}
             >
-              2
+              피카츄
             </div>
-            <div>3 </div>
-            <div>4 </div>
-            <div>5 </div>
+            <div
+              onClick={() => {
+                this.props.selectThumbnail(3)
+                this.props.change("thumbnail", 3)
+              }}
+            >
+              꼬부{" "}
+            </div>
+            <div
+              onClick={() => {
+                this.props.selectThumbnail(4)
+                this.props.change("thumbnail", 4)
+              }}
+            >
+              파이{" "}
+            </div>
+            <div
+              onClick={() => {
+                this.props.selectThumbnail(5)
+                this.props.change("thumbnail", 5)
+              }}
+            >
+              이상{" "}
+            </div>
             <div>6 </div>
           </div>
         </div>

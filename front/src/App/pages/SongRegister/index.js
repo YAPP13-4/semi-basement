@@ -1,8 +1,13 @@
 import React, { PureComponent } from "react"
 import classnames from "classnames/bind"
 import css from "./index.scss"
+///TEST
 import test1 from "src/assets/test_reg/jmb.png"
 import test2 from "src/assets/test_reg/pika.png"
+import test3 from "src/assets/test_reg/Stone.png"
+import test4 from "src/assets/test_reg/Stone2.png"
+import test5 from "src/assets/test_reg/Stone3.png"
+///
 import TextInputForm from "./component/textInput"
 import RightSideForm from "./component/RightSideForm"
 const cx = classnames.bind(css)
@@ -24,6 +29,27 @@ class SongRegist extends PureComponent {
         this.setState(() => {
           return {
             selectedArtWork: `url(${test2})`
+          }
+        })
+        break
+      case 3:
+        this.setState(() => {
+          return {
+            selectedArtWork: `url(${test3})`
+          }
+        })
+        break
+      case 4:
+        this.setState(() => {
+          return {
+            selectedArtWork: `url(${test4})`
+          }
+        })
+        break
+      case 5:
+        this.setState(() => {
+          return {
+            selectedArtWork: `url(${test5})`
           }
         })
         break

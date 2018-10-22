@@ -1,6 +1,5 @@
 @import "src/variable.scss";
-.form-group {
-}
+
 .SongRegist {
   color: white;
   background-color: #191b1c;
@@ -14,7 +13,19 @@
     textarea {
       min-height: 102px;
     }
+    input[type="text"] {
+      height: 2.65em;
+    }
+    input[type="text"],
+    textarea {
+      border: none;
+      font-family: $font-normal;
+      font-size: 16px;
+      background-color: rgba(255, 255, 255, 0.04);
+      color: #d1d1d1;
+    }
   }
+
   &_top {
     font-family: $font-Extra-bold;
     color: $green;
@@ -30,15 +41,11 @@
     font-family: $font-bold;
     font-size: 17px;
     flex: 1;
-  }
-  input {
-    height: 2.65em;
-  }
-  input,
-  textarea {
-    border: none;
-    background-color: rgba(255, 255, 255, 0.04);
-    color: #d1d1d1;
+    span {
+      float: right;
+      font-size: 12px;
+      font-family: $font-normal;
+    }
   }
 
   //right area
@@ -59,47 +66,10 @@
     border: 1px solid #d1d1d1;
     border-radius: 3px;
   }
-  &_right_bot {
-    width: 375px;
-    height: 108px;
-    background-color: #000000;
-    margin-top: 20px;
-    padding: 19px 0px 19px 9px;
-    border-radius: 3px;
-    overflow: auto;
-  }
-  &_right_bot_wrapper {
-    display: flex;
-    //tmp width;
-    width: 560px;
-    div {
-      width: 70px;
-      height: 70px;
-      border: 1px solid #d1d1d1;
-      margin-right: 23px;
-      border-radius: 3px;
-    }
-    div:hover {
-      cursor: pointer;
-    }
-
-    /*TODO : DELETE , For TEST*/
-    ///////////////////////////
-    div {
-      background-size: cover;
-    }
-    div:nth-child(1) {
-      background-image: url("src/assets/test_reg/jmb.png");
-    }
-    div:nth-child(2) {
-      background-image: url("src/assets/test_reg/pika.png");
-    }
-    ///////////////////////////
-  }
 
   &_right_bot_submit {
     position: absolute;
-    bottom: 15px;
+    bottom: 38px;
     right: 35px;
     button {
       padding: 0.5rem 2.5rem;
