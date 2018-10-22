@@ -1,19 +1,21 @@
-import { combineReducers, createStore, applyMiddleware, compose } from "redux";
-import { routerReducer, routerMiddleware } from "react-router-redux";
-import createSagaMiddleware from 'redux-saga'
+import { combineReducers, createStore, applyMiddleware, compose } from "redux"
+import { routerReducer, routerMiddleware } from "react-router-redux"
+import { reducer as reduxFormReducer } from "redux-form"
+import createSagaMiddleware from "redux-saga"
 
-import ReduxThunk from "redux-thunk";
-import rootSaga from 'src/redux/rootSagas';
-import reducer from "src/redux/reducers";
+import ReduxThunk from "redux-thunk"
+import rootSaga from "src/redux/rootSagas"
+import reducer from "src/redux/reducers"
 
 export default function createNewStore(history) {
-  const routerMw = routerMiddleware(history);
+  const routerMw = routerMiddleware(history)
   const sagaMiddleware = createSagaMiddleware()
 
   const store = createStore(
     combineReducers({
       router: routerReducer,
-      ...reducer
+      ...reducer,
+      form: reduxFormReducer
     }),
     {},
     compose(
@@ -22,15 +24,15 @@ export default function createNewStore(history) {
         ? window.__REDUX_DEVTOOLS_EXTENSION__()
         : f => f
     )
-  );
+  )
 
   if (module.hot) {
     module.hot.accept(() => {
-      store.replaceReducer(require("src/redux/reducers").default);
-    });
+      store.replaceReducer(require("src/redux/reducers").default)
+    })
   }
 
-  sagaMiddleware.run(rootSaga);
+  sagaMiddleware.run(rootSaga)
 
-  return store;
+  return store
 }
