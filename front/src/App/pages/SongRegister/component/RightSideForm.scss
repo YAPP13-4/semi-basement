@@ -1,4 +1,5 @@
-.ThumbNailInput {
+@import "src/variable.scss";
+.RightSideForm {
   width: 375px;
   height: 108px;
   background-color: #000000;
@@ -26,5 +27,20 @@
     div {
       background-size: cover;
     }
+  }
+}
+.RightSideForm_right_bot_check {
+  div:first-child {
+    margin-top: 15px;
+  }
+  input {
+    width: 15px;
+    height: 15px;
+    margin-top: 5px;
+  }
+  label {
+    margin-left: 10px;
+    font-family: $font-normal;
+    font-size: 15px;
   }
 }
