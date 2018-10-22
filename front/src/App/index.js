@@ -4,7 +4,7 @@ import { Switch, Route, withRouter } from "react-router-dom"
 import classnames from "classnames/bind"
 
 import PlayerContainer from "src/App/container/PlayerContainer"
-import MyPlayer from 'src/App/components/MyPlayer'
+import MyPlayer from "src/App/components/MyPlayer"
 
 import routes from "./routes"
 import css from "./index.scss"

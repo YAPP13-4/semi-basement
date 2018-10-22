@@ -1,37 +1,41 @@
-import Home from './pages/Home'
-import Mypage from './pages/Mypage'
-import Sign from './pages/Sign'
-import ChartTab from './pages/Home/Chart/ChartTab'
-import Landing from './pages/Landing'
-import SongDetail from './pages/SongDetail'
-
+import Home from "./pages/Home"
+import Mypage from "./pages/Mypage"
+import Sign from "./pages/Sign"
+import ChartTab from "./pages/Home/Chart/ChartTab"
+import Landing from "./pages/Landing"
+import SongDetail from "./pages/SongDetail"
+import SongRegist from "./pages/SongRegister"
 const routes = [
   {
-    path: '/mypage',
+    path: "/mypage",
     exact: true,
-    component: Mypage,
+    component: Mypage
   },
   {
-    path: '/sign',
+    path: "/sign",
     exact: true,
-    component: Sign,
+    component: Sign
   },
   {
-    path: '/chart',
+    path: "/chart",
     component: ChartTab
   },
   {
-    path: '/main',
-    component: Home,
+    path: "/main",
+    component: Home
   },
   {
-    path: '/songDetail',
-    component: SongDetail,
+    path: "/songDetail",
+    component: SongDetail
   },
   {
-    path: '/',
-    component: Landing,
+    path: "/regSong",
+    component: SongRegist
   },
+  {
+    path: "/",
+    component: Landing
+  }
 ]
 
-export default routes;
+export default routes
