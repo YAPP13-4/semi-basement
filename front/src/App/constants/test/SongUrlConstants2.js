@@ -1,10 +1,10 @@
-const SONG_URL_LIST1 = [
-  "https://soundcloud.com/tommisch/sets/beat-tape-1",
-  "https://soundcloud.com/seung-ryeol-paik/nuit-swing-demo-with-decalcomanic",
-  "https://soundcloud.com/lxwl4ih4tphn/feat-planet",
-  "https://soundcloud.com/namqkang/blueberrydream",
-  "https://soundcloud.com/link6/a-june-j-beat-movinon-featazitiz",
-  "https://soundcloud.com/user-61321127/swangg"
+const SONG_URL_LIST2 = [
+  "https://soundcloud.com/anuelaapr/anuel-aa-na-nuevo",
+  "https://soundcloud.com/partypupils/ms-jackson",
+  "https://soundcloud.com/nydge/float-ft-joe-hertler-and-the-rainbow-seekers",
+  "https://soundcloud.com/noonpacific/capyac-ft-moonzz-afterhours",
+  "https://soundcloud.com/samwillsmusic/years",
+  "https://soundcloud.com/deepmatter/harrison-sands-day2day"
 ]
 
-export default SONG_URL_LIST1
+export default SONG_URL_LIST2

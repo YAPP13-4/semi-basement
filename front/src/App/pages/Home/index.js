@@ -3,8 +3,9 @@ import { connect } from "react-redux"
 
 import Navigation from "./components/Navigation/index"
 import { loadSongsInfo } from "src/redux/music/actions"
+import { loadFirstSubSongInfo } from "src/redux/submusic1/actions"
 //TODO : FIX (with BE)
-import SONG_URL_LIST from "../../constants/test/SongUrlConstants"
+import SONG_URL_LIST2 from "../../constants/test/SongUrlConstants2"
 import SONG_URL_LIST1 from "../../constants/test/SongUrlConstants1"
 import ArtWorkContainer from "../Home/container/ArtWrokContainer"
 import classnames from "classnames/bind"
@@ -23,6 +24,7 @@ class Home extends PureComponent {
   }
   componentDidMount() {
     this.props.loadSongsInfo(SONG_URL_LIST1)
+    this.props.loadFirstSubSongInfo(SONG_URL_LIST2)
   }
 
   render() {
@@ -43,6 +45,7 @@ class Home extends PureComponent {
 export default connect(
   null,
   {
-    loadSongsInfo
+    loadSongsInfo,
+    loadFirstSubSongInfo
   }
 )(Home)

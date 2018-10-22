@@ -20,12 +20,8 @@ export function* loadSongsInfoFrom(action) {
     const data = yield all(
       songUrlArr.map(url => call(getSoundCloudSongInfo, url))
     )
-    //const { musicInfo } = yield call(getSoundCloudSongInfo, songUrl)
-    //debugger
-    // console.log(musicInfo)
     yield put(loadSongInfoSuccess(data))
   } catch (err) {
-    //console.log('err url',)
     yield put(loadSongInfoFailure(err))
   }
 }

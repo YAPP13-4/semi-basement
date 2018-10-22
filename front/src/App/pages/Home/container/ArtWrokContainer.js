@@ -44,19 +44,32 @@ class ArtWorkPlayContainer extends PureComponent {
     }
   }
   renderArtworks = () => {
-    return this.props.musicInfos.map(musicInfo => {
-      return (
-        <ArtworkPlay
-          musicInfo={musicInfo}
-          onClickPlay={this.onClickPlay}
-          onClickSongDetail={this.onClickSongDetail}
-        />
-      )
-    })
+    if (this.props.category === "SEBA'S CHOICE") {
+      return this.props.musicInfos.map(musicInfo => {
+        return (
+          <ArtworkPlay
+            musicInfo={musicInfo}
+            onClickPlay={this.onClickPlay}
+            onClickSongDetail={this.onClickSongDetail}
+          />
+        )
+      })
+    } else if (this.props.category === "YOU_KNOW") {
+      console.log("music info ", this.props.subMusicInfo1)
+      return this.props.subMusicInfo1.map(musicInfo => {
+        return (
+          <ArtworkPlay
+            musicInfo={musicInfo}
+            onClickPlay={this.onClickPlay}
+            onClickSongDetail={this.onClickSongDetail}
+          />
+        )
+      })
+    }
   }
 
   render() {
-    return this.props.musicInfos ? (
+    return this.props.musicInfos && this.props.subMusicInfo1 ? (
       <div className={cx(`${moduleName}`)}>
         <div className={cx(`${moduleName}-category`)}>
           <div
@@ -65,9 +78,7 @@ class ArtWorkPlayContainer extends PureComponent {
               this.onClickChangePlayList(this.props.category)
             }}
             className="patch-icon"
-          >
-            {/*index.js로부터 categoryTitle 넘겨받기*/}
-          </div>
+          />
           {/* 여기에 onClick Event 달기 */}
           <div className={cx(`${moduleName}-category-title`)}>
             {this.props.category}
@@ -83,8 +94,9 @@ class ArtWorkPlayContainer extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ music, playList }) => {
+const mapStateToProps = ({ music, playList, submusic1 }) => {
   return {
+    subMusicInfo1: submusic1.musicInfo,
     musicInfos: music.musicInfo,
     currentList: playList.currentList
   }

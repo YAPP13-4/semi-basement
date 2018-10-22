@@ -1,7 +1,6 @@
 // EXplain : palylist reducer에서 정보를 받아와서 다음곡 재생하기.
 import * as types from "./ActionType"
 import * as musicActions from "../music/ActionType"
-import * as playListActions from "../playlist/ActionType"
 import axios from "axios"
 import { SONG_URL } from "../../App/constants/ApiConstants"
 
@@ -41,7 +40,7 @@ export const playNexSong = targetId => (dispatch, getState) => {
   const state = getState()
   const currentSongInfoArray = state.music.song
   const targetPlayList = state.playList.musicList
-  console.log("tagetPlayList", targetPlayList)
+  console.log("tagetPlayList", state.playList)
   dispatch({ type: types.PLAY_NEXT_SONG })
 
   if (targetPlayList) {

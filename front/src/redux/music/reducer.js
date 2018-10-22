@@ -1,4 +1,4 @@
-import * as types from './ActionType'
+import * as types from "./ActionType"
 
 import {
   LOAD_SONG_DETAIL_REQUEST,
@@ -7,14 +7,16 @@ import {
   LOAD_SONG_INFO_REQUEST,
   LOAD_SONG_INFO_SUCCESS,
   LOAD_SONG_INFO_FAILURE
-} from './actions'
+} from "./actions"
 
 const music = (
   state = {
-    song: '',
+    song: "",
     loading: false,
     infoLoading: false,
     musicInfo: null,
+    recommendMusicInfo1: null,
+    recommendMusicInfo2: null,
     songDetail: null,
     historySong: null
   },
