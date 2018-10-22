@@ -1,0 +1,30 @@
+.ThumbNailInput {
+  width: 375px;
+  height: 108px;
+  background-color: #000000;
+  margin-top: 20px;
+  padding: 19px 0px 19px 9px;
+  border-radius: 3px;
+  overflow: auto;
+  &_wrapper {
+    display: flex;
+    //tmp width;
+    width: 560px;
+    div {
+      width: 70px;
+      height: 70px;
+      border: 1px solid #d1d1d1;
+      margin-right: 23px;
+      border-radius: 3px;
+    }
+    div:hover {
+      cursor: pointer;
+    }
+
+    /*TODO : DELETE , For TEST*/
+    ///////////////////////////
+    div {
+      background-size: cover;
+    }
+  }
+}

@@ -1,17 +1,16 @@
-import React, { Component } from "react"
+import React, { PureComponent } from "react"
 import classnames from "classnames/bind"
 import css from "./index.scss"
 import test1 from "src/assets/test_reg/jmb.png"
 import test2 from "src/assets/test_reg/pika.png"
 import TextInputForm from "./component/textInput"
-
+import ThumbNailInput from "./component/thumbnailInput"
 const cx = classnames.bind(css)
 const moduleName = "SongRegist"
 //image selection은 input type hidden 의 value를 조정해서 submit하기.
-class SongRegist extends Component {
+class SongRegist extends PureComponent {
   state = {
-    selectedArtWork: `url(${test1})`,
-    title: null
+    selectedArtWork: `url(${test1})`
   }
   selectThumbnail = number => {
     //나중에 reducer로 번호만 넘겨서 뒷단에서 thumbnail 매칭하기.
@@ -56,28 +55,7 @@ class SongRegist extends Component {
               name="thumbnail"
               value={this.state.selectedArtWork}
             />
-            <div className={cx(`${moduleName}_right_bot`)}>
-              <div className={cx(`${moduleName}_right_bot_wrapper`)}>
-                <div
-                  onClick={() => {
-                    this.selectThumbnail(1)
-                  }}
-                >
-                  1
-                </div>
-                <div
-                  onClick={() => {
-                    this.selectThumbnail(2)
-                  }}
-                >
-                  2
-                </div>
-                <div>3 </div>
-                <div>4 </div>
-                <div>5 </div>
-                <div>6 </div>
-              </div>
-            </div>
+            <ThumbNailInput selectThumbnail={this.selectThumbnail} />
             <div className={cx(`${moduleName}_right_bot_check`)}>
               <label htmlFor="user_terms" className="checkbox-inline">
                 <input
