@@ -1,95 +1,54 @@
-@font-face {
-    font-family: 'AvertaCYExtrabold';
-    src: url('../../assets/font/Averta\ CY\ Extrabold/AvertaCY-ExtraboldItalic.eot'); /* IE9 Compat Modes */
-    src: url('../../assets/font/Averta\ CY\ Extrabold/AvertaCY-ExtraboldItalic.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-         url('../../assets/font/Averta\ CY\ Extrabold/AvertaCY-ExtraboldItalic.woff') format('woff'), /* Modern Browsers */
-         url('../../assets/font/Averta\ CY\ Extrabold/AvertaCY-ExtraboldItalic.ttf') format('truetype'), /* Safari, Android, iOS */
-         url('../../assets/font/Averta\ CY\ Extrabold/AvertaCY-ExtraboldItalic.svg#AvertaCY-ExtraboldItalic') format('svg'); /* Legacy iOS */
-    font-style: italic;
-    font-weight: normal;
-    text-rendering: optimizeLegibility;
-}
+@import "src/variable.scss";
+
 .Landing {
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    height: 100%;
-    position: fixed;
-    z-index: 3;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 100%;
+  position: fixed;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  width: 100%;
+  // -------------------
+  &-glitch__img {
+    position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    // -------------------
-    &-glitch__img {
+    width: 101%;
+    height: 100%;
+    transform: translate3d(0, 0, 0);
+    background-blend-mode: var(--blend-mode-1);
+  }
+
+  &-logoWrapper {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+
+    img {
+      width: 60%;
+      height: auto;
       position: absolute;
       top: 0;
+      bottom: 0;
       left: 0;
-      width: 101%;
-      height: 100%;
-      transform: translate3d(0,0,0);
-      background-blend-mode: var(--blend-mode-1);
+      right: 0;
+      margin: auto;
+      mix-blend-mode: screen;
     }
 
-
-    &-logoWrapper {
-        position: relative;
-        height: 100%;
-        overflow: hidden;
-
-          img {
-          width: 60%;
-          height: auto;
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          margin: auto;
-          mix-blend-mode:screen;
-          }
-
-        div {
-            position: fixed;
-            bottom: 26%;
-            left: 46%;
-            width: 145px;
-            height: 48px;
-            img {
-                width: 100%;
-                max-width: 100%;
-                max-height: 100%;
-            }
-        }
-        /*
-        a {
-            font-family: 'AvertaCYExtrabold';
-            cursor: pointer;
-            margin: 0 auto;
-            position: fixed;
-            bottom: 37%;
-            left: 47%;
-            color: white;
-            width: 143px;
-            height: 46px;
-            border-radius: 6px;
-            mix-blend-mode: screen;
-            border: solid 1px #00ffff;
-            text-align: center;
-            text-decoration: none;
-            div {
-
-            }
-
-            span {
-                display: flex;
-                align-items: center;
-                mix-blend-mode: screen;
-                justify-content: center;
-                height: 100%;
-                font-size: 20px;
-                color: #ffffff;
-            }
-
-        }*/
+    div {
+      position: fixed;
+      bottom: 26%;
+      left: 46%;
+      width: 145px;
+      height: 48px;
+      img {
+        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+      }
     }
+  }
 }

@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import { compose } from "redux"
 import classnames from "classnames/bind"
 import { toggleMyplayer } from "src/redux/meta/actions.js"
-import logo from "../../../assets/logos/logo.png"
+import logo from "src/assets/logos/logo.png"
 import css from "./index.scss"
 
 const cx = classnames.bind(css)
