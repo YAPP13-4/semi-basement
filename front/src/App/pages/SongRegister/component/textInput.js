@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react"
 import { Field, reduxForm } from "redux-form"
-import { regexUrl } from "../../../constants/ApiConstants"
 import { renderInputField, renderAreaField } from "./renderField"
 class TextInputForm extends PureComponent {
   render() {

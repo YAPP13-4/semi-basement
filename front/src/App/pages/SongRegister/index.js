@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react"
 import classnames from "classnames/bind"
+import { reduxForm } from "redux-form"
 import css from "./index.scss"
 ///TEST
 import test1 from "src/assets/test_reg/jmb.png"
@@ -57,14 +58,19 @@ class SongRegist extends PureComponent {
         break
     }
   }
-
+  submitTest = values => {
+    console.log("submit!", this.props.form)
+    console.log("submit values", values)
+    //console.log("submit!")
+  }
   render() {
+    const { handleSubmit } = this.props
     return (
       <div className={cx(`${moduleName}`)}>
         <div className={cx(`${moduleName}_top`)}>
           <h4>Register Song</h4>
         </div>
-        <form>
+        <form onSubmit={handleSubmit(this.submitTest)}>
           <div className={cx(`${moduleName}_body`)}>
             <div className={cx(`${moduleName}_left`)}>
               <TextInputForm thumbnail={this.state.selectedArtWork} />
@@ -78,7 +84,9 @@ class SongRegist extends PureComponent {
               <RightSideForm selectThumbnail={this.selectThumbnail} />
               <div className={cx(`${moduleName}_right_bot_submit`)}>
                 <button className="btn">Cancel</button>
-                <button className="btn">Register</button>
+                <button type="submit" className="btn">
+                  Register
+                </button>
               </div>
             </div>
           </div>
@@ -87,4 +95,8 @@ class SongRegist extends PureComponent {
     )
   }
 }
-export default SongRegist
+export default reduxForm({
+  form: "RegisterMusic"
+})(SongRegist)
+
+//export default SongRegist
