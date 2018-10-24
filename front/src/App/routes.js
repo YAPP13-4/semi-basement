@@ -25,7 +25,7 @@ const routes = [
     component: Home
   },
   {
-    path: "/songDetail",
+    path: "/songDetail/:songId",
     component: SongDetail
   },
   {

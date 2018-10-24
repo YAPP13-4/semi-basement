@@ -30,10 +30,6 @@ class ArtWorkPlayContainer extends PureComponent {
     this.props.selectSong([songId, title, artworkUrl, duration])
     this.props.addHistory(songId)
   }
-
-  onClickSongDetail = songId => {
-    this.props.loadSongDetail(songId)
-  }
   onClickChangePlayList = playlist => {
     if (!this.props.currentList || this.props.currentList !== playlist) {
       const songId = this.props.musicInfos.map(info => {
@@ -48,9 +44,9 @@ class ArtWorkPlayContainer extends PureComponent {
       return this.props.musicInfos.map(musicInfo => {
         return (
           <ArtworkPlay
+            key={musicInfo.id}
             musicInfo={musicInfo}
             onClickPlay={this.onClickPlay}
-            onClickSongDetail={this.onClickSongDetail}
           />
         )
       })
@@ -59,9 +55,9 @@ class ArtWorkPlayContainer extends PureComponent {
       return this.props.subMusicInfo1.map(musicInfo => {
         return (
           <ArtworkPlay
+            key={musicInfo.id}
             musicInfo={musicInfo}
             onClickPlay={this.onClickPlay}
-            onClickSongDetail={this.onClickSongDetail}
           />
         )
       })
