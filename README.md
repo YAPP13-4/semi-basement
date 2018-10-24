@@ -10,4 +10,4 @@
 > npm install
 ```
 ## Stack
-React, Redux, Redux-saga, Node
+React, Redux, redux-saga, Node, redux-thunk
