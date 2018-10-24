@@ -12,7 +12,8 @@ const conn = mysql.createConnection({
     host      : db_config.host,
     user      : db_config.user,
     password  : db_config.password,
-    database  : db_config.database
+    database  : db_config.database,
+	insecureAuth : true
 })
 
 function isEmpty(obj) {
@@ -107,7 +108,7 @@ passport.deserializeUser(function (id, done) {
 passport.use(new GoogleStrategy({
     clientID: db_config.clientID,
     clientSecret: db_config.clientSecret,
-    callbackURL: "/auth/google/callback"
+    callbackURL: "https://semibasement.com/auth/google/callback"
 },
     function (accessToken, refreshToken, profile, done) {
         let newuser = {};
