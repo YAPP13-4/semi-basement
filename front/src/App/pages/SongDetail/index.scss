@@ -2,11 +2,14 @@
   background: black;
   margin-bottom: 73px;
   position: relative;
+  p {
+    line-height: 1.97;
+  }
   &-music {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    height: 240px;
+    height: 300px;
     padding: 30px 60px;
     filter: blur(5px);
   }
@@ -30,7 +33,7 @@
       margin: 0;
       font-size: 22px;
       display: inline-block;
-      padding: 5px 10px 5px 10px;
+      padding: 6px 10px;
       background-color: black;
     }
     h2 {
@@ -85,6 +88,33 @@
       h4 {
         font-size: 20px;
         font-weight: 100;
+      }
+      &-inner {
+        position: relative;
+
+        p {
+          transform: translateY(-2em);
+          z-index: -1;
+          transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s,
+            z-index 0s linear 0.01s;
+        }
+        &-showmore {
+          text-align: center;
+          height: 111.4px;
+          position: absolute;
+          width: 100%;
+          bottom: -0.5em;
+          background-image: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0),
+            #000000
+          );
+          display: table;
+          span {
+            display: table-cell;
+            vertical-align: bottom;
+          }
+        }
       }
     }
   }

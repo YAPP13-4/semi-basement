@@ -1,24 +1,40 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { compose } from 'recompose'
+import React, { Component } from "react"
+import { connect } from "react-redux"
+import { compose } from "recompose"
 
-import { formatDdMonthYyyy } from 'src/utils/DateUtils'
-import IMAGE_SIZES from 'src/App/constants/ImageConstants'
-import getImageUrl from 'src/utils/ImageUtils'
+import { formatDdMonthYyyy } from "src/utils/DateUtils"
+import IMAGE_SIZES from "src/App/constants/ImageConstants"
+import getImageUrl from "src/utils/ImageUtils"
+import Loading from "src/App/components/Loading"
 
-import classnames from 'classnames/bind'
-import css from './index.scss'
+import { formatString } from "src/utils/StringUtils"
+import classnames from "classnames/bind"
+import css from "./index.scss"
 
 const cx = classnames.bind(css)
-const moduleName = 'SongDetail'
+const moduleName = "SongDetail"
 
+//const { songDetail } = this.props
 class SongDetail extends Component {
+  state = {
+    isOpen: false
+  }
+  getRenderedItems(itemNumber, items) {
+    if (this.state.isOpen) {
+      return items
+    }
+    return items.slice(0, itemNumber)
+  }
+  toggle = () => {
+    this.setState({ isOpen: !this.state.isOpen })
+  }
   render() {
     const { songDetail } = this.props
     if (!songDetail) {
-      return <h1 style={{ color: 'white' }}>Loading</h1>
+      return <Loading />
     } else {
       const artworkUrl = songDetail.artwork_url
+      const parsedDesc = formatString(songDetail.description, 5)
       return (
         <div className={cx(`${moduleName}`)}>
           <div
@@ -50,7 +66,7 @@ class SongDetail extends Component {
               <div className={cx(`${moduleName}-songInfo-profile`)}>
                 <img
                   alt="artistProfile"
-                  src={songDetail.user.avatar_url.replace('large', 'crop')}
+                  src={songDetail.user.avatar_url.replace("large", "crop")}
                 />
                 <div>
                   <p>Released date</p>
@@ -60,10 +76,29 @@ class SongDetail extends Component {
               </div>
               <div className={cx(`${moduleName}-songInfo-description`)}>
                 <h4>Description</h4>
-                <p>{songDetail.description}</p>
+                <div className={cx(`${moduleName}-songInfo-description-inner`)}>
+                  {this.getRenderedItems(2, parsedDesc).map(
+                    (element, index) => {
+                      return (
+                        <p key={index}>
+                          {element}
+                          {index && index % 3 === 2 ? <br /> : ""}
+                        </p>
+                      )
+                    }
+                  )}
+                  <div
+                    className={cx(
+                      `${moduleName}-songInfo-description-inner-showmore`
+                    )}
+                    onClick={this.toggle}
+                  >
+                    <span>show more v</span>
+                  </div>
+                </div>
               </div>
             </div>
-            <div className={cx(`${moduleName}-coments`)}>댓글</div>
+            <div className={cx(`${moduleName}-coments`)}>COMMING SOON</div>
           </div>
         </div>
       )

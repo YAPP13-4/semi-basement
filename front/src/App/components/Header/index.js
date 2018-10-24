@@ -49,12 +49,6 @@ class Header extends Component {
             </div>
           </div>
         </header>
-
-        <div>
-          {/*
-        <MyPlayer open ={this.state.open}
-        onMaskClick={this.onTouchEnd} /> */}
-        </div>
       </Fragment>
     )
   }
