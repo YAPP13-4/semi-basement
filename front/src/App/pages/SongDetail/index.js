@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { compose } from "recompose"
+import { loadSongDetail, selectSong } from "src/redux/music/actions"
 
 import { formatDdMonthYyyy } from "src/utils/DateUtils"
 import IMAGE_SIZES from "src/App/constants/ImageConstants"
@@ -18,6 +18,12 @@ const moduleName = "SongDetail"
 class SongDetail extends Component {
   state = {
     isOpen: false
+  }
+  componentDidMount() {
+    this.props.loadSongDetail(this.props.match.params.songId)
+  }
+  onClickPlay = (songId, title, artworkUrl, duration) => {
+    this.props.selectSong([songId, title, artworkUrl, duration])
   }
   getRenderedItems(itemNumber, items) {
     if (this.state.isOpen) {
@@ -55,7 +61,18 @@ class SongDetail extends Component {
                   IMAGE_SIZES.XLARGE
                 )})`
               }}
-            />
+              /*FIX ME : refactoring */
+              onClick={() => {
+                this.onClickPlay(
+                  songDetail.id,
+                  songDetail.title,
+                  artworkUrl,
+                  songDetail.duration / 1000
+                )
+              }}
+            >
+              <div className={cx(`${moduleName}-albumCover-playicon`)} />
+            </div>
             <div className={cx(`${moduleName}-wordings`)}>
               <h3>{songDetail.user.username}</h3>
               <h2>{songDetail.title}</h2>
@@ -105,12 +122,12 @@ class SongDetail extends Component {
     }
   }
 }
-
-export default compose(
-  connect(state => {
-    const { music } = state
-    return {
-      songDetail: music.songDetail
-    }
-  })
+const mapStateToProps = ({ music }) => {
+  return {
+    songDetail: music.songDetail
+  }
+}
+export default connect(
+  mapStateToProps,
+  { loadSongDetail, selectSong }
 )(SongDetail)

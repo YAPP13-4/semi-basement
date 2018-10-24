@@ -1,6 +1,5 @@
 .SongDetail {
   background: black;
-  margin-bottom: 73px;
   position: relative;
   p {
     line-height: 1.97;
@@ -13,6 +12,7 @@
     padding: 30px 60px;
     filter: blur(5px);
   }
+
   &-albumCoverWrapper {
     position: absolute;
     top: 30px;
@@ -24,6 +24,22 @@
     width: 240px;
     display: inline-block;
     background-size: contain;
+    position: relative;
+    &-playicon {
+      position: absolute;
+      display: none;
+      background: url("src/assets/icons/icon2.png") no-repeat -446px -209px;
+      width: 79px;
+      height: 80px;
+      top: 33%;
+      left: 35%;
+    }
+  }
+  &-albumCover:hover {
+    cursor: pointer;
+    div {
+      display: block;
+    }
   }
   &-wordings {
     margin-left: 40px;
@@ -41,7 +57,7 @@
       margin-top: 15px;
       font-size: 30px;
       font-weight: 800;
-      padding: 1px 10px 1px 10px;
+      padding: 5px 10px;
       background-color: black;
     }
   }
@@ -112,7 +128,7 @@
           display: table;
           span {
             display: table-cell;
-            vertical-align: bottom;
+            vertical-align: middle;
           }
         }
       }

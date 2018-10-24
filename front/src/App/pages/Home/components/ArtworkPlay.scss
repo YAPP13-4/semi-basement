@@ -33,11 +33,11 @@
     }
   }
 
-  &-song-body-card-link {
+  &-song-body-card-link,
+  &-song-body-card-link:hover {
     text-decoration: none;
     color: white;
   }
-
   &-song-body-card-info {
     padding: 8px 0px 10px 7px;
   }
