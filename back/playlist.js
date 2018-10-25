@@ -28,7 +28,20 @@ const SONG_URL_LIST = [
     'https://soundcloud.com/filous/kodaline-high-hopes-filous',
     'https://soundcloud.com/in-demand-scotland/kodaline-all-i-want-session',
     'https://soundcloud.com/filous/kodaline-high-hopes-filous',
-    'https://soundcloud.com/youngma/young-ma-ooouuu-1'
+    'https://soundcloud.com/youngma/young-ma-ooouuu-1',
+    'https://soundcloud.com/seung-ryeol-paik/lake-with-decalcomanic-yong-jin',
+    'https://soundcloud.com/seung-ryeol-paik/nuit-swing-demo-with-decalcomanic',
+    'https://soundcloud.com/tommisch/sets/beat-tape-1',
+    'https://soundcloud.com/seung-ryeol-paik/sets/blanc-connexion-modern',
+    'https://soundcloud.com/lq38',
+    'https://soundcloud.com/trcs7hdjcmxp',
+    'https://soundcloud.com/seunghak-lee-576893850',
+    'https://soundcloud.com/rainy-piano/seafood',
+    'https://soundcloud.com/namqkang/blueberrydream',
+    'https://soundcloud.com/link6/a-june-j-beat-movinon-featazitiz',
+    'https://soundcloud.com/user-61321127/swangg',
+    'https://soundcloud.com/trippie-hippie-2/me-likely',
+    'https://soundcloud.com/dailywshh/lil-baby-seattle'
 
 ];
 var SONG_URL;
