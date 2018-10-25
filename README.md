@@ -10,4 +10,8 @@
 > npm install
 ```
 ## Stack
-React, Redux, redux-saga, Node, redux-thunk
+React, Redux, [redux-saga](https://github.com/redux-saga/redux-saga), Node, redux-thunk(will be deprecated)   
+Form Handling : [redux-form](https://redux-form.com/7.4.2/)
+
+## TODO 
+Try : GraphQL, TS, etc.
