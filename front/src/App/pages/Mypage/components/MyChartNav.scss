@@ -1,12 +1,21 @@
 .MyChartNav {
-  padding: 0px 50px;
+  border-bottom: 1px solid #dddddd;
+  a,
+  a:hover,
+  a:active {
+    color: white;
+    text-decoration: none;
+  }
   &-left {
     display: flex;
     padding: 40px 0px 30px;
-    border-bottom: 1px solid #dddddd;
+
     div {
       width: 120px;
       text-align: center;
+    }
+    div:last-child {
+      margin-left: auto;
     }
   }
 }
