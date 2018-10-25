@@ -1,3 +1,41 @@
 .Mypage {
-  color: olive;
+  //FIX ME !
+  color: #dddddd;
+  &-myinfo {
+    height: 300px;
+    padding: 41px 0px 63px 51px;
+    //FIX ME !
+    border: 1px solid #dddddd;
+    &-wrapper {
+      display: flex;
+      &-img {
+        width: 190.2px;
+        height: 192.4px;
+        //FIX ME !
+        border: 1px solid #dddddd;
+        border-radius: 5px;
+        margin-right: 32px;
+      }
+      &-name {
+        margin-top: 10px;
+        span {
+          //FIX ME !
+          background-color: cornflowerblue;
+          padding: 10px;
+        }
+      }
+    }
+  }
+  &-chart {
+    padding: 0px 50px;
+    &-nav {
+      display: flex;
+      padding: 40px 0px 30px;
+      border-bottom: 1px solid #dddddd;
+      div {
+        width: 120px;
+        text-align: center;
+      }
+    }
+  }
 }
