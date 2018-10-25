@@ -33,6 +33,25 @@
         font-size: 30px;
         padding-bottom: 45px;
       }
+      &_bottom {
+        margin: 0px 50px;
+        background-color: #4286f5;
+        padding: 13px 0px 13px 14px;
+        border-radius: 3px;
+        color: white;
+        text-align: center;
+        &_icon {
+          float: left;
+          width: 27px;
+          height: 28px;
+          background-size: contain;
+          //FIXME : 용량문제
+          background-image: url("src/assets/icons/group.jpg");
+        }
+        &_title {
+          font-family: $font-bold;
+        }
+      }
     }
   }
 }

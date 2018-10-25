@@ -23,7 +23,12 @@ class SignUp extends PureComponent {
               만나보세요!
             </div>
             <div className={cx(`${moduleName}_wrapper_content_bottom`)}>
-              Continue With Google
+              <span
+                className={cx(`${moduleName}_wrapper_content_bottom_icon`)}
+              />
+              <div className={cx(`${moduleName}_wrapper_content_bottom_title`)}>
+                Continue With Google
+              </div>
             </div>
           </div>
         </div>
