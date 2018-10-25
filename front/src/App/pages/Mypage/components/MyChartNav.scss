@@ -1,0 +1,12 @@
+.MyChartNav {
+  padding: 0px 50px;
+  &-left {
+    display: flex;
+    padding: 40px 0px 30px;
+    border-bottom: 1px solid #dddddd;
+    div {
+      width: 120px;
+      text-align: center;
+    }
+  }
+}

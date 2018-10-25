@@ -1,12 +1,13 @@
-import React, { Component } from "react"
+import React, { PureComponent } from "react"
 
 import classnames from "classnames/bind"
 import css from "./index.scss"
 import ChartTab from "../Home/Chart/ChartTab"
+import MyChartNav from "./components/MyCharNav"
 const cx = classnames.bind(css)
 const moduleName = "Mypage"
 
-class Mypage extends Component {
+class Mypage extends PureComponent {
   render() {
     return (
       <div className={cx(`${moduleName}`)}>
@@ -19,11 +20,7 @@ class Mypage extends Component {
           </div>
         </div>
         <div className={cx(`${moduleName}-chart`)}>
-          <div className={cx(`${moduleName}-chart-nav`)}>
-            <div>Discover</div>
-            <div>Playlist</div>
-            <div>liked</div>
-          </div>
+          <MyChartNav />
           <ChartTab />
         </div>
       </div>
