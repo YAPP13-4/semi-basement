@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react"
 import { connect } from "react-redux"
 import { compose } from "redux"
 import classnames from "classnames/bind"
-import { toggleMyplayer } from "src/redux/meta/actions.js"
+import { toggleMyplayer, toggleGNB } from "src/redux/meta/actions.js"
 import logo from "src/assets/logos/logo.png"
 import css from "./index.scss"
 
@@ -19,7 +19,7 @@ class Header extends Component {
           }}
         >
           <div className={cx(`${moduleName}-menu`)}>
-            <span />
+            <span onClick={this.props.toggleGNB} />
           </div>
           <div className={cx(`${moduleName}-logo`)}>
             <img src={logo} alt="logo" />
@@ -27,6 +27,7 @@ class Header extends Component {
           <div className={cx(`${moduleName}-rightSide`)}>
             <div className={cx(`${moduleName}-rightSide-user`)}>
               {/* sing up, sign in btn  a tag must be Link!!!*/}
+              {/* FIX ME ..... */}
               <a style={{ marginRight: "21px" }}>Sign In</a>
               <a
                 style={{
@@ -48,12 +49,6 @@ class Header extends Component {
             </div>
           </div>
         </header>
-
-        <div>
-          {/*
-        <MyPlayer open ={this.state.open}
-        onMaskClick={this.onTouchEnd} /> */}
-        </div>
       </Fragment>
     )
   }
@@ -68,7 +63,8 @@ export default compose(
       }
     },
     {
-      toggleMyplayer
+      toggleMyplayer,
+      toggleGNB
     }
   )
 )(Header)

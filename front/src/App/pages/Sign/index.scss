@@ -1,3 +1,57 @@
-.Sign{
-  color: skyblue;
+@import "src/variable.scss";
+.SignUp {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9000;
+  color: $ivory;
+  background-blend-mode: multiply;
+  background: linear-gradient(to bottom, rgba(98, 98, 98, 0.2) 18%, #000000),
+    url("src/assets/landing_img.png");
+  background-size: cover;
+  &_wrapper {
+    text-align: center;
+    position: relative;
+    height: 100%;
+    &_logo {
+      margin-top: 30px;
+    }
+    &_content {
+      position: absolute;
+      left: 35%;
+      top: 43%;
+      &_top {
+        font-family: $fornt-sanfran-light;
+        font-size: 40px;
+        padding-bottom: 30px;
+      }
+      &_body {
+        font-family: $font-korean;
+        font-weight: 300;
+        font-size: 30px;
+        padding-bottom: 45px;
+      }
+      &_bottom {
+        margin: 0px 50px;
+        background-color: #4286f5;
+        padding: 13px 0px 13px 14px;
+        border-radius: 3px;
+        color: white;
+        text-align: center;
+        &_icon {
+          float: left;
+          width: 27px;
+          height: 28px;
+          background-size: contain;
+          //FIXME : 용량문제
+          background-image: url("src/assets/icons/group.jpg");
+        }
+        &_title {
+          font-family: $font-bold;
+        }
+      }
+    }
+  }
 }

@@ -1,7 +1,10 @@
 $font-bold: "AvertaCYBold";
 $font-Extra-bold: "AvertaCYExtrabold";
 $font-normal: "AvertaCY";
+$font-korean: "NanumSquare";
+$fornt-sanfran-light: "San Francisco Display Ultralight";
 $green: #45f7aa;
+$ivory: #e1d1d1;
 @font-face {
   font-family: "AvertaCYBold";
   src: url("src/assets/font/Averta\ CY\ Bold/AvertaCY-Bold.eot"); /* IE9 Compat Modes */
@@ -54,4 +57,17 @@ $green: #45f7aa;
   font-style: normal;
   font-weight: normal;
   text-rendering: optimizeLegibility;
+}
+@font-face {
+  font-family: "San Francisco Display Ultralight";
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-ultralight-webfont.eot?#iefix)
+      format("embedded-opentype"),
+    url(https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-ultralight-webfont.woff2)
+      format("woff2"),
+    url(https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-ultralight-webfont.woff)
+      format("woff"),
+    url(https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-ultralight-webfont.ttf)
+      format("truetype");
 }

@@ -27,10 +27,6 @@ class ChartTab extends Component {
     this.props.addHistory(songId)
   }
 
-  onClickSongDetail = songId => {
-    this.props.loadSongDetail(songId)
-  }
-
   renderChart = () => {
     return this.props.chartMusicInfo.map((musicInfo, index) => {
       //console.log('data',songInfo)
@@ -39,7 +35,6 @@ class ChartTab extends Component {
           ind={index}
           musicInfo={musicInfo}
           onClickPlay={this.onClickPlay}
-          onClickSongDetail={this.onClickSongDetail}
         />
       )
     })

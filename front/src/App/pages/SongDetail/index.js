@@ -1,24 +1,46 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { compose } from 'recompose'
+import React, { Component } from "react"
+import { connect } from "react-redux"
+import { loadSongDetail, selectSong } from "src/redux/music/actions"
 
-import { formatDdMonthYyyy } from 'src/utils/DateUtils'
-import IMAGE_SIZES from 'src/App/constants/ImageConstants'
-import getImageUrl from 'src/utils/ImageUtils'
+import { formatDdMonthYyyy } from "src/utils/DateUtils"
+import IMAGE_SIZES from "src/App/constants/ImageConstants"
+import getImageUrl from "src/utils/ImageUtils"
+import Loading from "src/App/components/Loading"
 
-import classnames from 'classnames/bind'
-import css from './index.scss'
+import { formatString } from "src/utils/StringUtils"
+import classnames from "classnames/bind"
+import css from "./index.scss"
 
 const cx = classnames.bind(css)
-const moduleName = 'SongDetail'
+const moduleName = "SongDetail"
 
+//const { songDetail } = this.props
 class SongDetail extends Component {
+  state = {
+    isOpen: false
+  }
+  componentDidMount() {
+    this.props.loadSongDetail(this.props.match.params.songId)
+  }
+  onClickPlay = (songId, title, artworkUrl, duration) => {
+    this.props.selectSong([songId, title, artworkUrl, duration])
+  }
+  getRenderedItems(itemNumber, items) {
+    if (this.state.isOpen) {
+      return items
+    }
+    return items.slice(0, itemNumber)
+  }
+  toggle = () => {
+    this.setState({ isOpen: !this.state.isOpen })
+  }
   render() {
     const { songDetail } = this.props
     if (!songDetail) {
-      return <h1 style={{ color: 'white' }}>Loading</h1>
+      return <Loading />
     } else {
       const artworkUrl = songDetail.artwork_url
+      const parsedDesc = formatString(songDetail.description, 5)
       return (
         <div className={cx(`${moduleName}`)}>
           <div
@@ -39,7 +61,18 @@ class SongDetail extends Component {
                   IMAGE_SIZES.XLARGE
                 )})`
               }}
-            />
+              /*FIX ME : refactoring */
+              onClick={() => {
+                this.onClickPlay(
+                  songDetail.id,
+                  songDetail.title,
+                  artworkUrl,
+                  songDetail.duration / 1000
+                )
+              }}
+            >
+              <div className={cx(`${moduleName}-albumCover-playicon`)} />
+            </div>
             <div className={cx(`${moduleName}-wordings`)}>
               <h3>{songDetail.user.username}</h3>
               <h2>{songDetail.title}</h2>
@@ -50,7 +83,7 @@ class SongDetail extends Component {
               <div className={cx(`${moduleName}-songInfo-profile`)}>
                 <img
                   alt="artistProfile"
-                  src={songDetail.user.avatar_url.replace('large', 'crop')}
+                  src={songDetail.user.avatar_url.replace("large", "crop")}
                 />
                 <div>
                   <p>Released date</p>
@@ -60,22 +93,41 @@ class SongDetail extends Component {
               </div>
               <div className={cx(`${moduleName}-songInfo-description`)}>
                 <h4>Description</h4>
-                <p>{songDetail.description}</p>
+                <div className={cx(`${moduleName}-songInfo-description-inner`)}>
+                  {this.getRenderedItems(2, parsedDesc).map(
+                    (element, index) => {
+                      return (
+                        <p key={index}>
+                          {element}
+                          {index && index % 3 === 2 ? <br /> : ""}
+                        </p>
+                      )
+                    }
+                  )}
+                  <div
+                    className={cx(
+                      `${moduleName}-songInfo-description-inner-showmore`
+                    )}
+                    onClick={this.toggle}
+                  >
+                    <span>show more v</span>
+                  </div>
+                </div>
               </div>
             </div>
-            <div className={cx(`${moduleName}-coments`)}>댓글</div>
+            <div className={cx(`${moduleName}-coments`)}>COMMING SOON</div>
           </div>
         </div>
       )
     }
   }
 }
-
-export default compose(
-  connect(state => {
-    const { music } = state
-    return {
-      songDetail: music.songDetail
-    }
-  })
+const mapStateToProps = ({ music }) => {
+  return {
+    songDetail: music.songDetail
+  }
+}
+export default connect(
+  mapStateToProps,
+  { loadSongDetail, selectSong }
 )(SongDetail)

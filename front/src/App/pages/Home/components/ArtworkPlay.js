@@ -8,7 +8,7 @@ import IMAGE_SIZES from "../../../constants/ImageConstants"
 const cx = classnames.bind(css)
 const moduleName = "ArtworkPlay"
 
-const ArtWorkPlay = ({ musicInfo, onClickPlay, onClickSongDetail }) => {
+const ArtWorkPlay = ({ musicInfo, onClickPlay }) => {
   const songId = musicInfo.id
   const title = musicInfo.title
   const creator = musicInfo.user.username
@@ -37,10 +37,7 @@ const ArtWorkPlay = ({ musicInfo, onClickPlay, onClickSongDetail }) => {
 
             <Link
               className={cx(`${moduleName}-song-body-card-link`)}
-              to="/songDetail"
-              onClick={() => {
-                onClickSongDetail(songId)
-              }}
+              to={"/songDetail/" + songId}
             >
               <div className={cx(`${moduleName}-song-body-card-info`)}>
                 <div className={cx(`${moduleName}-song-body-card-title`)}>

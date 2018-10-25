@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "react-router-dom"
 import classnames from "classnames/bind"
 import css from "./ChartTabItem.scss"
 import IMAGE_SIZES from "../../../constants/ImageConstants"
@@ -6,7 +7,7 @@ import getImageUrl from "../../../../utils/ImageUtils"
 const cx = classnames.bind(css)
 const moduleName = "ChartTabContainer"
 
-const ChartTabItem = ({ musicInfo, onClickPlay, onClickSongDetail, ind }) => {
+const ChartTabItem = ({ musicInfo, onClickPlay, ind }) => {
   console.log("music info ", musicInfo)
   const songId = musicInfo.id
   const title = musicInfo.title
@@ -32,13 +33,8 @@ const ChartTabItem = ({ musicInfo, onClickPlay, onClickSongDetail, ind }) => {
           alt="artwork"
         />
       </td>
-      <td
-        className={cx(`${moduleName}-title`)}
-        onClick={() => {
-          onClickSongDetail(songId)
-        }}
-      >
-        {title}
+      <td className={cx(`${moduleName}-title`)}>
+        <Link to={"/songDetail/" + songId}>{title}</Link>
       </td>
       <td className={cx(`${moduleName}-singer`)}>{creator}</td>
       <td className={cx(`${moduleName}-time`)}>

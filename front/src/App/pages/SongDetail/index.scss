@@ -1,15 +1,18 @@
 .SongDetail {
   background: black;
-  margin-bottom: 73px;
   position: relative;
+  p {
+    line-height: 1.97;
+  }
   &-music {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    height: 240px;
+    height: 300px;
     padding: 30px 60px;
     filter: blur(5px);
   }
+
   &-albumCoverWrapper {
     position: absolute;
     top: 30px;
@@ -21,6 +24,22 @@
     width: 240px;
     display: inline-block;
     background-size: contain;
+    position: relative;
+    &-playicon {
+      position: absolute;
+      display: none;
+      background: url("src/assets/icons/icon2.png") no-repeat -446px -209px;
+      width: 79px;
+      height: 80px;
+      top: 33%;
+      left: 35%;
+    }
+  }
+  &-albumCover:hover {
+    cursor: pointer;
+    div {
+      display: block;
+    }
   }
   &-wordings {
     margin-left: 40px;
@@ -30,7 +49,7 @@
       margin: 0;
       font-size: 22px;
       display: inline-block;
-      padding: 5px 10px 5px 10px;
+      padding: 6px 10px;
       background-color: black;
     }
     h2 {
@@ -38,7 +57,7 @@
       margin-top: 15px;
       font-size: 30px;
       font-weight: 800;
-      padding: 1px 10px 1px 10px;
+      padding: 5px 10px;
       background-color: black;
     }
   }
@@ -85,6 +104,33 @@
       h4 {
         font-size: 20px;
         font-weight: 100;
+      }
+      &-inner {
+        position: relative;
+
+        p {
+          transform: translateY(-2em);
+          z-index: -1;
+          transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s,
+            z-index 0s linear 0.01s;
+        }
+        &-showmore {
+          text-align: center;
+          height: 111.4px;
+          position: absolute;
+          width: 100%;
+          bottom: -0.5em;
+          background-image: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0),
+            #000000
+          );
+          display: table;
+          span {
+            display: table-cell;
+            vertical-align: middle;
+          }
+        }
       }
     }
   }
