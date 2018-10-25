@@ -3,6 +3,11 @@
 .ChartTabContainer {
   font-family: $font-normal;
   font-size: 14px;
+  a,
+  a:hover {
+    color: white;
+    text-decoration: none;
+  }
   &-thumbnail {
     width: 87px;
   }

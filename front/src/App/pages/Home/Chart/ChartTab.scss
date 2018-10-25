@@ -1,50 +1,6 @@
 @import "src/variable.scss";
 .ChartTab {
   font-family: $font-normal;
-  &-selectTab {
-    padding: 0px 50px;
-    padding: 0px 50px;
-    padding-top: 33px;
-    display: flex;
-    span {
-      display: inline-block;
-      width: 33.8px;
-      height: 33.8px;
-      background-color: #4c4c4c;
-      border-radius: 50%;
-    }
-    select {
-      font-family: $font-normal;
-      width: 171.8px;
-      height: 35px;
-      border-radius: 11px;
-      border: solid 1px #979797;
-      background-color: black;
-      color: white;
-      margin-left: 21px;
-      font-size: 20px;
-      -webkit-appearance: none; /* 네이티브 외형 감추기 */
-      -moz-appearance: none;
-      appearance: none;
-
-      background: url("../../../../assets/icons/icon2.png") no-repeat 92px -32px;
-      padding: 4px 0px 6px 15px;
-    }
-  }
-  &-selectTab {
-    div:first-child {
-      cursor: pointer;
-      background: url("../../../../assets/icons/icon2.png") no-repeat -111px -152px;
-      width: 35px;
-      height: 35px;
-    }
-    div:first-child:hover {
-      cursor: pointer;
-      background: url("../../../../assets/icons/icon2.png") no-repeat -49px -152px;
-      width: 35px;
-      height: 35px;
-    }
-  }
   &-chart {
     color: white;
     padding: 0px 50px;

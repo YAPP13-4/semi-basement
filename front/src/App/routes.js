@@ -1,7 +1,10 @@
 import Home from "./pages/Home"
 import Mypage from "./pages/Mypage"
 import Sign from "./pages/Sign"
+//FIXME
 import ChartTab from "./pages/Home/Chart/ChartTab"
+
+import ChartTabPage from "./pages/Home/Chart/ChartTabPage"
 import Landing from "./pages/Landing"
 import SongDetail from "./pages/SongDetail"
 import SongRegist from "./pages/SongRegister"
@@ -18,7 +21,7 @@ const routes = [
   },
   {
     path: "/chart",
-    component: ChartTab
+    component: ChartTabPage
   },
   {
     path: "/main",
