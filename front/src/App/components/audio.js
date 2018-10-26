@@ -36,12 +36,21 @@ const audio = InnerComponent => {
       if (props.meta.showMyplayer && this.shouldToggleplay(prevProps, props)) {
         this.toggleSidePlayerPlay(player, audioElement)
       }
-      if(props.meta.showMyplayer) {
-        if(prevProps.player.myPlayerCurrentTime !== props.player.myPlayerCurrentTime) {
-          audioElement.currentTime = props.player.myPlayerCurrentTime
-        }
+      if (props.meta.showMyplayer && this.shouldChangeCurrentTime(prevProps, props)) {
+        audioElement.currentTime = props.player.myPlayerCurrentTime
       }
     }
+
+    toggleSidePlayerPlay = (player, audioElement) => {
+      player.isPlaying ? audioElement.play() : audioElement.pause()
+    }
+
+    shouldToggleplay = (prevProps, props) =>
+      prevProps.player.isPlaying !== props.player.isPlaying
+
+    shouldChangeCurrentTime = (prevProps, props) =>
+      prevProps.player.myPlayerCurrentTime !== props.player.myPlayerCurrentTime
+
     onEnded() {
       console.log(this.props)
       const { props } = this
@@ -106,13 +115,6 @@ const audio = InnerComponent => {
         audioElement.play()
       }
     }
-
-    toggleSidePlayerPlay = (player, audioElement) => {
-      player.isPlaying ? audioElement.play() : audioElement.pause()
-    }
-
-    shouldToggleplay = (prevProps, props) =>
-      prevProps.player.isPlaying !== props.player.isPlaying
 
     render() {
       const { song } = this.props
