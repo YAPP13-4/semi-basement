@@ -37,13 +37,11 @@ const audio = InnerComponent => {
         this.toggleSidePlayerPlay(player, audioElement)
       }
       if (props.meta.showMyplayer && this.shouldChangeCurrentTime(prevProps, props)) {
-        audioElement.currentTime = props.player.myPlayerCurrentTime
+          audioElement.currentTime = props.player.myPlayerCurrentTime
       }
-      if (props.meta.showMyplayer) {
-        if(prevProps.player.myPlayerVolume !== props.player.myPlayerVolume) {
+      if (props.meta.showMyplayer && this.shouldChangeVolume(prevProps, props)) {
           // audioElement.muted = false
           audioElement.volume = props.player.myPlayerVolume
-        }
       }
     }
 
@@ -56,6 +54,9 @@ const audio = InnerComponent => {
 
     shouldChangeCurrentTime = (prevProps, props) =>
       prevProps.player.myPlayerCurrentTime !== props.player.myPlayerCurrentTime
+
+    shouldChangeVolume = (prevProps, props) =>
+      prevProps.player.myPlayerVolume !== props.player.myPlayerVolume
 
     onEnded() {
       console.log(this.props)
