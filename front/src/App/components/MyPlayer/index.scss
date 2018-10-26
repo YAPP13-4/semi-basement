@@ -61,6 +61,22 @@
           width: 300px;
         }
       }
+      &-soundWrapper {
+        // background: rgba 0 0 0, 0.38;
+        background: gray;
+        border-radius: 15px;
+        position: absolute;
+        top: 15px;
+        right: 0px;
+        width: 110px;
+        height: 30px;
+      }
+      &-sound {
+        position: absolute;
+        top: 6px;
+        right: 15px;
+        width: 85px;
+      }
     }
   }
 

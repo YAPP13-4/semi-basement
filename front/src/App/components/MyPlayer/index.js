@@ -36,7 +36,8 @@ class MyPlayer extends Component {
 
   render() {
     const [songId, songTitle, songUrl, songDuration] = this.props.song
-    const { currentTime } = this.props.player
+    const { currentTime, muted } = this.props.player
+    const volume = muted ? 0 : this.props.volume
     return (
       <div
         className={cx(`${moduleName}`)}
@@ -81,6 +82,13 @@ class MyPlayer extends Component {
                 className={cx(`${moduleName}-top-musicController-slider-right`)}
               >
                 {formatSeconds(songDuration)}
+              </div>
+            </div>
+            <div
+              className={cx(`${moduleName}-top-musicController-soundWrapper`)}
+            >
+              <div className={cx(`${moduleName}-top-musicController-sound`)}>
+                <Slider max={1} value={volume} />
               </div>
             </div>
           </div>
