@@ -7,7 +7,7 @@
     background: tomato;
     position: relative;
     height: 460px;
-    padding: 45px;
+    padding: 40px;
     box-sizing: border-box;
 
     &-musicCard {
@@ -39,9 +39,28 @@
     &-musicController {
       background: darkkhaki;
       position: absolute;
-      bottom: 50px;
+      bottom: 40px;
       height: 60px;
-      width: 510px;
+      width: 520px;
+      &-slider {
+        font-size: 17px;
+        color: #ffffff;
+        &-left {
+          position: relative;
+          top: 17px;
+        }
+        &-right {
+          position: absolute;
+          left: 360px;
+          top: 17px;
+        }
+        &-center {
+          position: absolute;
+          top: 21px;
+          left: 50px;
+          width: 300px;
+        }
+      }
     }
   }
 

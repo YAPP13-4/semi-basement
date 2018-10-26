@@ -11,6 +11,7 @@ import {
   changeMyPlayerCurrentTime
 } from 'src/redux/player/actions'
 import Slider from 'src/App/components/Slider/'
+import { formatSeconds } from 'src/utils/NumberUtils'
 
 import css from './index.scss'
 
@@ -59,12 +60,29 @@ class MyPlayer extends Component {
             </div>
           </div>
           <div className={cx(`${moduleName}-top-musicController`)}>
-            음악컨트롤러
-            <Slider
-              max={songDuration}
-              onChange={this.props.changeMyPlayerCurrentTime}
-              value={currentTime}
-            />
+            <div className={cx(`${moduleName}-top-musicController-slider`)}>
+              <div
+                className={cx(`${moduleName}-top-musicController-slider-left`)}
+              >
+                {formatSeconds(currentTime)}
+              </div>
+              <div
+                className={cx(
+                  `${moduleName}-top-musicController-slider-center`
+                )}
+              >
+                <Slider
+                  max={songDuration}
+                  onChange={this.props.changeMyPlayerCurrentTime}
+                  value={currentTime}
+                />
+              </div>
+              <div
+                className={cx(`${moduleName}-top-musicController-slider-right`)}
+              >
+                {formatSeconds(songDuration)}
+              </div>
+            </div>
           </div>
         </div>
         <div className={cx(`${moduleName}-bottom`)}>
