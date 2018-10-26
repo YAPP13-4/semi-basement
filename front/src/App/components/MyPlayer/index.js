@@ -22,6 +22,11 @@ class MyPlayer extends Component {
     this.props.toggleMyplayer()
   }
 
+  togglePlay = () => {
+    const { player, onPause, onPlay } = this.props
+    player.isPlaying ? onPause() : onPlay()
+  }
+
   render() {
     return (
       <div
@@ -40,17 +45,7 @@ class MyPlayer extends Component {
             <div className={cx(`${moduleName}-top-musicCard-player`)}>
               플레이어
               <button>{'<'}</button>
-              <button
-                onClick={() => {
-                  if (this.props.player.isPlaying) {
-                    this.props.onPause()
-                  } else {
-                    this.props.onPlay()
-                  }
-                }}
-              >
-                {'toggle'}
-              </button>
+              <button onClick={this.togglePlay}>{'toggle'}</button>
               <button>{'>'}</button>
             </div>
           </div>

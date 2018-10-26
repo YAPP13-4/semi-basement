@@ -3,7 +3,6 @@ const initialState = {
   currentTime: 0,
   duration: 0,
   isPlaying: false,
-  isSidePlayerPlaying: false,
   muted: false,
   repeat: false,
   shuffle: false,
@@ -27,12 +26,6 @@ const player = (state = initialState, action) => {
       return {
         ...state,
         isPlaying: true
-      }
-
-    case types.ON_SIDE_PLAYER_PLAY:
-      return {
-        ...state,
-        isSidePlayerPlaying: true
       }
 
     case types.ON_TIME_UPDATE:

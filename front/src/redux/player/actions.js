@@ -20,10 +20,6 @@ export const onPlay = () => ({
   type: types.ON_PLAY
 })
 
-export const onSidePlayerPlay = () => ({
-  type: types.ON_SIDE_PLAYER_PLAY
-})
-
 export const onTimeUpdate = currentTime => ({
   type: types.ON_TIME_UPDATE,
   currentTime

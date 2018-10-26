@@ -27,27 +27,14 @@ const audio = InnerComponent => {
 
     componentDidUpdate(prevProps) {
       const { audioElement, props } = this
-      const { song } = props
+      const { song, player } = props
       const audioUrl = song[0]
       const prevSong = prevProps.song[0]
       if (prevSong !== audioUrl) {
         audioElement.play()
       }
-
-      // if (prevProps.player.isPlaying !== props.player.isPlaying && this.props.player.isSidePlayerPlaying) {
-      // if (prevProps.player.isPlaying !== props.player.isPlaying) {
-      //   debugger
-      //   audioElement.play()
-      // }
-      console.log(this.props.meta.showMyplayer)
-      if (this.props.meta.showMyplayer) {
-        if (prevProps.player.isPlaying !== props.player.isPlaying) {
-          if(props.player.isPlaying) {
-            audioElement.play()
-          } else {
-            audioElement.pause()
-          }
-        }
+      if (props.meta.showMyplayer && this.shouldToggleplay(prevProps, props)) {
+        this.toggleSidePlayerPlay(player, audioElement)
       }
     }
     onEnded() {
@@ -114,6 +101,14 @@ const audio = InnerComponent => {
         audioElement.play()
       }
     }
+
+    toggleSidePlayerPlay = (player, audioElement) => {
+      player.isPlaying ? audioElement.play() : audioElement.pause()
+    }
+
+    shouldToggleplay = (prevProps, props) =>
+      prevProps.player.isPlaying !== props.player.isPlaying
+
     render() {
       const { song } = this.props
       const songUrl = 'https:' + SONG_STREAM_URL.replace(':id', song[0])
