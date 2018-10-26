@@ -3,9 +3,10 @@
 .App {
   height: 100vh;
   font-family: $font-normal;
+  background: black;
   &-body {
     padding-top: 94px; // top nav padding
-    background: black;
+    //background: black;
     width: 1440px;
     //height: 100vh;
     margin: 0 auto;
