@@ -16,42 +16,31 @@ class RightSideForm extends PureComponent {
                 this.props.selectThumbnail(1)
                 this.props.change("thumbnail", 1)
               }}
-            >
-              잠만보
-            </div>
+            />
             <div
               onClick={() => {
                 this.props.selectThumbnail(2)
                 this.props.change("thumbnail", 2)
               }}
-            >
-              피카츄
-            </div>
+            />
             <div
               onClick={() => {
                 this.props.selectThumbnail(3)
                 this.props.change("thumbnail", 3)
               }}
-            >
-              꼬부{" "}
-            </div>
+            />
             <div
               onClick={() => {
                 this.props.selectThumbnail(4)
                 this.props.change("thumbnail", 4)
               }}
-            >
-              파이{" "}
-            </div>
+            />
             <div
               onClick={() => {
                 this.props.selectThumbnail(5)
                 this.props.change("thumbnail", 5)
               }}
-            >
-              이상{" "}
-            </div>
-            <div>6 </div>
+            />
           </div>
         </div>
         <div className={cx(`${moduleName}_right_bot_check`)}>

@@ -7,16 +7,55 @@ const cx = classnames.bind(css)
 const moduleName = "MyChartNav"
 
 class MyChartNav extends PureComponent {
+  state = {
+    selected: "playlist"
+  }
+  selectedTab = info => {
+    console.log("state", this.state.selected, "info", info)
+    if (info !== this.state.selected) {
+      this.setState(() => {
+        return {
+          selected: info
+        }
+      })
+    }
+  }
+
   render() {
+    const paintingCurrentStyle = path => {
+      console.log("state", this.state.selected, "path", path)
+      if (this.state.selected === path) return underStyle
+    }
     const underStyle = {
       borderBottom: "2px solid #45f7aa"
     }
     return (
       <div className={cx(`${moduleName}`)}>
         <div className={cx(`${moduleName}-left`)}>
-          <div>Discover</div>
-          <div>Playlist</div>
-          <div>liked</div>
+          <div
+            onClick={() => {
+              this.selectedTab("albums")
+            }}
+            style={paintingCurrentStyle("albums")}
+          >
+            Albums
+          </div>
+          <div
+            onClick={() => {
+              this.selectedTab("playlist")
+            }}
+            style={paintingCurrentStyle("playlist")}
+          >
+            Playlist
+          </div>
+          <div
+            onClick={() => {
+              this.selectedTab("liked")
+            }}
+            style={paintingCurrentStyle("liked")}
+          >
+            liked
+          </div>
           <div>
             <Link to="/regSong"> AddTrack </Link>
           </div>
