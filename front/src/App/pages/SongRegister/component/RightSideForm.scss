@@ -22,6 +22,22 @@
       cursor: pointer;
     }
 
+    //FIXME! 리팩토링
+    div:nth-child(1) {
+      background-image: url("src/assets/default_cover/cover1-1.png");
+    }
+    div:nth-child(2) {
+      background-image: url("src/assets/default_cover/cover1-2.png");
+    }
+    div:nth-child(3) {
+      background-image: url("src/assets/default_cover/cover1-3.png");
+    }
+    div:nth-child(4) {
+      background-image: url("src/assets/default_cover/cover1-4.png");
+    }
+    div:nth-child(5) {
+      background-image: url("src/assets/default_cover/cover1-5.png");
+    }
     /*TODO : DELETE , For TEST*/
     ///////////////////////////
     div {

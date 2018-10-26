@@ -1,0 +1,36 @@
+@import "src/variable.scss";
+.SelectBox {
+  padding: 0px 50px;
+  padding: 0px 50px;
+  padding-top: 33px;
+  display: flex;
+  select {
+    font-family: $font-normal;
+    width: 171.8px;
+    height: 35px;
+    border-radius: 11px;
+    border: solid 1px #979797;
+    background-color: black;
+    color: white;
+    margin-left: 21px;
+    font-size: 20px;
+    -webkit-appearance: none; /* 네이티브 외형 감추기 */
+    -moz-appearance: none;
+    appearance: none;
+
+    background: url("src/assets/icons/icon2.png") no-repeat 92px -32px;
+    padding: 4px 0px 6px 15px;
+  }
+  div:first-child {
+    cursor: pointer;
+    background: url("src/assets/icons/icon2.png") no-repeat -111px -152px;
+    width: 35px;
+    height: 35px;
+  }
+  div:first-child:hover {
+    cursor: pointer;
+    background: url("src/assets/icons/icon2.png") no-repeat -49px -152px;
+    width: 35px;
+    height: 35px;
+  }
+}

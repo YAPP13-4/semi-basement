@@ -7,10 +7,10 @@ import {
   loadSongDetail,
   loadSongsInfo
 } from "src/redux/music/actions"
+import PropTypes from "prop-types"
 import Loading from "src/App/components/Loading"
 import classnames from "classnames/bind"
 import SongChartList from "./constants/test/SongChartList"
-import Navigation from "../components/Navigation/index"
 import css from "./ChartTab.scss"
 import ChartTabItem from "./ChartTabItem"
 
@@ -18,6 +18,12 @@ const cx = classnames.bind(css)
 const moduleName = "ChartTab"
 
 class ChartTab extends Component {
+  static propTypes = {
+    isMypge: PropTypes.bool
+  }
+  static defaultProps = {
+    isMypge: false
+  }
   componentDidMount() {
     //this._requestId()
     this.props.loadChartSongsInfo(SongChartList)
@@ -43,15 +49,6 @@ class ChartTab extends Component {
   render() {
     return (
       <div className={cx(`${moduleName}`)}>
-        <Navigation />
-        <div className={cx(`${moduleName}-selectTab`)}>
-          <div />
-          <div>
-            <select>
-              <option value="Top50">Top 50</option>
-            </select>
-          </div>
-        </div>
         <div className={cx(`${moduleName}-chart`)}>
           <table>
             <tbody>
