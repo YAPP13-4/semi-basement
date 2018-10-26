@@ -1,8 +1,11 @@
 // EXplain : palylist reducer에서 정보를 받아와서 다음곡 재생하기.
-import * as types from "./ActionType"
-import * as musicActions from "../music/ActionType"
-import axios from "axios"
-import { SONG_URL } from "../../App/constants/ApiConstants"
+import * as types from './ActionType'
+import * as musicActions from '../music/ActionType'
+import axios from 'axios'
+import { SONG_URL } from '../../App/constants/ApiConstants'
+
+const MODULE_NAME = `META`
+export const CHANGE_MYPLAYER_CURRENT_TIME = `${MODULE_NAME}/CHANGE_MYPLAYER_CURRENT_TIME`
 
 export const onLoadedMetadata = duration => ({
   type: types.ON_LOADED_METADATA,
@@ -31,6 +34,13 @@ export const onVolumeChange = (muted, volume) => ({
   volume
 })
 
+export function changeMyPlayerCurrentTime(myPlayerCurrentTime) {
+  return {
+    type: CHANGE_MYPLAYER_CURRENT_TIME,
+    myPlayerCurrentTime
+  }
+}
+
 export const playSong = (playlist, playingIndex) => ({
   type: types.PLAY_SONG,
   playlist,
@@ -40,18 +50,18 @@ export const playNexSong = targetId => (dispatch, getState) => {
   const state = getState()
   const currentSongInfoArray = state.music.song
   const targetPlayList = state.playList.musicList
-  console.log("tagetPlayList", state.playList)
+  console.log('tagetPlayList', state.playList)
   dispatch({ type: types.PLAY_NEXT_SONG })
 
   if (targetPlayList) {
     //없으면 -1 반환.
     const currentSongIndex = targetPlayList.indexOf(currentSongInfoArray[0])
-    console.log("currentSongIndex", currentSongIndex)
+    console.log('currentSongIndex', currentSongIndex)
     const nextId =
       targetPlayList[(currentSongIndex + 1) % targetPlayList.length]
-    console.log("nextId", nextId)
+    console.log('nextId', nextId)
     return axios
-      .get(SONG_URL.replace(":id", nextId))
+      .get(SONG_URL.replace(':id', nextId))
       .then(response => {
         const songInfo = [
           response.data.id,
@@ -59,7 +69,7 @@ export const playNexSong = targetId => (dispatch, getState) => {
           response.data.artwork_url,
           response.data.duration / 1000
         ]
-        console.log("soninfo", songInfo)
+        console.log('soninfo', songInfo)
         dispatch({
           type: musicActions.SELECT_SONG,
           song: songInfo
@@ -85,7 +95,7 @@ export const playPrevSong = targetId => (dispatch, getState) => {
     else nextId = targetPlayList[(currentSongIndex - 1) % targetPlayList.length]
 
     return axios
-      .get(SONG_URL.replace(":id", nextId))
+      .get(SONG_URL.replace(':id', nextId))
       .then(response => {
         const songInfo = [
           response.data.id,
@@ -93,7 +103,7 @@ export const playPrevSong = targetId => (dispatch, getState) => {
           response.data.artwork_url,
           response.data.duration / 1000
         ]
-        console.log("soninfo", songInfo)
+        console.log('soninfo', songInfo)
         dispatch({
           type: musicActions.SELECT_SONG,
           song: songInfo

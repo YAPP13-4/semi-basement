@@ -7,8 +7,10 @@ import {
   onPlay,
   onPause,
   playNexSong,
-  playPrevSong
+  playPrevSong,
+  changeMyPlayerCurrentTime
 } from 'src/redux/player/actions'
+import Slider from 'src/App/components/Slider/'
 
 import css from './index.scss'
 
@@ -32,6 +34,8 @@ class MyPlayer extends Component {
   }
 
   render() {
+    const [songId, songTitle, songUrl, songDuration] = this.props.song
+    const { currentTime } = this.props.player
     return (
       <div
         className={cx(`${moduleName}`)}
@@ -44,7 +48,8 @@ class MyPlayer extends Component {
               앨범이미지
             </div>
             <div className={cx(`${moduleName}-top-musicCard-songInfo`)}>
-              title createrName
+              createrName
+              <h2>{songTitle}</h2>
             </div>
             <div className={cx(`${moduleName}-top-musicCard-player`)}>
               플레이어
@@ -55,6 +60,11 @@ class MyPlayer extends Component {
           </div>
           <div className={cx(`${moduleName}-top-musicController`)}>
             음악컨트롤러
+            <Slider
+              max={songDuration}
+              onChange={this.props.changeMyPlayerCurrentTime}
+              value={currentTime}
+            />
           </div>
         </div>
         <div className={cx(`${moduleName}-bottom`)}>
@@ -69,14 +79,16 @@ class MyPlayer extends Component {
 
 export default connect(
   state => {
-    const { meta, player } = state
+    const { meta, player, music } = state
     return {
       showMyplayer: meta.showMyplayer,
-      player
+      player,
+      song: music.song
     }
   },
   {
     toggleMyplayer,
+    changeMyPlayerCurrentTime,
     onPlay,
     onPause,
     playNexSong,
