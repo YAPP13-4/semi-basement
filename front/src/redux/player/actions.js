@@ -6,6 +6,7 @@ import { SONG_URL } from '../../App/constants/ApiConstants'
 
 const MODULE_NAME = `META`
 export const CHANGE_MYPLAYER_CURRENT_TIME = `${MODULE_NAME}/CHANGE_MYPLAYER_CURRENT_TIME`
+export const CHANGE_MYPLAYER_VOLUME = `${MODULE_NAME}/CHANGE_MYPLAYER_VOLUME`
 
 export const onLoadedMetadata = duration => ({
   type: types.ON_LOADED_METADATA,
@@ -38,6 +39,13 @@ export function changeMyPlayerCurrentTime(myPlayerCurrentTime) {
   return {
     type: CHANGE_MYPLAYER_CURRENT_TIME,
     myPlayerCurrentTime
+  }
+}
+
+export function changeMyPlayerVolume(myPlayerVolume) {
+  return {
+    type: CHANGE_MYPLAYER_VOLUME,
+    myPlayerVolume
   }
 }
 

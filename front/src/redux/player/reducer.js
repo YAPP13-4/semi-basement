@@ -1,8 +1,9 @@
 import * as types from './ActionType'
-import { CHANGE_MYPLAYER_CURRENT_TIME } from './actions'
+import { CHANGE_MYPLAYER_CURRENT_TIME, CHANGE_MYPLAYER_VOLUME } from './actions'
 const initialState = {
   currentTime: 0,
   myPlayerCurrentTime: 0,
+  myPlayerVolume: 1,
   duration: 0,
   isPlaying: false,
   muted: false,
@@ -53,6 +54,11 @@ const player = (state = initialState, action) => {
       return {
         ...state,
         myPlayerCurrentTime: action.myPlayerCurrentTime
+      }
+    case CHANGE_MYPLAYER_VOLUME:
+      return {
+        ...state,
+        myPlayerVolume: action.myPlayerVolume
       }
     default:
       return state

@@ -8,7 +8,8 @@ import {
   onPause,
   playNexSong,
   playPrevSong,
-  changeMyPlayerCurrentTime
+  changeMyPlayerCurrentTime,
+  changeMyPlayerVolume
 } from 'src/redux/player/actions'
 import Slider from 'src/App/components/Slider/'
 import { formatSeconds } from 'src/utils/NumberUtils'
@@ -88,7 +89,11 @@ class MyPlayer extends Component {
               className={cx(`${moduleName}-top-musicController-soundWrapper`)}
             >
               <div className={cx(`${moduleName}-top-musicController-sound`)}>
-                <Slider max={1} value={volume} />
+                <Slider
+                  max={1}
+                  onChange={this.props.changeMyPlayerVolume}
+                  value={this.props.player.myPlayerVolume}
+                />
               </div>
             </div>
           </div>
@@ -115,6 +120,7 @@ export default connect(
   {
     toggleMyplayer,
     changeMyPlayerCurrentTime,
+    changeMyPlayerVolume,
     onPlay,
     onPause,
     playNexSong,
