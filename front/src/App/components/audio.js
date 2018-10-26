@@ -1,5 +1,5 @@
-import React, { Component } from "react"
-import { SONG_STREAM_URL } from "../constants/ApiConstants"
+import React, { Component } from 'react'
+import { SONG_STREAM_URL } from '../constants/ApiConstants'
 const audio = InnerComponent => {
   class AudioComponent extends Component {
     constructor() {
@@ -32,6 +32,22 @@ const audio = InnerComponent => {
       const prevSong = prevProps.song[0]
       if (prevSong !== audioUrl) {
         audioElement.play()
+      }
+
+      // if (prevProps.player.isPlaying !== props.player.isPlaying && this.props.player.isSidePlayerPlaying) {
+      // if (prevProps.player.isPlaying !== props.player.isPlaying) {
+      //   debugger
+      //   audioElement.play()
+      // }
+      console.log(this.props.meta.showMyplayer)
+      if (this.props.meta.showMyplayer) {
+        if (prevProps.player.isPlaying !== props.player.isPlaying) {
+          if(props.player.isPlaying) {
+            audioElement.play()
+          } else {
+            audioElement.pause()
+          }
+        }
       }
     }
     onEnded() {
@@ -100,7 +116,7 @@ const audio = InnerComponent => {
     }
     render() {
       const { song } = this.props
-      const songUrl = "https:" + SONG_STREAM_URL.replace(":id", song[0])
+      const songUrl = 'https:' + SONG_STREAM_URL.replace(':id', song[0])
       return (
         <div>
           <audio

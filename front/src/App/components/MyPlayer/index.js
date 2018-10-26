@@ -3,8 +3,10 @@ import { connect } from 'react-redux'
 import classnames from 'classnames/bind'
 
 import { toggleMyplayer } from 'src/redux/meta/actions.js'
+import { onPlay, onPause } from 'src/redux/player/actions'
 
 import css from './index.scss'
+import { isRegExp } from 'util'
 
 const cx = classnames.bind(css)
 const moduleName = 'MyPlayer'
@@ -37,6 +39,19 @@ class MyPlayer extends Component {
             </div>
             <div className={cx(`${moduleName}-top-musicCard-player`)}>
               플레이어
+              <button>{'<'}</button>
+              <button
+                onClick={() => {
+                  if (this.props.player.isPlaying) {
+                    this.props.onPause()
+                  } else {
+                    this.props.onPlay()
+                  }
+                }}
+              >
+                {'toggle'}
+              </button>
+              <button>{'>'}</button>
             </div>
           </div>
           <div className={cx(`${moduleName}-top-musicController`)}>
@@ -55,12 +70,15 @@ class MyPlayer extends Component {
 
 export default connect(
   state => {
-    const { meta } = state
+    const { meta, player } = state
     return {
-      showMyplayer: meta.showMyplayer
+      showMyplayer: meta.showMyplayer,
+      player
     }
   },
   {
-    toggleMyplayer
+    toggleMyplayer,
+    onPlay,
+    onPause
   }
 )(MyPlayer)
