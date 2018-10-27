@@ -152,14 +152,31 @@ class MyPlayer extends Component {
             />
             <div>
               <div className={cx(`${moduleName}-top-musicCard-songInfo`)}>
-                createrName
+                <p>createrName</p>
                 <h2>{songTitle}</h2>
               </div>
               <div className={cx(`${moduleName}-top-musicCard-player`)}>
-                플레이어
-                <button onClick={this.props.playPrevSong}>{'<'}</button>
-                <button onClick={this.togglePlay}>{'toggle'}</button>
-                <button onClick={this.props.playNexSong}>{'>'}</button>
+                <div
+                  className={cx(`${moduleName}-top-musicCard-player-prev`)}
+                  onClick={this.props.playPrevSong}
+                >
+                  <i />
+                </div>
+                <div
+                  className={cx(
+                    `${moduleName}-top-musicCard-player-` +
+                      (this.props.player.isPlaying ? 'pause' : 'play')
+                  )}
+                  onClick={this.togglePlay}
+                >
+                  <i />
+                </div>
+                <div
+                  className={cx(`${moduleName}-top-musicCard-player-next`)}
+                  onClick={this.props.playNexSong}
+                >
+                  <i />
+                </div>
               </div>
             </div>
           </div>

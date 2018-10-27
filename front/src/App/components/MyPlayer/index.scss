@@ -16,14 +16,12 @@
   }
   &-top {
     position: absolute;
-    top:10px;
+    top: 10px;
     height: 460px;
     padding: 40px;
     box-sizing: border-box;
 
     &-musicCard {
-      // position: absolute;
-      // background: olive;
       height: 240px;
       display: flex;
       &-coverImg {
@@ -32,25 +30,95 @@
         border-radius: 5px;
         background: no-repeat center center;
         background-size: cover;
+        -webkit-box-shadow: 18px 19px 48px -10px rgba(0, 0, 0, 0.52);
+        -moz-box-shadow: 18px 19px 48px -10px rgba(0, 0, 0, 0.52);
+        box-shadow: 18px 19px 48px -10px rgba(0, 0, 0, 0.52);
       }
       &-songInfo {
-        background: rebeccapurple;
+        padding-left: 45px;
         top: 0px;
         right: 0px;
         height: 120px;
         width: 280px;
+        color: #ffffff;
+        text-overflow: ellipsis;
+        p {
+          font-size: 23px;
+        }
+        h2 {
+          font-size: 30px;
+          width: 235px;
+          height: 33px;
+          text-overflow: ellipsis;
+          margin: 0;
+          overflow: hidden;
+          white-space: nowrap;
+        }
       }
       &-player {
-        background: darkcyan;
+        position: relative;
+        // background: darkcyan;
         bottom: 0px;
         right: 0px;
         height: 120px;
         width: 280px;
+        &-prev {
+          i {
+            position: absolute;
+            top: 90px;
+            left: 60px;
+            background: url('src/assets/icons/icon2.png') no-repeat -47px -237px;
+            width: 17px;
+            height: 18px;
+            &:hover {
+              opacity: 0.8;
+            }
+          }
+        }
+        &-play {
+          i {
+            position: absolute;
+            top: 85px;
+            left: 159px;
+            background: url('src/assets/icons/icon2.png') no-repeat -115px -282px;
+            width: 21px;
+            height: 25px;
+            &:hover {
+              opacity: 0.8;
+            }
+          }
+        }
+        &-pause {
+          i {
+            position: absolute;
+            top: 85px;
+            left: 159px;
+            background: url('src/assets/icons/icon2.png') no-repeat -115px -236px;
+            width: 22px;
+            height: 26px;
+            &:hover {
+              opacity: 0.8;
+            }
+          }
+        }
+        &-next {
+          i {
+            position: absolute;
+            top: 90px;
+            right: 0px;
+            background: url('src/assets/icons/icon2.png') no-repeat -187px -237px;
+            width: 18px;
+            height: 18px;
+            &:hover {
+              opacity: 0.8;
+            }
+          }
+        }
       }
     }
     &-musicController {
       position: absolute;
-      bottom: 40px;
+      bottom: 50px;
       height: 60px;
       width: 520px;
       &-slider {
