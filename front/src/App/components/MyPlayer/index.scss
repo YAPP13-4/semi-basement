@@ -85,8 +85,47 @@
     height: 540px;
     box-sizing: border-box;
     &-playlist {
-      background: darkorange;
-      height: 90px;
+      background: black;
+      position: relative;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      &-shuffle {
+        i {
+          position: absolute;
+          top: 31px;
+          left: 32px;
+          background: url('src/assets/icons/icon2.png') no-repeat -445px -92px;
+          width: 17px;
+          height: 17px;
+        }
+      }
+      &-mainTitle {
+        font-size: 26px;
+        margin-left: 77px;
+        margin-right: 160px;
+        margin-bottom: 0px;
+        color: #ffffff;
+      }
+      &-toggleTitle {
+        position: absolute;
+        right: 60px;
+        font-size: 20px;
+        margin-bottom: 0px;
+        color: #ffffff;
+        opacity: 0.5;
+        &:hover {
+          opacity: 1;
+        }
+        i {
+          position: absolute;
+          top: 3px;
+          right: -30px;
+          background: url('src/assets/icons/icon2.png') no-repeat -292px -160px;
+          width: 12px;
+          height: 18px;
+        }
+      }
     }
     &-song {
       background: #000000;

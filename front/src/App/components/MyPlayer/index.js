@@ -103,9 +103,11 @@ class MyPlayer extends Component {
               {info.username}
             </p>
           </div>
-          <p className={cx(`${moduleName}-bottom-song-duration`)}>{formatSeconds(info.duration)}</p>
+          <p className={cx(`${moduleName}-bottom-song-duration`)}>
+            {formatSeconds(info.duration)}
+          </p>
           <div className={cx(`${moduleName}-bottom-song-etc`)}>
-            <i/>
+            <i />
           </div>
         </div>
       )
@@ -176,7 +178,16 @@ class MyPlayer extends Component {
         </div>
         <div className={cx(`${moduleName}-bottom`)}>
           <div className={cx(`${moduleName}-bottom-playlist`)}>
-            <h3>{this.props.currentList}</h3>
+            <div className={cx(`${moduleName}-bottom-playlist-shuffle`)}>
+              <i />
+            </div>
+            <h3 className={cx(`${moduleName}-bottom-playlist-mainTitle`)}>
+              {this.props.currentList}
+            </h3>
+            <h4 className={cx(`${moduleName}-bottom-playlist-toggleTitle`)}>
+              My PlayList
+              <i/>
+            </h4>
           </div>
           {this.renderPlayList()}
         </div>
