@@ -3,56 +3,270 @@
   right: 0;
   z-index: 1000;
   width: 600px;
-  &-top {
-    background: tomato;
-    position: relative;
+  &-topImageWrapper {
+    background: no-repeat center center;
+    background-size: cover;
+  }
+  &-topImage {
     height: 460px;
-    padding: 45px;
+    padding: 40px;
+    filter: blur(20px);
+    background: no-repeat center center;
+    background-size: cover;
+  }
+  &-top {
+    position: absolute;
+    top: 10px;
+    height: 460px;
+    padding: 40px;
     box-sizing: border-box;
 
     &-musicCard {
-      position: relative;
-      background: olive;
       height: 240px;
+      display: flex;
       &-coverImg {
-        background: orange;
         height: 240px;
         width: 240px;
+        border-radius: 5px;
+        background: no-repeat center center;
+        background-size: cover;
+        -webkit-box-shadow: 18px 19px 48px -10px rgba(0, 0, 0, 0.52);
+        -moz-box-shadow: 18px 19px 48px -10px rgba(0, 0, 0, 0.52);
+        box-shadow: 18px 19px 48px -10px rgba(0, 0, 0, 0.52);
       }
       &-songInfo {
-        background: rebeccapurple;
-        position: absolute;
+        padding-left: 45px;
         top: 0px;
         right: 0px;
         height: 120px;
-        width: 270px;
+        width: 280px;
+        color: #ffffff;
+        text-overflow: ellipsis;
+        p {
+          font-size: 23px;
+        }
+        h2 {
+          font-size: 30px;
+          width: 235px;
+          height: 33px;
+          text-overflow: ellipsis;
+          margin: 0;
+          overflow: hidden;
+          white-space: nowrap;
+        }
       }
       &-player {
-        background: darkcyan;
-        position: absolute;
+        position: relative;
+        // background: darkcyan;
         bottom: 0px;
         right: 0px;
         height: 120px;
-        width: 270px;
+        width: 280px;
+        &-prev {
+          i {
+            position: absolute;
+            top: 90px;
+            left: 60px;
+            background: url('src/assets/icons/icon2.png') no-repeat -47px -237px;
+            width: 17px;
+            height: 18px;
+            &:hover {
+              opacity: 0.8;
+            }
+          }
+        }
+        &-play {
+          i {
+            position: absolute;
+            top: 85px;
+            left: 159px;
+            background: url('src/assets/icons/icon2.png') no-repeat -115px -282px;
+            width: 21px;
+            height: 25px;
+            &:hover {
+              opacity: 0.8;
+            }
+          }
+        }
+        &-pause {
+          i {
+            position: absolute;
+            top: 85px;
+            left: 159px;
+            background: url('src/assets/icons/icon2.png') no-repeat -115px -236px;
+            width: 22px;
+            height: 26px;
+            &:hover {
+              opacity: 0.8;
+            }
+          }
+        }
+        &-next {
+          i {
+            position: absolute;
+            top: 90px;
+            right: 0px;
+            background: url('src/assets/icons/icon2.png') no-repeat -187px -237px;
+            width: 18px;
+            height: 18px;
+            &:hover {
+              opacity: 0.8;
+            }
+          }
+        }
       }
     }
     &-musicController {
-      background: darkkhaki;
       position: absolute;
       bottom: 50px;
       height: 60px;
-      width: 510px;
+      width: 520px;
+      &-slider {
+        font-size: 17px;
+        color: #ffffff;
+        &-left {
+          position: relative;
+          top: 17px;
+        }
+        &-right {
+          position: absolute;
+          left: 360px;
+          top: 17px;
+        }
+        &-center {
+          position: absolute;
+          top: 21px;
+          left: 50px;
+          width: 300px;
+        }
+      }
+      &-soundWrapper {
+        background: rgba(0, 0, 0, 0.38);
+        border-radius: 15px;
+        position: absolute;
+        top: 15px;
+        right: 0px;
+        width: 110px;
+        height: 30px;
+      }
+      &-sound {
+        position: absolute;
+        top: 6px;
+        right: 15px;
+        width: 85px;
+      }
     }
   }
 
   &-bottom {
-    background: sandybrown;
-    padding-top: 20px;
     height: 540px;
     box-sizing: border-box;
-    &-song {
-      background: darkgray;
+    &-playlist {
+      background: black;
+      position: relative;
       height: 80px;
+      display: flex;
+      align-items: center;
+      &-shuffle {
+        i {
+          position: absolute;
+          top: 31px;
+          left: 32px;
+          background: url('src/assets/icons/icon2.png') no-repeat -445px -92px;
+          width: 17px;
+          height: 17px;
+        }
+      }
+      &-mainTitle {
+        font-size: 26px;
+        margin-left: 77px;
+        margin-right: 160px;
+        margin-bottom: 0px;
+        color: #ffffff;
+      }
+      &-toggleTitle {
+        position: absolute;
+        right: 60px;
+        font-size: 20px;
+        margin-bottom: 0px;
+        color: #ffffff;
+        opacity: 0.5;
+        &:hover {
+          opacity: 1;
+        }
+        i {
+          position: absolute;
+          top: 3px;
+          right: -30px;
+          background: url('src/assets/icons/icon2.png') no-repeat -292px -160px;
+          width: 12px;
+          height: 18px;
+        }
+      }
+    }
+    &-song {
+      background: #000000;
+      display: flex;
+      height: 90px;
+      align-items: center;
+      &:hover {
+        background: #1d2022;
+        i {
+          opacity: 1;
+        }
+      }
+      &-artwork {
+        width: 56px;
+        height: 56px;
+        margin-left: 90px;
+        background: no-repeat center center;
+        background-size: cover;
+        border-radius: 35px;
+      }
+      &-center {
+        margin-left: 30px;
+        &-top {
+          color: #ffffff;
+          font-size: 17px;
+          margin-bottom: 10px;
+        }
+        &-bottom {
+          color: #939393;
+          font-size: 14px;
+          margin: 0;
+        }
+      }
+      &-duration {
+        position: absolute;
+        font-size: 14px;
+        color: #ffffff;
+        margin: 0;
+        right: 96px;
+      }
+      &-move {
+        position: absolute;
+        left: 34px;
+        background: url('src/assets/icons/icon2.png') no-repeat -255px -235px;
+        width: 14px;
+        height: 27px;
+        opacity: 0.5;
+      }
+      &-etc {
+        position: absolute;
+        background: black;
+        width: 52px;
+        height: 52px;
+        right: 27px;
+        border-radius: 35px;
+        i {
+          position: absolute;
+          top: 19px;
+          left: 24px;
+          background: url('src/assets/icons/icon2.png') no-repeat -507px -40px;
+          width: 4px;
+          height: 15px;
+        }
+      }
     }
   }
   &-close {

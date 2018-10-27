@@ -1,5 +1,5 @@
-import React, { Component } from "react"
-import { SONG_STREAM_URL } from "../constants/ApiConstants"
+import React, { Component } from 'react'
+import { SONG_STREAM_URL } from '../constants/ApiConstants'
 const audio = InnerComponent => {
   class AudioComponent extends Component {
     constructor() {
@@ -27,13 +27,37 @@ const audio = InnerComponent => {
 
     componentDidUpdate(prevProps) {
       const { audioElement, props } = this
-      const { song } = props
+      const { song, player } = props
       const audioUrl = song[0]
       const prevSong = prevProps.song[0]
       if (prevSong !== audioUrl) {
         audioElement.play()
       }
+      if (props.meta.showMyplayer && this.shouldToggleplay(prevProps, props)) {
+        this.toggleSidePlayerPlay(player, audioElement)
+      }
+      if (props.meta.showMyplayer && this.shouldChangeCurrentTime(prevProps, props)) {
+          audioElement.currentTime = props.player.myPlayerCurrentTime
+      }
+      if (props.meta.showMyplayer && this.shouldChangeVolume(prevProps, props)) {
+          // audioElement.muted = false
+          audioElement.volume = props.player.myPlayerVolume
+      }
     }
+
+    toggleSidePlayerPlay = (player, audioElement) => {
+      player.isPlaying ? audioElement.play() : audioElement.pause()
+    }
+
+    shouldToggleplay = (prevProps, props) =>
+      prevProps.player.isPlaying !== props.player.isPlaying
+
+    shouldChangeCurrentTime = (prevProps, props) =>
+      prevProps.player.myPlayerCurrentTime !== props.player.myPlayerCurrentTime
+
+    shouldChangeVolume = (prevProps, props) =>
+      prevProps.player.myPlayerVolume !== props.player.myPlayerVolume
+
     onEnded() {
       console.log(this.props)
       const { props } = this
@@ -98,9 +122,10 @@ const audio = InnerComponent => {
         audioElement.play()
       }
     }
+
     render() {
       const { song } = this.props
-      const songUrl = "https:" + SONG_STREAM_URL.replace(":id", song[0])
+      const songUrl = 'https:' + SONG_STREAM_URL.replace(':id', song[0])
       return (
         <div>
           <audio
