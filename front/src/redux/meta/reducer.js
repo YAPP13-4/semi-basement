@@ -14,6 +14,7 @@ const meta = (
     error: null,
     toggleHistory: false,
     showMyplayer: false,
+    showBottomplayer: true,
     showGNB: false
   },
   action
@@ -46,7 +47,8 @@ const meta = (
     case TOGGLE_MYPLAYER:
       return {
         ...state,
-        showMyplayer: !state.showMyplayer
+        showMyplayer: !state.showMyplayer,
+        showBottomplayer: !state.showBottomplayer
       }
     case SHOW_GNB:
       return {

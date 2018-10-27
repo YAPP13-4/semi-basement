@@ -36,11 +36,11 @@ class ArtWorkPlayContainer extends PureComponent {
   }
   onClickChangePlayList = playlist => {
     if (!this.props.currentList || this.props.currentList !== playlist) {
-      const songId = this.props.musicInfos.map(info => {
+      const songId = this.props.musicInfos.map(info => { //계속 뮤직인포만 바라보고 있는건가..? 뮤직인포가 플레이리스트에 띠라 담기는것들이 달라져야 한다.
         if (!songId) return info.id
         else return songId.concat(info.id)
       })
-      this.props.changePlayList(songId, playlist)
+      this.props.changePlayList(songId, playlist) // songIds만 배열로 넘겨주고 있는데, 어떻게 하는것이 맞는걸까? 마이 플레이 리스트에서 보여줄때, 상세정보들을 알아야 하기때문에, 일일히 url을 call해서 보여주어야 하나?(해보고 성능상 괜찮다면, redux에 id의 배열만 넣어주는것도 상태를 적게관리 하는 측면에서는 좋은 방법이다.)
     }
   }
   renderArtworks = () => {

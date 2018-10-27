@@ -31,7 +31,10 @@ const Player = ({
   const volume = muted ? 0 : player.volume
 
   return (
-    <div className={cx(`${moduleName}`)}>
+    <div
+      className={cx(`${moduleName}`)}
+      style={{ display: meta.showBottomplayer ? '' : 'none' }}
+    >
       <div
         className={cx(
           `${moduleName}` + (meta.toggleHistory ? '-history' : '-none')
@@ -77,7 +80,7 @@ const Player = ({
           </div>
           <div className={cx(`${moduleName}__section--time`)}>
             <div
-              style={{ color: "#45f7aa", width: "50px", textAlign: "center" }}
+              style={{ color: '#45f7aa', width: '50px', textAlign: 'center' }}
             >
               {formatSeconds(currentTime)}
             </div>
@@ -100,8 +103,8 @@ const Player = ({
               onClick={toggleMuted}
               tabIndex="0"
               style={{
-                paddingTop: "11px",
-                display: "flex"
+                paddingTop: '11px',
+                display: 'flex'
               }}
             >
               <i className={cx(`${moduleName}__button__mute`)} />
