@@ -82,12 +82,15 @@
 
   &-bottom {
     background: sandybrown;
-    padding-top: 20px;
     height: 540px;
     box-sizing: border-box;
+    &-playlist {
+      background: darkorange;
+      height: 90px;
+    }
     &-song {
       background: darkgray;
-      height: 80px;
+      height: 90px;
     }
   }
   &-close {

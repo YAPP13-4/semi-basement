@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import classnames from 'classnames/bind'
+import axios from 'axios'
 
 import { toggleMyplayer } from 'src/redux/meta/actions.js'
 import {
@@ -13,6 +14,7 @@ import {
 } from 'src/redux/player/actions'
 import Slider from 'src/App/components/Slider/'
 import { formatSeconds } from 'src/utils/NumberUtils'
+import { SONG_URL } from 'src/App/constants/ApiConstants'
 
 import css from './index.scss'
 
@@ -23,7 +25,19 @@ class MyPlayer extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {}
+    this.state = {
+      musicListInfos: []
+    }
+  }
+
+  componentDidMount() {
+    this.getMusicListInfos(this.props.musicList)
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.musicList !== this.props.musicList) {
+      this.getMusicListInfos(this.props.musicList)
+    }
   }
 
   handleClose = () => {
@@ -35,10 +49,33 @@ class MyPlayer extends Component {
     player.isPlaying ? onPause() : onPlay()
   }
 
+  getMusicListInfos = musicList => {
+    if (!musicList) return
+    axios
+      .all(musicList.map(musicId => this.getMusicInfo(musicId)))
+      .then(res => this.setState({ musicListInfos: res }))
+  }
+
+  getMusicInfo = musicId => {
+    return axios
+      .get(SONG_URL.replace(':id', musicId))
+      .then(
+        ({
+          data: {
+            artwork_url,
+            title,
+            duration,
+            user: { username }
+          }
+        }) => {
+          return { artwork_url, title, username, duration: duration / 1000 }
+        }
+      )
+  }
+
   render() {
     const [songId, songTitle, songUrl, songDuration] = this.props.song
-    const { currentTime, muted } = this.props.player
-    const volume = muted ? 0 : this.props.volume
+    const { currentTime } = this.props.player
     return (
       <div
         className={cx(`${moduleName}`)}
@@ -99,7 +136,9 @@ class MyPlayer extends Component {
           </div>
         </div>
         <div className={cx(`${moduleName}-bottom`)}>
-          <div className={cx(`${moduleName}-bottom-song`)}>음악이야1</div>
+          <div className={cx(`${moduleName}-bottom-playlist`)}>
+            <h3>{this.props.currentList}</h3>
+          </div>
           <div className={cx(`${moduleName}-bottom-song`)}>음악이야2</div>
           <div className={cx(`${moduleName}-bottom-song`)}>음악이야3</div>
         </div>
@@ -110,11 +149,13 @@ class MyPlayer extends Component {
 
 export default connect(
   state => {
-    const { meta, player, music } = state
+    const { meta, player, music, playList } = state
     return {
       showMyplayer: meta.showMyplayer,
       player,
-      song: music.song
+      song: music.song,
+      currentList: playList.currentList,
+      musicList: playList.musicList
     }
   },
   {
