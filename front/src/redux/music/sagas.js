@@ -23,12 +23,13 @@ export function* updateHistoryLocalStorage(action) {
   yield put(historySongRequest())
 
   try {
-    if (localStorage.historySong) {
+    let newHistory = []
+    if (checkValidValue(localStorage.historySong)) {
       const localData = JSON.parse(localStorage.historySong)
       let containsId = false
 
       const localDataLen = localData.length
-      let newHistorySongIds = []
+      //let newHistory = []
       let index
       for (index = 0; index < localDataLen; index++) {
         if (targetId === localData[index]) {
@@ -36,25 +37,20 @@ export function* updateHistoryLocalStorage(action) {
           break
         }
       }
-      if (!containsId) {
+      if (!checkValidValue(containsId)) {
         localData.push(targetId)
         localStorage.setItem("historySong", JSON.stringify(localData))
       }
 
       for (index = 0; index < localData.length; index++) {
-        newHistorySongIds.push(localData[index])
+        newHistory.push(localData[index])
       }
-
-      const data = yield all(
-        newHistorySongIds.map(id => call(getSoundCloudSong, id))
-      )
-      yield put(historySongSuccess(data))
     } else {
-      let myHistory = [targetId]
-      localStorage.historySong = JSON.stringify(myHistory)
-      const data = yield all(myHistory.map(id => call(getSoundCloudSong, id)))
-      yield put(historySongSuccess(data))
+      newHistory = [targetId]
+      localStorage.historySong = JSON.stringify(newHistory)
     }
+    const data = yield all(newHistory.map(id => call(getSoundCloudSong, id)))
+    yield put(historySongSuccess(data))
   } catch (err) {
     console.log(err)
     yield put(historySongFailure(err))

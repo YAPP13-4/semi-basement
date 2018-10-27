@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import { loadChartSongsInfo } from "src/redux/chart/actions"
 import {
   selectSong,
-  addHistory,
+  historySong,
   loadSongDetail,
   loadSongsInfo
 } from "src/redux/music/actions"
@@ -30,7 +30,8 @@ class ChartTab extends Component {
   }
   onClickPlay = ({ songId, title, artworkUrl, duration }) => {
     this.props.selectSong([songId, title, artworkUrl, duration])
-    this.props.addHistory(songId)
+    this.props.historySong(songId)
+    //this.props.addHistory(songId)
   }
 
   renderChart = () => {
@@ -67,5 +68,5 @@ function mapStateToProps({ chartMusic }) {
 }
 export default connect(
   mapStateToProps,
-  { loadChartSongsInfo, selectSong, addHistory, loadSongDetail, loadSongsInfo }
+  { loadChartSongsInfo, selectSong, historySong, loadSongDetail, loadSongsInfo }
 )(ChartTab)

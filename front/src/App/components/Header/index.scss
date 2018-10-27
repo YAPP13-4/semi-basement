@@ -41,13 +41,19 @@
   }
   &-rightSide-user {
     display: flex;
-    & a {
+    a {
+      text-decoration: none;
+    }
+    span {
       cursor: pointer;
       padding: 9px 32px;
       border-radius: 18.5px;
       border: solid 1px #979797;
       font-size: 14px;
       color: white;
+    }
+    &-signIn {
+      margin-right: 21px;
     }
   }
 
