@@ -73,6 +73,19 @@ class MyPlayer extends Component {
       )
   }
 
+  renderPlayList = () => {
+    if (!this.state.musicListInfos.length) return <div />
+    return this.state.musicListInfos.map((info, index) => {
+      return (
+        <div key={index}>
+          <p>{info.title}</p>
+          <p>{info.duration}</p>
+          <p>{info.username}</p>
+        </div>
+      )
+    })
+  }
+
   render() {
     const [songId, songTitle, songUrl, songDuration] = this.props.song
     const { currentTime } = this.props.player
@@ -141,6 +154,7 @@ class MyPlayer extends Component {
           </div>
           <div className={cx(`${moduleName}-bottom-song`)}>음악이야2</div>
           <div className={cx(`${moduleName}-bottom-song`)}>음악이야3</div>
+          {this.renderPlayList()}
         </div>
       </div>
     )
