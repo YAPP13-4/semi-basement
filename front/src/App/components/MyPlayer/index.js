@@ -15,6 +15,8 @@ import {
 import Slider from 'src/App/components/Slider/'
 import { formatSeconds } from 'src/utils/NumberUtils'
 import { SONG_URL } from 'src/App/constants/ApiConstants'
+import getImageUrl from 'src/utils/ImageUtils'
+import IMAGE_SIZES from 'src/App/constants/ImageConstants'
 
 import css from './index.scss'
 
@@ -68,7 +70,12 @@ class MyPlayer extends Component {
             user: { username }
           }
         }) => {
-          return { artwork_url, title, username, duration: duration / 1000 }
+          return {
+            artworkUrl: artwork_url,
+            title,
+            username,
+            duration: duration / 1000
+          }
         }
       )
   }
@@ -77,10 +84,29 @@ class MyPlayer extends Component {
     if (!this.state.musicListInfos.length) return <div />
     return this.state.musicListInfos.map((info, index) => {
       return (
-        <div key={index}>
-          <p>{info.title}</p>
-          <p>{info.duration}</p>
-          <p>{info.username}</p>
+        <div className={cx(`${moduleName}-bottom-song`)} key={index}>
+          <i className={cx(`${moduleName}-bottom-song-move`)} />
+          <div
+            className={cx(`${moduleName}-bottom-song-artwork`)}
+            style={{
+              backgroundImage: `url(${getImageUrl(
+                info.artworkUrl,
+                IMAGE_SIZES.SMALL
+              )})`
+            }}
+          />
+          <div className={cx(`${moduleName}-bottom-song-center`)}>
+            <p className={cx(`${moduleName}-bottom-song-center-top`)}>
+              {info.title}
+            </p>
+            <p className={cx(`${moduleName}-bottom-song-center-bottom`)}>
+              {info.username}
+            </p>
+          </div>
+          <p className={cx(`${moduleName}-bottom-song-duration`)}>{formatSeconds(info.duration)}</p>
+          <div className={cx(`${moduleName}-bottom-song-etc`)}>
+            <i/>
+          </div>
         </div>
       )
     })
@@ -152,8 +178,6 @@ class MyPlayer extends Component {
           <div className={cx(`${moduleName}-bottom-playlist`)}>
             <h3>{this.props.currentList}</h3>
           </div>
-          <div className={cx(`${moduleName}-bottom-song`)}>음악이야2</div>
-          <div className={cx(`${moduleName}-bottom-song`)}>음악이야3</div>
           {this.renderPlayList()}
         </div>
       </div>
