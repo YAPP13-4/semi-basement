@@ -123,11 +123,33 @@ class MyPlayer extends Component {
         style={{ display: this.props.showMyplayer ? '' : 'none' }}
       >
         <div onClick={this.handleClose} className={cx(`${moduleName}-close`)} />
+        <div
+          className={cx(`${moduleName}-topImageWrapper`)}
+          style={{
+            backgroundImage: `url(${getImageUrl(songUrl, IMAGE_SIZES.XLARGE)})`
+          }}
+        >
+          <div
+            className={cx(`${moduleName}-topImage`)}
+            style={{
+              backgroundImage: `url(${getImageUrl(
+                songUrl,
+                IMAGE_SIZES.XLARGE
+              )})`
+            }}
+          />
+        </div>
         <div className={cx(`${moduleName}-top`)}>
           <div className={cx(`${moduleName}-top-musicCard`)}>
-            <div className={cx(`${moduleName}-top-musicCard-coverImg`)}>
-              앨범이미지
-            </div>
+            <div
+              className={cx(`${moduleName}-top-musicCard-coverImg`)}
+              style={{
+                backgroundImage: `url(${getImageUrl(
+                  songUrl,
+                  IMAGE_SIZES.XLARGE
+                )})`
+              }}
+            />
             <div className={cx(`${moduleName}-top-musicCard-songInfo`)}>
               createrName
               <h2>{songTitle}</h2>
@@ -186,7 +208,7 @@ class MyPlayer extends Component {
             </h3>
             <h4 className={cx(`${moduleName}-bottom-playlist-toggleTitle`)}>
               My PlayList
-              <i/>
+              <i />
             </h4>
           </div>
           {this.renderPlayList()}

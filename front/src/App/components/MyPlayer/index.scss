@@ -3,21 +3,33 @@
   right: 0;
   z-index: 1000;
   width: 600px;
+  &-topImageWrapper {
+    background: no-repeat center center;
+    background-size: cover;
+  }
+  &-topImage {
+    height: 460px;
+    padding: 40px;
+    filter: blur(5px);
+    background: no-repeat center center;
+    background-size: cover;
+  }
   &-top {
-    background: tomato;
-    position: relative;
+    position: absolute;
     height: 460px;
     padding: 40px;
     box-sizing: border-box;
 
     &-musicCard {
-      position: relative;
+      position: absolute;
       background: olive;
       height: 240px;
       &-coverImg {
-        background: orange;
         height: 240px;
         width: 240px;
+        border-radius: 5px;
+        background: no-repeat center center;
+        background-size: cover;
       }
       &-songInfo {
         background: rebeccapurple;
@@ -25,7 +37,7 @@
         top: 0px;
         right: 0px;
         height: 120px;
-        width: 270px;
+        width: 280px;
       }
       &-player {
         background: darkcyan;
@@ -33,7 +45,7 @@
         bottom: 0px;
         right: 0px;
         height: 120px;
-        width: 270px;
+        width: 280px;
       }
     }
     &-musicController {
