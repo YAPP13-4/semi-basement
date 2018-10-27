@@ -1,6 +1,7 @@
-import * as types from "./ActionType"
-
 import {
+  SELECT_SONG,
+  HISTORY_SONG_REQUEST,
+  HISTORY_SONG_SUCCESS,
   LOAD_SONG_DETAIL_REQUEST,
   LOAD_SONG_DETAIL_SUCCESS,
   LOAD_SONG_DETAIL_FAILURE,
@@ -18,7 +19,7 @@ const music = (
     recommendMusicInfo1: null,
     recommendMusicInfo2: null,
     songDetail: null,
-    historySong: null
+    historySong: []
   },
   action
 ) => {
@@ -35,15 +36,19 @@ const music = (
         infoLoading: false,
         musicInfo: [...action.data]
       }
-    case types.SELECT_SONG:
+    case SELECT_SONG:
       return {
         ...state,
         song: action.song
       }
-    case types.HISTORY_SONG:
+    case HISTORY_SONG_REQUEST:
+      return {
+        ...state
+      }
+    case HISTORY_SONG_SUCCESS:
       return {
         ...state,
-        historySong: action.historySong
+        historySong: [...action.data]
       }
     case LOAD_SONG_DETAIL_REQUEST:
       return {

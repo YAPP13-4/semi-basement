@@ -1,6 +1,10 @@
 import React, { PureComponent } from "react"
 import { connect } from "react-redux"
-import { selectSong, addHistory, loadSongDetail } from "src/redux/music/actions"
+import {
+  selectSong,
+  historySong,
+  loadSongDetail
+} from "src/redux/music/actions"
 import { changePlayList } from "src/redux/playlist/actions"
 import Loading from "src/App/components/Loading"
 import ArtworkPlay from "../components/ArtworkPlay"
@@ -28,7 +32,7 @@ const inactivePalyList = {
 class ArtWorkPlayContainer extends PureComponent {
   onClickPlay = ({ songId, title, artworkUrl, duration }) => {
     this.props.selectSong([songId, title, artworkUrl, duration])
-    this.props.addHistory(songId)
+    this.props.historySong(songId)
   }
   onClickChangePlayList = playlist => {
     if (!this.props.currentList || this.props.currentList !== playlist) {
@@ -99,5 +103,5 @@ const mapStateToProps = ({ music, playList, submusic1 }) => {
 }
 export default connect(
   mapStateToProps,
-  { selectSong, addHistory, loadSongDetail, changePlayList }
+  { selectSong, loadSongDetail, historySong, changePlayList }
 )(ArtWorkPlayContainer)

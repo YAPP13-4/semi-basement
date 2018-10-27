@@ -8,9 +8,63 @@ import {
   LOAD_SONG_INFO,
   loadSongInfoRequest,
   loadSongInfoSuccess,
-  loadSongInfoFailure
+  loadSongInfoFailure,
+  HISTORY_SONG,
+  historySongRequest,
+  historySongSuccess,
+  historySongFailure
 } from "./actions"
+export function* updateHistoryLocalStorage(action) {
+  //FIXME : reaplace with selectSong action . song[0] === songId
+  const { songId } = action
+  console.log("action", action)
+  const targetId = songId
+  console.log("target id", targetId)
+  yield put(historySongRequest())
 
+  try {
+    if (localStorage.historySong) {
+      const localData = JSON.parse(localStorage.historySong)
+      let containsId = false
+
+      const localDataLen = localData.length
+      let newHistorySongIds = []
+      let index
+      for (index = 0; index < localDataLen; index++) {
+        if (targetId === localData[index]) {
+          containsId = true
+          break
+        }
+      }
+      if (!containsId) {
+        localData.push(targetId)
+        localStorage.setItem("historySong", JSON.stringify(localData))
+      }
+
+      for (index = 0; index < localData.length; index++) {
+        newHistorySongIds.push(localData[index])
+      }
+
+      const data = yield all(
+        newHistorySongIds.map(id => call(getSoundCloudSong, id))
+      )
+      yield put(historySongSuccess(data))
+    } else {
+      let myHistory = [targetId]
+      localStorage.historySong = JSON.stringify(myHistory)
+      const data = yield all(myHistory.map(id => call(getSoundCloudSong, id)))
+      yield put(historySongSuccess(data))
+    }
+  } catch (err) {
+    console.log(err)
+    yield put(historySongFailure(err))
+  }
+}
+export function* watchHistorySongInfoFlow() {
+  yield takeEvery(HISTORY_SONG, updateHistoryLocalStorage)
+}
+
+///////
 export function* loadSongsInfoFrom(action) {
   console.log("load song info from ", action)
   const { songUrlArr } = action
@@ -47,5 +101,14 @@ export function* watchLoadSongDtailFlow() {
 }
 
 export default function* musicRoot() {
-  yield all([watchLoadSongDtailFlow(), watchLoadSongInfoFlow()])
+  yield all([
+    watchLoadSongDtailFlow(),
+    watchLoadSongInfoFlow(),
+    watchHistorySongInfoFlow()
+  ])
+}
+
+function checkValidValue(value) {
+  if (value) return true
+  else return false
 }
