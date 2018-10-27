@@ -1,5 +1,12 @@
-import * as types from "./ActionType"
-
+export const SELECT_SONG = "SELECT_SONG"
+export const HISTORY_SONG = "HISTORY_SONG"
+export const HISTORY_SONG_REQUEST = "HISTORY_SONG_REQUEST"
+export const HISTORY_SONG_SUCCESS = "HISTORY_SONG_SUCCESS"
+export const HISTORY_SONG_FAILURE = "HISTORY_SONG_FAILURE"
+export const LANDING = "LANDING"
+export const FETCH_NEW_STREAM_SONGS_SUCCESS = "FETCH_NEW_STREAM_SONGS_SUCCESS"
+export const FETCH_SONGS_REQUEST = "FETCH_SONGS_REQUEST"
+export const FETCH_SONGS_SUCCESS = "FETCH_SONGS_SUCCESS"
 export const NAME = "MUSIC"
 export const LOAD_SONG_INFO = "LOAD_SONG_INFO"
 export const LOAD_SONG_INFO_REQUEST = "LOAD_SONG_INFO_REQUEST"
@@ -19,14 +26,12 @@ export function loadSongInfoRequest() {
     type: LOAD_SONG_INFO_REQUEST
   }
 }
-
 export function loadSongInfoSuccess(data) {
   return {
     type: LOAD_SONG_INFO_SUCCESS,
     data
   }
 }
-
 export function loadSongInfoFailure(err) {
   return {
     type: LOAD_SONG_INFO_FAILURE,
@@ -35,18 +40,42 @@ export function loadSongInfoFailure(err) {
 }
 
 //Legacy actions
+export function historySong(songId) {
+  return {
+    type: HISTORY_SONG,
+    songId
+  }
+}
+export function historySongRequest() {
+  return {
+    type: HISTORY_SONG_REQUEST
+  }
+}
+export function historySongSuccess(data) {
+  return {
+    type: HISTORY_SONG_SUCCESS,
+    data
+  }
+}
+export function historySongFailure(err) {
+  return {
+    type: HISTORY_SONG_FAILURE,
+    err
+  }
+}
 export function selectSong(song) {
   return {
-    type: types.SELECT_SONG,
+    type: SELECT_SONG,
     song
   }
 }
+/*
 export function addHistory(historySong) {
   return {
-    type: types.HISTORY_SONG,
+    type: HISTORY_SONG,
     historySong
   }
-}
+}*/
 
 export const LOAD_SONG_DETAIL = `${NAME}/LOAD_SONG_DETAIL`
 export const LOAD_SONG_DETAIL_REQUEST = `${NAME}/LOAD_SONG_DETAIL_REQUEST`

@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react"
 import { connect } from "react-redux"
 import { compose } from "redux"
+import { Link } from "react-router-dom"
 import classnames from "classnames/bind"
 import { toggleMyplayer, toggleGNB } from "src/redux/meta/actions.js"
 import logo from "src/assets/logos/logo.png"
@@ -28,16 +29,22 @@ class Header extends Component {
             <div className={cx(`${moduleName}-rightSide-user`)}>
               {/* sing up, sign in btn  a tag must be Link!!!*/}
               {/* FIX ME ..... */}
-              <a style={{ marginRight: "21px" }}>Sign In</a>
-              <a
-                style={{
-                  backgroundColor: "#45f7aa",
-                  color: "#020202",
-                  border: "none"
-                }}
-              >
-                Sign Up
-              </a>
+              <Link to="/sign">
+                <span className={cx(`${moduleName}-rightSide-user-signIn`)}>
+                  Sign In
+                </span>
+              </Link>
+              <Link to="/sign">
+                <span
+                  style={{
+                    backgroundColor: "#45f7aa",
+                    color: "#020202",
+                    border: "none"
+                  }}
+                >
+                  Sign Up
+                </span>
+              </Link>
             </div>
             <div
               className={cx(`${moduleName}-rightSide-playlist`)}

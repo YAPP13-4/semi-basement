@@ -1,8 +1,6 @@
 import Home from "./pages/Home"
 import Mypage from "./pages/Mypage"
 import Sign from "./pages/Sign"
-//FIXME
-import ChartTab from "./pages/Home/Chart/ChartTab"
 
 import ChartTabPage from "./pages/Home/Chart/ChartTabPage"
 import Landing from "./pages/Landing"
