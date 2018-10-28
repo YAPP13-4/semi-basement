@@ -32,10 +32,10 @@ class Home extends PureComponent {
       <div className={cx(`${moduleName}`)}>
         <Navigation />
         <div>
-          <ArtWorkContainer category="SEBA'S CHOICE" />
+          <ArtWorkContainer category="SEBA'S CHOICE" musicInfos={this.props.musicInfos} />
         </div>
         <div>
-          <ArtWorkContainer category="YOU_KNOW" />
+          <ArtWorkContainer category="YOU_KNOW" musicInfos={this.props.subMusicInfos1} />
         </div>
       </div>
     )
@@ -43,7 +43,12 @@ class Home extends PureComponent {
 }
 
 export default connect(
-  null,
+  ({ submusic1, music}) => {
+    return {
+      subMusicInfos1: submusic1.musicInfo,
+      musicInfos: music.musicInfo
+    }
+  },
   {
     loadSongsInfo,
     loadFirstSubSongInfo
