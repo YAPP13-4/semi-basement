@@ -12,13 +12,13 @@ const moduleName = "Header"
 class Header extends Component {
   render() {
     return (
-      <Fragment>
-        <header
-          className={cx(`${moduleName}`)}
-          style={{
-            backgroundColor: this.props.pathname === "/" ? "none" : "#000000"
-          }}
-        >
+      <div
+        className={cx(`${moduleName}`)}
+        style={{
+          backgroundColor: this.props.pathname === "/" ? "none" : "#000000"
+        }}
+      >
+        <header className={cx(`${moduleName}-inner`)}>
           <div className={cx(`${moduleName}-menu`)}>
             <span onClick={this.props.toggleGNB} />
           </div>
@@ -56,7 +56,7 @@ class Header extends Component {
             </div>
           </div>
         </header>
-      </Fragment>
+      </div>
     )
   }
 }

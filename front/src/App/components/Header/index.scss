@@ -1,21 +1,27 @@
 .Header {
-  // background: black;
+  width: 100%;
   background: none;
+  z-index: 5;
   position: fixed;
   left: 0;
   right: 0;
-  margin-left: auto;
-  margin-right: auto;
-  width: 1440px;
-  z-index: 5;
-  //position: relative;
-  padding: 28px 0px 28px 0px;
-  display: flex;
-  justify-content: space-between;
+  // background: black;
+  &-inner {
+    max-width: 1440px;
+    min-width: 1440px;
+    //z-index: 5;
+    //position: relative;
+    padding: 28px 50px 28px 50px;
+    display: flex;
+    justify-content: space-between;
+
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   &-menu {
     span {
       display: block;
-      margin-left: 50px;
       background: url("src/assets/icons/icon2.png") no-repeat -442px -41px;
       width: 19px;
       height: 13px;
@@ -23,11 +29,9 @@
   }
   &-logo {
     position: absolute;
-    left: 644px;
+    left: 744px;
   }
   &-rightSide {
-    /*background: lavenderblush;*/
-    padding-right: 50px;
     display: flex;
     &-playlist {
       span {
@@ -56,162 +60,6 @@
       margin-right: 21px;
     }
   }
-
-  &-modal {
-    width: 400px;
-    height: 500px;
-    object-fit: contain;
-    vertical-align: middle;
-    margin: auto;
-    border-radius: 2px;
-    background-blend-mode: multiply, multiply;
-    background-image: linear-gradient(
-      rgba(175, 25, 25, 0.39),
-      rgba(6, 54, 56, 0.253)
-    );
-
-    //background-color: rgba(175, 25, 25, 0.39);
-    box-shadow: -6px 0 6px 0 rgba(255, 0, 0, 0.4);
-
-    &-close {
-      cursor: pointer;
-      position: relative;
-      margin-left: 380px;
-      padding: 2px 5px;
-      line-height: 20px;
-      font-size: 24px;
-      color: black;
-    }
-
-    &-title {
-      margin-top: 30px;
-      width: 100%;
-      font-size: 18px;
-      text-align: center;
-      padding: 5px;
-      font-family: AvertaCY;
-      // font-size: 24px;
-      font-weight: 900;
-      font-style: normal;
-      font-stretch: normal;
-      line-height: normal;
-      letter-spacing: normal;
-      text-align: center;
-      color: #000000;
-    }
-
-    &-content {
-      width: 100%;
-      font-size: 18px;
-      text-align: center;
-      &-login {
-        padding: 0;
-        border: 0;
-        width: 316px;
-        height: 46px;
-        border-radius: 3px;
-        background-color: #4286f5;
-        font-family: AvertaCY;
-        font-size: 18px;
-        font-weight: 600;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: normal;
-        text-align: center;
-        color: #fffdff;
-
-        &-google {
-          position: relative;
-          bottom: auto;
-          right: 10px;
-          top: 3px;
-          align-self: left;
-        }
-      }
-      &-login2 {
-        padding: 0;
-        border: 0;
-        width: 316px;
-        height: 46px;
-        border-radius: 3px;
-        border: solid 0.5px #000000;
-        font-family: AvertaCY;
-        font-size: 18px;
-        font-weight: 600;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: normal;
-        text-align: center;
-        color: #000000;
-        background-color: #ffffff00;
-        margin-right: 10px;
-
-        &-facebook {
-          position: relative;
-          bottom: auto;
-          right: 35px;
-          top: 3px;
-          float: left;
-          margin-left: 10px;
-        }
-        &-twitter {
-          position: relative;
-          bottom: auto;
-          right: 35px;
-          top: 3px;
-        }
-      }
-    }
-
-    &-close {
-      width: 21px;
-      height: 21px;
-      transform: rotate(45deg);
-    }
-  }
-
-  //////////
-  &-modal2 {
-    width: 650px;
-    height: 600px;
-    object-fit: contain;
-    vertical-align: middle;
-    margin: auto;
-    border-radius: 2px;
-    background-color: #ffffff;
-    &-close {
-      cursor: pointer;
-      position: relative;
-      margin-left: 40%;
-      padding: 2px 5px;
-      line-height: 20px;
-      font-size: 24px;
-      color: black;
-    }
-
-    &-content {
-      margin-left: 45%;
-      font-size: 35px;
-      text-align: left;
-      font-family: AvertaCY;
-      font-weight: 900;
-      font-style: normal;
-      font-stretch: normal;
-      line-height: normal;
-      letter-spacing: normal;
-      color: #000000;
-      line-height: 1.71;
-    }
-
-    &-close {
-      width: 21px;
-      height: 21px;
-      transform: rotate(45deg);
-    }
-  }
-
   &-line {
     text-decoration-line: underline;
     text-decoration-color: #45f7aa;
