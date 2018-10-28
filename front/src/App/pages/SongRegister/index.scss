@@ -1,14 +1,20 @@
 @import "src/variable.scss";
 
 .SongRegist {
+  width: 100%;
   color: white;
   background-color: #191b1c;
   height: 100%;
-  margin: 0 auto;
+
   position: fixed;
   top: 94px;
   left: 0;
-  width: 100%;
+  &-inner {
+    margin: 0 auto;
+    min-width: 1440px;
+  }
+
+  //width: 100%;
   form {
     //space between input form
     div:nth-child(1) {
