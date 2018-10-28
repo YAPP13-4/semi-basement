@@ -1,16 +1,16 @@
-import React from 'react'
-import classnames from 'classnames/bind'
-import css from './Player.scss'
-import audio from './audio'
+import React from "react"
+import classnames from "classnames/bind"
+import css from "./Player.scss"
+import audio from "./audio"
 
-import getImageUrl from '../../utils/ImageUtils'
-import IMAGE_SIZES from '../constants/ImageConstants'
-import Slider from './Slider'
-import { formatSeconds } from '../../utils/NumberUtils'
-import HistoryTab from './HistoryTab/HistoryTab'
+import getImageUrl from "../../utils/ImageUtils"
+import IMAGE_SIZES from "../constants/ImageConstants"
+import Slider from "./Slider"
+import { formatSeconds } from "../../utils/NumberUtils"
+import HistoryTab from "./HistoryTab/HistoryTab"
 
 const cx = classnames.bind(css)
-const moduleName = 'Player'
+const moduleName = "Player"
 const Player = ({
   meta,
   song,
@@ -33,11 +33,11 @@ const Player = ({
   return (
     <div
       className={cx(`${moduleName}`)}
-      style={{ display: meta.showBottomplayer ? '' : 'none' }}
+      style={{ display: meta.showBottomplayer ? "" : "none" }}
     >
       <div
         className={cx(
-          `${moduleName}` + (meta.toggleHistory ? '-history' : '-none')
+          `${moduleName}` + (meta.toggleHistory ? "-history" : "-none")
         )}
       >
         <div className={cx(`${moduleName}__inner`)}>
@@ -57,11 +57,11 @@ const Player = ({
                 role="button"
                 onClick={togglePlay}
                 tabIndex="0"
-                style={{ color: '#ffffff' }}
+                style={{ color: "#ffffff" }}
               >
                 <i
                   className={cx(
-                    `${moduleName}__button__` + (isPlaying ? 'play' : 'pause')
+                    `${moduleName}__button__` + (isPlaying ? "play" : "pause")
                   )}
                 />
               </div>
@@ -80,7 +80,7 @@ const Player = ({
           </div>
           <div className={cx(`${moduleName}__section--time`)}>
             <div
-              style={{ color: '#45f7aa', width: '50px', textAlign: 'center' }}
+              style={{ color: "#45f7aa", width: "50px", textAlign: "center" }}
             >
               {formatSeconds(currentTime)}
             </div>
@@ -100,14 +100,16 @@ const Player = ({
             <div
               className={cx(`${moduleName}__button`)}
               role="button"
-              onClick={toggleMuted}
               tabIndex="0"
               style={{
-                paddingTop: '11px',
-                display: 'flex'
+                paddingTop: "11px",
+                display: "flex"
               }}
             >
-              <i className={cx(`${moduleName}__button__mute`)} />
+              <i
+                onClick={toggleMuted}
+                className={cx(`${moduleName}__button__mute`)}
+              />
 
               <div className={cx(`${moduleName}__section--volume`)}>
                 <Slider max={1} onChange={changeVolume} value={volume} />
@@ -164,7 +166,7 @@ const Player = ({
         </div>
       </div>
       <div
-        style={{ display: meta.toggleHistory ? 'block' : 'none' }}
+        style={{ display: meta.toggleHistory ? "block" : "none" }}
         className={cx(`${moduleName}__historyTab`)}
       >
         <HistoryTab />

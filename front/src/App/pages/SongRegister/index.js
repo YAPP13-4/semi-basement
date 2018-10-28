@@ -67,30 +67,34 @@ class SongRegist extends PureComponent {
     const { handleSubmit } = this.props
     return (
       <div className={cx(`${moduleName}`)}>
-        <div className={cx(`${moduleName}_top`)}>
-          <h4>Register Song</h4>
-        </div>
-        <form onSubmit={handleSubmit(this.submitTest)}>
-          <div className={cx(`${moduleName}_body`)}>
-            <div className={cx(`${moduleName}_left`)}>
-              <TextInputForm thumbnail={this.state.selectedArtWork} />
-            </div>
-            <div className={cx(`${moduleName}_right`)}>
-              <div className={cx(`${moduleName}_right_top`)}>Album cover </div>
-              <div
-                className={cx(`${moduleName}_right_mid`)}
-                style={{ backgroundImage: this.state.selectedArtWork }}
-              />
-              <RightSideForm selectThumbnail={this.selectThumbnail} />
-              <div className={cx(`${moduleName}_right_bot_submit`)}>
-                <button className="btn">Cancel</button>
-                <button type="submit" className="btn">
-                  Register
-                </button>
+        <div className={cx(`${moduleName}-inner`)}>
+          <div className={cx(`${moduleName}_top`)}>
+            <h4>Register Song</h4>
+          </div>
+          <form onSubmit={handleSubmit(this.submitTest)}>
+            <div className={cx(`${moduleName}_body`)}>
+              <div className={cx(`${moduleName}_left`)}>
+                <TextInputForm thumbnail={this.state.selectedArtWork} />
+              </div>
+              <div className={cx(`${moduleName}_right`)}>
+                <div className={cx(`${moduleName}_right_top`)}>
+                  Album cover{" "}
+                </div>
+                <div
+                  className={cx(`${moduleName}_right_mid`)}
+                  style={{ backgroundImage: this.state.selectedArtWork }}
+                />
+                <RightSideForm selectThumbnail={this.selectThumbnail} />
+                <div className={cx(`${moduleName}_right_bot_submit`)}>
+                  <button className="btn">Cancel</button>
+                  <button type="submit" className="btn">
+                    Register
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     )
   }

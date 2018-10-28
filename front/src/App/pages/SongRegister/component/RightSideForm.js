@@ -14,7 +14,7 @@ class RightSideForm extends PureComponent {
             <div
               onClick={() => {
                 this.props.selectThumbnail(1)
-                this.props.change("thumbnail", 1)
+                this.props.change("thumbnail", 1) //redux-form 에 넘겨주는 값을 thumbnail : 1로 하기 위해.
               }}
             />
             <div
