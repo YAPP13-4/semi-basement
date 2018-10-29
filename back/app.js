@@ -12,7 +12,8 @@ const conn = mysql.createConnection({
     host      : db_config.host,
     user      : db_config.user,
     password  : db_config.password,
-    database  : db_config.database
+    database  : db_config.database,
+	insecureAuth : true
 })
 
 function isEmpty(obj) {
@@ -107,7 +108,7 @@ passport.deserializeUser(function (id, done) {
 passport.use(new GoogleStrategy({
     clientID: db_config.clientID,
     clientSecret: db_config.clientSecret,
-    callbackURL: "/auth/google/callback"
+    callbackURL: "https://semibasement.com/auth/google/callback"
 },
     function (accessToken, refreshToken, profile, done) {
         let newuser = {};
@@ -203,7 +204,7 @@ app.post('/add_albumlist', function(req, res){
         if(err){
             console.log(err);
         }else{
-            console.log('album_connect' + user_id +' 테이블이 생성됨.');
+            console.log('album_connect_' + user_id +' 테이블이 생성됨.');
         }
     });
 
@@ -308,7 +309,7 @@ app.get('/fillMusicTable', function(req, res) {
     console.log(SONG_URL);
     console.log("@" + req.method + " " + req.url);
 
-    let sql_insert = 'INSERT INTO music (date, music_name, play_url, hashtag_1, hashtag_2, hashtag_3, author, sc_id, duration) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
+    let sql_insert = 'INSERT INTO music (date, music_name, play_url, hashtag_1, hashtag_2, hashtag_3, author, sc_id, duration, like_count) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)';
     let sql_update = 'UPDATE music SET music_name = ?, hashtag_1 = ?, hashtag_2 = ?, hashtag_3 = ? WHERE sc_id = ?';
 
     conn.query('select m.sc_id from music m;', function(err, count_row, fields) {
@@ -321,13 +322,24 @@ app.get('/fillMusicTable', function(req, res) {
                         .then(response => {
                             let sc_id = response.data.id;
                             let play_url = response.data.permalink_url;
-                            let date = response.data.created_at;
-                            let music_name = response.data.title;
-                            let author = response.data.user.username;
-                            var hashtag_1 = '';
-                            var hashtag_2 = '';
-                            var hashtag_3 = '';
+                            var date = response.data.created_at;
+                            if(date == null){
+                                date = 'no data';
+                            }
+                            var music_name = response.data.title;
+                            if(music_name == null){
+                                music_name = 'no data';
+                            }
+                            var author = response.data.user.username;
+                            if(author == null){
+                                author = 'no data';
+                            }
+                            var hashtag_1 = 'no data';
+                            var hashtag_2 = 'no data';
+                            var hashtag_3 = 'no data';
+                            var like_count = 0;
                             var duration = response.data.duration;
+                            duration = parseFloat(duration/60000);
 
                             var rr = new Array();
                             rr = response.data.tag_list.split('\"');
@@ -337,7 +349,9 @@ app.get('/fillMusicTable', function(req, res) {
                                     hashtag_1 = rr[0];
                                 }
                             } else{
-                                hashtag_1 = rr[1];
+                                if( rr[1] != null){
+                                    hashtag_1 = rr[1];
+                                }
                                 hashtag_2 = rr[2];
                                 hashtag_3 = rr[3];
                             }
@@ -362,9 +376,9 @@ app.get('/fillMusicTable', function(req, res) {
                                     }
                                 })
                             }else if(updateTrigger == 0){
-                                conn.query(sql_insert, [date, music_name, play_url, hashtag_1, hashtag_2, hashtag_3, author, sc_id, duration], function(err, rows) {
+                                conn.query(sql_insert, [date, music_name, play_url, hashtag_1, hashtag_2, hashtag_3, author, sc_id, duration, like_count], function(err, rows) {
                                     if(err) {
-                                        console.log(err);
+                                        console.log(err); 
                                     } else {
                                         console.log("insert done");
                                         res.redirect('/rankingChart');
