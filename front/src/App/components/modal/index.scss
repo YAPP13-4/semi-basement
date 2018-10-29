@@ -1,15 +1,36 @@
+@import "./src/variable.scss";
 .Modal {
-  //test
   color: azure;
-  width: 50px;
-  height: 50px;
-  z-index: 99999;
-  position: fixed;
-  top: 0;
   &-display-block {
+    position: fixed;
+    top: 0;
+    z-index: 99999;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
     display: block;
+    &-modal-main {
+      position: fixed;
+      background: #323232;
+      width: 80%;
+      height: auto;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
   }
   &-display-none {
     display: none;
+  }
+  button {
+    padding: 0.5rem 2.5rem;
+    font-family: $font-Extra-bold;
+    color: #000000;
+    background: $green;
+    border: none;
+  }
+  button:focus {
+    outline: none;
   }
 }

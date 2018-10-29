@@ -12,9 +12,13 @@ const Modal = ({ handleClose, showModal }) => {
   return (
     <div className={cx(`${moduleName}`)}>
       <div className={cx(`${moduleName}-${showHideClassName}`)}>
-        <section className="modal-main">
-          im modal
-          <button onClick={handleClose}>Close</button>
+        <section
+          className={cx(`${moduleName}-${showHideClassName}-modal-main`)}
+        >
+          Coming soon.
+          <button className="btn" onClick={handleClose}>
+            Close
+          </button>
         </section>
       </div>
     </div>
