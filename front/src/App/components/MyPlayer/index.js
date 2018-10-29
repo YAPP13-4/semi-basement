@@ -12,6 +12,7 @@ import {
   changeMyPlayerCurrentTime,
   changeMyPlayerVolume
 } from 'src/redux/player/actions'
+import { switchPlayList } from 'src/redux/myPlayer/actions'
 import Slider from 'src/App/components/Slider/'
 import { formatSeconds } from 'src/utils/NumberUtils'
 import { SONG_URL } from 'src/App/constants/ApiConstants'
@@ -225,7 +226,9 @@ class MyPlayer extends Component {
             <h3 className={cx(`${moduleName}-bottom-playlist-mainTitle`)}>
               {this.props.currentList}
             </h3>
-            <h4 className={cx(`${moduleName}-bottom-playlist-toggleTitle`)}>
+            <h4 className={cx(`${moduleName}-bottom-playlist-toggleTitle`)}
+              onClick={this.props.switchPlayList}
+            >
               My PlayList
               <i />
             </h4>
@@ -255,6 +258,7 @@ export default connect(
     onPlay,
     onPause,
     playNexSong,
-    playPrevSong
+    playPrevSong,
+    switchPlayList
   }
 )(MyPlayer)
