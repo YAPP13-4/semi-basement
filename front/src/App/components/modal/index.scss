@@ -1,0 +1,15 @@
+.Modal {
+  //test
+  color: azure;
+  width: 50px;
+  height: 50px;
+  z-index: 99999;
+  position: fixed;
+  top: 0;
+  &-display-block {
+    display: block;
+  }
+  &-display-none {
+    display: none;
+  }
+}
