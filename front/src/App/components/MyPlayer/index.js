@@ -12,7 +12,11 @@ import {
   changeMyPlayerCurrentTime,
   changeMyPlayerVolume
 } from 'src/redux/player/actions'
-import { switchPlayList } from 'src/redux/myPlayer/actions'
+import { changePlayList } from 'src/redux/playlist/actions'
+import {
+  switchPlayList,
+  setMyPlayerSubPlayList
+} from 'src/redux/myPlayer/actions'
 import Slider from 'src/App/components/Slider/'
 import { formatSeconds } from 'src/utils/NumberUtils'
 import { SONG_URL } from 'src/App/constants/ApiConstants'
@@ -224,12 +228,23 @@ class MyPlayer extends Component {
               <i />
             </div>
             <h3 className={cx(`${moduleName}-bottom-playlist-mainTitle`)}>
-              {this.props.currentList}
+              {this.props.currentMusicListName}
             </h3>
-            <h4 className={cx(`${moduleName}-bottom-playlist-toggleTitle`)}
-              onClick={this.props.switchPlayList}
+            <h4
+              className={cx(`${moduleName}-bottom-playlist-toggleTitle`)}
+              onClick={() => {
+                // this.props.switchPlayList() 레거시....?
+                this.props.setMyPlayerSubPlayList(
+                  this.props.musicList,
+                  this.props.currentMusicListName
+                )
+                this.props.changePlayList(
+                  this.props.myPlayer.subPlayList,
+                  this.props.myPlayer.subPlayListName
+                )
+              }}
             >
-              My PlayList
+              {this.props.myPlayer.subPlayListName}
               <i />
             </h4>
           </div>
@@ -242,23 +257,26 @@ class MyPlayer extends Component {
 
 export default connect(
   state => {
-    const { meta, player, music, playList } = state
+    const { meta, player, music, playList, myPlayer } = state
     return {
       showMyplayer: meta.showMyplayer,
       player,
       song: music.song,
-      currentList: playList.currentList,
-      musicList: playList.musicList
+      currentMusicListName: playList.currentList,
+      musicList: playList.musicList,
+      myPlayer
     }
   },
   {
     toggleMyplayer,
     changeMyPlayerCurrentTime,
     changeMyPlayerVolume,
+    changePlayList,
     onPlay,
     onPause,
     playNexSong,
     playPrevSong,
-    switchPlayList
+    switchPlayList,
+    setMyPlayerSubPlayList
   }
 )(MyPlayer)
