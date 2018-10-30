@@ -14,7 +14,6 @@ import {
 } from 'src/redux/player/actions'
 import { changePlayList } from 'src/redux/playlist/actions'
 import {
-  switchPlayList,
   setMyPlayerSubPlayList
 } from 'src/redux/myPlayer/actions'
 import Slider from 'src/App/components/Slider/'
@@ -233,7 +232,6 @@ class MyPlayer extends Component {
             <h4
               className={cx(`${moduleName}-bottom-playlist-toggleTitle`)}
               onClick={() => {
-                // this.props.switchPlayList() 레거시....?
                 this.props.setMyPlayerSubPlayList(
                   this.props.musicList,
                   this.props.currentMusicListName
@@ -276,7 +274,6 @@ export default connect(
     onPause,
     playNexSong,
     playPrevSong,
-    switchPlayList,
     setMyPlayerSubPlayList
   }
 )(MyPlayer)

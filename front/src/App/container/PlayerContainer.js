@@ -1,6 +1,7 @@
 import React from "react"
 import { connect } from "react-redux"
 
+import { addSongMyPlaylist } from 'src/redux/myPlayer/actions'
 import {
   onLoadedMetadata,
   onLoadStart,
@@ -49,6 +50,7 @@ export default connect(
     playSong,
     // addPlaylist,
     playNexSong,
-    playPrevSong
+    playPrevSong,
+    addSongMyPlaylist
   }
 )(PlayerContainer)

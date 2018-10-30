@@ -1,8 +1,8 @@
 import React from 'react'
 import classnames from 'classnames/bind'
+
 import css from './Player.scss'
 import audio from './audio'
-
 import getImageUrl from '../../utils/ImageUtils'
 import IMAGE_SIZES from '../constants/ImageConstants'
 import Slider from './Slider'
@@ -21,7 +21,8 @@ const Player = ({
   toggleMuted,
   toggleHistory,
   playNexSong,
-  playPrevSong
+  playPrevSong,
+  addSongMyPlaylist
 }) => {
   const artworkUrl = song[2]
   const title = song[1]
@@ -141,7 +142,10 @@ const Player = ({
               <div role="button" tabIndex="0">
                 <span
                   className={cx(`${moduleName}__add_playlist`)}
-                  // onClick={addPlaylist}
+                  onClick={() => {
+                    const songId = song[0]
+                    addSongMyPlaylist(songId)
+                  }}
                 />
               </div>
               <div role="button" tabIndex="0">
