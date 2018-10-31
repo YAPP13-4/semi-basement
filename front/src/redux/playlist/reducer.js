@@ -1,6 +1,6 @@
 import * as types from './ActionType'
 
-const myPlayList = JSON.parse(localStorage.getItem('myPlayList'))
+const myPlayList = JSON.parse(localStorage.getItem('myPlayList')) || []
 
 const initialState = {
   musicList: [...myPlayList],

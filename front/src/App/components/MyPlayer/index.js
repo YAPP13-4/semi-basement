@@ -4,6 +4,7 @@ import classnames from 'classnames/bind'
 import axios from 'axios'
 
 import { toggleMyplayer } from 'src/redux/meta/actions.js'
+import { selectSong, historySong } from 'src/redux/music/actions'
 import {
   onPlay,
   onPause,
@@ -13,9 +14,7 @@ import {
   changeMyPlayerVolume
 } from 'src/redux/player/actions'
 import { changePlayList } from 'src/redux/playlist/actions'
-import {
-  setMyPlayerSubPlayList
-} from 'src/redux/myPlayer/actions'
+import { setMyPlayerSubPlayList } from 'src/redux/myPlayer/actions'
 import Slider from 'src/App/components/Slider/'
 import { formatSeconds } from 'src/utils/NumberUtils'
 import { SONG_URL } from 'src/App/constants/ApiConstants'
@@ -55,6 +54,11 @@ class MyPlayer extends Component {
     player.isPlaying ? onPause() : onPlay()
   }
 
+  onClickPlay = ({ songId, title, artworkUrl, duration }) => {
+    this.props.selectSong([songId, title, artworkUrl, duration])
+    this.props.historySong(songId)
+  }
+
   getMusicListInfos = musicList => {
     if (!musicList) return
     axios
@@ -88,7 +92,18 @@ class MyPlayer extends Component {
     if (!this.state.musicListInfos.length) return <div />
     return this.state.musicListInfos.map((info, index) => {
       return (
-        <div className={cx(`${moduleName}-bottom-song`)} key={index}>
+        <div
+          className={cx(`${moduleName}-bottom-song`)}
+          key={index}
+          onClick={() => {
+            this.onClickPlay({
+              songId: this.props.musicList[index],
+              title: info.title,
+              artworkUrl: info.artworkUrl,
+              duration: info.duration
+            })
+          }}
+        >
           <i className={cx(`${moduleName}-bottom-song-move`)} />
           <div
             className={cx(`${moduleName}-bottom-song-artwork`)}
@@ -119,7 +134,7 @@ class MyPlayer extends Component {
   }
 
   render() {
-    const [songId, songTitle, songUrl, songDuration] = this.props.song
+    const [songId, songTitle, artworkUrl, songDuration] = this.props.song
     const { currentTime } = this.props.player
     return (
       <div
@@ -130,14 +145,17 @@ class MyPlayer extends Component {
         <div
           className={cx(`${moduleName}-topImageWrapper`)}
           style={{
-            backgroundImage: `url(${getImageUrl(songUrl, IMAGE_SIZES.XLARGE)})`
+            backgroundImage: `url(${getImageUrl(
+              artworkUrl,
+              IMAGE_SIZES.XLARGE
+            )})`
           }}
         >
           <div
             className={cx(`${moduleName}-topImage`)}
             style={{
               backgroundImage: `url(${getImageUrl(
-                songUrl,
+                artworkUrl,
                 IMAGE_SIZES.XLARGE
               )})`
             }}
@@ -149,7 +167,7 @@ class MyPlayer extends Component {
               className={cx(`${moduleName}-top-musicCard-coverImg`)}
               style={{
                 backgroundImage: `url(${getImageUrl(
-                  songUrl,
+                  artworkUrl,
                   IMAGE_SIZES.XLARGE
                 )})`
               }}
@@ -274,6 +292,8 @@ export default connect(
     onPause,
     playNexSong,
     playPrevSong,
-    setMyPlayerSubPlayList
+    setMyPlayerSubPlayList,
+    selectSong,
+    historySong
   }
 )(MyPlayer)

@@ -17,7 +17,7 @@ const myPlayer = (
   switch (action.type) {
     case ADD_SONG_MYPLAYLIST:
       // 임시 방편이다. 백엔드와 연동되고 나면, saga를 통해 api로 DB에 저장할것.
-      const myPlayList = JSON.parse(localStorage.getItem('myPlayList'))
+      const myPlayList = JSON.parse(localStorage.getItem('myPlayList')) || []
       const reducer = (acc, v) => {
         if (isNotContain(acc, v)) acc.push(v)
         return acc
