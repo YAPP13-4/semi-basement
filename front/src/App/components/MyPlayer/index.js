@@ -14,7 +14,10 @@ import {
   changeMyPlayerVolume
 } from 'src/redux/player/actions'
 import { changePlayList } from 'src/redux/playlist/actions'
-import { setMyPlayerSubPlayList } from 'src/redux/myPlayer/actions'
+import {
+  removeSongMyPlaylist,
+  setMyPlayerSubPlayList
+} from 'src/redux/myPlayer/actions'
 import Slider from 'src/App/components/Slider/'
 import { formatSeconds } from 'src/utils/NumberUtils'
 import { SONG_URL } from 'src/App/constants/ApiConstants'
@@ -128,7 +131,6 @@ class MyPlayer extends Component {
           <div
             className={cx(`${moduleName}-bottom-song-etc`)}
             onClick={e => {
-              alert('remove')
               const songId = this.props.musicList[index]
               this.props.removeSongMyPlaylist(songId)
               e.stopPropagation()
@@ -301,6 +303,7 @@ export default connect(
     playNexSong,
     playPrevSong,
     setMyPlayerSubPlayList,
+    removeSongMyPlaylist,
     selectSong,
     historySong
   }

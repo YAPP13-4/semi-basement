@@ -1,4 +1,8 @@
-import { ADD_SONG_MYPLAYLIST, SET_MYPLAYER_SUB_PLAYLIST } from './actions'
+import {
+  ADD_SONG_MYPLAYLIST,
+  REMOVE_SONG_MYPLAYLIST,
+  SET_MYPLAYER_SUB_PLAYLIST
+} from './actions'
 
 const myPlayer = (
   state = {
@@ -25,6 +29,13 @@ const myPlayer = (
       const isNotContain = (arr, v) => arr.indexOf(v) < 0
       const newMyPlayList = [...myPlayList, action.songId].reduce(reducer, [])
       localStorage.setItem('myPlayList', JSON.stringify(newMyPlayList))
+      return {
+        ...state
+      }
+    case REMOVE_SONG_MYPLAYLIST:
+      const myPlayList2 = JSON.parse(localStorage.getItem('myPlayList')) || []
+      const filteredMyPlayList = myPlayList2.filter(songId => songId !== action.songId)
+      localStorage.setItem('myPlayList', JSON.stringify(filteredMyPlayList))
       return {
         ...state
       }
