@@ -187,6 +187,8 @@ app.get("/loginOk", function(req, res) {
 app.post("/add_albumlist", function(req, res) {
   console.log("@" + req.method + " " + req.url)
 
+  let genre = req.body.genre_Num
+
   // 0. 프론트로부터 버튼이 눌렸을때 url 받기 (나중에 처리해야할 사항)
   // var testurl = 'https://soundcloud.com/amirarief/love-will-set-you-free-amirarief-kodaline-cover-mp3';
 
@@ -252,7 +254,8 @@ app.post("/add_albumlist", function(req, res) {
               } else {
                 console.log("insert to album_connect done")
                 // 3. 해당 url를 '/fillMusicTable' 으로 리다이렉트 시켜서 뮤직테이블에 정보 저장
-                res.redirect("/fillMusicTable")
+                let redirectUrl = '/fillMusicTable/' + genre;
+                res.redirect(redirectUrl)
               }
             })
           })
@@ -343,11 +346,12 @@ app.post("/delete_albumlist", function(req, res) {
 
 // '/add_albumlist/:user_id' 에서 설정한 SONG_URL 값을 이용해서 music 테이블 채우기
 
-app.get("/fillMusicTable", function(req, res) {
+app.get("/fillMusicTable/:genre", function(req, res) {
   let sql_insert =
-    "INSERT INTO music (date, music_name, play_url, hashtag_1, hashtag_2, hashtag_3, author, sc_id, duration, like_count) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)"
+    "INSERT INTO music (date, music_name, play_url, hashtag_1, hashtag_2, hashtag_3, author, sc_id, duration, like_count, genre) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)"
   let sql_update =
     "UPDATE music SET music_name = ?, hashtag_1 = ?, hashtag_2 = ?, hashtag_3 = ? WHERE sc_id = ?"
+  let genre = req.params.genre;
 
   conn.query("select m.sc_id from music m;", function(err, count_row, fields) {
     if (err) {
@@ -429,7 +433,8 @@ app.get("/fillMusicTable", function(req, res) {
                   author,
                   sc_id,
                   duration,
-                  like_count
+                  like_count,
+                  genre
                 ],
                 function(err, rows) {
                   if (err) {
@@ -728,15 +733,30 @@ app.get("/recentChart", function(req, res) {
 
 // 태그에 기반한 music 테이블 데이터들을 가져옴
 app.get("/tagChart", function(req, res) {
-  let sql_genre = "select music_name, author, hashtag_1 from music;"
+  let sql_tag = "select music_name, author, hashtag_1 from music;"
 
-  conn.query(sql_genre, function(err, result) {
+  conn.query(sql_tag, function(err, result) {
     if (err) {
       console.log(err)
     } else {
       res.send(JSON.stringify(result))
     }
   })
+})
+
+// 장르에 기반한 music 테이블 데이터들을 가져옴 (장르 : 1,2,3)
+app.get("/genreChart/:genre", function(req, res){
+    let sql_genre = "SELECT music_name, author FROM music WHERE genre = ?;"
+    let genre = req.params.genre
+
+    conn.query(sql_genre, [genre], function(err, result){
+        if (err) {
+            console.log(err)
+        } else {
+            req.send(JSON.stringify(result))
+        }
+    })
+
 })
 
 //////////////////////////////////////////////////////////////////
