@@ -125,7 +125,15 @@ class MyPlayer extends Component {
           <p className={cx(`${moduleName}-bottom-song-duration`)}>
             {formatSeconds(info.duration)}
           </p>
-          <div className={cx(`${moduleName}-bottom-song-etc`)}>
+          <div
+            className={cx(`${moduleName}-bottom-song-etc`)}
+            onClick={e => {
+              alert('remove')
+              const songId = this.props.musicList[index]
+              this.props.removeSongMyPlaylist(songId)
+              e.stopPropagation()
+            }}
+          >
             <i />
           </div>
         </div>
