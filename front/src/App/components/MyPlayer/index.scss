@@ -204,7 +204,13 @@
         }
       }
     }
+    &-songWrapper {
+      overflow: scroll;
+      height: 480px;
+      background: #000000;
+    }
     &-song {
+      position: relative;
       background: #000000;
       display: flex;
       height: 90px;

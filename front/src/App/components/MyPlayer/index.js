@@ -274,7 +274,10 @@ class MyPlayer extends Component {
               <i />
             </h4>
           </div>
-          {this.renderPlayList()}
+          {/* 꼭 컴포넌트 분리하자... ㅠ */}
+          <div className={cx(`${moduleName}-bottom-songWrapper`)}>
+            {this.renderPlayList()}
+          </div>
         </div>
       </div>
     )
