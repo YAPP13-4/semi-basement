@@ -84,7 +84,7 @@ app.get("/welcome", function(req, res) {
 })
 app.get("/auth/logout", function(req, res) {
   let user_email = req.user.email
-  let sql = "update users set access_Token = NULL where email=?"
+  let sql = "update user_info set access_Token = NULL where email=?"
   conn.query(sql, [user_email], function(err, rows) {
     if (err) {
       console.log(err)
@@ -110,7 +110,7 @@ passport.serializeUser(function(user, done) {
 
 passport.deserializeUser(function(id, done) {
   //console.log('deserializeUser', id);
-  let sql = "SELECT * FROM users WHERE email=?"
+  let sql = "SELECT * FROM user_info WHERE email=?"
   conn.query(sql, [id], function(err, results) {
     if (err) {
       console.log(err)
@@ -130,7 +130,7 @@ passport.use(
     function(accessToken, refreshToken, profile, done) {
       let newuser = {}
       let authId = profile.id
-      let sql = "SELECT * FROM users WHERE auth_id=?"
+      let sql = "SELECT * FROM user_info WHERE auth_id=?"
       conn.query(sql, [authId], function(err, results) {
         if (results.length > 0) {
           done(null, results[0])
@@ -138,7 +138,7 @@ passport.use(
           newuser["auth_id"] = authId
           newuser["display_name"] = profile.displayName
           newuser["email"] = profile.emails[0].value
-          let sql = "INSERT INTO users SET ?"
+          let sql = "INSERT INTO user_info SET ?"
           conn.query(sql, newuser, function(err, results) {
             if (err) {
               console.log(err)
@@ -166,7 +166,7 @@ app.get(
   function(req, res) {
     const token = uuidv4()
     let user_email = req.user.email
-    let sql = "update users set access_Token = ? where email=?"
+    let sql = "update user_info set access_Token = ? where email=?"
     conn.query(sql, [token, user_email], function(err, rows) {
       if (err) {
         console.log(err)
@@ -193,7 +193,7 @@ app.post("/add_albumlist", function(req, res) {
   // var testurl = 'https://soundcloud.com/amirarief/love-will-set-you-free-amirarief-kodaline-cover-mp3';
 
   let token = req.body.access_Token
-  let sql_select1 = "SELECT id from users where access_Token = ?"
+  let sql_select1 = "SELECT id from user_info where access_Token = ?"
   let user_id = 0
   conn.query(sql_select1, [token], function(err, result) {
     if (err) {
@@ -274,7 +274,7 @@ app.post("/add_albumlist", function(req, res) {
 // 사용자의 앨범 리스트 보여주기
 app.post("/show_albumlist", function(req, res) {
   let token = req.body.access_Token
-  let sql_select = "SELECT id from users where access_Token = ?"
+  let sql_select = "SELECT id from user_info where access_Token = ?"
   let user_id = 0
   conn.query(sql_select, [token], function(err, result) {
     if (err) {
@@ -310,7 +310,7 @@ app.post("/delete_albumlist", function(req, res) {
   // var testurl = 'https://soundcloud.com/amirarief/love-will-set-you-free-amirarief-kodaline-cover-mp3';
 
   let token = req.body.access_Token
-  let sql_select1 = "SELECT id from users where access_Token = ?"
+  let sql_select1 = "SELECT id from user_info where access_Token = ?"
   let user_id = 0
   conn.query(sql_select1, [token], function(err, result) {
     if (err) {
@@ -468,7 +468,7 @@ app.post("/add_playlist", function(req, res) {
   // var testurl = 'https://soundcloud.com/amirarief/love-will-set-you-free-amirarief-kodaline-cover-mp3';
 
   let token = req.body.access_Token
-  let sql_select1 = "SELECT id from users where access_Token = ?"
+  let sql_select1 = "SELECT id from user_info where access_Token = ?"
   let user_id = 0
   conn.query(sql_select1, [token], function(err, result) {
     if (err) {
@@ -509,7 +509,7 @@ app.post("/add_playlist", function(req, res) {
 // 사용자의 플레이 리스트 보여주기
 app.post("/show_playlist", function(req, res) {
   let token = req.body.access_Token
-  let sql_select = "SELECT id from users where access_Token = ?"
+  let sql_select = "SELECT id from user_info where access_Token = ?"
   let user_id = 0
   conn.query(sql_select, [token], function(err, result) {
     if (err) {
@@ -539,7 +539,7 @@ app.post("/delete_playlist", function(req, res) {
   // var testurl = 'https://soundcloud.com/amirarief/love-will-set-you-free-amirarief-kodaline-cover-mp3';
 
   let token = req.body.access_Token
-  let sql_select1 = "SELECT id from users where access_Token = ?"
+  let sql_select1 = "SELECT id from user_info where access_Token = ?"
   let user_id = 0
   conn.query(sql_select1, [token], function(err, result) {
     if (err) {
@@ -567,7 +567,7 @@ app.post("/delete_playlist", function(req, res) {
 
 app.post("/heartlist", function(req, res) {
   let token = req.body.access_Token
-  let sql_select1 = "SELECT id from users where access_Token = ?"
+  let sql_select1 = "SELECT id from user_info where access_Token = ?"
   let user_id = 0
   conn.query(sql_select1, [token], function(err, result) {
     if (err) {
@@ -675,7 +675,7 @@ app.post("/updateHL", function(req, res) {
 // 사용자의 좋아요 리스트 보여주기
 app.post("/show_heartlist", function(req, res) {
   let token = req.body.access_Token
-  let sql_select = "SELECT id from users where access_Token = ?"
+  let sql_select = "SELECT id from user_info where access_Token = ?"
   let user_id = 0
   conn.query(sql_select, [token], function(err, result) {
     if (err) {
