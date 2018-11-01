@@ -2,6 +2,7 @@ import React, { PureComponent } from "react"
 import { connect } from "react-redux"
 
 import Navigation from "./components/Navigation"
+import Featured from "./components/Featured"
 import { loadSongsInfo } from "src/redux/music/actions"
 import { loadFirstSubSongInfo } from "src/redux/submusic1/actions"
 //TODO : FIX (with BE)
@@ -32,10 +33,19 @@ class Home extends PureComponent {
       <div className={cx(`${moduleName}`)}>
         <Navigation />
         <div>
-          <ArtWorkContainer category="SEBA'S CHOICE" musicInfos={this.props.musicInfos} />
+          <ArtWorkContainer
+            category="SEBA'S CHOICE"
+            musicInfos={this.props.musicInfos}
+          />
         </div>
         <div>
-          <ArtWorkContainer category="YOU_KNOW" musicInfos={this.props.subMusicInfos1} />
+          <ArtWorkContainer
+            category="YOU_KNOW"
+            musicInfos={this.props.subMusicInfos1}
+          />
+        </div>
+        <div>
+          <Featured />
         </div>
       </div>
     )
@@ -43,7 +53,7 @@ class Home extends PureComponent {
 }
 
 export default connect(
-  ({ submusic1, music}) => {
+  ({ submusic1, music }) => {
     return {
       subMusicInfos1: submusic1.musicInfo,
       musicInfos: music.musicInfo
