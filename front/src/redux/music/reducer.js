@@ -8,11 +8,18 @@ import {
   LOAD_SONG_INFO_REQUEST,
   LOAD_SONG_INFO_SUCCESS,
   LOAD_SONG_INFO_FAILURE
-} from "./actions"
+} from './actions'
+
+const initSong = [
+  278197314,
+  'Everywhere (Beat by. NSOUL)',
+  'https://i1.sndcdn.com/artworks-000235180753-oc72f3-large.jpg',
+  230.29
+]
 
 const music = (
   state = {
-    song: "",
+    song: initSong,
     loading: false,
     infoLoading: false,
     musicInfo: null,

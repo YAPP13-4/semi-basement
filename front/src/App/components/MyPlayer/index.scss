@@ -204,7 +204,13 @@
         }
       }
     }
+    &-songWrapper {
+      overflow: scroll;
+      height: 480px;
+      background: #000000;
+    }
     &-song {
+      position: relative;
       background: #000000;
       display: flex;
       height: 90px;
@@ -265,6 +271,9 @@
           background: url('src/assets/icons/icon2.png') no-repeat -507px -40px;
           width: 4px;
           height: 15px;
+        }
+        &:hover {
+          background: rgba(128, 128, 128, 0.233);
         }
       }
     }
