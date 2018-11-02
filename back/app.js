@@ -209,9 +209,9 @@ app.post("/add_albumlist", function(req, res) {
   // 1. 테이블 생성 (테이블이 없을때만 생성 - IF NOT EXISTS 를 이용)
 
   var sql_createA =
-    "CREATE TABLE IF NOT EXISTS `new_semibasement`.`album_?` (`album_id` INT(11) NOT NULL, PRIMARY KEY (`album_id`));"
+    "CREATE TABLE IF NOT EXISTS `semibasement`.`album_?` (`album_id` INT(11) NOT NULL, PRIMARY KEY (`album_id`));"
   var sql_createAc =
-    "CREATE TABLE IF NOT EXISTS `new_semibasement`.`album_connect_?` (`album_id` INT(11) NULL DEFAULT NULL, `music_id` INT(11) NULL DEFAULT NULL, INDEX `c_album_?_idx` (`album_id` ASC), CONSTRAINT `c_album_?` FOREIGN KEY (`album_id`) REFERENCES `new_semibasement`.`album_?` (`album_id`) ON DELETE CASCADE ON UPDATE CASCADE);"
+    "CREATE TABLE IF NOT EXISTS `semibasement`.`album_connect_?` (`album_id` INT(11) NULL DEFAULT NULL, `music_id` INT(11) NULL DEFAULT NULL, INDEX `c_album_?_idx` (`album_id` ASC), CONSTRAINT `c_album_?` FOREIGN KEY (`album_id`) REFERENCES `new_semibasement`.`album_?` (`album_id`) ON DELETE CASCADE ON UPDATE CASCADE);"
 
   conn.query(sql_createA, [user_id], function(err, rows) {
     if (err) {
@@ -482,7 +482,7 @@ app.post("/add_playlist", function(req, res) {
   // 1. 테이블이 없으면 생성 (list_테이블만)
 
   var sql_createPL =
-    "CREATE TABLE IF NOT EXISTS `new_semibasement`.`list_?` (`list_id` INT(11) NOT NULL AUTO_INCREMENT, `music_id` INT(11) NULL DEFAULT NULL, PRIMARY KEY (`list_id`));"
+    "CREATE TABLE IF NOT EXISTS `semibasement`.`list_?` (`list_id` INT(11) NOT NULL AUTO_INCREMENT, `music_id` INT(11) NULL DEFAULT NULL, PRIMARY KEY (`list_id`));"
 
   conn.query(sql_createPL, [user_id], function(err, result_music_url) {
     if (err) {
@@ -578,7 +578,7 @@ app.post("/heartlist", function(req, res) {
   })
 
   let sql_createH =
-    "CREATE TABLE IF NOT EXISTS `new_semibasement`.`heartlist_?` (`heartlist_id` INT(11) NOT NULL AUTO_INCREMENT, `music_id` INT(11) NULL DEFAULT NULL, PRIMARY KEY (`heartlist_id`));"
+    "CREATE TABLE IF NOT EXISTS `semibasement`.`heartlist_?` (`heartlist_id` INT(11) NOT NULL AUTO_INCREMENT, `music_id` INT(11) NULL DEFAULT NULL, PRIMARY KEY (`heartlist_id`));"
   let sql_select2 = "SELECT music_name, like_count, sc_id from music;"
   let sql_check =
     "SELECT DISTINCT m.music_name, m.like_count, m.sc_id FROM (music m INNER JOIN heartlist_? h on m.sc_id=h.music_id);"
