@@ -211,7 +211,7 @@ app.post("/add_albumlist", function(req, res) {
   var sql_createA =
     "CREATE TABLE IF NOT EXISTS `semibasement`.`album_?` (`album_id` INT(11) NOT NULL, PRIMARY KEY (`album_id`));"
   var sql_createAc =
-    "CREATE TABLE IF NOT EXISTS `semibasement`.`album_connect_?` (`album_id` INT(11) NULL DEFAULT NULL, `music_id` INT(11) NULL DEFAULT NULL, INDEX `c_album_?_idx` (`album_id` ASC), CONSTRAINT `c_album_?` FOREIGN KEY (`album_id`) REFERENCES `new_semibasement`.`album_?` (`album_id`) ON DELETE CASCADE ON UPDATE CASCADE);"
+    "CREATE TABLE IF NOT EXISTS `semibasement`.`album_connect_?` (`album_id` INT(11) NULL DEFAULT NULL, `music_id` INT(11) NULL DEFAULT NULL, INDEX `c_album_?_idx` (`album_id` ASC), CONSTRAINT `c_album_?` FOREIGN KEY (`album_id`) REFERENCES `semibasement`.`album_?` (`album_id`) ON DELETE CASCADE ON UPDATE CASCADE);"
 
   conn.query(sql_createA, [user_id], function(err, rows) {
     if (err) {
