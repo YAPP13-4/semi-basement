@@ -193,7 +193,7 @@ app.post("/add_albumlist", function(req, res) {
   // var testurl = 'https://soundcloud.com/amirarief/love-will-set-you-free-amirarief-kodaline-cover-mp3';
 
   let token = req.body.access_Token
-  let sql_select1 = "SELECT id from user_info where access_Token = ?"
+  let sql_select1 = "SELECT user_id from user_info where access_Token = ?"
   let user_id = 0
   conn.query(sql_select1, [token], function(err, result) {
     if (err) {
@@ -274,7 +274,7 @@ app.post("/add_albumlist", function(req, res) {
 // 사용자의 앨범 리스트 보여주기
 app.post("/show_albumlist", function(req, res) {
   let token = req.body.access_Token
-  let sql_select = "SELECT id from user_info where access_Token = ?"
+  let sql_select = "SELECT user_id from user_info where access_Token = ?"
   let user_id = 0
   conn.query(sql_select, [token], function(err, result) {
     if (err) {
@@ -310,7 +310,7 @@ app.post("/delete_albumlist", function(req, res) {
   // var testurl = 'https://soundcloud.com/amirarief/love-will-set-you-free-amirarief-kodaline-cover-mp3';
 
   let token = req.body.access_Token
-  let sql_select1 = "SELECT id from user_info where access_Token = ?"
+  let sql_select1 = "SELECT user_id from user_info where access_Token = ?"
   let user_id = 0
   conn.query(sql_select1, [token], function(err, result) {
     if (err) {
@@ -468,7 +468,7 @@ app.post("/add_playlist", function(req, res) {
   // var testurl = 'https://soundcloud.com/amirarief/love-will-set-you-free-amirarief-kodaline-cover-mp3';
 
   let token = req.body.access_Token
-  let sql_select1 = "SELECT id from user_info where access_Token = ?"
+  let sql_select1 = "SELECT user_id from user_info where access_Token = ?"
   let user_id = 0
   conn.query(sql_select1, [token], function(err, result) {
     if (err) {
@@ -509,7 +509,7 @@ app.post("/add_playlist", function(req, res) {
 // 사용자의 플레이 리스트 보여주기
 app.post("/show_playlist", function(req, res) {
   let token = req.body.access_Token
-  let sql_select = "SELECT id from user_info where access_Token = ?"
+  let sql_select = "SELECT user_id from user_info where access_Token = ?"
   let user_id = 0
   conn.query(sql_select, [token], function(err, result) {
     if (err) {
@@ -539,7 +539,7 @@ app.post("/delete_playlist", function(req, res) {
   // var testurl = 'https://soundcloud.com/amirarief/love-will-set-you-free-amirarief-kodaline-cover-mp3';
 
   let token = req.body.access_Token
-  let sql_select1 = "SELECT id from user_info where access_Token = ?"
+  let sql_select1 = "SELECT user_id from user_info where access_Token = ?"
   let user_id = 0
   conn.query(sql_select1, [token], function(err, result) {
     if (err) {
@@ -567,7 +567,7 @@ app.post("/delete_playlist", function(req, res) {
 
 app.post("/heartlist", function(req, res) {
   let token = req.body.access_Token
-  let sql_select1 = "SELECT id from user_info where access_Token = ?"
+  let sql_select1 = "SELECT user_id from user_info where access_Token = ?"
   let user_id = 0
   conn.query(sql_select1, [token], function(err, result) {
     if (err) {
@@ -675,7 +675,7 @@ app.post("/updateHL", function(req, res) {
 // 사용자의 좋아요 리스트 보여주기
 app.post("/show_heartlist", function(req, res) {
   let token = req.body.access_Token
-  let sql_select = "SELECT id from user_info where access_Token = ?"
+  let sql_select = "SELECT user_id from user_info where access_Token = ?"
   let user_id = 0
   conn.query(sql_select, [token], function(err, result) {
     if (err) {
