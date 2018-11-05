@@ -36,6 +36,7 @@ class Featured extends PureComponent {
           key={index}
           kind={item.kind}
           icon={item.iconPosition}
+          width={item.width}
           popUp={this.showModal}
         />
       )

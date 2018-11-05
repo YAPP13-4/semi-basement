@@ -11,11 +11,13 @@ class FeaturedComponent extends PureComponent {
   static propTypes = {
     kind: PropTypes.string,
     icon: PropTypes.string,
+    width: PropTypes.string,
     popUp: PropTypes.func
   }
   static defaultProps = {
     kind: "feature",
-    icon: ""
+    icon: "",
+    width: "0px"
   }
 
   render() {
@@ -24,7 +26,7 @@ class FeaturedComponent extends PureComponent {
         <div className={cx(`${moduleName}-float`)} />
         <div
           className={cx(`${moduleName}-mid`)}
-          style={{ background: this.props.icon }}
+          style={{ background: this.props.icon, width: this.props.width }}
         />
         <div className={cx(`${moduleName}-bot`)}>{this.props.kind}</div>
       </div>
