@@ -17,15 +17,14 @@ import {
 export function* updateHistoryLocalStorage(action) {
   //FIXME : reaplace with selectSong action . song[0] === songId
   const { songId } = action
-  console.log("action", action)
   const targetId = songId
-  console.log("target id", targetId)
+
   yield put(historySongRequest())
 
   try {
     let newHistory = []
     if (checkValidValue(localStorage.historySong)) {
-      const localData = JSON.parse(localStorage.historySong)
+      let localData = JSON.parse(localStorage.historySong)
       let containsId = false
 
       const localDataLen = localData.length

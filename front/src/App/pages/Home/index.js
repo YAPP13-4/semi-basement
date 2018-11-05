@@ -2,6 +2,7 @@ import React, { PureComponent } from "react"
 import { connect } from "react-redux"
 
 import Navigation from "./components/Navigation"
+import Loading from "src/App/components/Loading"
 import Featured from "./components/Featured"
 import { loadSongsInfo } from "src/redux/music/actions"
 import { loadFirstSubSongInfo } from "src/redux/submusic1/actions"
@@ -29,7 +30,7 @@ class Home extends PureComponent {
   }
 
   render() {
-    return (
+    return !this.props.mainMusicLoading && !this.props.subMusicLoading ? (
       <div className={cx(`${moduleName}`)}>
         <Navigation />
         <div>
@@ -48,6 +49,8 @@ class Home extends PureComponent {
           <Featured />
         </div>
       </div>
+    ) : (
+      <Loading />
     )
   }
 }
@@ -56,7 +59,9 @@ export default connect(
   ({ submusic1, music }) => {
     return {
       subMusicInfos1: submusic1.musicInfo,
-      musicInfos: music.musicInfo
+      musicInfos: music.musicInfo,
+      mainMusicLoading: music.loading,
+      subMusicLoading: submusic1.loading
     }
   },
   {
