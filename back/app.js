@@ -18,6 +18,38 @@ const conn = mysql.createConnection({
   insecureAuth: true
 })
 
+const config = {
+  host: db_config.host,
+  user: db_config.user,
+  password: db_config.password,
+  database: db_config.database,
+  insecureAuth: true
+}
+
+class Database {
+  constructor(config) {
+    this.connection = mysql.createConnection(config)
+  }
+  query(sql, args) {
+    return new Promise((resolve, reject) => {
+      this.connection.query(sql, args, (err, rows) => {
+        if (err) return reject(err)
+        resolve(rows)
+      })
+    })
+  }
+  close() {
+    return new Promise((resolve, reject) => {
+      this.connection.end(err => {
+        if (err) return reject(err)
+        resolve()
+      })
+    })
+  }
+}
+
+let database = new Database(config)
+
 function isEmpty(obj) {
   for (const key123 in obj) {
     if (obj.hasOwnProperty(key123)) return false
@@ -67,7 +99,7 @@ var USER_ID
 
 // 0. 로그인
 
-app.get("/welcome", function (req, res) {
+app.get("/welcome", function(req, res) {
   if (req.user && req.user.displayName) {
     res.send(`
         <h1>Hello, ${req.user.displayName}</h1>
@@ -82,36 +114,36 @@ app.get("/welcome", function (req, res) {
         `)
   }
 })
-app.get("/auth/logout", function (req, res) {
+app.get("/auth/logout", function(req, res) {
   let user_email = req.user.email
   let sql = "update user_info set access_Token = NULL where email=?"
-  conn.query(sql, [user_email], function (err, rows) {
+  conn.query(sql, [user_email], function(err, rows) {
     if (err) {
       console.log(err)
     } else {
       req.logout()
-      req.session.save(function () {
-        res.redirect("/welcome")
+      req.session.save(function() {
+        res.send("logout")
       })
     }
   })
 })
 
-app.get("/auth/login", function (req, res) {
+app.get("/auth/login", function(req, res) {
   let output = `
     <h2>You can also login with</h2>
     <a href="/auth/google">Google</a>
     `
   res.send(output)
 })
-passport.serializeUser(function (user, done) {
+passport.serializeUser(function(user, done) {
   done(null, user.email)
 })
 
-passport.deserializeUser(function (id, done) {
+passport.deserializeUser(function(id, done) {
   //console.log('deserializeUser', id);
   let sql = "SELECT * FROM user_info WHERE email=?"
-  conn.query(sql, [id], function (err, results) {
+  conn.query(sql, [id], function(err, results) {
     if (err) {
       console.log(err)
       done("There is no user.")
@@ -121,16 +153,17 @@ passport.deserializeUser(function (id, done) {
   })
 })
 passport.use(
-  new GoogleStrategy({
+  new GoogleStrategy(
+    {
       clientID: googleCredentials.web.client_id,
       clientSecret: googleCredentials.web.client_secret,
       callbackURL: googleCredentials.web.redirect_uris[0]
     },
-    function (accessToken, refreshToken, profile, done) {
+    function(accessToken, refreshToken, profile, done) {
       let newuser = {}
       let authId = profile.id
       let sql = "SELECT * FROM user_info WHERE auth_id=?"
-      conn.query(sql, [authId], function (err, results) {
+      conn.query(sql, [authId], function(err, results) {
         if (results.length > 0) {
           done(null, results[0])
         } else {
@@ -138,7 +171,7 @@ passport.use(
           newuser["display_name"] = profile.displayName
           newuser["email"] = profile.emails[0].value
           let sql = "INSERT INTO user_info SET ?"
-          conn.query(sql, newuser, function (err, results) {
+          conn.query(sql, newuser, function(err, results) {
             if (err) {
               console.log(err)
               done("Error")
@@ -162,28 +195,25 @@ app.get(
   passport.authenticate("google", {
     failureRedirect: "/auth/login"
   }),
-  function (req, res) {
+  function(req, res) {
     const token = uuidv4()
     let user_email = req.user.email
     let sql = "update user_info set access_Token = ? where email=?"
-    conn.query(sql, [token, user_email], function (err, rows) {
+    conn.query(sql, [token, user_email], function(err, rows) {
       if (err) {
         console.log(err)
       } else {
-        res.redirect("/loginOk")
+        res.send(JSON.stringify(req.user))
       }
     })
   }
 )
-app.get("/loginOk", function (req, res) {
-  res.send(JSON.stringify(req.user))
-})
 
 /////////////////////////////////////////////////////////////////
 
 //1. 앨범 리스트
 // 사용자가 자신의 곡을 앨범으로 업로드
-app.post("/add_albumlist", function (req, res) {
+app.post("/add_albumlist", function(req, res) {
   console.log("@" + req.method + " " + req.url)
 
   let genre = req.body.genre_Num
@@ -194,7 +224,7 @@ app.post("/add_albumlist", function (req, res) {
   let token = req.body.access_Token
   let sql_select1 = "SELECT user_id from user_info where access_Token = ?"
   let user_id = 0
-  conn.query(sql_select1, [token], function (err, result) {
+  conn.query(sql_select1, [token], function(err, result) {
     if (err) {
       console.log(err)
     } else {
@@ -212,7 +242,7 @@ app.post("/add_albumlist", function (req, res) {
   var sql_createAc =
     "CREATE TABLE IF NOT EXISTS `semibasement`.`album_connect_?` (`album_id` INT(11) NULL DEFAULT NULL, `music_id` INT(11) NULL DEFAULT NULL, INDEX `c_album_?_idx` (`album_id` ASC), CONSTRAINT `c_album_?` FOREIGN KEY (`album_id`) REFERENCES `semibasement`.`album_?` (`album_id`) ON DELETE CASCADE ON UPDATE CASCADE);"
 
-  conn.query(sql_createA, [user_id], function (err, rows) {
+  conn.query(sql_createA, [user_id], function(err, rows) {
     if (err) {
       console.log(err)
     } else {
@@ -220,7 +250,7 @@ app.post("/add_albumlist", function (req, res) {
     }
   })
 
-  conn.query(sql_createAc, [user_id, user_id, user_id, user_id], function (
+  conn.query(sql_createAc, [user_id, user_id, user_id, user_id], function(
     err,
     rows
   ) {
@@ -236,7 +266,7 @@ app.post("/add_albumlist", function (req, res) {
   var sql_albumC = "INSERT INTO album_connect_? (music_id) VALUES (?);"
   var sql_musicUrl = "SELECT sc_id FROM music WHERE play_url = ?;"
 
-  conn.query(sql_musicUrl, [SONG_URL], function (err, re_overlap) {
+  conn.query(sql_musicUrl, [SONG_URL], function(err, re_overlap) {
     if (err) {
       console.log(err)
     } else {
@@ -247,13 +277,13 @@ app.post("/add_albumlist", function (req, res) {
           .get(resolveUrl(SONG_URL))
           .then(response => {
             let music_id = response.data.id
-            conn.query(sql_albumC, [user_id, music_id], function (err, rows) {
+            conn.query(sql_albumC, [user_id, music_id], function(err, rows) {
               if (err) {
                 console.log(err)
               } else {
                 console.log("insert to album_connect done")
                 // 3. 해당 url를 '/fillMusicTable' 으로 리다이렉트 시켜서 뮤직테이블에 정보 저장
-                let redirectUrl = '/fillMusicTable/' + genre;
+                let redirectUrl = "/fillMusicTable/" + genre
                 res.redirect(redirectUrl)
               }
             })
@@ -271,11 +301,11 @@ app.post("/add_albumlist", function (req, res) {
 })
 
 // 사용자의 앨범 리스트 보여주기
-app.post("/show_albumlist", function (req, res) {
+app.post("/show_albumlist", function(req, res) {
   let token = req.body.access_Token
   let sql_select = "SELECT user_id from user_info where access_Token = ?"
   let user_id = 0
-  conn.query(sql_select, [token], function (err, result) {
+  conn.query(sql_select, [token], function(err, result) {
     if (err) {
       console.log(err)
     } else {
@@ -286,7 +316,7 @@ app.post("/show_albumlist", function (req, res) {
   var sql_albumlist =
     "SELECT m.* from (music m inner join album_connect_? c on m.sc_id=c.music_id) left join album_? l  on c.album_id=l.album_id;"
 
-  conn.query(sql_albumlist, [user_id, user_id], function (
+  conn.query(sql_albumlist, [user_id, user_id], function(
     err,
     result_music_url
   ) {
@@ -302,7 +332,7 @@ app.post("/show_albumlist", function (req, res) {
 // 사용자의 앨범 리스트에서 삭제
 // album_connect_(user_id) 테이블에서 해당 music_url을 삭제
 // music 테이블에서 해당 music_url을 가지는 행 삭제
-app.post("/delete_albumlist", function (req, res) {
+app.post("/delete_albumlist", function(req, res) {
   console.log("@" + req.method + " " + req.url)
 
   // 임시로 받아오는 url (프론트단에서 어떤 값 가져올지 결정 후 구현) --> sc_id 가져옴
@@ -311,7 +341,7 @@ app.post("/delete_albumlist", function (req, res) {
   let token = req.body.access_Token
   let sql_select1 = "SELECT user_id from user_info where access_Token = ?"
   let user_id = 0
-  conn.query(sql_select1, [token], function (err, result) {
+  conn.query(sql_select1, [token], function(err, result) {
     if (err) {
       console.log(err)
     } else {
@@ -323,14 +353,14 @@ app.post("/delete_albumlist", function (req, res) {
   var sql_del_conn = "delete from album_connect_? where music_id = ?;"
   var sql_del_music = "delete from music where sc_id = ?;"
 
-  conn.query(sql_del_conn, [user_id, sc_id], function (err, rows) {
+  conn.query(sql_del_conn, [user_id, sc_id], function(err, rows) {
     if (err) {
       console.log(err)
     } else {
       console.log("delete album_connect done")
     }
   })
-  conn.query(sql_del_music, [sc_id], function (err, rows) {
+  conn.query(sql_del_music, [sc_id], function(err, rows) {
     if (err) {
       console.log(err)
     } else {
@@ -345,14 +375,14 @@ app.post("/delete_albumlist", function (req, res) {
 
 // '/add_albumlist/:user_id' 에서 설정한 SONG_URL 값을 이용해서 music 테이블 채우기
 
-app.get("/fillMusicTable/:genre", function (req, res) {
+app.get("/fillMusicTable/:genre", function(req, res) {
   let sql_insert =
     "INSERT INTO music (date, music_name, play_url, hashtag_1, hashtag_2, hashtag_3, author, sc_id, duration, like_count, genre) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)"
   let sql_update =
     "UPDATE music SET music_name = ?, hashtag_1 = ?, hashtag_2 = ?, hashtag_3 = ? WHERE sc_id = ?"
-  let genre = req.params.genre;
+  let genre = req.params.genre
 
-  conn.query("select m.sc_id from music m;", function (err, count_row, fields) {
+  conn.query("select m.sc_id from music m;", function(err, count_row, fields) {
     if (err) {
       console.log(err)
     } else {
@@ -410,7 +440,7 @@ app.get("/fillMusicTable/:genre", function (req, res) {
               conn.query(
                 sql_update,
                 [music_name, hashtag_1, hashtag_2, hashtag_3, sc_id],
-                function (err, rows) {
+                function(err, rows) {
                   if (err) {
                     console.log(err)
                   } else {
@@ -435,7 +465,7 @@ app.get("/fillMusicTable/:genre", function (req, res) {
                   like_count,
                   genre
                 ],
-                function (err, rows) {
+                function(err, rows) {
                   if (err) {
                     console.log(err)
                   } else {
@@ -460,7 +490,7 @@ app.get("/fillMusicTable/:genre", function (req, res) {
 //3. 플레이 리스트
 
 // 사용자의 플레이 리스트에 추가
-app.post("/add_playlist", function (req, res) {
+app.post("/add_playlist", function(req, res) {
   console.log("@" + req.method + " " + req.url)
 
   // 0. 프론트로부터 버튼이 눌렸을때 url 받기 (나중에 처리해야할 사항)
@@ -469,7 +499,7 @@ app.post("/add_playlist", function (req, res) {
   let token = req.body.access_Token
   let sql_select1 = "SELECT user_id from user_info where access_Token = ?"
   let user_id = 0
-  conn.query(sql_select1, [token], function (err, result) {
+  conn.query(sql_select1, [token], function(err, result) {
     if (err) {
       console.log(err)
     } else {
@@ -483,7 +513,7 @@ app.post("/add_playlist", function (req, res) {
   var sql_createPL =
     "CREATE TABLE IF NOT EXISTS `semibasement`.`list_?` (`list_id` INT(11) NOT NULL AUTO_INCREMENT, `music_id` INT(11) NULL DEFAULT NULL, PRIMARY KEY (`list_id`));"
 
-  conn.query(sql_createPL, [user_id], function (err, result_music_url) {
+  conn.query(sql_createPL, [user_id], function(err, result_music_url) {
     if (err) {
       console.log(err)
     } else {
@@ -496,7 +526,7 @@ app.post("/add_playlist", function (req, res) {
   var sql_list =
     "insert into list_? (music_id) select ? from dual where not exists (select music_id from list_? where music_id=?);"
 
-  conn.query(sql_list, [user_id, sc_id, user_id, sc_id], function (err, rows) {
+  conn.query(sql_list, [user_id, sc_id, user_id, sc_id], function(err, rows) {
     if (err) {
       console.log(err)
     } else {
@@ -506,11 +536,11 @@ app.post("/add_playlist", function (req, res) {
 })
 
 // 사용자의 플레이 리스트 보여주기
-app.post("/show_playlist", function (req, res) {
+app.post("/show_playlist", function(req, res) {
   let token = req.body.access_Token
   let sql_select = "SELECT user_id from user_info where access_Token = ?"
   let user_id = 0
-  conn.query(sql_select, [token], function (err, result) {
+  conn.query(sql_select, [token], function(err, result) {
     if (err) {
       console.log(err)
     } else {
@@ -520,7 +550,7 @@ app.post("/show_playlist", function (req, res) {
 
   var sql_music_id =
     "SELECT m.* from (music m inner join list_? l on m.sc_id=l.music_id);"
-  conn.query(sql_music_id, [user_id], function (err, result_music_url) {
+  conn.query(sql_music_id, [user_id], function(err, result_music_url) {
     if (err) {
       console.log(err)
     } else {
@@ -531,7 +561,7 @@ app.post("/show_playlist", function (req, res) {
 })
 
 // 사용자의 플레이 리스트에서 삭제
-app.post("/delete_playlist", function (req, res) {
+app.post("/delete_playlist", function(req, res) {
   console.log("@" + req.method + " " + req.url)
 
   // 임시로 받아오는 url (프론트단에서 어떤 값 가져올지 결정 후 구현)
@@ -540,7 +570,7 @@ app.post("/delete_playlist", function (req, res) {
   let token = req.body.access_Token
   let sql_select1 = "SELECT user_id from user_info where access_Token = ?"
   let user_id = 0
-  conn.query(sql_select1, [token], function (err, result) {
+  conn.query(sql_select1, [token], function(err, result) {
     if (err) {
       console.log(err)
     } else {
@@ -551,7 +581,7 @@ app.post("/delete_playlist", function (req, res) {
 
   var sql_del_conn = "delete from list_? where music_id = ?;"
 
-  conn.query(sql_del_conn, [user_id, sc_id], function (err, rows) {
+  conn.query(sql_del_conn, [user_id, sc_id], function(err, rows) {
     if (err) {
       console.log(err)
     } else {
@@ -564,11 +594,11 @@ app.post("/delete_playlist", function (req, res) {
 
 //4. 하트 리스트
 
-app.post("/heartlist", function (req, res) {
+app.post("/heartlist", function(req, res) {
   let token = req.body.access_Token
   let sql_select1 = "SELECT user_id from user_info where access_Token = ?"
   let user_id = 0
-  conn.query(sql_select1, [token], function (err, result) {
+  conn.query(sql_select1, [token], function(err, result) {
     if (err) {
       console.log(err)
     } else {
@@ -584,7 +614,7 @@ app.post("/heartlist", function (req, res) {
   let sql_check2 =
     "SELECT DISTINCT m.music_name, m.like_count, m.sc_id FROM music m LEFT JOIN heartlist_? h on m.sc_id = h.music_id WHERE h.music_id IS NULL;"
 
-  conn.query(sql_createH, [user_id], function (err, result_music_url) {
+  conn.query(sql_createH, [user_id], function(err, result_music_url) {
     if (err) {
       console.log(err)
     } else {
@@ -592,13 +622,13 @@ app.post("/heartlist", function (req, res) {
     }
   })
 
-  conn.query(sql_check, [user_id], function (err, result) {
+  conn.query(sql_check, [user_id], function(err, result) {
     if (err) {
       console.log(err)
     } else {
       if (isEmpty(result)) {
         console.log("아무 음악도 좋아요 한 적이 없음")
-        conn.query(sql_select2, function (err, musiclist) {
+        conn.query(sql_select2, function(err, musiclist) {
           if (err) {
             console.log(err)
           } else {
@@ -607,7 +637,7 @@ app.post("/heartlist", function (req, res) {
         })
       } else {
         console.log("몇몇 음악을 이미 좋아요 누름")
-        conn.query(sql_check2, [user_id], function (err, result2) {
+        conn.query(sql_check2, [user_id], function(err, result2) {
           if (err) {
             console.log(err)
           } else {
@@ -619,7 +649,7 @@ app.post("/heartlist", function (req, res) {
   })
 })
 
-app.post("/updateHL", function (req, res) {
+app.post("/updateHL", function(req, res) {
   let sql_select = "select like_count from music where sc_id=?"
   let sql_update = "update music set like_count=? where sc_id=?"
   let sc_id = Object.keys(req.body)[0]
@@ -629,13 +659,13 @@ app.post("/updateHL", function (req, res) {
   let like_count = 0
   let sql_insertH = "insert into heartlist_? (music_id) values (" + sc_id + ")"
   let sql_deleteH = "delete from heartlist_? where music_id = ?"
-  conn.query(sql_select, [sc_id], function (err, result, fields) {
+  conn.query(sql_select, [sc_id], function(err, result, fields) {
     if (err) {
       console.log(err)
     } else {
       if (checkLike === "like") {
         like_count = like_count + result[0].like_count + 1
-        conn.query(sql_insertH, [user_id], function (err, result, fields) {
+        conn.query(sql_insertH, [user_id], function(err, result, fields) {
           if (err) {
             console.log(err)
           } else {
@@ -644,7 +674,7 @@ app.post("/updateHL", function (req, res) {
         })
       } else {
         like_count = like_count + result[0].like_count - 1
-        conn.query(sql_deleteH, [user_id, sc_id], function (
+        conn.query(sql_deleteH, [user_id, sc_id], function(
           err,
           result,
           fields
@@ -656,7 +686,7 @@ app.post("/updateHL", function (req, res) {
           }
         })
       }
-      conn.query(sql_update, [like_count, sc_id], function (
+      conn.query(sql_update, [like_count, sc_id], function(
         err,
         result,
         fields
@@ -672,29 +702,35 @@ app.post("/updateHL", function (req, res) {
 })
 
 // 사용자의 좋아요 리스트 보여주기
-app.post("/show_heartlist", function (req, res) {
+app.post("/show_heartlist", function(req, res) {
   let token = req.body.access_Token
   let sql_select = "SELECT user_id from user_info where access_Token = ?"
-  let user_id = 0
-  conn.query(sql_select, [token], function (err, result) {
-    if (err) {
-      console.log(err)
-    } else {
-      user_id = parseInt(result[0].user_id)
-    }
-  })
-
   let sql_heartlist =
     "SELECT m.* from (music m inner join heartlist_? c on m.sc_id=c.music_id);"
+  let user_id = 0
+  let firstResult, secondResult
 
-  conn.query(sql_heartlist, [user_id], function (err, result_music_url) {
-    if (err) {
+  database
+    .query(sql_select, [token])
+    .then(rows => {
+      firstResult = parseInt(rows[0].user_id)
+      return database.query(sql_heartlist, [firstResult])
+    })
+    .then(
+      rows => {
+        secondResult = rows
+        res.send(JSON.stringify(secondResult))
+        return database.close()
+      },
+      err => {
+        return database.close().then(() => {
+          throw err
+        })
+      }
+    )
+    .catch(err => {
       console.log(err)
-    } else {
-      res.send(JSON.stringify(result_music_url))
-      console.log("result_music_url : " + JSON.stringify(result_music_url))
-    }
-  })
+    })
 })
 
 //////////////////////////////////////////////////////////////////
@@ -702,63 +738,92 @@ app.post("/show_heartlist", function (req, res) {
 // 5. 차트 기능
 
 // 좋아요 수에 기반한 music 테이블 데이터들을 오름차순으로 가져옴
-app.get("/rankingChart", function (req, res) {
+app.get("/rankingChart", function(req, res) {
   let sql_rankChart =
     "SELECT music_name, author, like_count FROM music ORDER BY like_count DESC;"
-  let display = ""
+  let result
 
-  conn.query(sql_rankChart, function (err, result) {
-    if (err) {
+  database
+    .query(sql_rankChart)
+    .then(
+      rows => {
+        result = rows
+        res.send(JSON.stringify(result))
+        return database.close()
+      },
+      err => {
+        return database.close().then(() => {
+          throw err
+        })
+      }
+    )
+    .catch(err => {
       console.log(err)
-    } else {
-      res.send(JSON.stringify(result))
-    }
-  })
+    })
 })
 
 // 날짜에 기반한 music 테이블 데이터들을 오름차순으로 가져옴
-app.get("/recentChart", function (req, res) {
+app.get("/recentChart", function(req, res) {
   let sql_recentChart =
     "SELECT music_name, author, date FROM music ORDER BY date DESC;"
-
-  conn.query(sql_recentChart, function (err, result) {
-    if (err) {
+  let result
+  database
+    .query(sql_recentChart)
+    .then(
+      rows => {
+        result = rows
+        res.send(JSON.stringify(result))
+        return database.close()
+      },
+      err => {
+        return database.close().then(() => {
+          throw err
+        })
+      }
+    )
+    .catch(err => {
       console.log(err)
-    } else {
-      res.send(JSON.stringify(result))
-    }
-  })
+    })
 })
 
 // 태그에 기반한 music 테이블 데이터들을 가져옴
-app.get("/tagChart", function (req, res) {
+app.get("/tagChart", function(req, res) {
   let sql_tag = "select music_name, author, hashtag_1 from music;"
-
-  conn.query(sql_tag, function (err, result) {
-    if (err) {
+  let result
+  database
+    .query(sql_tag)
+    .then(
+      rows => {
+        result = rows
+        res.send(JSON.stringify(result))
+        return database.close()
+      },
+      err => {
+        return database.close().then(() => {
+          throw err
+        })
+      }
+    )
+    .catch(err => {
       console.log(err)
-    } else {
-      res.send(JSON.stringify(result))
-    }
-  })
+    })
 })
 
 // 장르에 기반한 music 테이블 데이터들을 가져옴 (장르 : 1,2,3)
-app.get("/genreChart/:genre", function (req, res) {
+app.get("/genreChart/:genre", function(req, res) {
   let sql_genre = "SELECT music_name, author FROM music WHERE genre = ?;"
   let genre = req.params.genre
 
-  conn.query(sql_genre, [genre], function (err, result) {
+  conn.query(sql_genre, [genre], function(err, result) {
     if (err) {
       console.log(err)
     } else {
       req.send(JSON.stringify(result))
     }
   })
-
 })
 
 //////////////////////////////////////////////////////////////////
-app.listen(7260, function () {
+app.listen(7260, function() {
   console.log("Connected 7260 port!!!")
 })
