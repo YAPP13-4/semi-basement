@@ -598,14 +598,6 @@ app.post("/heartlist", function(req, res) {
   let token = req.body.access_Token
   let sql_select1 = "SELECT user_id from user_info where access_Token = ?"
   let user_id = 0
-  conn.query(sql_select1, [token], function(err, result) {
-    if (err) {
-      console.log(err)
-    } else {
-      user_id = parseInt(result[0].user_id)
-    }
-  })
-
   let sql_createH =
     "CREATE TABLE IF NOT EXISTS `semibasement`.`heartlist_?` (`heartlist_id` INT(11) NOT NULL AUTO_INCREMENT, `music_id` INT(11) NULL DEFAULT NULL, PRIMARY KEY (`heartlist_id`));"
   let sql_select2 = "SELECT music_name, like_count, sc_id from music;"
@@ -614,39 +606,57 @@ app.post("/heartlist", function(req, res) {
   let sql_check2 =
     "SELECT DISTINCT m.music_name, m.like_count, m.sc_id FROM music m LEFT JOIN heartlist_? h on m.sc_id = h.music_id WHERE h.music_id IS NULL;"
 
-  conn.query(sql_createH, [user_id], function(err, result_music_url) {
-    if (err) {
-      console.log(err)
-    } else {
-      console.log("hearlist_" + user_id + "테이블이 잘 생성됨")
-    }
-  })
-
-  conn.query(sql_check, [user_id], function(err, result) {
-    if (err) {
-      console.log(err)
-    } else {
-      if (isEmpty(result)) {
-        console.log("아무 음악도 좋아요 한 적이 없음")
-        conn.query(sql_select2, function(err, musiclist) {
-          if (err) {
-            console.log(err)
-          } else {
-            res.send(JSON.stringify(musiclist))
-          }
-        })
-      } else {
-        console.log("몇몇 음악을 이미 좋아요 누름")
-        conn.query(sql_check2, [user_id], function(err, result2) {
-          if (err) {
-            console.log(err)
-          } else {
-            res.send(JSON.stringify(result) + "," + JSON.stringify(result2))
-          }
+  database
+    .query(sql_select1, [token])
+    .then(
+      rows => {
+        user_id = parseInt(rows[0].user_id)
+        return database.query(sql_createH, [user_id])
+      },
+      err => {
+        return database.close().then(() => {
+          throw err
         })
       }
-    }
-  })
+    )
+    .then(
+      () => {
+        return database.query(sql_check, [user_id])
+      },
+      err => {
+        return database.close().then(() => {
+          throw err
+        })
+      }
+    )
+    .then(
+      rows => {
+        if (isEmpty(rows)) {
+          return database.query(sql_select2)
+        } else {
+          return database.query(sql_check2)
+        }
+      },
+      err => {
+        return database.close().then(() => {
+          throw err
+        })
+      }
+    )
+    .then(
+      rows => {
+        res.send(JSON.stringify(rows))
+        database.close()
+      },
+      err => {
+        return database.close().then(() => {
+          throw err
+        })
+      }
+    )
+    .catch(err => {
+      console.log(err)
+    })
 })
 
 app.post("/updateHL", function(req, res) {
@@ -708,18 +718,17 @@ app.post("/show_heartlist", function(req, res) {
   let sql_heartlist =
     "SELECT m.* from (music m inner join heartlist_? c on m.sc_id=c.music_id);"
   let user_id = 0
-  let firstResult, secondResult
+  let result
 
   database
     .query(sql_select, [token])
     .then(rows => {
-      firstResult = parseInt(rows[0].user_id)
-      return database.query(sql_heartlist, [firstResult])
+      user_id = parseInt(rows[0].user_id)
+      return database.query(sql_heartlist, [user_id])
     })
     .then(
       rows => {
-        secondResult = rows
-        res.send(JSON.stringify(secondResult))
+        res.send(JSON.stringify(rows))
         return database.close()
       },
       err => {
