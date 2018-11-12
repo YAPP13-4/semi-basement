@@ -18,37 +18,18 @@ const conn = mysql.createConnection({
   insecureAuth: true
 })
 
-const config = {
-  host: db_config.host,
-  user: db_config.user,
-  password: db_config.password,
-  database: db_config.database,
-  insecureAuth: true
-}
-
 class Database {
-  constructor(config) {
-    this.connection = mysql.createConnection(config)
-  }
   query(sql, args) {
     return new Promise((resolve, reject) => {
-      this.connection.query(sql, args, (err, rows) => {
+      conn.query(sql, args, (err, rows) => {
         if (err) return reject(err)
         resolve(rows)
       })
     })
   }
-  close() {
-    return new Promise((resolve, reject) => {
-      this.connection.end(err => {
-        if (err) return reject(err)
-        resolve()
-      })
-    })
-  }
 }
 
-let database = new Database(config)
+let database = new Database()
 
 function isEmpty(obj) {
   for (const key123 in obj) {
@@ -608,107 +589,68 @@ app.post("/heartlist", function(req, res) {
 
   database
     .query(sql_select1, [token])
-    .then(
-      rows => {
-        user_id = parseInt(rows[0].user_id)
-        return database.query(sql_createH, [user_id])
-      },
-      err => {
-        return database.close().then(() => {
-          throw err
-        })
+    .then(rows => {
+      user_id = parseInt(rows[0].user_id)
+      return database.query(sql_createH, [user_id])
+    })
+    .then(() => {
+      return database.query(sql_check, [user_id])
+    })
+    .then(rows => {
+      if (isEmpty(rows)) {
+        return database.query(sql_select2)
+      } else {
+        return database.query(sql_check2)
       }
-    )
-    .then(
-      () => {
-        return database.query(sql_check, [user_id])
-      },
-      err => {
-        return database.close().then(() => {
-          throw err
-        })
-      }
-    )
-    .then(
-      rows => {
-        if (isEmpty(rows)) {
-          return database.query(sql_select2)
-        } else {
-          return database.query(sql_check2)
-        }
-      },
-      err => {
-        return database.close().then(() => {
-          throw err
-        })
-      }
-    )
-    .then(
-      rows => {
-        res.send(JSON.stringify(rows))
-        database.close()
-      },
-      err => {
-        return database.close().then(() => {
-          throw err
-        })
-      }
-    )
+    })
+    .then(rows => {
+      res.send(JSON.stringify(rows))
+    })
     .catch(err => {
       console.log(err)
     })
 })
 
 app.post("/updateHL", function(req, res) {
-  let sql_select = "select like_count from music where sc_id=?"
+  let token = req.body.access_Token
+  let checkLike = req.body.checkLike
+  let sc_id = req.body.sc_id
+  let sql_select = "SELECT user_id from user_info where access_Token = ?"
+  let sql_select1 = "select like_count from music where sc_id=?"
   let sql_update = "update music set like_count=? where sc_id=?"
-  let sc_id = Object.keys(req.body)[0]
-  let checkLike = Object.values(req.body)[0].split(",")[0]
-  let user_id = Object.values(req.body)[0].split(",")[1]
-  user_id = parseInt(user_id)
-  let like_count = 0
   let sql_insertH = "insert into heartlist_? (music_id) values (" + sc_id + ")"
   let sql_deleteH = "delete from heartlist_? where music_id = ?"
-  conn.query(sql_select, [sc_id], function(err, result, fields) {
-    if (err) {
-      console.log(err)
-    } else {
+  let numOfLike
+  let user_id
+
+  database
+    .query(sql_select, [token])
+    .then(rows => {
+      user_id = parseInt(rows[0].user_id)
+      return database.query(sql_select1, [sc_id])
+    })
+    .then(rows => {
+      if (isEmpty(rows)) throw "there is no music matched with sc_id"
+      else numOfLike = rows[0].like_count
       if (checkLike === "like") {
-        like_count = like_count + result[0].like_count + 1
-        conn.query(sql_insertH, [user_id], function(err, result, fields) {
-          if (err) {
-            console.log(err)
-          } else {
-            console.log("heartlist_" + user_id + " 테이블에 sc_id 대입 성공")
-          }
+        numOfLike += 1
+        return database.query(sql_update, [numOfLike, sc_id]).then(() => {
+          return database.query(sql_insertH, [user_id])
         })
       } else {
-        like_count = like_count + result[0].like_count - 1
-        conn.query(sql_deleteH, [user_id, sc_id], function(
-          err,
-          result,
-          fields
-        ) {
-          if (err) {
-            console.log(err)
-          } else {
-            console.log("heartlist_" + user_id + " 테이블에 sc_id 삭제 성공")
-          }
+        numOfLike -= 1
+        if (numOfLike < 0) numOfLike = 0
+        return database.query(sql_update, [numOfLike, sc_id]).then(() => {
+          return database.query(sql_deleteH, [user_id, sc_id])
         })
       }
-      conn.query(sql_update, [like_count, sc_id], function(
-        err,
-        result,
-        fields
-      ) {
-        if (err) {
-          console.log(err)
-        } else {
-          res.redirect("/heartlist/" + user_id)
-        }
-      })
-    }
-  })
+    })
+    .then(() => {
+      res.send("complete")
+    })
+    .catch(err => {
+      console.log(err)
+    })
 })
 
 // 사용자의 좋아요 리스트 보여주기
@@ -718,7 +660,6 @@ app.post("/show_heartlist", function(req, res) {
   let sql_heartlist =
     "SELECT m.* from (music m inner join heartlist_? c on m.sc_id=c.music_id);"
   let user_id = 0
-  let result
 
   database
     .query(sql_select, [token])
@@ -726,17 +667,9 @@ app.post("/show_heartlist", function(req, res) {
       user_id = parseInt(rows[0].user_id)
       return database.query(sql_heartlist, [user_id])
     })
-    .then(
-      rows => {
-        res.send(JSON.stringify(rows))
-        return database.close()
-      },
-      err => {
-        return database.close().then(() => {
-          throw err
-        })
-      }
-    )
+    .then(rows => {
+      res.send(JSON.stringify(rows))
+    })
     .catch(err => {
       console.log(err)
     })
@@ -750,72 +683,38 @@ app.post("/show_heartlist", function(req, res) {
 app.get("/rankingChart", function(req, res) {
   let sql_rankChart =
     "SELECT music_name, author, like_count FROM music ORDER BY like_count DESC;"
-  let result
-
-  database
-    .query(sql_rankChart)
-    .then(
-      rows => {
-        result = rows
-        res.send(JSON.stringify(result))
-        return database.close()
-      },
-      err => {
-        return database.close().then(() => {
-          throw err
-        })
-      }
-    )
-    .catch(err => {
+  conn.query(sql_rankChart, function(err, result) {
+    if (err) {
       console.log(err)
-    })
+    } else {
+      res.send(JSON.stringify(result))
+    }
+  })
 })
 
 // 날짜에 기반한 music 테이블 데이터들을 오름차순으로 가져옴
 app.get("/recentChart", function(req, res) {
   let sql_recentChart =
     "SELECT music_name, author, date FROM music ORDER BY date DESC;"
-  let result
-  database
-    .query(sql_recentChart)
-    .then(
-      rows => {
-        result = rows
-        res.send(JSON.stringify(result))
-        return database.close()
-      },
-      err => {
-        return database.close().then(() => {
-          throw err
-        })
-      }
-    )
-    .catch(err => {
+  conn.query(sql_recentChart, function(err, result) {
+    if (err) {
       console.log(err)
-    })
+    } else {
+      res.send(JSON.stringify(result))
+    }
+  })
 })
 
 // 태그에 기반한 music 테이블 데이터들을 가져옴
 app.get("/tagChart", function(req, res) {
   let sql_tag = "select music_name, author, hashtag_1 from music;"
-  let result
-  database
-    .query(sql_tag)
-    .then(
-      rows => {
-        result = rows
-        res.send(JSON.stringify(result))
-        return database.close()
-      },
-      err => {
-        return database.close().then(() => {
-          throw err
-        })
-      }
-    )
-    .catch(err => {
+  conn.query(sql_tag, function(err, result) {
+    if (err) {
       console.log(err)
-    })
+    } else {
+      res.send(JSON.stringify(result))
+    }
+  })
 })
 
 // 장르에 기반한 music 테이블 데이터들을 가져옴 (장르 : 1,2,3)
@@ -827,7 +726,7 @@ app.get("/genreChart/:genre", function(req, res) {
     if (err) {
       console.log(err)
     } else {
-      req.send(JSON.stringify(result))
+      res.send(JSON.stringify(result))
     }
   })
 })
