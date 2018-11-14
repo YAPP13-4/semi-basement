@@ -42,9 +42,17 @@ class ChartTab extends Component {
   }
   musicSearch = searchKeyWord => {
     //filter 될 list. 초기 값 셋팅.
+    //console.log("searchkeyword ", searchKeyWord)
     let updateMusicList = this.props.chartMusicInfo
+    if (!searchKeyWord) return updateMusicList
+
     updateMusicList = this.filter(updateMusicList, music => {
-      return music.title.toLowerCase() === searchKeyWord.toLowerCase()
+      //console.log("music.title ", music.title, "searchkeyword ", searchKeyWord)
+      console.log(
+        "music.title.search(searchKeyWord) ",
+        music.title.search(searchKeyWord)
+      )
+      return music.title.search(searchKeyWord)
     })
     return updateMusicList
   }
