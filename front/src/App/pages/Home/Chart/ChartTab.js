@@ -19,24 +19,38 @@ const moduleName = "ChartTab"
 
 class ChartTab extends Component {
   static propTypes = {
-    isMypge: PropTypes.bool
+    isMypge: PropTypes.bool,
+    searchKeyWord: PropTypes.string
   }
   static defaultProps = {
-    isMypge: false
+    isMypge: false,
+    searchKeyWord: ""
   }
   componentDidMount() {
-    //this._requestId()
     this.props.loadChartSongsInfo(SongChartList)
   }
   onClickPlay = ({ songId, title, artworkUrl, duration }) => {
     this.props.selectSong([songId, title, artworkUrl, duration])
     this.props.historySong(songId)
-    //this.props.addHistory(songId)
   }
-
+  filter = (list, predicate) => {
+    let newList = []
+    for (let i = 0; i < list.length; i++) {
+      if (predicate(list[i])) newList.push(list[i])
+    }
+    return newList
+  }
+  musicSearch = searchKeyWord => {
+    //filter 될 list. 초기 값 셋팅.
+    let updateMusicList = this.props.chartMusicInfo
+    updateMusicList = this.filter(updateMusicList, music => {
+      return music.title.toLowerCase() === searchKeyWord.toLowerCase()
+    })
+    return updateMusicList
+  }
   renderChart = () => {
-    return this.props.chartMusicInfo.map((musicInfo, index) => {
-      //console.log('data',songInfo)
+    const filteredMusic = this.musicSearch(this.props.searchKeyWord)
+    return filteredMusic.map((musicInfo, index) => {
       return (
         <ChartTabItem
           ind={index}
