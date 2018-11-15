@@ -205,21 +205,11 @@ app.post("/add_albumlist", function(req, res) {
   let sql_select1 = "SELECT user_id from semibasement.user_info where access_Token = ?"
   let sql_createA = "CREATE TABLE IF NOT EXISTS `semibasement`.`album_?` (`album_id` INT(11) NOT NULL AUTO_INCREMENT, `music_id` INT(11) NULL DEFAULT NULL, PRIMARY KEY (`album_id`));"
   let sql_updateCheck = "SELECT m.sc_id FROM semibasement.music m;"
-  let sql_insertAscid = "INSERT INTO semibasement.album_? (music_id) VALUES (?);"
+  let sql_update = "UPDATE music SET music_name = ?, hashtag_1 = ?, hashtag_2 = ?, hashtag_3 = ? WHERE sc_id = ?"
+  let sql_insert = "INSERT INTO music (date, music_name, play_url, hashtag_1, hashtag_2, hashtag_3, author, sc_id, duration, like_count, genre) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)"
+  let sql_insertAscid = "INSERT INTO semibasement.album_? (music_id) select ? from dual where not exists (select music_id from semibasement.album_? where music_id=?);"
   let user_id = 0
-  let sc_id
-
-  _requestId = () => {
-    return axios
-        .get(resolveUrl(SONG_URL))
-        .then(response => {
-          let music_id = response.data.id
-          res.send(music_id)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-  }
+  var updateTrigger = 0
 
   database
     .query(sql_select1, [token])
@@ -230,91 +220,86 @@ app.post("/add_albumlist", function(req, res) {
     .then(() => {
       console.log("앨범 테이블 만들었다.")
       // 여기서 axios 해야함
-      console.log(SONG_URL)
-      _requestId()
+      axios
+        .get(resolveUrl(SONG_URL))
+        .then(response => {
+          let music_id = response.data.id
+          return database.query(sql_insertAscid, [user_id, music_id, user_id, music_id])
+        })
+    })
+    .then(() => {
+      console.log("앨범 테이블에 sc_id 값 제대로 삽입")
+      return database.query(sql_updateCheck)
+    })
+    .then((rows) => {
+      console.log("뮤직 테이블에 있는 sc_id 가 뭔지 뽑아봄. --> 업데이트할지 삽입할지 결정하기 위함")
+
+      axios
+        .get(resolveUrl(SONG_URL))
+        .then(response => {
+          for (var i = 0; i < rows.length; i++){
+            if(rows[i].sc_id == response.data.id){
+              updateTrigger = 1
+            }
+          }
+
+          // 테이블에 넣을 정보 추출
+          let sc_id = response.data.id
+          let play_url = response.data.permalink_url
+          var date = response.data.created_at
+          if (date == null) {
+            date = "no data"
+          }
+          var music_name = response.data.title
+          if (music_name == null) {
+            music_name = "no data"
+          }
+          var author = response.data.user.username
+          if (author == null) {
+            author = "no data"
+          }
+          var hashtag_1 = "no data"
+          var hashtag_2 = "no data"
+          var hashtag_3 = "no data"
+          var like_count = 0
+          var duration = response.data.duration
+          duration = parseFloat(duration / 60000)
+
+          var rr = new Array()
+          rr = response.data.tag_list.split('"')
+
+          if (rr.length == 1) {
+            if (rr[0] != "") {
+              hashtag_1 = rr[0]
+            }
+          } else {
+            if (rr[1] != null) {
+              hashtag_1 = rr[1]
+            }
+            hashtag_2 = rr[2]
+            hashtag_3 = rr[3]
+          }  
+
+          // 업데이트 혹은 삽입 시작 
+          if(updateTrigger == 1){
+            console.log("뮤직테이블 업데이트 시작")
+            return database.query(sql_update, [music_name, hashtag_1, hashtag_2, hashtag_3, sc_id])
+          } else if (updateTrigger == 0){
+            console.log("뮤직테이블 삽입 시작")
+            return database.query(sql_insert, [date, music_name, play_url, hashtag_1, hashtag_2, hashtag_3, author, sc_id, duration, like_count, genre])
+          }
+        })
+        .then(() => {
+          console.log("업데이트 혹은 삽입 성공")
+        })
+        .catch(err => {
+          console.log(err)
+        })
+
     })
     .catch(err => {
       console.log(err)
     })
-
-
-
-
-  // // 0. 프론트로부터 버튼이 눌렸을때 url 받기 (나중에 처리해야할 사항)
-  // // var testurl = 'https://soundcloud.com/amirarief/love-will-set-you-free-amirarief-kodaline-cover-mp3';
-
-  // let genre = req.body.genre_Num
-  // let token = req.body.access_Token
-  // let sql_select1 = "SELECT user_id from user_info where access_Token = ?"
-  // let sql_createA = "CREATE TABLE IF NOT EXISTS `semibasement`.`album_?` (`album_id` INT(11) NOT NULL, PRIMARY KEY (`album_id`));"
-  // let sql_createAc = "CREATE TABLE IF NOT EXISTS `semibasement`.`album_connect_?` (`album_id` INT(11) NULL DEFAULT NULL, `music_id` INT(11) NULL DEFAULT NULL, INDEX `c_album_?_idx` (`album_id` ASC), CONSTRAINT `c_album_?` FOREIGN KEY (`album_id`) REFERENCES `semibasement`.`album_?` (`album_id`) ON DELETE CASCADE ON UPDATE CASCADE);"
-  // let sql_albumC = "INSERT INTO album_connect_? (music_id) VALUES (?);"
-  // let sql_musicUrl = "SELECT sc_id FROM music WHERE play_url = ?;"
-  // let user_id = 0
-  // SONG_URL = req.body.url
-
-  // console.log(SONG_URL)
-
-  // // database
-  // //   .query(sql_select1, [token])
-  // //   .then(rows => {
-  // //     user_id = parseInt(rows[0].user_id)
-  // //     return database.query(sql_createA, [user_id])
-  // //   })
-  // //   .then(() => {
-  // //     return database.query(sql_createAc, [user_id, user_id, user_id, user_id])
-  // //   })
-  // //   .then(() => {
-  // //     return database.query(sql_musicUrl, [SONG_URL])
-  // //   })
-  // //   .then(() => {
-  // //     _requestId = () => {
-  // //       return axios
-  // //         .get(resolveUrl(SONG_URL))
-  // //         .then(response => {
-  // //           let music_id = response.data.id
-  // //           return database.query(sql_albumC, [user_id, music_id])
-  // //         })
-  // //     }
-  // //   })
-    
-
-  // // 1. 테이블 생성 (테이블이 없을때만 생성 - IF NOT EXISTS 를 이용)
-
-  // // 2. 프론트에서 받은 url로 먼저 sc_id를 커넥트 테이블에 저장 & 중복 처리
-
-  // conn.query(sql_musicUrl, [SONG_URL], function(err, re_overlap) {
-  //   if (err) {
-  //     console.log(err)
-  //   } else {
-  //     //if(JSON.stringify(re_overlap) == '[]'){
-  //     // 중복되는 url 없음
-  //     _requestId = () => {
-  //       return axios
-  //         .get(resolveUrl(SONG_URL))
-  //         .then(response => {
-  //           let music_id = response.data.id
-  //           conn.query(sql_albumC, [user_id, music_id], function(err, rows) {
-  //             if (err) {
-  //               console.log(err)
-  //             } else {
-  //               console.log("insert to album_connect done")
-  //               // 3. 해당 url를 '/fillMusicTable' 으로 리다이렉트 시켜서 뮤직테이블에 정보 저장
-  //               let redirectUrl = "/fillMusicTable/" + genre
-  //               res.redirect(redirectUrl)
-  //             }
-  //           })
-  //         })
-  //         .catch(err => {
-  //           console.log(err)
-  //         })
-  //     }
-  //     _requestId()
-  //     //}else{
-  //     //    console.log("중복되는 url임. music 테이블에 삽입 불가");
-  //     //}
-  //   }
-  // })
 })
 
 // 사용자의 앨범 리스트 보여주기
@@ -370,125 +355,9 @@ app.post("/delete_albumlist", function(req, res) {
     })
 })
 
-///////////////////////////////////////////////////////////////////////
-
-// 음악테이블 채우기
-
-// '/add_albumlist/:user_id' 에서 설정한 SONG_URL 값을 이용해서 music 테이블 채우기
-
-app.get("/fillMusicTable/:genre", function(req, res) {
-  let sql_insert =
-    "INSERT INTO music (date, music_name, play_url, hashtag_1, hashtag_2, hashtag_3, author, sc_id, duration, like_count, genre) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)"
-  let sql_update =
-    "UPDATE music SET music_name = ?, hashtag_1 = ?, hashtag_2 = ?, hashtag_3 = ? WHERE sc_id = ?"
-  let genre = req.params.genre
-
-  conn.query("select m.sc_id from music m;", function(err, count_row, fields) {
-    if (err) {
-      console.log(err)
-    } else {
-      var updateTrigger = 0
-      _requestId = () => {
-        return axios
-          .get(resolveUrl(SONG_URL))
-          .then(response => {
-            let sc_id = response.data.id
-            let play_url = response.data.permalink_url
-            var date = response.data.created_at
-            if (date == null) {
-              date = "no data"
-            }
-            var music_name = response.data.title
-            if (music_name == null) {
-              music_name = "no data"
-            }
-            var author = response.data.user.username
-            if (author == null) {
-              author = "no data"
-            }
-            var hashtag_1 = "no data"
-            var hashtag_2 = "no data"
-            var hashtag_3 = "no data"
-            var like_count = 0
-            var duration = response.data.duration
-            duration = parseFloat(duration / 60000)
-
-            var rr = new Array()
-            rr = response.data.tag_list.split('"')
-
-            if (rr.length == 1) {
-              if (rr[0] != "") {
-                hashtag_1 = rr[0]
-              }
-            } else {
-              if (rr[1] != null) {
-                hashtag_1 = rr[1]
-              }
-              hashtag_2 = rr[2]
-              hashtag_3 = rr[3]
-            }
-
-            //res.send(response.data);
-
-            for (var i = 0; i < count_row.length; i++) {
-              if (count_row[i].sc_id == response.data.id) {
-                console.log("update 필요")
-                updateTrigger = 1
-              }
-            }
-
-            if (updateTrigger == 1) {
-              conn.query(
-                sql_update,
-                [music_name, hashtag_1, hashtag_2, hashtag_3, sc_id],
-                function(err, rows) {
-                  if (err) {
-                    console.log(err)
-                  } else {
-                    console.log("update done")
-                    res.redirect("/rankingChart")
-                  }
-                }
-              )
-            } else if (updateTrigger == 0) {
-              conn.query(
-                sql_insert,
-                [
-                  date,
-                  music_name,
-                  play_url,
-                  hashtag_1,
-                  hashtag_2,
-                  hashtag_3,
-                  author,
-                  sc_id,
-                  duration,
-                  like_count,
-                  genre
-                ],
-                function(err, rows) {
-                  if (err) {
-                    console.log(err)
-                  } else {
-                    console.log("insert done")
-                    res.redirect("/rankingChart")
-                  }
-                }
-              )
-            }
-          })
-          .catch(err => {
-            console.log(err)
-          })
-      }
-      _requestId()
-    }
-  })
-})
-
 ///////////////////////////////////////////////////////////////////
 
-//3. 플레이 리스트
+//2. 플레이 리스트
 
 // 사용자의 플레이 리스트에 추가
 // 1) 테이블이 없으면 생성 (list_테이블만)
@@ -631,13 +500,15 @@ app.post("/updateHL", function(req, res) {
       else numOfLike = rows[0].like_count
       if (checkLike === "like") {
         numOfLike += 1
-        return database.query(sql_update, [numOfLike, sc_id]).then(() => {
+        return database.query(sql_update, [numOfLike, sc_id])
+        .then(() => {
           return database.query(sql_insertH, [user_id])
         })
       } else {
         numOfLike -= 1
         if (numOfLike < 0) numOfLike = 0
-        return database.query(sql_update, [numOfLike, sc_id]).then(() => {
+        return database.query(sql_update, [numOfLike, sc_id])
+        .then(() => {
           return database.query(sql_deleteH, [user_id, sc_id])
         })
       }
@@ -674,7 +545,7 @@ app.post("/show_heartlist", function(req, res) {
 
 //////////////////////////////////////////////////////////////////
 
-// 5. 차트 기능
+// 4. 차트 기능
 
 // 좋아요 수에 기반한 music 테이블 데이터들을 오름차순으로 가져옴
 app.get("/rankingChart", function(req, res) {
