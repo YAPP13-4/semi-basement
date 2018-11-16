@@ -42,7 +42,6 @@ class ChartTab extends Component {
   }
   musicSearch = searchKeyWord => {
     //filter 될 list. 초기 값 셋팅.
-    //console.log("searchkeyword ", searchKeyWord)
     let updateMusicList = this.props.chartMusicInfo
     if (!searchKeyWord) return updateMusicList
 
@@ -58,7 +57,7 @@ class ChartTab extends Component {
   }
   renderChart = () => {
     const filteredMusic = this.musicSearch(this.props.searchKeyWord)
-    return filteredMusic.map((musicInfo, index) => {
+    return this.props.chartMusicInfo.map((musicInfo, index) => {
       return (
         <ChartTabItem
           ind={index}
