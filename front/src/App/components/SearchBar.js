@@ -1,7 +1,11 @@
 import React, { PureComponent } from "react"
 import { Redirect } from "react-router-dom"
 import { connect } from "react-redux"
+import classnames from "classnames/bind"
 import { searchMusicRequest } from "src/redux/search/actions"
+import css from "./SearchBar.scss"
+const cx = classnames.bind(css)
+const moduleName = "SearchBar"
 class SearchBar extends PureComponent {
   state = {
     term: "",
@@ -9,7 +13,6 @@ class SearchBar extends PureComponent {
   }
   onInputChange = term => {
     this.setState({ term })
-    //this.props.onSearchTermCahgne(term)
   }
   handleSubmit = e => {
     e.preventDefault()
@@ -22,7 +25,6 @@ class SearchBar extends PureComponent {
         redir: true
       }
     })
-    //return <Redirect to="/search" />
   }
   renderRedirect = () => {
     if (this.state.redir) {
@@ -31,10 +33,12 @@ class SearchBar extends PureComponent {
   }
   render() {
     return (
-      <div>
+      <div className={cx(`${moduleName}`)}>
         {this.renderRedirect()}
-        <form onSubmit={this.handleSubmit}>
+        <form className={cx(`${moduleName}-form`)} onSubmit={this.handleSubmit}>
+          <i className={cx(`${moduleName}-form-icon`)} />
           <input
+            className={cx(`${moduleName}-form-input`)}
             value={this.state.term}
             onChange={event => this.onInputChange(event.target.value)}
             type="text"

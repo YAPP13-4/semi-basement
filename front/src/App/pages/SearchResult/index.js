@@ -2,6 +2,8 @@ import React, { PureComponent } from "react"
 import { connect } from "react-redux"
 import classnames from "classnames/bind"
 import Fuse from "fuse.js"
+import { searchMusicRequest } from "src/redux/search/actions"
+import ChartTab from "../Home/Chart/ChartTab"
 import css from "./index.scss"
 
 const cx = classnames.bind(css)
@@ -9,8 +11,18 @@ const moduleName = "SearchResult"
 
 class SearchResult extends PureComponent {
   //FIX ME!
-  componentDidCatch() {}
+  state = {
+    term: ""
+  }
+  onInputChange = term => {
+    this.setState({ term })
+  }
+  handleSubmit = e => {
+    e.preventDefault()
+    this.props.searchMusicRequest(this.state.term)
+  }
   search() {
+    console.log("props check ", this.props.musicData)
     const searchOpts = {
       caseSensitive: true,
       shouldSort: true,
@@ -25,13 +37,32 @@ class SearchResult extends PureComponent {
     }
     const fuse = new Fuse(this.props.musicData, searchOpts)
     const matchResult = fuse.search(this.props.searchKeyWord)
+    console.log("matchResult ", matchResult)
     return matchResult
   }
   render() {
     const matchResult = this.search()
     return (
       <div className={cx(`${moduleName}`)}>
-        <div>{matchResult}</div>
+        <div className={cx(`${moduleName}-top`)}>
+          <form onSubmit={this.handleSubmit}>
+            <div className={cx(`${moduleName}-top-inputWrapper`)}>
+              <div className={cx(`${moduleName}-top-inputWrapper-search`)}>
+                Search :{" "}
+              </div>
+              <input
+                type="text"
+                onChange={event => this.onInputChange(event.target.value)}
+                value={
+                  !this.state.term ? this.props.searchKeyWord : this.state.term
+                }
+              />
+            </div>
+          </form>
+        </div>
+        <div className={cx(`${moduleName}-mid`)}>
+          <ChartTab chartInstanceData={matchResult} />
+        </div>
       </div>
     )
   }
@@ -43,4 +74,7 @@ function mapStateToProps(state) {
     musicData: music.musicInfo
   }
 }
-export default connect(mapStateToProps)(SearchResult)
+export default connect(
+  mapStateToProps,
+  { searchMusicRequest }
+)(SearchResult)
