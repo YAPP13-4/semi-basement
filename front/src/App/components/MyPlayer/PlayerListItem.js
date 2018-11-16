@@ -8,6 +8,7 @@ import getImageUrl from 'src/utils/ImageUtils'
 import IMAGE_SIZES from 'src/App/constants/ImageConstants'
 
 import css from './PlayerListItem.scss'
+import Tooltip from './Tooltip'
 
 const cx = classnames.bind(css)
 const moduleName = 'PlayerListItem'
@@ -43,12 +44,8 @@ const PlayerListItem = ({
         }}
       />
       <div className={cx(`${moduleName}-center`)}>
-        <p className={cx(`${moduleName}-center-top`)}>
-          {info.title}
-        </p>
-        <p className={cx(`${moduleName}-center-bottom`)}>
-          {info.username}
-        </p>
+        <p className={cx(`${moduleName}-center-top`)}>{info.title}</p>
+        <p className={cx(`${moduleName}-center-bottom`)}>{info.username}</p>
       </div>
       <p className={cx(`${moduleName}-duration`)}>
         {formatSeconds(info.duration)}
@@ -56,12 +53,15 @@ const PlayerListItem = ({
       <div
         className={cx(`${moduleName}-etc`)}
         onClick={e => {
-          const songId = this.props.musicList[index]
-          removeSongMyPlaylist(songId)
+          // const songId = this.props.musicList[index]
+          // removeSongMyPlaylist(songId)
+          alert('hi')
           e.stopPropagation()
         }}
       >
-        <i />
+        <Tooltip>
+          <i />
+        </Tooltip>
       </div>
     </div>
   )
