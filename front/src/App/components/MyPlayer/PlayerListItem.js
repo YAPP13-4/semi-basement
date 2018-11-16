@@ -50,17 +50,19 @@ const PlayerListItem = ({
       <p className={cx(`${moduleName}-duration`)}>
         {formatSeconds(info.duration)}
       </p>
-      <div
-        className={cx(`${moduleName}-etc`)}
-        onClick={e => {
-          // const songId = this.props.musicList[index]
-          // removeSongMyPlaylist(songId)
-          alert('hi')
-          e.stopPropagation()
-        }}
-      >
+      <div className={cx(`${moduleName}-etcWrapper`)}>
         <Tooltip>
-          <i />
+          <div
+            className={cx(`${moduleName}-etc`)}
+            onClick={e => {
+              // const songId = this.props.musicList[index]
+              // removeSongMyPlaylist(songId)
+              // alert('hi')
+              // e.stopPropagation()
+            }}
+          >
+            <i />
+          </div>
         </Tooltip>
       </div>
     </div>

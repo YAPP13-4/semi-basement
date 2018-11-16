@@ -46,6 +46,11 @@
     height: 27px;
     opacity: 0.5;
   }
+  &-etcWrapper {
+    position: absolute;
+    right: 5px;
+    top: 20px;
+  }
   &-etc {
     position: absolute;
     background: black;
