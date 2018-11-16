@@ -33,31 +33,10 @@ class ChartTab extends Component {
     this.props.selectSong([songId, title, artworkUrl, duration])
     this.props.historySong(songId)
   }
-  filter = (list, predicate) => {
-    let newList = []
-    for (let i = 0; i < list.length; i++) {
-      if (predicate(list[i])) newList.push(list[i])
-    }
-    return newList
-  }
-  musicSearch = searchKeyWord => {
-    //filter 될 list. 초기 값 셋팅.
-    let updateMusicList = this.props.chartMusicInfo
-    if (!searchKeyWord) return updateMusicList
 
-    updateMusicList = this.filter(updateMusicList, music => {
-      //console.log("music.title ", music.title, "searchkeyword ", searchKeyWord)
-      console.log(
-        "music.title.search(searchKeyWord) ",
-        music.title.search(searchKeyWord)
-      )
-      return music.title.search(searchKeyWord)
-    })
-    return updateMusicList
-  }
   renderChart = () => {
-    const filteredMusic = this.musicSearch(this.props.searchKeyWord)
-    return this.props.chartMusicInfo.map((musicInfo, index) => {
+    // const filteredMusic = this.musicSearch(this.props.searchKeyWord)
+    return this.props.chartInstanceData.map((musicInfo, index) => {
       return (
         <ChartTabItem
           ind={index}
