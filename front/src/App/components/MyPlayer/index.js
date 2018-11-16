@@ -25,6 +25,7 @@ import getImageUrl from 'src/utils/ImageUtils'
 import IMAGE_SIZES from 'src/App/constants/ImageConstants'
 
 import css from './index.scss'
+import PlayerListItem from './PlayerListItem'
 
 const cx = classnames.bind(css)
 const moduleName = 'MyPlayer'
@@ -95,56 +96,17 @@ class MyPlayer extends Component {
     if (!this.state.musicListInfos.length) return <div />
     return this.state.musicListInfos.map((info, index) => {
       return (
-        <div
-          className={cx(`${moduleName}-bottom-song`)}
-          key={index}
-          onClick={() => {
-            this.onClickPlay({
-              songId: this.props.musicList[index],
-              title: info.title,
-              artworkUrl: info.artworkUrl,
-              duration: info.duration
-            })
-          }}
-        >
-          <i className={cx(`${moduleName}-bottom-song-move`)} />
-          <div
-            className={cx(`${moduleName}-bottom-song-artwork`)}
-            style={{
-              backgroundImage: `url(${getImageUrl(
-                info.artworkUrl,
-                IMAGE_SIZES.SMALL
-              )})`
-            }}
-          />
-          <div className={cx(`${moduleName}-bottom-song-center`)}>
-            <p className={cx(`${moduleName}-bottom-song-center-top`)}>
-              {info.title}
-            </p>
-            <p className={cx(`${moduleName}-bottom-song-center-bottom`)}>
-              {info.username}
-            </p>
-          </div>
-          <p className={cx(`${moduleName}-bottom-song-duration`)}>
-            {formatSeconds(info.duration)}
-          </p>
-          <div
-            className={cx(`${moduleName}-bottom-song-etc`)}
-            onClick={e => {
-              const songId = this.props.musicList[index]
-              this.props.removeSongMyPlaylist(songId)
-              e.stopPropagation()
-            }}
-          >
-            <i />
-          </div>
-        </div>
+        <PlayerListItem
+          info={info}
+          index={index}
+          onClickPlay={this.onClickPlay}
+        />
       )
     })
   }
 
   render() {
-    const [songId, songTitle, artworkUrl, songDuration] = this.props.song
+    const [ , songTitle, artworkUrl, songDuration] = this.props.song
     const { currentTime } = this.props.player
     return (
       <div
