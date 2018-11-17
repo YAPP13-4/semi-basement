@@ -20,6 +20,7 @@ const Player = ({
   togglePlay,
   toggleMuted,
   toggleHistory,
+  toggleShuffle,
   playNexSong,
   playPrevSong,
   addSongMyPlaylist
@@ -27,7 +28,7 @@ const Player = ({
   const artworkUrl = song[2]
   const title = song[1]
   const duration = song[3]
-  const { currentTime, isPlaying, muted } = player
+  const { currentTime, isPlaying, muted, shuffle } = player
   //변수명때문에 굳이 .. 위에 안씀.
   const volume = muted ? 0 : player.volume
 
@@ -76,6 +77,17 @@ const Player = ({
                 }}
               >
                 <i className={cx(`${moduleName}__button__forward`)} />
+              </div>
+              <div
+                className={cx(`${moduleName}__button`)}
+                onClick={toggleShuffle}
+              >
+                <i
+                  className={cx(
+                    `${moduleName}__button__` +
+                      (shuffle ? "shuffle" : "no-shuffle")
+                  )}
+                />
               </div>
             </div>
           </div>

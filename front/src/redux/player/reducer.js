@@ -1,5 +1,5 @@
-import * as types from './ActionType'
-import { CHANGE_MYPLAYER_CURRENT_TIME, CHANGE_MYPLAYER_VOLUME } from './actions'
+import * as types from "./ActionType"
+import { CHANGE_MYPLAYER_CURRENT_TIME, CHANGE_MYPLAYER_VOLUME } from "./actions"
 const initialState = {
   currentTime: 0,
   myPlayerCurrentTime: 0,
@@ -43,14 +43,18 @@ const player = (state = initialState, action) => {
         muted: action.muted,
         volume: action.volume
       }
-
+    case types.TOGGLE_SHUFFLE:
+      return {
+        ...state,
+        shuffle: !state.shuffle
+      }
     case types.PLAY_SONG:
       return {
         ...state,
         playingIndex: action.playingIndex,
         playlist: action.playlist
       }
-    case CHANGE_MYPLAYER_CURRENT_TIME: 
+    case CHANGE_MYPLAYER_CURRENT_TIME:
       return {
         ...state,
         myPlayerCurrentTime: action.myPlayerCurrentTime

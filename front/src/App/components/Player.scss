@@ -67,12 +67,19 @@
     width: 22px;
     height: 19px;
   }
-
+  &__button:last-child::after {
+    content: "";
+    margin-right: 1em;
+  }
+  &__button::after {
+    content: "";
+    margin-right: 2em;
+  }
   &__button {
     position: relative;
     padding: 4px;
     outline: 0;
-    margin-right: 3em;
+
     &:hover {
       cursor: pointer;
     }
@@ -86,7 +93,16 @@
       display: inline-block;
     }
   }
-
+  &__button__shuffle {
+    width: 19px;
+    height: 23px;
+    background: url("src/assets/icons/icon2.png") no-repeat -444px -56px;
+  }
+  &__button__no-shuffle {
+    width: 19px;
+    height: 23px;
+    background: url("src/assets/icons/icon2.png") no-repeat -468px -56px;
+  }
   &__button__pause {
     width: 12px;
     height: 14px;
