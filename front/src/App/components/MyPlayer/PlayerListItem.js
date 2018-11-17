@@ -2,7 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import classnames from 'classnames/bind'
 
-import { removeSongMyPlaylist } from 'src/redux/myPlayer/actions'
+import {
+  addSongMyPlaylist,
+  removeSongMyPlaylist
+} from 'src/redux/myPlayer/actions'
 import { formatSeconds } from 'src/utils/NumberUtils'
 import getImageUrl from 'src/utils/ImageUtils'
 import IMAGE_SIZES from 'src/App/constants/ImageConstants'
@@ -18,6 +21,7 @@ const PlayerListItem = ({
   index,
   musicList,
   onClickPlay,
+  addSongMyPlaylist,
   removeSongMyPlaylist
 }) => {
   return (
@@ -51,16 +55,19 @@ const PlayerListItem = ({
         {formatSeconds(info.duration)}
       </p>
       <div className={cx(`${moduleName}-etcWrapper`)}>
-        <Tooltip>
-          <div
-            className={cx(`${moduleName}-etc`)}
-            onClick={e => {
-              // const songId = this.props.musicList[index]
-              // removeSongMyPlaylist(songId)
-              // alert('hi')
-              // e.stopPropagation()
-            }}
-          >
+        <Tooltip
+          onClickAdd={e => {
+            const songId = musicList[index]
+            addSongMyPlaylist(songId)
+            e.stopPropagation()
+          }}
+          onClickRemove={e => {
+            const songId = musicList[index]
+            removeSongMyPlaylist(songId)
+            e.stopPropagation()
+          }}
+        >
+          <div className={cx(`${moduleName}-etc`)}>
             <i />
           </div>
         </Tooltip>
@@ -71,5 +78,5 @@ const PlayerListItem = ({
 
 export default connect(
   ({ playList }) => ({ musicList: playList.musicList }),
-  { removeSongMyPlaylist }
+  { addSongMyPlaylist, removeSongMyPlaylist }
 )(PlayerListItem)

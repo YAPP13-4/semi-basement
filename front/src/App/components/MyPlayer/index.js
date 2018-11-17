@@ -97,6 +97,7 @@ class MyPlayer extends Component {
     return this.state.musicListInfos.map((info, index) => {
       return (
         <PlayerListItem
+          key={index}
           info={info}
           index={index}
           onClickPlay={this.onClickPlay}
@@ -236,7 +237,6 @@ class MyPlayer extends Component {
               <i />
             </h4>
           </div>
-          {/* 꼭 컴포넌트 분리하자... ㅠ */}
           <div className={cx(`${moduleName}-bottom-songWrapper`)}>
             {this.renderPlayList()}
           </div>

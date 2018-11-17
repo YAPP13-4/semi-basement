@@ -40,6 +40,9 @@
       width: 180px;
       text-align: center;
     }
+    &:hover {
+      background: gray;
+    }
   }
   &-innerSecond {
     width: 200px;
@@ -59,6 +62,9 @@
       display: inline-block;
       width: 180px;
       text-align: center;
+    }
+    &:hover {
+      background: gray;
     }
   }
   &-innerThird {
@@ -80,6 +86,9 @@
       display: inline-block;
       width: 180px;
       text-align: center;
+    }
+    &:hover {
+      background: gray;
     }
   }
 }

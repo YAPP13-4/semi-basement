@@ -7,6 +7,7 @@ import css from './Tooltip.scss'
 const cx = classnames.bind(css)
 const moduleName = 'Tooltip'
 
+// TODO: HOC로 분리하기..
 class Tooltip extends Component {
   constructor(props) {
     super(props)
@@ -32,15 +33,31 @@ class Tooltip extends Component {
         <div onClick={this.toggle}>{this.props.children}</div>
         <div style={style} className={cx(`${moduleName}-tooltipWrapper`)}>
           <div className={cx(`${moduleName}-arrow`)} />
-          <div className={cx(`${moduleName}-innerFirst`)}>
+          <div
+            className={cx(`${moduleName}-innerFirst`)}
+            onClick={(e) => {
+              this.props.onClickAdd(e)
+              this.toggle(e)
+            }}
+          >
             <div className={cx(`${moduleName}-innerFirst-addIcon`)} />
             <span>add</span>
           </div>
-          <div className={cx(`${moduleName}-innerSecond`)}>
+          <div
+            className={cx(`${moduleName}-innerSecond`)}
+            onClick={() => {
+              alert('share!')
+            }}
+          >
             <div className={cx(`${moduleName}-innerSecond-shareIcon`)} />
             <span>share</span>
           </div>
-          <div className={cx(`${moduleName}-innerThird`)}>
+          <div
+            className={cx(`${moduleName}-innerThird`)}
+            onClick={() => {
+              alert('like!')
+            }}
+          >
             <div className={cx(`${moduleName}-innerThird-likeIcon`)} />
             <span>like</span>
           </div>
