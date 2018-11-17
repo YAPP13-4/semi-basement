@@ -22,7 +22,7 @@ class Tooltip extends Component {
   render() {
     const style = {
       opacity: +this.state.opacity,
-      zIndex: 1000,
+      zIndex: this.state.opacity ? 1000 : -1000,
       top: 60,
       left: -210,
       position: 'absolute'
@@ -31,10 +31,19 @@ class Tooltip extends Component {
       <div className={cx(`${moduleName}`)}>
         <div onClick={this.toggle}>{this.props.children}</div>
         <div style={style} className={cx(`${moduleName}-tooltipWrapper`)}>
-          <div className={cx(`${moduleName}-arrow`)}></div>
-          <div className={cx(`${moduleName}-innerFirst`)}>add</div>
-          <div className={cx(`${moduleName}-innerSecond`)}>share</div>
-          <div className={cx(`${moduleName}-innerThird`)}>like</div>
+          <div className={cx(`${moduleName}-arrow`)} />
+          <div className={cx(`${moduleName}-innerFirst`)}>
+            <div className={cx(`${moduleName}-innerFirst-addIcon`)} />
+            <span>add</span>
+          </div>
+          <div className={cx(`${moduleName}-innerSecond`)}>
+            <div className={cx(`${moduleName}-innerSecond-shareIcon`)} />
+            <span>share</span>
+          </div>
+          <div className={cx(`${moduleName}-innerThird`)}>
+            <div className={cx(`${moduleName}-innerThird-likeIcon`)} />
+            <span>like</span>
+          </div>
         </div>
       </div>
     )
