@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import classnames from 'classnames/bind'
-import axios from 'axios'
+import React, { Component } from "react"
+import { connect } from "react-redux"
+import classnames from "classnames/bind"
+import axios from "axios"
 
-import { toggleMyplayer } from 'src/redux/meta/actions.js'
-import { selectSong, historySong } from 'src/redux/music/actions'
+import { toggleMyplayer } from "src/redux/meta/actions.js"
+import { selectSong, historySong } from "src/redux/music/actions"
 import {
   onPlay,
   onPause,
@@ -12,22 +12,22 @@ import {
   playPrevSong,
   changeMyPlayerCurrentTime,
   changeMyPlayerVolume
-} from 'src/redux/player/actions'
-import { changePlayList } from 'src/redux/playlist/actions'
+} from "src/redux/player/actions"
+import { changePlayList } from "src/redux/playlist/actions"
 import {
   removeSongMyPlaylist,
   setMyPlayerSubPlayList
-} from 'src/redux/myPlayer/actions'
-import Slider from 'src/App/components/Slider/'
-import { formatSeconds } from 'src/utils/NumberUtils'
-import { SONG_URL } from 'src/App/constants/ApiConstants'
-import getImageUrl from 'src/utils/ImageUtils'
-import IMAGE_SIZES from 'src/App/constants/ImageConstants'
+} from "src/redux/myPlayer/actions"
+import Slider from "src/App/components/Slider/"
+import { formatSeconds } from "src/utils/NumberUtils"
+import { SONG_URL } from "src/App/constants/ApiConstants"
+import getImageUrl from "src/utils/ImageUtils"
+import IMAGE_SIZES from "src/App/constants/ImageConstants"
 
-import css from './index.scss'
+import css from "./index.scss"
 
 const cx = classnames.bind(css)
-const moduleName = 'MyPlayer'
+const moduleName = "MyPlayer"
 
 class MyPlayer extends Component {
   constructor(props) {
@@ -71,7 +71,7 @@ class MyPlayer extends Component {
 
   getMusicInfo = musicId => {
     return axios
-      .get(SONG_URL.replace(':id', musicId))
+      .get(SONG_URL.replace(":id", musicId))
       .then(
         ({
           data: {
@@ -149,7 +149,7 @@ class MyPlayer extends Component {
     return (
       <div
         className={cx(`${moduleName}`)}
-        style={{ display: this.props.showMyplayer ? '' : 'none' }}
+        style={{ display: this.props.showMyplayer ? "" : "none" }}
       >
         <div onClick={this.handleClose} className={cx(`${moduleName}-close`)} />
         <div
@@ -197,7 +197,7 @@ class MyPlayer extends Component {
                 <div
                   className={cx(
                     `${moduleName}-top-musicCard-player-` +
-                      (this.props.player.isPlaying ? 'pause' : 'play')
+                      (this.props.player.isPlaying ? "pause" : "play")
                   )}
                   onClick={this.togglePlay}
                 >

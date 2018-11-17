@@ -12,10 +12,16 @@ const moduleName = "SearchResult"
 class SearchResult extends PureComponent {
   //FIX ME!
   state = {
-    term: ""
+    term: "",
+    research: false //SearchResult에서 재검색 하는지 검사할 state
   }
   onInputChange = term => {
-    this.setState({ term })
+    this.setState(() => {
+      return {
+        term: term,
+        research: true
+      }
+    })
   }
   handleSubmit = e => {
     e.preventDefault()
@@ -37,24 +43,28 @@ class SearchResult extends PureComponent {
     }
     const fuse = new Fuse(this.props.musicData, searchOpts)
     const matchResult = fuse.search(this.props.searchKeyWord)
-    console.log("matchResult ", matchResult)
+    //console.log("matchResult ", matchResult)
     return matchResult
   }
   render() {
     const matchResult = this.search()
-    return (
+    return !matchResult ? (
+      <div>No result</div>
+    ) : (
       <div className={cx(`${moduleName}`)}>
         <div className={cx(`${moduleName}-top`)}>
           <form onSubmit={this.handleSubmit}>
             <div className={cx(`${moduleName}-top-inputWrapper`)}>
               <div className={cx(`${moduleName}-top-inputWrapper-search`)}>
-                Search :{" "}
+                Search :
               </div>
               <input
                 type="text"
                 onChange={event => this.onInputChange(event.target.value)}
                 value={
-                  !this.state.term ? this.props.searchKeyWord : this.state.term
+                  !this.state.research
+                    ? this.props.searchKeyWord
+                    : this.state.term
                 }
               />
             </div>

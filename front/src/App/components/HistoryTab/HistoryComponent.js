@@ -6,7 +6,6 @@ import getImageUrl from "../../../utils/ImageUtils"
 import { selectSong } from "../../../redux/music/actions"
 import { connect } from "react-redux"
 import { onPlay, onPause } from "src/redux/player/actions"
-import { bindActionCreators } from "redux"
 import selectIcon from "src/assets/icons/icon2.png"
 const cx = classnames.bind(css)
 const moduleName = "HistoryComponent"
