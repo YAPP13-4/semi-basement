@@ -108,3 +108,35 @@ export function loadSongDetailFailure(err) {
     err
   }
 }
+
+export const LOAD_KEYWORD_MUSIC = `${NAME}/LOAD_KEYWORD_MUSIC`
+export const LOAD_KEYWORD_MUSIC_REQUEST = `${NAME}/LOAD_KEYWORD_MUSIC_REQUEST`
+export const LOAD_KEYWORD_MUSIC_SUCCESS = `${NAME}/LOAD_KEYWORD_MUSIC_SUCCESS`
+export const LOAD_KEYWORD_MUSIC_FAILURE = `${NAME}/LOAD_KEYWORD_MUSIC_FAILURE`
+
+export function loadKeywordMusic(keyword) {
+  return {
+    type: LOAD_KEYWORD_MUSIC,
+    keyword
+  }
+}
+
+export function loadKeywordMusicsRequest() {
+  return {
+    type: LOAD_KEYWORD_MUSIC_REQUEST
+  }
+}
+
+export function loadKeywordMusicSuccess(data) {
+  return {
+    type: LOAD_KEYWORD_MUSIC_SUCCESS,
+    data
+  }
+}
+
+export function loadKeywordMusicFailure(err) {
+  return {
+    type: LOAD_KEYWORD_MUSIC_FAILURE,
+    err
+  }
+}

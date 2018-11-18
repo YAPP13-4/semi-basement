@@ -1,5 +1,9 @@
-import { takeEvery, all, put, call } from "redux-saga/effects"
-import { getSoundCloudSong, getSoundCloudSongInfo } from "src/api"
+import { takeEvery, all, put, call, select } from "redux-saga/effects"
+import {
+  getSoundCloudSong,
+  getSoundCloudSongInfo,
+  getKeywordSearchResult
+} from "src/api"
 import {
   LOAD_SONG_DETAIL,
   loadSongDetailRequest,
@@ -12,7 +16,11 @@ import {
   HISTORY_SONG,
   historySongRequest,
   historySongSuccess,
-  historySongFailure
+  historySongFailure,
+  LOAD_KEYWORD_MUSIC,
+  loadKeywordMusicsRequest,
+  loadKeywordMusicSuccess,
+  loadKeywordMusicFailure
 } from "./actions"
 export function* updateHistoryLocalStorage(action) {
   //FIXME : reaplace with selectSong action . song[0] === songId
@@ -81,6 +89,7 @@ export function* watchLoadSongInfoFlow() {
 
 export function* loadSongDetailFlow(action) {
   const { songId } = action
+
   yield put(loadSongDetailRequest())
   try {
     const { data } = yield call(getSoundCloudSong, songId)
@@ -95,6 +104,22 @@ export function* watchLoadSongDtailFlow() {
   yield takeEvery(LOAD_SONG_DETAIL, loadSongDetailFlow)
 }
 
+export function* loadKeywordMusicFlow(action) {
+  const { keyword } = action
+  //FIXME : show issue #109 comment !!!!!
+  const getMusicInfo = state => state.music.musicInfo
+  const musicInfo = yield select(getMusicInfo)
+  yield put(loadKeywordMusicsRequest())
+  try {
+    const { data } = yield call(getKeywordSearchResult, [musicInfo, keyword])
+    yield put(loadKeywordMusicSuccess(data))
+  } catch (error) {
+    yield put(loadKeywordMusicFailure(error))
+  }
+}
+export function* watchLoadKeywordMusicFlow() {
+  yield takeEvery(LOAD_KEYWORD_MUSIC, loadKeywordMusicFlow)
+}
 export default function* musicRoot() {
   yield all([
     watchLoadSongDtailFlow(),

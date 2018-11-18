@@ -35,7 +35,7 @@ const routes = [
     component: SongRegist
   },
   {
-    path: "/search",
+    path: "/search/:keyword",
     component: SearchResult
   },
   {

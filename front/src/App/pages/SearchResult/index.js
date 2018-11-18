@@ -1,8 +1,7 @@
 import React, { PureComponent } from "react"
 import { connect } from "react-redux"
 import classnames from "classnames/bind"
-import Fuse from "fuse.js"
-import { searchMusicRequest } from "src/redux/search/actions"
+import { loadKeywordMusic } from "src/redux/music/actions"
 import ChartTab from "../Home/Chart/ChartTab"
 import css from "./index.scss"
 
@@ -25,27 +24,9 @@ class SearchResult extends PureComponent {
   }
   handleSubmit = e => {
     e.preventDefault()
-    this.props.searchMusicRequest(this.state.term)
+    this.props.loadKeywordMusic(this.state.term)
   }
-  search() {
-    console.log("props check ", this.props.musicData)
-    const searchOpts = {
-      caseSensitive: true,
-      shouldSort: true,
-      matchAllTokens: true,
-      findAllMatches: true,
-      threshold: 0.6,
-      location: 0,
-      distance: 100,
-      maxPatternLength: 32,
-      minMatchCharLength: 1,
-      keys: ["title", "user.username"]
-    }
-    const fuse = new Fuse(this.props.musicData, searchOpts)
-    const matchResult = fuse.search(this.props.searchKeyWord)
-    //console.log("matchResult ", matchResult)
-    return matchResult
-  }
+  componentDidMount() {}
   render() {
     const matchResult = this.search()
     return !matchResult ? (
@@ -77,14 +58,7 @@ class SearchResult extends PureComponent {
     )
   }
 }
-function mapStateToProps(state) {
-  const { search, music } = state
-  return {
-    searchKeyWord: search.searchKeyWord,
-    musicData: music.musicInfo
-  }
-}
 export default connect(
-  mapStateToProps,
-  { searchMusicRequest }
+  null,
+  { loadKeywordMusic }
 )(SearchResult)

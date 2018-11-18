@@ -2,7 +2,7 @@ import React, { PureComponent } from "react"
 import { Redirect } from "react-router-dom"
 import { connect } from "react-redux"
 import classnames from "classnames/bind"
-import { searchMusicRequest } from "src/redux/search/actions"
+import { loadKeywordMusicsRequest } from "src/redux/music/actions"
 import css from "./SearchBar.scss"
 const cx = classnames.bind(css)
 const moduleName = "SearchBar"
@@ -17,7 +17,7 @@ class SearchBar extends PureComponent {
   handleSubmit = e => {
     e.preventDefault()
     console.log("submit", this.state.term)
-    this.props.searchMusicRequest(this.state.term)
+    this.props.loadKeywordMusicsRequest(this.state.term)
 
     this.setState(() => {
       return {
@@ -28,7 +28,7 @@ class SearchBar extends PureComponent {
   }
   renderRedirect = () => {
     if (this.state.redir) {
-      return <Redirect to="/search" />
+      return <Redirect to={"/search/" + this.state.term} />
     }
   }
   render() {
@@ -50,5 +50,5 @@ class SearchBar extends PureComponent {
 }
 export default connect(
   null,
-  { searchMusicRequest }
+  { loadKeywordMusicsRequest }
 )(SearchBar)
