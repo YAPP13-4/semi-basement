@@ -106,7 +106,7 @@ export function* watchLoadSongDtailFlow() {
 
 export function* loadKeywordMusicFlow(action) {
   const { keyword } = action
-  //FIXME : show issue #109 comment !!!!!
+  //FIXME : show issue #109 comment !!!!! 일시적 처리임.
   const getMusicInfo = state => state.music.musicInfo
   const musicInfo = yield select(getMusicInfo)
   yield put(loadKeywordMusicsRequest())

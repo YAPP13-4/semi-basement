@@ -24,11 +24,15 @@ class SearchResult extends PureComponent {
   }
   handleSubmit = e => {
     e.preventDefault()
-    this.props.loadKeywordMusic(this.state.term)
+    this.props.searchMusicRequest(this.state.term)
   }
-  componentDidMount() {}
+  componentDidMount() {
+    //need to test !
+    this.props.loadKeywordMusic(this.props.math.params.keyword)
+  }
+
   render() {
-    const matchResult = this.search()
+    const matchResult = this.props.searchResult
     return !matchResult ? (
       <div>No result</div>
     ) : (
@@ -58,7 +62,12 @@ class SearchResult extends PureComponent {
     )
   }
 }
+const mapStateToProps = ({ music }) => {
+  return {
+    searchResult: music.searchResult
+  }
+}
 export default connect(
-  null,
+  mapStateToProps,
   { loadKeywordMusic }
 )(SearchResult)

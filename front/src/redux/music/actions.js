@@ -121,7 +121,7 @@ export function loadKeywordMusic(keyword) {
   }
 }
 
-export function loadKeywordMusicsRequest() {
+export function loadKeywordMusicRequest() {
   return {
     type: LOAD_KEYWORD_MUSIC_REQUEST
   }
