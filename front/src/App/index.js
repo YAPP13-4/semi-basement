@@ -5,12 +5,10 @@ import classnames from "classnames/bind"
 
 import PlayerContainer from "src/App/container/PlayerContainer"
 import MyPlayer from "src/App/components/MyPlayer"
-
+import NavBar from "src/App/components/Header/navBar"
 import routes from "./routes"
 import css from "./index.scss"
 import Header from "./components/Header"
-
-import NavBar from "../App/components/Header/navBar"
 
 const cx = classnames.bind(css)
 const moduleName = "App"
