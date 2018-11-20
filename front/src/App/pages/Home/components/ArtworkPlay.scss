@@ -17,6 +17,7 @@
     cursor: pointer;
     height: 188px;
     background-size: contain;
+    border-radius: 3px 3px 0px 0px;
   }
   &-song-body-card-playicon {
     position: absolute;
@@ -44,9 +45,10 @@
   &-song-body-card-title {
     font-family: $font-bold;
     padding-bottom: 5px;
-    font-size: 17px;
+    font-size: 14px;
   }
   &-song-body-card-singer {
     color: white;
+    font-size: 13px;
   }
 }

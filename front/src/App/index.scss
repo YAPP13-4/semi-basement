@@ -5,12 +5,12 @@
   font-family: $font-normal;
   background-color: black;
   min-height: 1024px;
-  height: 100%;
   min-width: 1440px;
   width: auto !important;
+  background-image: linear-gradient(to bottom, #282828, #000000);
   &-body {
-    padding-top: 94px; // top nav padding
-    background: black;
+    padding-top: 60px; // top nav padding
+    background: transparent;
     width: 1440px;
     //height: 100vh;
     margin: 0 auto;

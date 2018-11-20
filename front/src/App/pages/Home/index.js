@@ -35,13 +35,13 @@ class Home extends PureComponent {
         <Navigation />
         <div>
           <ArtWorkContainer
-            category="SEBA'S CHOICE"
+            category="Seba's Choice"
             musicInfos={this.props.musicInfos}
           />
         </div>
         <div>
           <ArtWorkContainer
-            category="YOU_KNOW"
+            category="Artists you should know"
             musicInfos={this.props.subMusicInfos1}
           />
         </div>

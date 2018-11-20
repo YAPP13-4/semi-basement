@@ -3,30 +3,35 @@
   right: 0;
   z-index: 1000;
   width: 600px;
+  -webkit-box-shadow: 22px 10px 10px 10px rgba(0, 0, 0, 0.52);
+  -moz-box-shadow: 2px 10px 10px 10px rgba(0, 0, 0, 0.52);
+  box-shadow: 2px 10px 10px 10px rgba(0, 0, 0, 0.52);
   &-topImageWrapper {
     background: no-repeat center center;
     background-size: cover;
+    overflow: hidden;
   }
   &-topImage {
-    height: 460px;
-    padding: 40px;
-    filter: blur(20px);
+    height: 400px;
+    padding: -40px;
+    filter: blur(18px);
+    margin: -20px -10px -20px -5px;
     background: no-repeat center center;
     background-size: cover;
   }
   &-top {
     position: absolute;
-    top: 10px;
-    height: 460px;
+    top: 0px;
+    height: 400px;
     padding: 40px;
     box-sizing: border-box;
 
     &-musicCard {
-      height: 240px;
+      height: 230px;
       display: flex;
       &-coverImg {
-        height: 240px;
-        width: 240px;
+        height: 230px;
+        width: 230px;
         border-radius: 5px;
         background: no-repeat center center;
         background-size: cover;
@@ -46,7 +51,8 @@
           font-size: 23px;
         }
         h2 {
-          font-size: 30px;
+          font-size: 26px;
+          font-weight: 600;
           width: 235px;
           height: 33px;
           text-overflow: ellipsis;
@@ -58,7 +64,7 @@
       &-player {
         position: relative;
         // background: darkcyan;
-        bottom: 0px;
+        bottom: 20px;
         right: 0px;
         height: 120px;
         width: 280px;
@@ -178,7 +184,7 @@
         }
       }
       &-mainTitle {
-        font-size: 26px;
+        font-size: 22px;
         margin-left: 77px;
         margin-right: 160px;
         margin-bottom: 0px;
@@ -187,7 +193,7 @@
       &-toggleTitle {
         position: absolute;
         right: 60px;
-        font-size: 20px;
+        font-size: 18px;
         margin-bottom: 0px;
         color: #ffffff;
         opacity: 0.5;

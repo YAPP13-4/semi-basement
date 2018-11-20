@@ -1,5 +1,6 @@
 .Header {
   width: 100%;
+  height: 60px;
   background: none;
   z-index: 5;
   position: fixed;
@@ -11,7 +12,12 @@
     min-width: 1440px;
     //z-index: 5;
     //position: relative;
-    padding: 28px 50px 28px 50px;
+    padding: 0px 50px;
+    position: absolute;
+    height:20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
     display: flex;
     justify-content: space-between;
 
@@ -29,7 +35,9 @@
   }
   &-logo {
     position: absolute;
-    left: 744px;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
   }
   &-rightSide {
     display: flex;
@@ -37,8 +45,8 @@
       span {
         display: block;
         background: url("src/assets/icons/icon2.png") no-repeat -169px -93px;
-        width: 16px;
-        height: 15px;
+        width: 19px;
+        height: 20px;
         margin-left: 124px;
       }
     }
@@ -50,8 +58,14 @@
     }
     span {
       cursor: pointer;
-      padding: 9px 32px;
-      border-radius: 18.5px;
+      display: inline-block;
+      position: relative;
+      top:50%;
+      height: 38px;
+      line-height: 38px;
+      transform: translate(-50%,-50%);
+      padding: 0px 32px;
+      border-radius: 19px;
       border: solid 1px #979797;
       font-size: 14px;
       color: white;

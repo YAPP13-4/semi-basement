@@ -17,7 +17,7 @@ class Loading extends PureComponent {
     }
     return (
       <div className={cx(`${moduleName}`)}>
-        <Lottie options={defaultOptions} height={400} width={400} />
+        <Lottie options={defaultOptions} height={250} width={250} />
       </div>
     )
   }
