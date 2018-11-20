@@ -4,7 +4,7 @@ import { compose } from "redux"
 import { Link } from "react-router-dom"
 import classnames from "classnames/bind"
 import { toggleMyplayer, toggleGNB } from "src/redux/meta/actions.js"
-import logo from "src/assets/logos/logo.png"
+import logo from "src/assets/logos/logo.svg"
 import css from "./index.scss"
 
 const cx = classnames.bind(css)

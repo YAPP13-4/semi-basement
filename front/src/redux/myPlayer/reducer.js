@@ -14,7 +14,7 @@ const myPlayer = (
       197769251,
       277971445
     ],
-    subPlayListName: "SEBA'S CHOICE"
+    subPlayListName: "seba's choice"
   },
   action
 ) => {

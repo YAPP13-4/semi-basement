@@ -1,8 +1,11 @@
+@import "src/variable.scss";
+
 .ArtWorkPlayContainer {
   &-category {
+    font-family: AvertaCYBold;
     display: flex;
-    padding: 70px 65px 20px 65px;
-    font-size: 23px;
+    padding: 55px 65px 20px 65px;
+    font-size: 20px;
   }
   &-category-title {
     margin-left: 20px;
