@@ -12,6 +12,7 @@ import IMAGE_SIZES from 'src/App/constants/ImageConstants'
 
 import css from './PlayerListItem.scss'
 import Tooltip from './Tooltip'
+import MyPlayListTooltip from './MyPlayListTooltip'
 
 const cx = classnames.bind(css)
 const moduleName = 'PlayerListItem'
@@ -55,7 +56,7 @@ const PlayerListItem = ({
         {formatSeconds(info.duration)}
       </p>
       <div className={cx(`${moduleName}-etcWrapper`)}>
-        <Tooltip
+        {/* <Tooltip
           onClickAdd={e => {
             const songId = musicList[index]
             addSongMyPlaylist(songId)
@@ -70,7 +71,12 @@ const PlayerListItem = ({
           <div className={cx(`${moduleName}-etc`)}>
             <i />
           </div>
-        </Tooltip>
+        </Tooltip> */}
+        <MyPlayListTooltip>
+          <div className={cx(`${moduleName}-etc`)}>
+            <i />
+          </div>
+        </MyPlayListTooltip>
       </div>
     </div>
   )

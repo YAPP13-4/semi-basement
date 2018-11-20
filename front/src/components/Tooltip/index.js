@@ -11,11 +11,25 @@ const Tooltip = Component => {
     constructor(props) {
       super(props)
       this.state = { opacity: false }
+      this.state.handleClick = this.handleClick.bind(this)
+    }
+
+    handleClick(e) {
+      alert('click the tooltip!')
+      e.stopPropagation()
     }
 
     render() {
       console.log(this.state)
-      return <Component {...this.state} {...this.props} />
+
+      return (
+        <div>
+          <Component
+            {...this.state}
+            {...this.props}
+          />
+        </div>
+      )
     }
   }
   return _Tooltip
