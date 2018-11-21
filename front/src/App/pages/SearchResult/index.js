@@ -63,17 +63,17 @@ class SearchResult extends PureComponent {
     const matchResultItem = this.isValidValue(
       matchResult,
       this.seperateResult(
-        this.filterResult(matchResult, res => res.matches[0].key === "title"),
+        this.filterResult(
+          matchResult,
+          this.state.selectedResult === "All"
+            ? res => res
+            : res => res.matches[0].key === this.state.selectedResult
+        ),
         res => res.item
       ),
       ""
     )
     console.log("matchresult item ", matchResultItem)
-    const matchResultMatches = this.isValidValue(
-      matchResult,
-      this.seperateResult(matchResult, res => res.matches),
-      ""
-    )
 
     return !matchResult ? (
       <div>No result</div>
