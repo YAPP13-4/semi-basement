@@ -7,6 +7,7 @@ import {
   LOAD_SONG_DETAIL_FAILURE,
   LOAD_SONG_INFO_REQUEST,
   LOAD_SONG_INFO_SUCCESS,
+  LOAD_KEYWORD_MUSIC,
   LOAD_KEYWORD_MUSIC_SUCCESS,
   LOAD_KEYWORD_MUSIC_FAILURE
 } from "./actions"
@@ -28,6 +29,7 @@ const music = (
     recommendMusicInfo2: null,
     songDetail: null,
     historySong: [],
+    searchKeyword: "",
     searchResult: null
   },
   action
@@ -75,6 +77,11 @@ const music = (
         ...state,
         loading: false,
         error: { ...action.err }
+      }
+    case LOAD_KEYWORD_MUSIC:
+      return {
+        ...state,
+        searchKeyword: action.keyword
       }
     case LOAD_KEYWORD_MUSIC_SUCCESS:
       return {

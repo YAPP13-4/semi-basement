@@ -2,6 +2,7 @@ import React, { PureComponent } from "react"
 import { connect } from "react-redux"
 import classnames from "classnames/bind"
 import { loadKeywordMusic } from "src/redux/music/actions"
+import NavBar from "./components/NavBar"
 import ChartTab from "../Home/Chart/ChartTab"
 import css from "./index.scss"
 
@@ -12,7 +13,8 @@ class SearchResult extends PureComponent {
   //FIX ME!
   state = {
     term: "",
-    research: false //SearchResult에서 재검색 하는지 검사할 state
+    research: false, //SearchResult에서 재검색 하는지 검사할 state
+    selectedResult: "All"
   }
   onInputChange = term => {
     this.setState(() => {
@@ -22,39 +24,35 @@ class SearchResult extends PureComponent {
       }
     })
   }
+  handleShowResultChange = option => {
+    this.setState(prevState => ({
+      ...prevState,
+      selectedResult: option
+    }))
+  }
   handleSubmit = e => {
     e.preventDefault()
     this.props.searchMusicRequest(this.state.term)
   }
   componentDidMount() {
-    //need to test !
-    console.log("this.props.match : ", this.props.match)
     this.props.loadKeywordMusic(this.props.match.params.keyword)
   }
   seperateResult = (list, iteratee) => {
     let seperatedList = []
-    if (list) {
-      console.log("list ", list, "list[0].item ", list[0].item)
-      console.log("iteratee[list[i]] ", iteratee(list[0]))
-      for (let i = 0; i < list.length; i++) {
-        seperatedList.push(iteratee(list[i]))
-      }
-      console.log("seperatedList  ", seperatedList)
-      return seperatedList
-    }
-    return null
-  }
-  //FIX ME : 왜 안되는거지 ..ㅠㅠㅠ
-  /*
-      const matchResultItem = this.isValidValue(
-      matchResult,
-      this.seperateResult(matchResult, res => res.item),
-      ""
-    )
-  */
 
+    for (let i = 0; i < list.length; i++) {
+      seperatedList.push(iteratee(list[i]))
+    }
+    return seperatedList
+  }
+  filterResult = (list, predicate) => {
+    let newList = []
+    for (let i = 0; i < list.length; i++) {
+      if (predicate(list[i])) newList.push(list[i])
+    }
+    return newList
+  }
   isValidValue = (data, validAction, noValidACtion) => {
-    console.log("data", data)
     return data ? validAction : noValidACtion
   }
   render() {
@@ -62,21 +60,21 @@ class SearchResult extends PureComponent {
       ? Object.values(this.props.searchResult)
       : null
 
-    const matchResultItem = this.props.searchResult
-      ? this.seperateResult(matchResult, res => res.item)
-      : null
-
+    const matchResultItem = this.isValidValue(
+      matchResult,
+      this.seperateResult(
+        this.filterResult(matchResult, res => res.matches[0].key === "title"),
+        res => res.item
+      ),
+      ""
+    )
+    console.log("matchresult item ", matchResultItem)
     const matchResultMatches = this.isValidValue(
       matchResult,
       this.seperateResult(matchResult, res => res.matches),
       ""
     )
-    /*
-    const matchResultMatches = matchResult
-      ? matchResult.map(result => {
-          return result.matches
-        })
-      : null*/
+
     return !matchResult ? (
       <div>No result</div>
     ) : (
@@ -92,7 +90,7 @@ class SearchResult extends PureComponent {
                 onChange={event => this.onInputChange(event.target.value)}
                 value={
                   !this.state.research
-                    ? this.props.searchKeyWord
+                    ? this.props.searchKeyword
                     : this.state.term
                 }
               />
@@ -100,6 +98,9 @@ class SearchResult extends PureComponent {
           </form>
         </div>
         <div className={cx(`${moduleName}-mid`)}>
+          <NavBar handleShowResultChange={this.handleShowResultChange} />
+        </div>
+        <div className={cx(`${moduleName}-bot`)}>
           <ChartTab chartInstanceData={matchResultItem} />
         </div>
       </div>
@@ -108,6 +109,7 @@ class SearchResult extends PureComponent {
 }
 const mapStateToProps = ({ music }) => {
   return {
+    searchKeyword: music.searchKeyword,
     searchResult: music.searchResult
   }
 }
