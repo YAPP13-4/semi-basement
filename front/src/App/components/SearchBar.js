@@ -10,9 +10,6 @@ class SearchBar extends PureComponent {
     term: "",
     redir: false
   }
-  onInputChange = term => {
-    this.setState({ term })
-  }
   handleSubmit = e => {
     e.preventDefault()
     console.log("submit", this.state.term)
@@ -20,11 +17,18 @@ class SearchBar extends PureComponent {
 
     this.setState(() => {
       return {
-        term: "",
+        //term: "",
         redir: true
       }
     })
   }
+  getTargetValue = e => {
+    return this.onInputChange(e.target.value)
+  }
+  onInputChange = targetValue => {
+    this.setState(() => ({ term: targetValue }))
+  }
+
   renderRedirect = () => {
     if (this.state.redir) {
       return <Redirect to={"/search/" + this.state.term} />
@@ -39,7 +43,7 @@ class SearchBar extends PureComponent {
           <input
             className={cx(`${moduleName}-form-input`)}
             value={this.state.term}
-            onChange={event => this.onInputChange(event.target.value)}
+            onChange={this.getTargetValue}
             type="text"
           />
         </form>

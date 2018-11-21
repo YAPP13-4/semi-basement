@@ -28,11 +28,55 @@ class SearchResult extends PureComponent {
   }
   componentDidMount() {
     //need to test !
-    this.props.loadKeywordMusic(this.props.math.params.keyword)
+    console.log("this.props.match : ", this.props.match)
+    this.props.loadKeywordMusic(this.props.match.params.keyword)
   }
+  seperateResult = (list, iteratee) => {
+    let seperatedList = []
+    if (list) {
+      console.log("list ", list, "list[0].item ", list[0].item)
+      console.log("iteratee[list[i]] ", iteratee(list[0]))
+      for (let i = 0; i < list.length; i++) {
+        seperatedList.push(iteratee(list[i]))
+      }
+      console.log("seperatedList  ", seperatedList)
+      return seperatedList
+    }
+    return null
+  }
+  //FIX ME : 왜 안되는거지 ..ㅠㅠㅠ
+  /*
+      const matchResultItem = this.isValidValue(
+      matchResult,
+      this.seperateResult(matchResult, res => res.item),
+      ""
+    )
+  */
 
+  isValidValue = (data, validAction, noValidACtion) => {
+    console.log("data", data)
+    return data ? validAction : noValidACtion
+  }
   render() {
     const matchResult = this.props.searchResult
+      ? Object.values(this.props.searchResult)
+      : null
+
+    const matchResultItem = this.props.searchResult
+      ? this.seperateResult(matchResult, res => res.item)
+      : null
+
+    const matchResultMatches = this.isValidValue(
+      matchResult,
+      this.seperateResult(matchResult, res => res.matches),
+      ""
+    )
+    /*
+    const matchResultMatches = matchResult
+      ? matchResult.map(result => {
+          return result.matches
+        })
+      : null*/
     return !matchResult ? (
       <div>No result</div>
     ) : (
@@ -56,7 +100,7 @@ class SearchResult extends PureComponent {
           </form>
         </div>
         <div className={cx(`${moduleName}-mid`)}>
-          <ChartTab chartInstanceData={matchResult} />
+          <ChartTab chartInstanceData={matchResultItem} />
         </div>
       </div>
     )

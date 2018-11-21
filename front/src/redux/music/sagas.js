@@ -18,7 +18,7 @@ import {
   historySongSuccess,
   historySongFailure,
   LOAD_KEYWORD_MUSIC,
-  loadKeywordMusicsRequest,
+  loadKeywordMusicRequest,
   loadKeywordMusicSuccess,
   loadKeywordMusicFailure
 } from "./actions"
@@ -106,12 +106,18 @@ export function* watchLoadSongDtailFlow() {
 
 export function* loadKeywordMusicFlow(action) {
   const { keyword } = action
+  //console.log("keyword ", keyword) OK
   //FIXME : show issue #109 comment !!!!! 일시적 처리임.
   const getMusicInfo = state => state.music.musicInfo
+  //console.log("getMusicInfo ", getMusicInfo)  OK
   const musicInfo = yield select(getMusicInfo)
-  yield put(loadKeywordMusicsRequest())
+  //console.log("musicInfo ", musicInfo) OK
+  yield put(loadKeywordMusicRequest())
   try {
-    const { data } = yield call(getKeywordSearchResult, [musicInfo, keyword])
+    // 이 call 이 .... 내가 아는 call 이라면 apply로 처리해야 함.
+    //2018.11.20 여기고치면 됨.
+    const data = yield call(getKeywordSearchResult, { musicInfo, keyword })
+    console.log("saga data ", data)
     yield put(loadKeywordMusicSuccess(data))
   } catch (error) {
     yield put(loadKeywordMusicFailure(error))
@@ -124,7 +130,8 @@ export default function* musicRoot() {
   yield all([
     watchLoadSongDtailFlow(),
     watchLoadSongInfoFlow(),
-    watchHistorySongInfoFlow()
+    watchHistorySongInfoFlow(),
+    watchLoadKeywordMusicFlow()
   ])
 }
 

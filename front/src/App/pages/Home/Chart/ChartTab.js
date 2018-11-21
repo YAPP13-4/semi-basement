@@ -53,7 +53,7 @@ class ChartTab extends Component {
         <div className={cx(`${moduleName}-chart`)}>
           <table>
             <tbody>
-              {this.props.chartMusicInfo ? this.renderChart() : <Loading />}
+              {this.props.chartInstanceData ? this.renderChart() : <Loading />}
             </tbody>
           </table>
         </div>
