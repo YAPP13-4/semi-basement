@@ -13,7 +13,7 @@ import css from './index.scss'
 const cx = classnames.bind(css)
 const moduleName = 'Tooltip'
 
-const Tooltip = Component => {
+const Tooltip = tooltipFunctions => Component => {
   class _Tooltip extends React.Component {
     constructor(props) {
       super(props)
@@ -34,6 +34,9 @@ const Tooltip = Component => {
         left: -210,
         position: 'absolute'
       }
+
+      console.log(tooltipFunctions)
+      debugger
 
       return (
         <div>
