@@ -1,7 +1,7 @@
 .Navigation {
   width: 1340px;
-  height: 85px;
-  background-color: black;
+  height: 75px;
+  background-color: transparent;
   margin: 0 50px;
   display: flex;
   justify-content: space-between;
@@ -14,7 +14,6 @@
     width: 380px;
     display: flex;
     font-size: 19px;
-    font-weight: 900;
     color: white;
     line-height: 85px;
     div {
