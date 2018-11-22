@@ -8,7 +8,6 @@ const cx = classnames.bind(css)
 const moduleName = "ChartTabContainer"
 
 const ChartTabItem = ({ musicInfo, onClickPlay, ind }) => {
-  console.log("music info ", musicInfo)
   const songId = musicInfo.id
   const title = musicInfo.title
   const creator = musicInfo.user.username

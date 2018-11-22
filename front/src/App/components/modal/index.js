@@ -7,7 +7,6 @@ const cx = classnames.bind(css)
 const moduleName = "Modal"
 
 const Modal = ({ handleClose, showModal }) => {
-  console.log("show modal", showModal)
   const showHideClassName = showModal ? "display-block" : "display-none"
   return (
     <div className={cx(`${moduleName}`)}>

@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react"
+import { connect } from "react-redux"
 import Navigation from "../components/Navigation"
-import SelectBox from "./components/SelectBox.js"
+import SelectBox from "./components/SelectBox"
 import classnames from "classnames/bind"
 import css from "./ChartTabPage.scss"
 import ChartTab from "./ChartTab"
@@ -17,11 +18,16 @@ class ChartTabPage extends PureComponent {
           <SelectBox />
         </div>
         <div className={cx(`${moduleName}-chart`)}>
-          <ChartTab />
+          <ChartTab chartInstanceData={this.props.chartMusicInfo} />
         </div>
       </div>
     )
   }
 }
-
-export default ChartTabPage
+function mapStateToProps({ chartMusic }) {
+  return {
+    chartMusicInfo: chartMusic.musicInfo
+  }
+}
+export default connect(mapStateToProps)(ChartTabPage)
+//export default ChartTabPage

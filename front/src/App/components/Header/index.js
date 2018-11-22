@@ -1,8 +1,9 @@
-import React, { Component, Fragment } from "react"
+import React, { Component } from "react"
+import { Link } from "react-router-dom"
 import { connect } from "react-redux"
 import { compose } from "redux"
-import { Link } from "react-router-dom"
 import classnames from "classnames/bind"
+import SearchBar from "../SearchBar"
 import { toggleMyplayer, toggleGNB } from "src/redux/meta/actions.js"
 import logo from "src/assets/logos/logo.svg"
 import css from "./index.scss"
@@ -23,34 +24,17 @@ class Header extends Component {
             <span onClick={this.props.toggleGNB} />
           </div>
           <div className={cx(`${moduleName}-logo`)}>
-            <img src={logo} alt="logo" />
+            <Link to="/main">
+              <img src={logo} alt="logo" />
+            </Link>
           </div>
           <div className={cx(`${moduleName}-rightSide`)}>
-            <div className={cx(`${moduleName}-rightSide-user`)}>
-              {/* sing up, sign in btn  a tag must be Link!!!*/}
-              {/* FIX ME ..... */}
-              <Link to="/sign">
-                <span className={cx(`${moduleName}-rightSide-user-signIn`)}>
-                  Sign In
-                </span>
-              </Link>
-              <Link to="/sign">
-                <span
-                  style={{
-                    backgroundColor: "#45f7aa",
-                    color: "#020202",
-                    border: "none"
-                  }}
-                >
-                  Sign Up
-                </span>
-              </Link>
+            <div className={cx(`${moduleName}-rightSide-search`)}>
+              <SearchBar />
             </div>
             <div
               className={cx(`${moduleName}-rightSide-playlist`)}
-              onClick={() => {
-                this.props.toggleMyplayer()
-              }}
+              onClick={this.props.toggleMyplayer}
             >
               <span />
             </div>

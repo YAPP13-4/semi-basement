@@ -19,24 +19,24 @@ const moduleName = "ChartTab"
 
 class ChartTab extends Component {
   static propTypes = {
-    isMypge: PropTypes.bool
+    isMypge: PropTypes.bool,
+    searchKeyWord: PropTypes.string
   }
   static defaultProps = {
-    isMypge: false
+    isMypge: false,
+    searchKeyWord: ""
   }
   componentDidMount() {
-    //this._requestId()
     this.props.loadChartSongsInfo(SongChartList)
   }
   onClickPlay = ({ songId, title, artworkUrl, duration }) => {
     this.props.selectSong([songId, title, artworkUrl, duration])
     this.props.historySong(songId)
-    //this.props.addHistory(songId)
   }
 
   renderChart = () => {
-    return this.props.chartMusicInfo.map((musicInfo, index) => {
-      //console.log('data',songInfo)
+    // const filteredMusic = this.musicSearch(this.props.searchKeyWord)
+    return this.props.chartInstanceData.map((musicInfo, index) => {
       return (
         <ChartTabItem
           ind={index}
@@ -53,7 +53,7 @@ class ChartTab extends Component {
         <div className={cx(`${moduleName}-chart`)}>
           <table>
             <tbody>
-              {this.props.chartMusicInfo ? this.renderChart() : <Loading />}
+              {this.props.chartInstanceData ? this.renderChart() : <Loading />}
             </tbody>
           </table>
         </div>

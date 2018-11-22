@@ -30,12 +30,15 @@ class Navigation extends Component {
             <Link to="/recent">Recent</Link>
           </div>
         </div>
+        {/*FIXME : 홈에 searchBar가 있어야 할 이유가 없다면, 제거할것. */}
+        {/*
         <div className={cx(`${moduleName}-leftBox`)}>
           <div>
             <i className="material-icons">search</i>
             <input placeholder={"Type something"} />
           </div>
         </div>
+        */}
       </div>
     )
   }

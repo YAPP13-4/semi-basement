@@ -7,26 +7,30 @@ import {
   LOAD_SONG_DETAIL_FAILURE,
   LOAD_SONG_INFO_REQUEST,
   LOAD_SONG_INFO_SUCCESS,
-  LOAD_SONG_INFO_FAILURE
-} from './actions'
+  LOAD_KEYWORD_MUSIC,
+  LOAD_KEYWORD_MUSIC_SUCCESS,
+  LOAD_KEYWORD_MUSIC_FAILURE
+} from "./actions"
 
 const initSong = [
   278197314,
-  'Everywhere (Beat by. NSOUL)',
-  'https://i1.sndcdn.com/artworks-000235180753-oc72f3-large.jpg',
+  "Everywhere (Beat by. NSOUL)",
+  "https://i1.sndcdn.com/artworks-000235180753-oc72f3-large.jpg",
   230.29
 ]
 
 const music = (
   state = {
-    song: initSong,
+    song: "",
     loading: false,
     infoLoading: false,
     musicInfo: null,
     recommendMusicInfo1: null,
     recommendMusicInfo2: null,
     songDetail: null,
-    historySong: []
+    historySong: [],
+    searchKeyword: "",
+    searchResult: null
   },
   action
 ) => {
@@ -72,6 +76,21 @@ const music = (
       return {
         ...state,
         loading: false,
+        error: { ...action.err }
+      }
+    case LOAD_KEYWORD_MUSIC:
+      return {
+        ...state,
+        searchKeyword: action.keyword
+      }
+    case LOAD_KEYWORD_MUSIC_SUCCESS:
+      return {
+        ...state,
+        searchResult: { ...action.data }
+      }
+    case LOAD_KEYWORD_MUSIC_FAILURE:
+      return {
+        ...state,
         error: { ...action.err }
       }
     default:

@@ -6,6 +6,7 @@ import ChartTabPage from "./pages/Home/Chart/ChartTabPage"
 import Landing from "./pages/Landing"
 import SongDetail from "./pages/SongDetail"
 import SongRegist from "./pages/SongRegister"
+import SearchResult from "./pages/SearchResult"
 const routes = [
   {
     path: "/mypage",
@@ -32,6 +33,10 @@ const routes = [
   {
     path: "/regSong",
     component: SongRegist
+  },
+  {
+    path: "/search/:keyword",
+    component: SearchResult
   },
   {
     path: "/",
