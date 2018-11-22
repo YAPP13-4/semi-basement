@@ -12,21 +12,21 @@ export default class NavBar extends PureComponent {
 
         <div
           onClick={() => {
-            this.props.handleShowResultChange("All")
+            this.props.handleExposedResultChange("All")
           }}
         >
           All
         </div>
         <div
           onClick={() => {
-            this.props.handleShowResultChange("user.username")
+            this.props.handleExposedResultChange("user.username")
           }}
         >
           Artist
         </div>
         <div
           onClick={() => {
-            this.props.handleShowResultChange("title")
+            this.props.handleExposedResultChange("title")
           }}
         >
           Title

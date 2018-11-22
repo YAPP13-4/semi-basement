@@ -24,7 +24,7 @@ class SearchResult extends PureComponent {
       }
     })
   }
-  handleShowResultChange = option => {
+  handleExposedResultChange = option => {
     this.setState(prevState => ({
       ...prevState,
       selectedResult: option
@@ -35,23 +35,10 @@ class SearchResult extends PureComponent {
     this.props.searchMusicRequest(this.state.term)
   }
   componentDidMount() {
+    console.log("params. keyword ", this.props.match.params.keyword)
     this.props.loadKeywordMusic(this.props.match.params.keyword)
   }
-  seperateResult = (list, iteratee) => {
-    let seperatedList = []
 
-    for (let i = 0; i < list.length; i++) {
-      seperatedList.push(iteratee(list[i]))
-    }
-    return seperatedList
-  }
-  filterResult = (list, predicate) => {
-    let newList = []
-    for (let i = 0; i < list.length; i++) {
-      if (predicate(list[i])) newList.push(list[i])
-    }
-    return newList
-  }
   isValidValue = (data, validAction, noValidACtion) => {
     return data ? validAction : noValidACtion
   }
@@ -62,16 +49,16 @@ class SearchResult extends PureComponent {
 
     const matchResultItem = this.isValidValue(
       matchResult,
-      this.seperateResult(
-        this.filterResult(
-          matchResult,
-          this.state.selectedResult === "All"
-            ? res => res
-            : res => res.matches[0].key === this.state.selectedResult
-        ),
-        res => res.item
-      ),
-      ""
+      matchResult
+        .filter(
+          this.isValidValue(
+            this.state.selectedResult === "All",
+            res => res,
+            res => res.matches[0].key === this.state.selectedResult
+          )
+        )
+        .map(filteredRes => filteredRes.item),
+      null
     )
     console.log("matchresult item ", matchResultItem)
 
@@ -98,7 +85,7 @@ class SearchResult extends PureComponent {
           </form>
         </div>
         <div className={cx(`${moduleName}-mid`)}>
-          <NavBar handleShowResultChange={this.handleShowResultChange} />
+          <NavBar handleExposedResultChange={this.handleExposedResultChange} />
         </div>
         <div className={cx(`${moduleName}-bot`)}>
           <ChartTab chartInstanceData={matchResultItem} />
