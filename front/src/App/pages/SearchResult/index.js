@@ -32,7 +32,7 @@ class SearchResult extends PureComponent {
   }
   handleSubmit = e => {
     e.preventDefault()
-    this.props.searchMusicRequest(this.state.term)
+    this.props.loadKeywordMusic(this.state.term)
   }
   componentDidMount() {
     console.log("params. keyword ", this.props.match.params.keyword)
@@ -40,12 +40,14 @@ class SearchResult extends PureComponent {
   }
 
   isValidValue = (data, validAction, noValidACtion) => {
+    console.log("data : ", data)
     return data ? validAction : noValidACtion
   }
   render() {
-    const matchResult = this.props.searchResult
-      ? Object.values(this.props.searchResult)
-      : null
+    const { searchResult } = this.props
+    console.log("searchResult ", searchResult)
+    const matchResult = searchResult ? Object.values(searchResult) : null
+    console.log("matchResult ", matchResult)
 
     const matchResultItem = this.isValidValue(
       matchResult,
@@ -85,7 +87,10 @@ class SearchResult extends PureComponent {
           </form>
         </div>
         <div className={cx(`${moduleName}-mid`)}>
-          <NavBar handleExposedResultChange={this.handleExposedResultChange} />
+          <NavBar
+            handleExposedResultChange={this.handleExposedResultChange}
+            selectedResult={this.state.selectedResult}
+          />
         </div>
         <div className={cx(`${moduleName}-bot`)}>
           <ChartTab chartInstanceData={matchResultItem} />
