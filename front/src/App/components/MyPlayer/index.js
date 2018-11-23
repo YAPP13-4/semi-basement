@@ -111,9 +111,8 @@ class MyPlayer extends Component {
     const { currentTime } = this.props.player
     return (
       <div
-        className={cx(`${moduleName}`, {
-          [`${moduleName}--open`]: !this.props.showMyplayer
-        })}
+        className={cx(`${moduleName}`)}
+        style={{ display: this.props.showMyplayer ? "" : "none" }}
       >
         <div onClick={this.handleClose} className={cx(`${moduleName}-close`)} />
         <div
