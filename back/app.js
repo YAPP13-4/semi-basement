@@ -1,4 +1,5 @@
 const express = require("express")
+const cors = require('cors')
 const session = require("express-session")
 const MySQLStore = require("express-mysql-session")(session)
 const bodyparser = require("body-parser")
@@ -63,6 +64,7 @@ app.use(
 )
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(cors());
 
 /////////////////////////////////////////////////////////////
 
@@ -138,7 +140,7 @@ passport.use(
     {
       clientID: googleCredentials.web.client_id,
       clientSecret: googleCredentials.web.client_secret,
-      callbackURL: googleCredentials.web.redirect_uris[0]
+      callbackURL: googleCredentials.web.redirect_uris[1]
     },
     function(accessToken, refreshToken, profile, done) {
       let newuser = {}
