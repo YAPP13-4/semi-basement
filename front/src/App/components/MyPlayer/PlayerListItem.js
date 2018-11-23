@@ -23,6 +23,7 @@ const PlayerListItem = ({
   info,
   index,
   musicList,
+  currentMusicListName,
   onClickPlay,
   addSongMyPlaylist,
   removeSongMyPlaylist
@@ -48,7 +49,7 @@ const PlayerListItem = ({
       icon: {
         background: `url(${icons}) no-repeat -389px -89px`,
         width: '19px',
-	      height: '21px',
+        height: '21px',
         top: '18px',
         left: '20px'
       },
@@ -66,6 +67,24 @@ const PlayerListItem = ({
       action: () => alert('like!')
     }
   ]
+
+  if (currentMusicListName === 'My PlayList') {
+    tooltipList[0] = {
+      name: 'remove',
+      icon: {
+        background: `url(${icons}) no-repeat -280px -123px`,
+        height: '17px',
+        width: '20px',
+        top: '20px',
+        left: '20px'
+      },
+      action: e => {
+        const songId = musicList[index]
+        removeSongMyPlaylist(songId)
+        e.stopPropagation()
+      }
+    }
+  }
 
   return (
     <div
@@ -98,27 +117,6 @@ const PlayerListItem = ({
         {formatSeconds(info.duration)}
       </p>
       <div className={cx(`${moduleName}-etcWrapper`)}>
-        {/* <Tooltip
-          onClickAdd={e => {
-            const songId = musicList[index]
-            addSongMyPlaylist(songId)
-            e.stopPropagation()
-          }}
-          onClickRemove={e => {
-            const songId = musicList[index]
-            removeSongMyPlaylist(songId)
-            e.stopPropagation()
-          }}
-        >
-          <div className={cx(`${moduleName}-etc`)}>
-            <i />
-          </div>
-        </Tooltip> */}
-        {/* <MyPlayListTooltip>
-          <div className={cx(`${moduleName}-etc`)}>
-            <i />
-          </div>
-        </MyPlayListTooltip> */}
         <Tooltip2 tooltipList={tooltipList}>
           <div className={cx(`${moduleName}-etc`)}>
             <i />
