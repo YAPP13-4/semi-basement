@@ -1,0 +1,51 @@
+.Tooltip2 {
+  position: relative;
+  &-tooltipWrapper {
+    color: #ffffff;
+    font-size: 16px;
+    line-height: 58px;
+    text-align: center;
+  }
+
+  &-arrow {
+    position: relative;
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 12px solid #646464;
+    left: 145px;
+  }
+
+  &-tooltipItemsWrapper {
+    width: 200px;
+    min-height: 58px;
+    background: #646464;
+    border-radius: 5px;
+  }
+
+  &-tooltipListItem {
+    display: flex;
+    width: 200px;
+    height: 58px;
+    border-bottom: solid 1px black;
+    text-align: center;
+    &-iconWrapper {
+      width: 60px;
+    }
+    &-icon {
+      position: relative;
+      width: 100px;
+    }
+    &-name {
+      flex: 1;
+      display: inline-block;
+      text-align: center;
+      padding-right: 30px;
+    }
+    &:hover {
+      background: gray;
+      border-radius: 5px;
+    }
+  }
+}

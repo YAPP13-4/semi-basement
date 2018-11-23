@@ -1,0 +1,90 @@
+.Tooltip {
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 58px;
+  text-align: center;
+  &-arrow {
+    position: relative;
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 12px solid #646464;
+    left: 145px;
+  }
+
+  &-innerFirst {
+    display: flex;
+    width: 200px;
+    height: 58px;
+    background: #646464;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: solid 1px black;
+    text-align: center;
+    &-addIcon {
+      display: inline-block;
+      position: relative;
+      background: url('src/assets/icons/icon2.png') no-repeat -280px -123px;
+      height: 17px;
+      width: 20px;
+      top: 20px;
+      left: 20px;
+    }
+    span {
+      display: inline-block;
+      width: 180px;
+      text-align: center;
+    }
+    &:hover {
+      background: gray;
+    }
+  }
+  &-innerSecond {
+    width: 200px;
+    height: 58px;
+    background: #646464;
+    border-bottom: solid 1px black;
+    &-shareIcon {
+      display: inline-block;
+      position: relative;
+      background: url('src/assets/icons/icon2.png') no-repeat -389px -89px;
+      height: 21px;
+      width: 20px;
+      top: 2px;
+      left: 20px;
+    }
+    span {
+      display: inline-block;
+      width: 180px;
+      text-align: center;
+    }
+    &:hover {
+      background: gray;
+    }
+  }
+  &-innerThird {
+    width: 200px;
+    height: 58px;
+    background: #646464;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    &-likeIcon {
+      display: inline-block;
+      position: relative;
+      background: url('src/assets/icons/icon2.png') no-repeat -276px -40px;
+      height: 16px;
+      width: 20px;
+      top: 2px;
+      left: 20px;
+    }
+    span {
+      display: inline-block;
+      width: 180px;
+      text-align: center;
+    }
+    &:hover {
+      background: gray;
+    }
+  }
+}
