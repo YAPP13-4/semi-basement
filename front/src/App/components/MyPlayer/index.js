@@ -114,6 +114,7 @@ class MyPlayer extends Component {
         className={cx(`${moduleName}`, {
           [`${moduleName}--closed`]: !this.props.showMyplayer
         })}
+
       >
         <div onClick={this.handleClose} className={cx(`${moduleName}-close`)} />
         <div
