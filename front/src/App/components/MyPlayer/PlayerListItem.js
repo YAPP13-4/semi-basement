@@ -14,6 +14,7 @@ import css from './PlayerListItem.scss'
 import Tooltip from './Tooltip'
 import MyPlayListTooltip from './MyPlayListTooltip'
 import Tooltip2 from 'src/components/Tooltip2'
+import icons from 'src/assets/icons/icon2.png'
 
 const cx = classnames.bind(css)
 const moduleName = 'PlayerListItem'
@@ -26,6 +27,46 @@ const PlayerListItem = ({
   addSongMyPlaylist,
   removeSongMyPlaylist
 }) => {
+  const tooltipList = [
+    {
+      name: 'add',
+      icon: {
+        background: `url(${icons}) no-repeat -280px -123px`,
+        height: '17px',
+        width: '20px',
+        top: '20px',
+        left: '20px'
+      },
+      action: e => {
+        const songId = musicList[index]
+        addSongMyPlaylist(songId)
+        e.stopPropagation()
+      }
+    },
+    {
+      name: 'share',
+      icon: {
+        background: `url(${icons}) no-repeat -389px -89px;`,
+        height: '21px',
+        width: '20px',
+        top: '2px',
+        left: '20px'
+      },
+      action: () => alert('share!')
+    },
+    {
+      name: 'like',
+      icon: {
+        background: `url(${icons}) no-repeat -276px -40px`,
+        height: '16px',
+        width: '20px',
+        top: '20px',
+        left: '20px'
+      },
+      action: () => alert('like!')
+    }
+  ]
+
   return (
     <div
       className={cx(`${moduleName}`)}
@@ -78,7 +119,7 @@ const PlayerListItem = ({
             <i />
           </div>
         </MyPlayListTooltip> */}
-        <Tooltip2>
+        <Tooltip2 tooltipList={tooltipList}>
           <div className={cx(`${moduleName}-etc`)}>
             <i />
           </div>
@@ -89,6 +130,9 @@ const PlayerListItem = ({
 }
 
 export default connect(
-  ({ playList }) => ({ musicList: playList.musicList }),
+  ({ playList }) => ({
+    musicList: playList.musicList,
+    currentMusicListName: playList.currentList
+  }),
   { addSongMyPlaylist, removeSongMyPlaylist }
 )(PlayerListItem)

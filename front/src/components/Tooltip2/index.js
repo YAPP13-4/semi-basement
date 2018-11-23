@@ -19,6 +19,30 @@ class Tooltip2 extends Component {
     e.stopPropagation()
   }
 
+  renderTooltipList = tooltipList => {
+    return tooltipList.map(v => {
+      return (
+        <div className={cx(`${moduleName}-tooltipListItem`)} onClick={v.action}>
+          <div
+            style={v.icon ? {} : { width: '0px' }}
+            className={cx(`${moduleName}-tooltipListItem-iconWrapper`)}
+          >
+            <div
+              className={cx(`${moduleName}-tooltipListItem-icon`)}
+              style={v.icon}
+            />
+          </div>
+          <span
+            style={v.icon ? {} : { paddingRight: '0px' }}
+            className={cx(`${moduleName}-tooltipListItem-name`)}
+          >
+            {v.name}
+          </span>
+        </div>
+      )
+    })
+  }
+
   render() {
     const style = {
       opacity: +this.state.opacity,
@@ -33,33 +57,8 @@ class Tooltip2 extends Component {
         <div onClick={this.toggle}>{this.props.children}</div>
         <div style={style} className={cx(`${moduleName}-tooltipWrapper`)}>
           <div className={cx(`${moduleName}-arrow`)} />
-          <div
-            className={cx(`${moduleName}-innerFirst`)}
-            onClick={e => {
-              this.props.onClickAdd(e)
-              this.toggle(e)
-            }}
-          >
-            <div className={cx(`${moduleName}-innerFirst-addIcon`)} />
-            <span>add</span>
-          </div>
-          <div
-            className={cx(`${moduleName}-innerSecond`)}
-            onClick={() => {
-              alert('share!')
-            }}
-          >
-            <div className={cx(`${moduleName}-innerSecond-shareIcon`)} />
-            <span>share</span>
-          </div>
-          <div
-            className={cx(`${moduleName}-innerThird`)}
-            onClick={() => {
-              alert('like!')
-            }}
-          >
-            <div className={cx(`${moduleName}-innerThird-likeIcon`)} />
-            <span>like</span>
+          <div className={cx(`${moduleName}-tooltipItemsWrapper`)}>
+            {this.renderTooltipList(this.props.tooltipList)}
           </div>
         </div>
       </Fragment>
