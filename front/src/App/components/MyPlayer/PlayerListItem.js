@@ -46,10 +46,10 @@ const PlayerListItem = ({
     {
       name: 'share',
       icon: {
-        background: `url(${icons}) no-repeat -389px -89px;`,
-        height: '21px',
-        width: '20px',
-        top: '2px',
+        background: `url(${icons}) no-repeat -389px -89px`,
+        width: '19px',
+	      height: '21px',
+        top: '18px',
         left: '20px'
       },
       action: () => alert('share!')

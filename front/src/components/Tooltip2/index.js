@@ -1,4 +1,5 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 import classnames from 'classnames/bind'
 
@@ -12,6 +13,27 @@ class Tooltip2 extends Component {
     super(props)
 
     this.state = { opacity: false }
+
+    this.setWrapperRef = this.setWrapperRef.bind(this)
+    this.handleClickOutside = this.handleClickOutside.bind(this)
+  }
+
+  componentDidMount() {
+    document.addEventListener('mousedown', this.handleClickOutside)
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClickOutside)
+  }
+
+  setWrapperRef(node) {
+    this.wrapperRef = node
+  }
+
+  handleClickOutside(e) {
+    if (this.state.opacity && this.wrapperRef && !this.wrapperRef.contains(e.target)) {
+      this.setState({opacity:false})
+    }
   }
 
   toggle = e => {
@@ -53,7 +75,7 @@ class Tooltip2 extends Component {
     }
 
     return (
-      <Fragment>
+      <div ref={this.setWrapperRef}>
         <div onClick={this.toggle}>{this.props.children}</div>
         <div style={style} className={cx(`${moduleName}-tooltipWrapper`)}>
           <div className={cx(`${moduleName}-arrow`)} />
@@ -61,9 +83,13 @@ class Tooltip2 extends Component {
             {this.renderTooltipList(this.props.tooltipList)}
           </div>
         </div>
-      </Fragment>
+      </div>
     )
   }
+}
+
+Tooltip2.propTypes = {
+  children: PropTypes.element.isRequired
 }
 
 export default Tooltip2

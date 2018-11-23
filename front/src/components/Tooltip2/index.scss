@@ -28,8 +28,6 @@
     display: flex;
     width: 200px;
     height: 58px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
     border-bottom: solid 1px black;
     text-align: center;
     &-iconWrapper {
@@ -47,6 +45,7 @@
     }
     &:hover {
       background: gray;
+      border-radius: 5px;
     }
   }
 }
