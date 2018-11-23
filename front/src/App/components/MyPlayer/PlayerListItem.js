@@ -13,6 +13,7 @@ import IMAGE_SIZES from 'src/App/constants/ImageConstants'
 import css from './PlayerListItem.scss'
 import Tooltip from './Tooltip'
 import MyPlayListTooltip from './MyPlayListTooltip'
+import Tooltip2 from 'src/components/Tooltip2'
 
 const cx = classnames.bind(css)
 const moduleName = 'PlayerListItem'
@@ -72,11 +73,16 @@ const PlayerListItem = ({
             <i />
           </div>
         </Tooltip> */}
-        <MyPlayListTooltip>
+        {/* <MyPlayListTooltip>
           <div className={cx(`${moduleName}-etc`)}>
             <i />
           </div>
-        </MyPlayListTooltip>
+        </MyPlayListTooltip> */}
+        <Tooltip2>
+          <div className={cx(`${moduleName}-etc`)}>
+            <i />
+          </div>
+        </Tooltip2>
       </div>
     </div>
   )

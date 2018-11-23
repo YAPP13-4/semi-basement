@@ -5,7 +5,7 @@ import classnames from 'classnames/bind'
 import css from './index.scss'
 
 const cx = classnames.bind(css)
-const moduleName = 'Tooltip'
+const moduleName = 'Tooltip2'
 
 class Tooltip2 extends Component {
   constructor(props) {
