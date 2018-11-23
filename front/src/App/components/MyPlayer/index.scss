@@ -6,6 +6,11 @@
   -webkit-box-shadow: 22px 10px 10px 10px rgba(0, 0, 0, 0.52);
   -moz-box-shadow: 2px 10px 10px 10px rgba(0, 0, 0, 0.52);
   box-shadow: 2px 10px 10px 10px rgba(0, 0, 0, 0.52);
+
+  transition: margin-right 0.5s;
+  &--open.MyPlayer {
+    margin-right: -600px;
+  }
   &-topImageWrapper {
     background: no-repeat center center;
     background-size: cover;

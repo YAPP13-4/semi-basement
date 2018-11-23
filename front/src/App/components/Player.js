@@ -34,13 +34,15 @@ const Player = ({
 
   return (
     <div
-      className={cx(`${moduleName}`)}
-      style={{ display: meta.showBottomplayer ? "" : "none" }}
+      className={cx(`${moduleName}`, {
+        [`${moduleName}--hide`]: !meta.showBottomplayer
+      })}
+      // style={{ display: meta.showBottomplayer ? "" : "none" }}
     >
       <div
-        className={cx(
-          `${moduleName}` + (meta.toggleHistory ? "-history" : "-none")
-        )}
+        className={cx(`${moduleName}-control`, {
+          [`${moduleName}-control--open`]: meta.toggleHistory
+        })}
       >
         <div className={cx(`${moduleName}__inner`)}>
           <div className={cx(`${moduleName}__section`)}>
@@ -182,8 +184,9 @@ const Player = ({
         </div>
       </div>
       <div
-        style={{ display: meta.toggleHistory ? "block" : "none" }}
-        className={cx(`${moduleName}__historyTab`)}
+        className={cx(`${moduleName}__historyTab`, {
+          [`${moduleName}__historyTab--open`]: meta.toggleHistory
+        })}
       >
         <HistoryTab />
       </div>
