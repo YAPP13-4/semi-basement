@@ -1,4 +1,13 @@
 .Player {
+  &.Player--hide {
+    .Player-control {
+      bottom: -75px;
+    }
+    .Player__historyTab {
+      bottom: -150px;
+    }
+  }
+
   & > div {
     width: 100%;
     height: 76px;
@@ -9,14 +18,23 @@
     left: 0;
   }
   color: white;
-  &-none {
+
+  &-control {
+    transition: bottom 0.5s;
     bottom: 0;
+
+    &--open.Player-control {
+      bottom: 75px;
+    }
   }
-  &-history {
-    bottom: 75px;
-  }
+
   &__historyTab {
-    bottom: 0;
+    transition: bottom 0.5s;
+    bottom: -75px;
+
+    &--open.Player__historyTab {
+      bottom: 0;
+    }
   }
   &__section--song {
     display: flex;
