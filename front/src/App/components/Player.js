@@ -153,10 +153,14 @@ const Player = ({
               </div>
             </div>
           </div>
-          <div className="player__section player__section--options">
+          <div
+            className="player__section player__section--options"
+            style={{ marginLeft: "30px" }}
+          >
             <div className={cx(`${moduleName}__buttons`)}>
               <div role="button" tabIndex="0">
                 <span
+                  style={{ marginLeft: "10px" }}
                   className={cx(`${moduleName}__add_playlist`)}
                   onClick={() => {
                     const songId = song[0]
@@ -165,10 +169,14 @@ const Player = ({
                 />
               </div>
               <div role="button" tabIndex="0">
-                <span className={cx(`${moduleName}__heart`)} />
+                <span
+                  style={{ marginLeft: "10px" }}
+                  className={cx(`${moduleName}__heart`)}
+                />
               </div>
               <div role="button" tabIndex="0">
                 <span
+                  style={{ marginLeft: "16px" }}
                   className={cx(`${moduleName}__toggle__history`)}
                   onClick={toggleHistory}
                 />
