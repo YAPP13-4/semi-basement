@@ -48,7 +48,18 @@ class SearchResult extends PureComponent {
     console.log("searchResult ", searchResult)
     const matchResult = searchResult ? Object.values(searchResult) : null
     console.log("matchResult ", matchResult)
-
+    const matchResultItem = matchResult
+      ? matchResult
+          .filter(
+            this.isValidValue(
+              this.state.selectedResult === "All",
+              res => res,
+              res => res.matches[0].key === this.state.selectedResult
+            )
+          )
+          .map(filteredRes => filteredRes.item)
+      : null
+    /*
     const matchResultItem = this.isValidValue(
       matchResult,
       matchResult
@@ -61,7 +72,7 @@ class SearchResult extends PureComponent {
         )
         .map(filteredRes => filteredRes.item),
       null
-    )
+    )*/
     console.log("matchresult item ", matchResultItem)
 
     return !matchResult ? (
