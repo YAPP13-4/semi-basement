@@ -32,7 +32,6 @@
     "fuse.js": "^3.3.0",
     "history": "^4.7.2",
     "html-webpack-plugin": "2.29.0",
-    "jest": "20.0.4",
     "node-sass": "^4.9.3",
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.2.0",
@@ -113,5 +112,8 @@
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "devDependencies": {
+    "jest": "^20.0.4"
   }
 }
