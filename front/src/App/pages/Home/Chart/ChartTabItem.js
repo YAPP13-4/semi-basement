@@ -4,6 +4,7 @@ import classnames from 'classnames/bind';
 import css from './ChartTabItem.scss';
 import IMAGE_SIZES from '../../../constants/ImageConstants';
 import getImageUrl from '../../../../utils/ImageUtils';
+import { formatSeconds } from 'src/utils/NumberUtils';
 const cx = classnames.bind(css);
 const moduleName = 'ChartTabContainer';
 
@@ -13,8 +14,6 @@ const ChartTabItem = ({ musicInfo, onClickPlay, ind }) => {
   const creator = musicInfo.user.username;
   const artworkUrl = musicInfo.artwork_url;
   const duration = musicInfo.duration / 1000;
-  const min = Math.ceil(duration / 60);
-  const sec = Math.ceil(duration % 60);
   //FIX ME : WITH BE
   const playCount = (musicInfo.playback_count / 1000000).toFixed(2);
   const likeCount = (musicInfo.favoritings_count / 1000000).toFixed(2);
@@ -35,9 +34,7 @@ const ChartTabItem = ({ musicInfo, onClickPlay, ind }) => {
         <Link to={'/songDetail/' + songId}>{title}</Link>
       </td>
       <td className={cx(`${moduleName}-singer`)}>{creator}</td>
-      <td className={cx(`${moduleName}-time`)}>
-        {min} : {sec}
-      </td>
+      <td className={cx(`${moduleName}-time`)}>{formatSeconds(duration)}</td>
       <td>
         <span className={cx(`${moduleName}-likeIcon`)} />{' '}
       </td>
