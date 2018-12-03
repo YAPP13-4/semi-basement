@@ -29,4 +29,14 @@ describe('/actions', () => {
     //Then
     expect(playerAction.onLoadStart()).toEqual(onLoadStart);
   });
+  it('Test addHistory', () => {
+    //Given
+    const addHistory = {
+      type: musicActions.HISTORY_SONG,
+      songId: 331622174,
+    };
+    //When
+    //Then
+    expect(musicActions.historySong(331622174)).toEqual(addHistory);
+  });
 });

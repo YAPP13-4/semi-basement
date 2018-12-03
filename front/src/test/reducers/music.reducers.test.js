@@ -1,6 +1,6 @@
 import musicReducer from 'src/redux/music/reducer.js';
 import * as musicActions from 'src/redux/music/actions.js';
-import { musicInfoMockData } from '../mockData';
+import { musicInfoMockData, historyMockData } from '../mockData';
 
 describe('Test music Reducer', () => {
   function getInitialState() {
@@ -57,6 +57,22 @@ describe('Test music Reducer', () => {
     const expected = {
       ...initialState,
       song: mockSong,
+    };
+    expect(result).toEqual(expected);
+  });
+  it('Test Add HistorySuccess reducer', () => {
+    //Given
+    const initialState = getInitialState();
+    const addHistoryAction = {
+      type: musicActions.HISTORY_SONG_SUCCESS,
+      data: [historyMockData],
+    };
+    //When
+    const result = musicReducer(initialState, addHistoryAction);
+    //Then
+    const expected = {
+      ...initialState,
+      historySong: [historyMockData],
     };
     expect(result).toEqual(expected);
   });
