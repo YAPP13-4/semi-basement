@@ -1,23 +1,24 @@
 import musicReducer from 'src/redux/music/reducer.js';
 import * as musicActions from 'src/redux/music/actions.js';
-import { musicInfoMockData, historyMockData } from '../mockData';
+import { musicInfoMockData, historyMockData } from '../../mockData';
 
-describe('Test music Reducer', () => {
-  function getInitialState() {
-    return {
-      song: '',
-      loading: false,
-      infoLoading: false,
-      musicInfo: null,
-      recommendMusicInfo1: null,
-      recommendMusicInfo2: null,
-      songDetail: null,
-      historySong: [],
-      searchKeyword: '',
-      searchResult: null,
-    };
-  }
-  it('Test loadSongInfoSuccess ', () => {
+function getInitialState() {
+  return {
+    song: '',
+    loading: false,
+    infoLoading: false,
+    musicInfo: null,
+    recommendMusicInfo1: null,
+    recommendMusicInfo2: null,
+    songDetail: null,
+    historySong: [],
+    searchKeyword: '',
+    searchResult: null,
+  };
+}
+
+describe('redux/music [LOAD DATA]', () => {
+  it('actions.LOAD_SONG_INFO_SUCCESS, [LOAD_MUSIC_INFO_MAINPAGE]', () => {
     //Given
     const mockData = musicInfoMockData;
     const loadSongSuccessAction = {
@@ -37,8 +38,25 @@ describe('Test music Reducer', () => {
     };
     expect(result).toEqual(expected);
   });
-  //뭐랄까 createAction.test.js랑 상당히 비슷한 느낌. ;
-  it('Test Select Song', () => {
+  it('actions.HISTORY_SONG_SUCCESS, [ADD_HISTORYDATA]', () => {
+    //Given
+    const initialState = getInitialState();
+    const addHistoryAction = {
+      type: musicActions.HISTORY_SONG_SUCCESS,
+      data: [historyMockData],
+    };
+    //When
+    const result = musicReducer(initialState, addHistoryAction);
+    //Then
+    const expected = {
+      ...initialState,
+      historySong: [historyMockData],
+    };
+    expect(result).toEqual(expected);
+  });
+});
+describe('redux/music [LOAD DATA]', () => {
+  it('actions.SELECT_SONG, [CHANGE_MUSIC_WHEN_CLICK]', () => {
     //Given
     const mockSong = [
       331622174,
@@ -57,22 +75,6 @@ describe('Test music Reducer', () => {
     const expected = {
       ...initialState,
       song: mockSong,
-    };
-    expect(result).toEqual(expected);
-  });
-  it('Test Add HistorySuccess reducer', () => {
-    //Given
-    const initialState = getInitialState();
-    const addHistoryAction = {
-      type: musicActions.HISTORY_SONG_SUCCESS,
-      data: [historyMockData],
-    };
-    //When
-    const result = musicReducer(initialState, addHistoryAction);
-    //Then
-    const expected = {
-      ...initialState,
-      historySong: [historyMockData],
     };
     expect(result).toEqual(expected);
   });

@@ -1,9 +1,7 @@
 import * as musicActions from 'src/redux/music/actions.js';
-import * as playerActionType from 'src/redux/player/ActionType.js';
-import * as playerAction from 'src/redux/player/actions.js';
 
-describe('/actions', () => {
-  it('Test playedSong Action', () => {
+describe('/redux/music/actions', () => {
+  it('actions.selectSong [SELECT_SONG dispatch Test]', () => {
     //Given
     const mockSong = [
       331622174,
@@ -20,16 +18,7 @@ describe('/actions', () => {
     //Then
     expect(musicActions.selectSong(mockSong)).toEqual(selectSongAction);
   });
-  it('Test onLoadStart', () => {
-    //Given
-    const onLoadStart = {
-      type: playerActionType.ON_LOAD_START,
-    };
-    //When
-    //Then
-    expect(playerAction.onLoadStart()).toEqual(onLoadStart);
-  });
-  it('Test addHistory', () => {
+  it('actions.historySong [HISTORY_SONG dispatch Test]', () => {
     //Given
     const addHistory = {
       type: musicActions.HISTORY_SONG,
