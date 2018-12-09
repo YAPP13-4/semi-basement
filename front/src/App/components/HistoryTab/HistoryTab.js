@@ -1,14 +1,14 @@
-import React, { Component } from "react"
-import css from "./HistoryTab.scss"
-import classnames from "classnames/bind"
-import HistoryComponent from "./HistoryComponent"
-import { connect } from "react-redux"
-const cx = classnames.bind(css)
-const moduleName = "HistoryTab"
+import React, { Component } from 'react';
+import css from './HistoryTab.scss';
+import classnames from 'classnames/bind';
+import HistoryComponent from './HistoryComponent';
+import { connect } from 'react-redux';
+const cx = classnames.bind(css);
+const moduleName = 'HistoryTab';
 
-class HistoryTab extends Component {
+export class HistoryTab extends Component {
   renderHistory = () => {
-    console.log("history", this.props.historySong)
+    console.log('history', this.props.historySong);
     return this.props.historySong.map((song, index) => (
       <HistoryComponent
         key={`history-${index}`}
@@ -18,26 +18,25 @@ class HistoryTab extends Component {
         title={song.data.title}
         singer={song.data.user.username}
       />
-    ))
-  }
+    ));
+  };
   render() {
     return (
       <div className={cx(`${moduleName}`)}>
         <div
           className={cx(`${moduleName}__Wrapper`)}
-          style={{ color: "#ffffff" }}
-        >
+          style={{ color: '#ffffff' }}>
           {/*<button onClick={this._getHistorySong}>butn</button> */}
-          {this.props.historySong ? this.renderHistory() : "Loading"}
+          {this.props.historySong ? this.renderHistory() : 'Loading'}
         </div>
       </div>
-    )
+    );
   }
 }
 function mapStateToProps(state) {
   return {
-    historySong: state.music.historySong
-  }
+    historySong: state.music.historySong,
+  };
 }
 
-export default connect(mapStateToProps)(HistoryTab)
+export default connect(mapStateToProps)(HistoryTab);
