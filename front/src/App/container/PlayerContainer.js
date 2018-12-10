@@ -1,7 +1,7 @@
-import React from "react"
-import { connect } from "react-redux"
+import React from 'react';
+import { connect } from 'react-redux';
 
-import { addSongMyPlaylist } from "src/redux/myPlayer/actions"
+import { addSongMyPlaylist } from 'src/redux/myPlayer/actions';
 import {
   onLoadedMetadata,
   onLoadStart,
@@ -13,31 +13,31 @@ import {
   // addPlaylist,
   playNexSong,
   playPrevSong,
-  toggleShuffle
-} from "../../redux/player/actions"
+  toggleShuffle,
+} from '../../redux/player/actions';
 //title, artwork, songId, singerName
-import Player from "../components/Player"
-import { toggleHistory } from "../../redux/meta/actions"
+import Player from '../components/Player';
+import { toggleHistory } from '../../redux/meta/actions';
 
 const defaultProps = {
-  song: null
-}
+  song: null,
+};
 
 const PlayerContainer = props => {
-  const { song } = props
-  return song ? <Player {...props} /> : null
+  const { song } = props;
+  return song ? <Player {...props} /> : null;
   //return <Player {...props} />
-}
-PlayerContainer.defaultProps = defaultProps
+};
+PlayerContainer.defaultProps = defaultProps;
 
 const mapStateToProps = ({ player, meta, music }) => {
   return {
     //song : songUrl
     meta,
     player,
-    song: music.song
-  }
-}
+    song: music.playingMusic,
+  };
+};
 export default connect(
   mapStateToProps,
   {
@@ -52,6 +52,6 @@ export default connect(
     toggleShuffle,
     playNexSong,
     playPrevSong,
-    addSongMyPlaylist
-  }
-)(PlayerContainer)
+    addSongMyPlaylist,
+  },
+)(PlayerContainer);

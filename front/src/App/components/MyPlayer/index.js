@@ -1,99 +1,106 @@
-import React, { Component } from "react"
-import { connect } from "react-redux"
-import classnames from "classnames/bind"
-import axios from "axios"
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import classnames from 'classnames/bind';
+import axios from 'axios';
 
-import { toggleMyplayer } from "src/redux/meta/actions.js"
-import { selectSong, historySong } from "src/redux/music/actions"
+import { toggleMyplayer } from 'src/redux/meta/actions.js';
+import { selectSong, historySong } from 'src/redux/music/actions';
 import {
   onPlay,
   onPause,
   playNexSong,
   playPrevSong,
   changeMyPlayerCurrentTime,
-  changeMyPlayerVolume
-} from "src/redux/player/actions"
-import { changePlayList } from "src/redux/playlist/actions"
+  changeMyPlayerVolume,
+} from 'src/redux/player/actions';
+import { changePlayList } from 'src/redux/playlist/actions';
 import {
   removeSongMyPlaylist,
-  setMyPlayerSubPlayList
-} from "src/redux/myPlayer/actions"
-import Slider from "src/App/components/Slider/"
-import { formatSeconds } from "src/utils/NumberUtils"
-import { SONG_URL } from "src/App/constants/ApiConstants"
-import getImageUrl from "src/utils/ImageUtils"
-import IMAGE_SIZES from "src/App/constants/ImageConstants"
+  setMyPlayerSubPlayList,
+} from 'src/redux/myPlayer/actions';
+import Slider from 'src/App/components/Slider/';
+import { formatSeconds } from 'src/utils/NumberUtils';
+import { SONG_URL } from 'src/App/constants/ApiConstants';
+import getImageUrl from 'src/utils/ImageUtils';
+import IMAGE_SIZES from 'src/App/constants/ImageConstants';
 
-import css from "./index.scss"
-import PlayerListItem from "./PlayerListItem"
+import css from './index.scss';
+import PlayerListItem from './PlayerListItem';
 
-const cx = classnames.bind(css)
-const moduleName = "MyPlayer"
+const cx = classnames.bind(css);
+const moduleName = 'MyPlayer';
 
 class MyPlayer extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
-      musicListInfos: []
-    }
+      musicListInfos: [],
+    };
   }
 
   componentDidMount() {
-    this.getMusicListInfos(this.props.musicList)
+    this.getMusicListInfos(this.props.musicList);
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.musicList !== this.props.musicList) {
-      this.getMusicListInfos(this.props.musicList)
+      this.getMusicListInfos(this.props.musicList);
     }
   }
 
   handleClose = () => {
-    this.props.toggleMyplayer()
-  }
+    this.props.toggleMyplayer();
+  };
 
   togglePlay = () => {
-    const { player, onPause, onPlay } = this.props
-    player.isPlaying ? onPause() : onPlay()
-  }
+    const { player, onPause, onPlay } = this.props;
+    player.isPlaying ? onPause() : onPlay();
+  };
 
-  onClickPlay = ({ songId, title, artworkUrl, duration }) => {
-    this.props.selectSong([songId, title, artworkUrl, duration])
-    this.props.historySong(songId)
-  }
+  onClickPlay = ({ songId, title, singer, artworkUrl, duration }) => {
+    const targetMusic = {
+      songId: songId,
+      title: title,
+      singer: singer,
+      artworkUrl: artworkUrl,
+      duration: duration,
+    };
+    this.props.selectSong(targetMusic);
+    this.props.historySong(songId);
+  };
 
   getMusicListInfos = musicList => {
-    if (!musicList) return
+    if (!musicList) return;
     axios
       .all(musicList.map(musicId => this.getMusicInfo(musicId)))
-      .then(res => this.setState({ musicListInfos: res }))
-  }
+      .then(res => this.setState({ musicListInfos: res }));
+  };
 
   getMusicInfo = musicId => {
     return axios
-      .get(SONG_URL.replace(":id", musicId))
+      .get(SONG_URL.replace(':id', musicId))
       .then(
         ({
           data: {
             artwork_url,
             title,
             duration,
-            user: { username }
-          }
+            user: { username },
+          },
         }) => {
           return {
             artworkUrl: artwork_url,
             title,
             username,
-            duration: duration / 1000
-          }
-        }
-      )
-  }
+            duration: duration / 1000,
+          };
+        },
+      );
+  };
 
   renderPlayList = () => {
-    if (!this.state.musicListInfos.length) return <div />
+    if (!this.state.musicListInfos.length) return <div />;
     return this.state.musicListInfos.map((info, index) => {
       return (
         <PlayerListItem
@@ -102,37 +109,35 @@ class MyPlayer extends Component {
           index={index}
           onClickPlay={this.onClickPlay}
         />
-      )
-    })
-  }
+      );
+    });
+  };
 
   render() {
-    const [, songTitle, artworkUrl, songDuration] = this.props.song
-    const { currentTime } = this.props.player
+    const targetMusic = this.props.playingMusic || {};
+    const { title, singer, artworkUrl, duration } = targetMusic;
+    const { currentTime } = this.props.player;
     return (
       <div
         className={cx(`${moduleName}`, {
-          [`${moduleName}--closed`]: !this.props.showMyplayer
-        })}
-
-      >
+          [`${moduleName}--closed`]: !this.props.showMyplayer,
+        })}>
         <div onClick={this.handleClose} className={cx(`${moduleName}-close`)} />
         <div
           className={cx(`${moduleName}-topImageWrapper`)}
           style={{
             backgroundImage: `url(${getImageUrl(
               artworkUrl,
-              IMAGE_SIZES.XLARGE
-            )})`
-          }}
-        >
+              IMAGE_SIZES.XLARGE,
+            )})`,
+          }}>
           <div
             className={cx(`${moduleName}-topImage`)}
             style={{
               backgroundImage: `url(${getImageUrl(
                 artworkUrl,
-                IMAGE_SIZES.XLARGE
-              )})`
+                IMAGE_SIZES.XLARGE,
+              )})`,
             }}
           />
         </div>
@@ -143,35 +148,32 @@ class MyPlayer extends Component {
               style={{
                 backgroundImage: `url(${getImageUrl(
                   artworkUrl,
-                  IMAGE_SIZES.XLARGE
-                )})`
+                  IMAGE_SIZES.XLARGE,
+                )})`,
               }}
             />
             <div>
               <div className={cx(`${moduleName}-top-musicCard-songInfo`)}>
-                <p>createrName</p>
-                <h2>{songTitle}</h2>
+                <p>{singer}</p>
+                <h2>{title}</h2>
               </div>
               <div className={cx(`${moduleName}-top-musicCard-player`)}>
                 <div
                   className={cx(`${moduleName}-top-musicCard-player-prev`)}
-                  onClick={this.props.playPrevSong}
-                >
+                  onClick={this.props.playPrevSong}>
                   <i />
                 </div>
                 <div
                   className={cx(
                     `${moduleName}-top-musicCard-player-` +
-                      (this.props.player.isPlaying ? "pause" : "play")
+                      (this.props.player.isPlaying ? 'pause' : 'play'),
                   )}
-                  onClick={this.togglePlay}
-                >
+                  onClick={this.togglePlay}>
                   <i />
                 </div>
                 <div
                   className={cx(`${moduleName}-top-musicCard-player-next`)}
-                  onClick={this.props.playNexSong}
-                >
+                  onClick={this.props.playNexSong}>
                   <i />
                 </div>
               </div>
@@ -180,30 +182,28 @@ class MyPlayer extends Component {
           <div className={cx(`${moduleName}-top-musicController`)}>
             <div className={cx(`${moduleName}-top-musicController-slider`)}>
               <div
-                className={cx(`${moduleName}-top-musicController-slider-left`)}
-              >
+                className={cx(`${moduleName}-top-musicController-slider-left`)}>
                 {formatSeconds(currentTime)}
               </div>
               <div
                 className={cx(
-                  `${moduleName}-top-musicController-slider-center`
-                )}
-              >
+                  `${moduleName}-top-musicController-slider-center`,
+                )}>
                 <Slider
-                  max={songDuration}
+                  max={duration}
                   onChange={this.props.changeMyPlayerCurrentTime}
                   value={currentTime}
                 />
               </div>
               <div
-                className={cx(`${moduleName}-top-musicController-slider-right`)}
-              >
-                {formatSeconds(songDuration)}
+                className={cx(
+                  `${moduleName}-top-musicController-slider-right`,
+                )}>
+                {formatSeconds(duration)}
               </div>
             </div>
             <div
-              className={cx(`${moduleName}-top-musicController-soundWrapper`)}
-            >
+              className={cx(`${moduleName}-top-musicController-soundWrapper`)}>
               <div className={cx(`${moduleName}-top-musicController-sound`)}>
                 <Slider
                   max={1}
@@ -227,14 +227,13 @@ class MyPlayer extends Component {
               onClick={() => {
                 this.props.setMyPlayerSubPlayList(
                   this.props.musicList,
-                  this.props.currentMusicListName
-                )
+                  this.props.currentMusicListName,
+                );
                 this.props.changePlayList(
                   this.props.myPlayer.subPlayList,
-                  this.props.myPlayer.subPlayListName
-                )
-              }}
-            >
+                  this.props.myPlayer.subPlayListName,
+                );
+              }}>
               {this.props.myPlayer.subPlayListName}
               <i />
             </h4>
@@ -244,21 +243,21 @@ class MyPlayer extends Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
 export default connect(
   state => {
-    const { meta, player, music, playList, myPlayer } = state
+    const { meta, player, music, playList, myPlayer } = state;
     return {
       showMyplayer: meta.showMyplayer,
       player,
-      song: music.song,
+      playingMusic: music.playingMusic,
       currentMusicListName: playList.currentList,
       musicList: playList.musicList,
-      myPlayer
-    }
+      myPlayer,
+    };
   },
   {
     toggleMyplayer,
@@ -272,6 +271,6 @@ export default connect(
     setMyPlayerSubPlayList,
     removeSongMyPlaylist,
     selectSong,
-    historySong
-  }
-)(MyPlayer)
+    historySong,
+  },
+)(MyPlayer);
