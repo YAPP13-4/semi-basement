@@ -1,131 +1,137 @@
-import React, { Component } from 'react'
-import { SONG_STREAM_URL } from '../constants/ApiConstants'
+import React, { Component } from 'react';
+import { SONG_STREAM_URL } from '../constants/ApiConstants';
 const audio = InnerComponent => {
   class AudioComponent extends Component {
     constructor() {
-      super()
-      this.audioElement = null
-      this.onEnded = this.onEnded.bind(this)
-      this.onLoadStart = this.onLoadStart.bind(this)
-      this.onLoadedMetadata = this.onLoadedMetadata.bind(this)
-      this.onPause = this.onPause.bind(this)
-      this.onPlay = this.onPlay.bind(this)
-      this.onTimeUpdate = this.onTimeUpdate.bind(this)
-      this.onVolumeChange = this.onVolumeChange.bind(this)
+      super();
+      this.audioElement = null;
+      this.onEnded = this.onEnded.bind(this);
+      this.onLoadStart = this.onLoadStart.bind(this);
+      this.onLoadedMetadata = this.onLoadedMetadata.bind(this);
+      this.onPause = this.onPause.bind(this);
+      this.onPlay = this.onPlay.bind(this);
+      this.onTimeUpdate = this.onTimeUpdate.bind(this);
+      this.onVolumeChange = this.onVolumeChange.bind(this);
 
-      this.changeCurrentTime = this.changeCurrentTime.bind(this)
-      this.changeVolume = this.changeVolume.bind(this)
-      this.toggleMuted = this.toggleMuted.bind(this)
-      this.togglePlay = this.togglePlay.bind(this)
+      this.changeCurrentTime = this.changeCurrentTime.bind(this);
+      this.changeVolume = this.changeVolume.bind(this);
+      this.toggleMuted = this.toggleMuted.bind(this);
+      this.togglePlay = this.togglePlay.bind(this);
     }
 
     componentDidMount() {
       //console.log("audio", this.props);
-      const { audioElement } = this
-      audioElement.play()
+      const { audioElement } = this;
+      audioElement.play();
     }
 
     componentDidUpdate(prevProps) {
-      const { audioElement, props } = this
-      const { song, player } = props
-      const audioUrl = song[0]
-      const prevSong = prevProps.song[0]
+      const { audioElement, props } = this;
+      const { song, player } = props;
+      const audioUrl = song[0];
+      const prevSong = prevProps.song[0];
       if (prevSong !== audioUrl) {
-        audioElement.play()
+        audioElement.play();
       }
       if (props.meta.showMyplayer && this.shouldToggleplay(prevProps, props)) {
-        this.toggleSidePlayerPlay(player, audioElement)
+        this.toggleSidePlayerPlay(player, audioElement);
       }
-      if (props.meta.showMyplayer && this.shouldChangeCurrentTime(prevProps, props)) {
-          audioElement.currentTime = props.player.myPlayerCurrentTime
+      if (
+        props.meta.showMyplayer &&
+        this.shouldChangeCurrentTime(prevProps, props)
+      ) {
+        audioElement.currentTime = props.player.myPlayerCurrentTime;
       }
-      if (props.meta.showMyplayer && this.shouldChangeVolume(prevProps, props)) {
-          // audioElement.muted = false
-          audioElement.volume = props.player.myPlayerVolume
+      if (
+        props.meta.showMyplayer &&
+        this.shouldChangeVolume(prevProps, props)
+      ) {
+        // audioElement.muted = false
+        audioElement.volume = props.player.myPlayerVolume;
       }
     }
 
     toggleSidePlayerPlay = (player, audioElement) => {
-      player.isPlaying ? audioElement.play() : audioElement.pause()
-    }
+      player.isPlaying ? audioElement.play() : audioElement.pause();
+    };
 
     shouldToggleplay = (prevProps, props) =>
-      prevProps.player.isPlaying !== props.player.isPlaying
+      prevProps.player.isPlaying !== props.player.isPlaying;
 
     shouldChangeCurrentTime = (prevProps, props) =>
-      prevProps.player.myPlayerCurrentTime !== props.player.myPlayerCurrentTime
+      prevProps.player.myPlayerCurrentTime !== props.player.myPlayerCurrentTime;
 
     shouldChangeVolume = (prevProps, props) =>
-      prevProps.player.myPlayerVolume !== props.player.myPlayerVolume
+      prevProps.player.myPlayerVolume !== props.player.myPlayerVolume;
 
     onEnded() {
-      console.log(this.props)
-      const { props } = this
-      const { playNexSong } = props
-      playNexSong()
+      console.log(this.props);
+      const { props } = this;
+      const { playNexSong } = props;
+      playNexSong();
     }
     onLoadedMetadata() {
-      const { audioElement, props } = this
-      const { onLoadedMetadata } = props
-      onLoadedMetadata(Math.floor(audioElement.duration))
+      const { audioElement, props } = this;
+      const { onLoadedMetadata } = props;
+      onLoadedMetadata(Math.floor(audioElement.duration));
     }
     onLoadStart() {
-      const { onLoadStart } = this.props
-      onLoadStart()
+      const { onLoadStart } = this.props;
+      onLoadStart();
     }
 
     onPlay() {
-      const { onPlay } = this.props
-      onPlay()
+      const { onPlay } = this.props;
+      onPlay();
     }
 
     onPause() {
-      const { onPause } = this.props
-      onPause()
+      const { onPause } = this.props;
+      onPause();
     }
 
     onTimeUpdate() {
-      const { audioElement, props } = this
-      const { onTimeUpdate } = props
-      onTimeUpdate(Math.floor(audioElement.currentTime))
+      const { audioElement, props } = this;
+      const { onTimeUpdate } = props;
+      onTimeUpdate(Math.floor(audioElement.currentTime));
     }
 
     onVolumeChange() {
-      const { audioElement, props } = this
+      const { audioElement, props } = this;
 
-      const { muted, volume } = audioElement
-      const { onVolumeChange } = props
-      onVolumeChange(muted, volume)
+      const { muted, volume } = audioElement;
+      const { onVolumeChange } = props;
+      onVolumeChange(muted, volume);
     }
 
     changeCurrentTime(currentTime) {
-      this.audioElement.currentTime = currentTime
+      this.audioElement.currentTime = currentTime;
     }
 
     changeVolume(volume) {
-      const { audioElement } = this
-      audioElement.muted = false
-      audioElement.volume = volume
+      const { audioElement } = this;
+      audioElement.muted = false;
+      audioElement.volume = volume;
     }
 
     toggleMuted() {
-      const { audioElement } = this
-      const { muted } = audioElement
-      audioElement.muted = !muted
+      const { audioElement } = this;
+      const { muted } = audioElement;
+      audioElement.muted = !muted;
     }
 
     togglePlay() {
-      const { audioElement } = this
+      const { audioElement } = this;
       if (this.props.player.isPlaying) {
-        audioElement.pause()
+        audioElement.pause();
       } else {
-        audioElement.play()
+        audioElement.play();
       }
     }
 
     render() {
-      const { song } = this.props
-      const songUrl = 'https:' + SONG_STREAM_URL.replace(':id', song[0])
+      const { song } = this.props;
+      const songUrl = 'https:' + SONG_STREAM_URL.replace(':id', song.songId);
       return (
         <div>
           <audio
@@ -138,7 +144,7 @@ const audio = InnerComponent => {
             onTimeUpdate={this.onTimeUpdate}
             onVolumeChange={this.onVolumeChange}
             ref={node => {
-              this.audioElement = node
+              this.audioElement = node;
             }}
             src={songUrl}
           />
@@ -151,9 +157,9 @@ const audio = InnerComponent => {
             togglePlay={this.togglePlay}
           />
         </div>
-      )
+      );
     }
   }
-  return AudioComponent
-}
-export default audio
+  return AudioComponent;
+};
+export default audio;

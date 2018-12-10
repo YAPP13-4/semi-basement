@@ -1,16 +1,16 @@
-import React from "react"
-import classnames from "classnames/bind"
-import css from "./Player.scss"
-import audio from "./audio"
+import React from 'react';
+import classnames from 'classnames/bind';
+import css from './Player.scss';
+import audio from './audio';
 
-import getImageUrl from "../../utils/ImageUtils"
-import IMAGE_SIZES from "../constants/ImageConstants"
-import Slider from "./Slider"
-import { formatSeconds } from "../../utils/NumberUtils"
-import HistoryTab from "./HistoryTab/HistoryTab"
+import getImageUrl from '../../utils/ImageUtils';
+import IMAGE_SIZES from '../constants/ImageConstants';
+import Slider from './Slider';
+import { formatSeconds } from '../../utils/NumberUtils';
+import HistoryTab from './HistoryTab/HistoryTab';
 
-const cx = classnames.bind(css)
-const moduleName = "Player"
+const cx = classnames.bind(css);
+const moduleName = 'Player';
 const Player = ({
   meta,
   song,
@@ -23,27 +23,27 @@ const Player = ({
   toggleShuffle,
   playNexSong,
   playPrevSong,
-  addSongMyPlaylist
+  addSongMyPlaylist,
 }) => {
-  const artworkUrl = song[2]
-  const title = song[1]
-  const duration = song[3]
-  const { currentTime, isPlaying, muted, shuffle } = player
+  const artworkUrl = song.artworkUrl;
+  const title = song.title;
+  const duration = song.duration;
+  const singer = song.singer;
+  const { currentTime, isPlaying, muted, shuffle } = player;
   //변수명때문에 굳이 .. 위에 안씀.
-  const volume = muted ? 0 : player.volume
+  const volume = muted ? 0 : player.volume;
 
   return (
     <div
       className={cx(`${moduleName}`, {
-        [`${moduleName}--hide`]: !meta.showBottomplayer
+        [`${moduleName}--hide`]: !meta.showBottomplayer,
       })}
       // style={{ display: meta.showBottomplayer ? "" : "none" }}
     >
       <div
         className={cx(`${moduleName}-control`, {
-          [`${moduleName}-control--open`]: meta.toggleHistory
-        })}
-      >
+          [`${moduleName}-control--open`]: meta.toggleHistory,
+        })}>
         <div className={cx(`${moduleName}__inner`)}>
           <div className={cx(`${moduleName}__section`)}>
             <div className={cx(`${moduleName}__buttons`)}>
@@ -52,8 +52,7 @@ const Player = ({
                 className={cx(`${moduleName}__button`)}
                 role="button"
                 tabIndex="0"
-                onClick={playPrevSong}
-              >
+                onClick={playPrevSong}>
                 <i className={cx(`${moduleName}__button__prev`)} />
               </div>
               <div
@@ -61,11 +60,10 @@ const Player = ({
                 role="button"
                 onClick={togglePlay}
                 tabIndex="0"
-                style={{ color: "#ffffff" }}
-              >
+                style={{ color: '#ffffff' }}>
                 <i
                   className={cx(
-                    `${moduleName}__button__` + (isPlaying ? "play" : "pause")
+                    `${moduleName}__button__` + (isPlaying ? 'play' : 'pause'),
                   )}
                 />
               </div>
@@ -75,19 +73,17 @@ const Player = ({
                 role="button"
                 tabIndex="0"
                 onClick={() => {
-                  playNexSong(song[0])
-                }}
-              >
+                  playNexSong(song[0]);
+                }}>
                 <i className={cx(`${moduleName}__button__forward`)} />
               </div>
               <div
                 className={cx(`${moduleName}__button`)}
-                onClick={toggleShuffle}
-              >
+                onClick={toggleShuffle}>
                 <i
                   className={cx(
                     `${moduleName}__button__` +
-                      (shuffle ? "shuffle" : "no-shuffle")
+                      (shuffle ? 'shuffle' : 'no-shuffle'),
                   )}
                 />
               </div>
@@ -95,8 +91,7 @@ const Player = ({
           </div>
           <div className={cx(`${moduleName}__section--time`)}>
             <div
-              style={{ color: "#45f7aa", width: "50px", textAlign: "center" }}
-            >
+              style={{ color: '#45f7aa', width: '50px', textAlign: 'center' }}>
               {formatSeconds(currentTime)}
             </div>
           </div>
@@ -117,10 +112,9 @@ const Player = ({
               role="button"
               tabIndex="0"
               style={{
-                paddingTop: "11px",
-                display: "flex"
-              }}
-            >
+                paddingTop: '11px',
+                display: 'flex',
+              }}>
               <i
                 onClick={toggleMuted}
                 className={cx(`${moduleName}__button__mute`)}
@@ -137,8 +131,8 @@ const Player = ({
                   style={{
                     backgroundImage: `url(${getImageUrl(
                       artworkUrl,
-                      IMAGE_SIZES.SMALL
-                    )})`
+                      IMAGE_SIZES.SMALL,
+                    )})`,
                   }}
                 />
                 {/*TODO : Change Link*/}
@@ -147,7 +141,7 @@ const Player = ({
                     {title}
                   </div>
                   <div className={cx(`${moduleName}__song__username`)}>
-                    Creator
+                    {singer}
                   </div>
                 </div>
               </div>
@@ -155,28 +149,27 @@ const Player = ({
           </div>
           <div
             className="player__section player__section--options"
-            style={{ marginLeft: "30px" }}
-          >
+            style={{ marginLeft: '30px' }}>
             <div className={cx(`${moduleName}__buttons`)}>
               <div role="button" tabIndex="0">
                 <span
-                  style={{ marginLeft: "10px" }}
+                  style={{ marginLeft: '10px' }}
                   className={cx(`${moduleName}__add_playlist`)}
                   onClick={() => {
-                    const songId = song[0]
-                    addSongMyPlaylist(songId)
+                    const songId = song[0];
+                    addSongMyPlaylist(songId);
                   }}
                 />
               </div>
               <div role="button" tabIndex="0">
                 <span
-                  style={{ marginLeft: "10px" }}
+                  style={{ marginLeft: '10px' }}
                   className={cx(`${moduleName}__heart`)}
                 />
               </div>
               <div role="button" tabIndex="0">
                 <span
-                  style={{ marginLeft: "16px" }}
+                  style={{ marginLeft: '16px' }}
                   className={cx(`${moduleName}__toggle__history`)}
                   onClick={toggleHistory}
                 />
@@ -193,13 +186,12 @@ const Player = ({
       </div>
       <div
         className={cx(`${moduleName}__historyTab`, {
-          [`${moduleName}__historyTab--open`]: meta.toggleHistory
-        })}
-      >
+          [`${moduleName}__historyTab--open`]: meta.toggleHistory,
+        })}>
         <HistoryTab />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default audio(Player)
+export default audio(Player);

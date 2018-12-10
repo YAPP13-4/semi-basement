@@ -1,54 +1,61 @@
-import React, { Component } from "react"
-import { connect } from "react-redux"
-import { loadSongDetail, selectSong } from "src/redux/music/actions"
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { loadSongDetail, selectSong } from 'src/redux/music/actions';
 
-import { formatDdMonthYyyy } from "src/utils/DateUtils"
-import IMAGE_SIZES from "src/App/constants/ImageConstants"
-import getImageUrl from "src/utils/ImageUtils"
-import Loading from "src/App/components/Loading"
+import { formatDdMonthYyyy } from 'src/utils/DateUtils';
+import IMAGE_SIZES from 'src/App/constants/ImageConstants';
+import getImageUrl from 'src/utils/ImageUtils';
+import Loading from 'src/App/components/Loading';
 
-import { formatString } from "src/utils/StringUtils"
-import classnames from "classnames/bind"
-import css from "./index.scss"
+import { formatString } from 'src/utils/StringUtils';
+import classnames from 'classnames/bind';
+import css from './index.scss';
 
-const cx = classnames.bind(css)
-const moduleName = "SongDetail"
+const cx = classnames.bind(css);
+const moduleName = 'SongDetail';
 
 //const { songDetail } = this.props
 class SongDetail extends Component {
   state = {
-    isOpen: false
-  }
+    isOpen: false,
+  };
   componentDidMount() {
-    this.props.loadSongDetail(this.props.match.params.songId)
+    this.props.loadSongDetail(this.props.match.params.songId);
   }
-  onClickPlay = (songId, title, artworkUrl, duration) => {
-    this.props.selectSong([songId, title, artworkUrl, duration])
-  }
+  onClickPlay = (songId, title, singer, artworkUrl, duration) => {
+    const targetMusic = {
+      songId: songId,
+      title: title,
+      singer: singer,
+      artworkUrl: artworkUrl,
+      duration: duration,
+    };
+    this.props.selectSong(targetMusic);
+  };
   getRenderedItems(itemNumber, items) {
     if (this.state.isOpen) {
-      return items
+      return items;
     }
-    return items.slice(0, itemNumber)
+    return items.slice(0, itemNumber);
   }
   toggle = () => {
-    this.setState({ isOpen: !this.state.isOpen })
-  }
+    this.setState({ isOpen: !this.state.isOpen });
+  };
   render() {
-    const { songDetail } = this.props
+    const { songDetail } = this.props;
     if (!songDetail) {
-      return <Loading />
+      return <Loading />;
     } else {
-      const artworkUrl = songDetail.artwork_url
-      const parsedDesc = formatString(songDetail.description, 5)
+      const artworkUrl = songDetail.artwork_url;
+      const parsedDesc = formatString(songDetail.description, 5);
       return (
         <div className={cx(`${moduleName}`)}>
           <div
             style={{
               backgroundImage: `url(${getImageUrl(
                 artworkUrl,
-                IMAGE_SIZES.XLARGE
-              )})`
+                IMAGE_SIZES.XLARGE,
+              )})`,
             }}
             className={cx(`${moduleName}-music`)}
           />
@@ -58,19 +65,19 @@ class SongDetail extends Component {
               style={{
                 backgroundImage: `url(${getImageUrl(
                   artworkUrl,
-                  IMAGE_SIZES.XLARGE
-                )})`
+                  IMAGE_SIZES.XLARGE,
+                )})`,
               }}
               /*FIX ME : refactoring */
               onClick={() => {
                 this.onClickPlay(
                   songDetail.id,
                   songDetail.title,
+                  songDetail.user.username,
                   artworkUrl,
-                  songDetail.duration / 1000
-                )
-              }}
-            >
+                  songDetail.duration / 1000,
+                );
+              }}>
               <div className={cx(`${moduleName}-albumCover-playicon`)} />
             </div>
             <div className={cx(`${moduleName}-wordings`)}>
@@ -83,7 +90,7 @@ class SongDetail extends Component {
               <div className={cx(`${moduleName}-songInfo-profile`)}>
                 <img
                   alt="artistProfile"
-                  src={songDetail.user.avatar_url.replace("large", "crop")}
+                  src={songDetail.user.avatar_url.replace('large', 'crop')}
                 />
                 <div>
                   <p>Released date</p>
@@ -99,17 +106,16 @@ class SongDetail extends Component {
                       return (
                         <p key={index}>
                           {element}
-                          {index && index % 3 === 2 ? <br /> : ""}
+                          {index && index % 3 === 2 ? <br /> : ''}
                         </p>
-                      )
-                    }
+                      );
+                    },
                   )}
                   <div
                     className={cx(
-                      `${moduleName}-songInfo-description-inner-showmore`
+                      `${moduleName}-songInfo-description-inner-showmore`,
                     )}
-                    onClick={this.toggle}
-                  >
+                    onClick={this.toggle}>
                     <span>show more v</span>
                   </div>
                 </div>
@@ -118,16 +124,16 @@ class SongDetail extends Component {
             <div className={cx(`${moduleName}-coments`)}>COMMING SOON</div>
           </div>
         </div>
-      )
+      );
     }
   }
 }
 const mapStateToProps = ({ music }) => {
   return {
-    songDetail: music.songDetail
-  }
-}
+    songDetail: music.songDetail,
+  };
+};
 export default connect(
   mapStateToProps,
-  { loadSongDetail, selectSong }
-)(SongDetail)
+  { loadSongDetail, selectSong },
+)(SongDetail);
