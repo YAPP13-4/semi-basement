@@ -1,5 +1,336 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`components/HistoryTab render.HistoryTab [Render Correctly] 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <HistoryTab
+    historySong={
+        Array [
+            Object {
+              "config": Object {
+                "headers": Object {
+                  "Accept": "application/json, text/plain, */*",
+                },
+                "maxContentLength": -1,
+                "method": "get",
+                "timeout": 0,
+                "transformRequest": Object {},
+                "transformResponse": Object {},
+                "url": "//api.soundcloud.com/tracks/331622174?client_id=a281614d7f34dc30b665dfcaa3ed7505",
+                "xsrfCookieName": "XSRF-TOKEN",
+                "xsrfHeaderName": "X-XSRF-TOKEN",
+              },
+              "data": Object {
+                "artwork_url": "https://i1.sndcdn.com/artworks-000232037629-yspo52-large.jpg",
+                "attachments_uri": "https://api.soundcloud.com/tracks/331622174/attachments",
+                "bpm": null,
+                "comment_count": 2,
+                "commentable": true,
+                "created_at": "2017/07/05 08:08:39 +0000",
+                "description": "Lyrics by  Bluite  ,  PLANET
+        Mixed by PLANET
+        Artwork by Tomnick
+        Produced by Bluesy Mansion
+        
+        verse 1 ) Bluite
+        
+        아침에 하는 건 알람 끄기 밖에 없던 내가
+        요즘은 일어나 하는 건 네 상메 확인부터야
+        
+        점심에 하는 건 약속 잡는 것 밖에 없던 내가
+        요즘은 시간 비우는 걸, 아, 니 연락 기다리나봐
+        
+        저녁에 하는 건 술 먹는 것 밖에 없던 내가
+        요즘은 뭐라고 보낼까, 고민만 한 시간 째야
+        
+        처음 만났던 그때를 기억해 난
+        넌 ~ 남방을 입었었지, 한
+        
+        참을 바라 봤고 말을 걸까도 했어
+        아,아 근데 내 스타일은 아냐
+        
+        내려다보는 눈빛이 설레, 몰래
+        감정을 숨기고 또 표현, 못하는 게 나야
+        
+        그게 말야, 난 모든 게 처음이니
+        서툰 날, 조금만 더 맞춰줄래
+        
+        hook) Bluite
+        
+        love is painful 이건 너무도 말이 안돼
+        love is an open door love is an open door
+        
+        love is painful 이건 너무도 말이 안돼
+        love is an open door love is an open door
+        
+        verse 2) PLANET
+        
+        예 사실 너가 그렇게 신경 쓰이고 했던  건 별로 아니었기에
+        처음에는 그냥 생각 없이 너에게 다가갔고
+        설레어 하는 듯, 한 너가 귀엽기만 했어
+        
+        근데 솔직히 말할게 I can't predict it 
+        예상 못했는데 너가 내 삶에 그렇게
+        큰 부분을 차지할진 몰랐고
+        너가 내 맘 한, 켠 에서 계속 돌고 돌아
+        
+        자고 일어나면 자연스럽게 take a message
+        너가 황새라면 난 영원히 널 쫒는 뱁새지
+        찢어져도 좋아 가랑인
+        언제부턴가 널 보는 날이면 산뜻한 신바람이
+        
+        불어와 don't leave me alone 
+        너도 나와 같다면 지금당장 날 보러와
+        조바심이 나기 시작해 어느 순간 나는
+        답장만 빨라지는 걸 babe 
+        
+        hook) Bluite X PLANET
+        
+        love is painful 이건 너무도 말이 안돼
+        love is an open door love is an open door
+        
+        love is painful 이건 너무도 말이 안돼
+        love is an open door love is an open door
+        
+        bridge ) Bluite
+        
+        너 지금 뭐해
+        난 답장 느린 걸 좋아 해
+        
+        질투는 없어 하나도
+        근데 너 때문에 변해 또
+        
+        넌 어떻게 생각 해 지금 우리 사이
+        뭐 이렇게 복잡해 시간 지나 많이
+        
+        생각 많이 했다간 놓칠 거야. 뭘 바라지
+        않아, 조금만 네가 다가오지
+        
+        Lyrics by  Bluite  ,  PLANET
+        Mixed by PLANET
+        Artwork by Tomnick
+        Produced by Bluesy Mansion",
+                "download_count": 0,
+                "download_url": "https://api.soundcloud.com/tracks/331622174/download",
+                "downloadable": false,
+                "duration": 186479,
+                "embeddable_by": "all",
+                "favoritings_count": 58,
+                "genre": "Hip-hop & Rap",
+                "id": 331622174,
+                "isrc": null,
+                "key_signature": null,
+                "kind": "track",
+                "label_id": null,
+                "label_name": null,
+                "last_modified": "2018/02/13 00:41:36 +0000",
+                "license": "all-rights-reserved",
+                "original_content_size": 7449984,
+                "original_format": "mp3",
+                "permalink": "feat-planet",
+                "permalink_url": "https://soundcloud.com/lxwl4ih4tphn/feat-planet",
+                "playback_count": 2730,
+                "purchase_title": null,
+                "purchase_url": null,
+                "release": null,
+                "release_day": null,
+                "release_month": null,
+                "release_year": null,
+                "reposts_count": 5,
+                "sharing": "public",
+                "state": "finished",
+                "stream_url": "https://api.soundcloud.com/tracks/331622174/stream",
+                "streamable": true,
+                "tag_list": "",
+                "title": "지금 뭐 해 (feat. PLANET)",
+                "track_type": null,
+                "uri": "https://api.soundcloud.com/tracks/331622174",
+                "user": Object {
+                  "avatar_url": "https://i1.sndcdn.com/avatars-000378492338-8vchg6-large.jpg",
+                  "id": 214535905,
+                  "kind": "user",
+                  "last_modified": "2018/07/07 10:47:51 +0000",
+                  "permalink": "lxwl4ih4tphn",
+                  "permalink_url": "http://soundcloud.com/lxwl4ih4tphn",
+                  "uri": "https://api.soundcloud.com/users/214535905",
+                  "username": "Bluite",
+                },
+                "user_id": 214535905,
+                "video_url": null,
+                "waveform_url": "https://w1.sndcdn.com/hounJmQBrjAK_m.png",
+              },
+              "headers": Object {
+                "cache-control": "private, max-age=0, must-revalidate",
+                "content-type": "application/json;charset=utf-8",
+                "date": "Sun, 02 Dec 2018 17:24:25 GMT",
+              },
+              "request": Object {},
+              "status": 200,
+              "statusText": "OK",
+            },
+          ]
+    }
+/>,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": <div
+        className="HistoryTab__Wrapper"
+        style={
+                Object {
+                        "color": "#ffffff",
+                      }
+        }
+>
+        <Connect(HistoryComponent)
+                artwork="https://i1.sndcdn.com/artworks-000232037629-yspo52-large.jpg"
+                duration={186479}
+                singer="Bluite"
+                songId={331622174}
+                title="지금 뭐 해 (feat. PLANET)"
+        />
+</div>,
+      "className": "HistoryTab",
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <Connect(HistoryComponent)
+            artwork="https://i1.sndcdn.com/artworks-000232037629-yspo52-large.jpg"
+            duration={186479}
+            singer="Bluite"
+            songId={331622174}
+            title="지금 뭐 해 (feat. PLANET)"
+/>,
+        ],
+        "className": "HistoryTab__Wrapper",
+        "style": Object {
+          "color": "#ffffff",
+        },
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": "history-0",
+          "nodeType": "class",
+          "props": Object {
+            "artwork": "https://i1.sndcdn.com/artworks-000232037629-yspo52-large.jpg",
+            "duration": 186479,
+            "singer": "Bluite",
+            "songId": 331622174,
+            "title": "지금 뭐 해 (feat. PLANET)",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+      ],
+      "type": "div",
+    },
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": <div
+          className="HistoryTab__Wrapper"
+          style={
+                    Object {
+                              "color": "#ffffff",
+                            }
+          }
+>
+          <Connect(HistoryComponent)
+                    artwork="https://i1.sndcdn.com/artworks-000232037629-yspo52-large.jpg"
+                    duration={186479}
+                    singer="Bluite"
+                    songId={331622174}
+                    title="지금 뭐 해 (feat. PLANET)"
+          />
+</div>,
+        "className": "HistoryTab",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <Connect(HistoryComponent)
+              artwork="https://i1.sndcdn.com/artworks-000232037629-yspo52-large.jpg"
+              duration={186479}
+              singer="Bluite"
+              songId={331622174}
+              title="지금 뭐 해 (feat. PLANET)"
+/>,
+          ],
+          "className": "HistoryTab__Wrapper",
+          "style": Object {
+            "color": "#ffffff",
+          },
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": "history-0",
+            "nodeType": "class",
+            "props": Object {
+              "artwork": "https://i1.sndcdn.com/artworks-000232037629-yspo52-large.jpg",
+              "duration": 186479,
+              "singer": "Bluite",
+              "songId": 331622174,
+              "title": "지금 뭐 해 (feat. PLANET)",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+        ],
+        "type": "div",
+      },
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
+`;
+
 exports[`components/HistoryTab/HistoryComponent render.HistoryComponent [Render Correctly] 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],

@@ -8,7 +8,6 @@ const moduleName = 'HistoryTab';
 
 export class HistoryTab extends Component {
   renderHistory = () => {
-    console.log('history', this.props.historySong);
     return this.props.historySong.map((song, index) => (
       <HistoryComponent
         key={`history-${index}`}
