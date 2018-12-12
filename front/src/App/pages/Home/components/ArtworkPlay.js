@@ -4,7 +4,6 @@ import classnames from 'classnames/bind';
 import getImageUrl from 'src/utils/ImageUtils';
 import css from './ArtworkPlay.scss';
 import IMAGE_SIZES from '../../../constants/ImageConstants';
-import music from '../../../../redux/music/reducer';
 
 const cx = classnames.bind(css);
 const moduleName = 'ArtworkPlay';
@@ -12,7 +11,6 @@ const moduleName = 'ArtworkPlay';
 const ArtWorkPlay = ({ musicInfo, onClickPlay }) => {
   const songId = musicInfo.id;
   const title = musicInfo.title;
-  const singer = musicInfo.user.username || 'Creator';
   const creator = musicInfo.user.username;
   const artworkUrl = musicInfo.artwork_url;
   const duration = musicInfo.duration / 1000;
@@ -25,7 +23,7 @@ const ArtWorkPlay = ({ musicInfo, onClickPlay }) => {
             <div
               className={cx(`${moduleName}-song-body-card-artwork`)}
               onClick={() => {
-                onClickPlay({ songId, title, singer, artworkUrl, duration });
+                onClickPlay({ songId, title, creator, artworkUrl, duration });
               }}
               style={{
                 backgroundImage: `url(${getImageUrl(
