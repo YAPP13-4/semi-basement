@@ -1,19 +1,22 @@
-import { SONG_URL, resolveUrl } from "../apiConstants"
-import axios from "axios"
+import { SONG_URL, resolveUrl } from '../apiConstants';
+import axios from 'axios';
 
 export function getSoundCloudSongInfo(url) {
   //debugger
   return axios
     .get(resolveUrl(url))
     .then(response => response.data)
-    .catch(err => err)
+    .catch(err => err);
 }
 
 export function getSoundCloudSong(songId) {
-  const songUrl = SONG_URL.replace(":id", songId)
+  console.log('get info ', songId);
+  const songUrl = SONG_URL.replace(':id', songId);
 
   return axios
     .get(songUrl)
-    .then(res => res)
-    .then(err => err)
+    .then(res => res.data)
+    .catch(err => {
+      console.log('err', err);
+    });
 }

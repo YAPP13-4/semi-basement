@@ -11,11 +11,11 @@ export class HistoryTab extends Component {
     return this.props.historySong.map((song, index) => (
       <HistoryComponent
         key={`history-${index}`}
-        songId={song.data.id}
-        artwork={song.data.artwork_url}
-        duration={song.data.duration}
-        title={song.data.title}
-        singer={song.data.user.username}
+        songId={song.id}
+        artwork={song.artwork_url}
+        duration={song.duration}
+        title={song.title}
+        singer={song.user.username}
       />
     ));
   };
