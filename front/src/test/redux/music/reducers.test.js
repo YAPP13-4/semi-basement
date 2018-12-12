@@ -4,7 +4,7 @@ import { musicInfoMockData, historyMockData } from '../../mockData';
 
 function getInitialState() {
   return {
-    song: '',
+    playingMusic: null,
     loading: false,
     infoLoading: false,
     musicInfo: null,
@@ -58,15 +58,17 @@ describe('redux/music [LOAD DATA]', () => {
 describe('redux/music [LOAD DATA]', () => {
   it('actions.SELECT_SONG, [CHANGE_MUSIC_WHEN_CLICK]', () => {
     //Given
-    const mockSong = [
-      331622174,
-      '지금 뭐 해 (feat. PLANET)',
-      'https://i1.sndcdn.com/artworks-000232037629-yspo52-large.jpg',
-      186.479,
-    ];
+    const mockSong = {
+      songId: 331622174,
+      title: '지금 뭐 해 (feat. PLANET)',
+      singer: 'Bluite',
+      artworkUrl:
+        'https://i1.sndcdn.com/artworks-000232037629-yspo52-large.jpg',
+      duration: 186.479,
+    };
     const selectSongAction = {
       type: musicActions.SELECT_SONG,
-      song: mockSong,
+      playingMusic: mockSong,
     };
     const initialState = getInitialState();
     //When
@@ -74,7 +76,7 @@ describe('redux/music [LOAD DATA]', () => {
     //Then
     const expected = {
       ...initialState,
-      song: mockSong,
+      playingMusic: mockSong,
     };
     expect(result).toEqual(expected);
   });
