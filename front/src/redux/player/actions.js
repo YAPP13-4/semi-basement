@@ -4,6 +4,7 @@ import * as types from './ActionType';
 import * as musicActions from '../music/actions';
 import axios from 'axios';
 import { SONG_URL } from '../../App/constants/ApiConstants';
+import { getSoundCloudSong } from 'src/api';
 
 const MODULE_NAME = `META`;
 export const CHANGE_MYPLAYER_CURRENT_TIME = `${MODULE_NAME}/CHANGE_MYPLAYER_CURRENT_TIME`;
@@ -68,7 +69,7 @@ function randomIndex(currentIndex, maxIndex) {
   }
   return nextIndex;
 }
-export const playNexSong = targetId => (dispatch, getState) => {
+export const playNexSong = () => async (dispatch, getState) => {
   const state = getState();
   const isShuffle = state.player.shuffle;
   const currentSongInfo = state.music.playingMusic;
@@ -82,29 +83,21 @@ export const playNexSong = targetId => (dispatch, getState) => {
     const nextId = isShuffle
       ? targetPlayList[randomIndex(currentSongIndex, targetPlayList.length)]
       : targetPlayList[(currentSongIndex + 1) % targetPlayList.length];
-
-    return axios
-      .get(SONG_URL.replace(':id', nextId))
-      .then(response => {
-        const songInfo = [
-          response.data.id,
-          response.data.title,
-          response.data.artwork_url,
-          response.data.duration / 1000,
-        ];
-        console.log('soninfo', songInfo);
-        dispatch({
-          type: musicActions.SELECT_SONG,
-          song: songInfo,
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    const newMusicData = await getSoundCloudSong(nextId);
+    const newPlayingMusic = {
+      songId: newMusicData.id,
+      title: newMusicData.title,
+      artworkUrl: newMusicData.artwork_url,
+      duration: newMusicData.duration / 1000,
+    };
+    dispatch({
+      type: musicActions.SELECT_SONG,
+      playingMusic: newPlayingMusic,
+    });
   }
 };
 
-export const playPrevSong = () => (dispatch, getState) => {
+export const playPrevSong = () => async (dispatch, getState) => {
   const state = getState();
   const currentSongInfo = state.music.playingMusic;
   const targetPlayList = state.playList.musicList;
@@ -120,24 +113,16 @@ export const playPrevSong = () => (dispatch, getState) => {
         ? targetPlayList[randomIndex(currentSongIndex, targetPlayList.length)]
         : targetPlayList[(currentSongIndex - 1) % targetPlayList.length];
     }
-
-    return axios
-      .get(SONG_URL.replace(':id', nextId))
-      .then(response => {
-        const songInfo = [
-          response.data.id,
-          response.data.title,
-          response.data.artwork_url,
-          response.data.duration / 1000,
-        ];
-        console.log('soninfo', songInfo);
-        dispatch({
-          type: musicActions.SELECT_SONG,
-          song: songInfo,
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    const newMusicData = await getSoundCloudSong(nextId);
+    const newPlayingMusic = {
+      songId: newMusicData.id,
+      title: newMusicData.title,
+      artworkUrl: newMusicData.artwork_url,
+      duration: newMusicData.duration / 1000,
+    };
+    dispatch({
+      type: musicActions.SELECT_SONG,
+      playingMusic: newPlayingMusic,
+    });
   }
 };
