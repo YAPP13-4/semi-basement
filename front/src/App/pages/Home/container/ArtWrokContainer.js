@@ -31,14 +31,15 @@ const inactivePalyList = {
   height: '35px',
 };
 class ArtWorkPlayContainer extends PureComponent {
-  onClickPlay = ({ songId, title, singer, artworkUrl, duration }) => {
+  onClickPlay = ({ songId, title, creator, artworkUrl, duration }) => {
     const targetMusic = {
       songId: songId,
       title: title,
-      singer: singer,
+      singer: creator,
       artworkUrl: artworkUrl,
       duration: duration,
     };
+    console.log('targetmusic', targetMusic);
     this.props.selectSong(targetMusic);
     this.props.historySong(songId);
   };
