@@ -28,8 +28,9 @@ const audio = InnerComponent => {
     componentDidUpdate(prevProps) {
       const { audioElement, props } = this;
       const { song, player } = props;
-      const audioUrl = song[0];
-      const prevSong = prevProps.song[0];
+      console.log('audio song', song, 'player', player);
+      const audioUrl = song.songId;
+      const prevSong = prevProps.song.songId;
       if (prevSong !== audioUrl) {
         audioElement.play();
       }
