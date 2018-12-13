@@ -59,14 +59,7 @@ class MyPlayer extends Component {
   };
 
   onClickPlay = ({ songId, title, singer, artworkUrl, duration }) => {
-    const targetMusic = {
-      songId: songId,
-      title: title,
-      singer: singer,
-      artworkUrl: artworkUrl,
-      duration: duration,
-    };
-    this.props.selectSong(targetMusic);
+    this.props.selectSong({ songId, title, singer, artworkUrl, duration });
     this.props.historySong(songId);
   };
 
@@ -90,6 +83,7 @@ class MyPlayer extends Component {
           },
         }) => {
           return {
+            songId: musicId,
             artworkUrl: artwork_url,
             title,
             username,
@@ -114,9 +108,10 @@ class MyPlayer extends Component {
   };
 
   render() {
-    const targetMusic = this.props.playingMusic || {};
-    const { title, singer, artworkUrl, duration } = targetMusic;
-    const { currentTime } = this.props.player;
+    const { playingMusic, player } = this.props;
+    const { currentTime } = player;
+    const { title, singer, artworkUrl, duration } = playingMusic || {};
+
     return (
       <div
         className={cx(`${moduleName}`, {
