@@ -13,10 +13,5 @@ export function getSoundCloudSong(songId) {
   console.log('get info ', songId);
   const songUrl = SONG_URL.replace(':id', songId);
 
-  return axios
-    .get(songUrl)
-    .then(res => res.data)
-    .catch(err => {
-      console.log('err', err);
-    });
+  return axios.get(songUrl).then(res => res.data);
 }
