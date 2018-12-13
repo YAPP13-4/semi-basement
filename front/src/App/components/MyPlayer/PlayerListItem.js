@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import classnames from 'classnames/bind';
 
 import { formatSeconds } from 'src/utils/NumberUtils';
@@ -12,19 +11,15 @@ import MyPlayerTooltip from './components/MyPlayerTooltip';
 const cx = classnames.bind(css);
 const moduleName = 'PlayerListItem';
 
-const PlayerListItem = ({ info, index, musicList, onClickPlay }) => {
+const PlayerListItem = ({ info, index, onClickPlay }) => {
+  console.log('info', info);
+  const { songId, title, singer, artworkUrl, duration } = info;
   return (
     <div
       className={cx(`${moduleName}`)}
       key={index}
       onClick={() => {
-        onClickPlay({
-          songId: musicList[index],
-          title: info.title,
-          singer: info.user.username || 'Creator',
-          artworkUrl: info.artworkUrl,
-          duration: info.duration,
-        });
+        onClickPlay({ songId, title, singer, artworkUrl, duration });
       }}>
       <i className={cx(`${moduleName}-move`)} />
       <div
@@ -54,9 +49,4 @@ const PlayerListItem = ({ info, index, musicList, onClickPlay }) => {
   );
 };
 
-export default connect(
-  ({ playList }) => ({
-    musicList: playList.musicList,
-  }),
-  {},
-)(PlayerListItem);
+export default PlayerListItem;
