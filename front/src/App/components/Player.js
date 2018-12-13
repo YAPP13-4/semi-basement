@@ -25,12 +25,9 @@ const Player = ({
   playPrevSong,
   addSongMyPlaylist,
 }) => {
-  const artworkUrl = song.artworkUrl;
-  const title = song.title;
-  const duration = song.duration;
-  const singer = song.singer;
+  const { songId, title, singer, artworkUrl, duration } = song;
+
   const { currentTime, isPlaying, muted, shuffle } = player;
-  //변수명때문에 굳이 .. 위에 안씀.
   const volume = muted ? 0 : player.volume;
 
   return (
@@ -156,7 +153,6 @@ const Player = ({
                   style={{ marginLeft: '10px' }}
                   className={cx(`${moduleName}__add_playlist`)}
                   onClick={() => {
-                    const songId = song[0];
                     addSongMyPlaylist(songId);
                   }}
                 />
