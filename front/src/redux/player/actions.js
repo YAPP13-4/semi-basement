@@ -87,6 +87,7 @@ export const playNexSong = () => async (dispatch, getState) => {
     const newPlayingMusic = {
       songId: newMusicData.id,
       title: newMusicData.title,
+      singer: newMusicData.user.username,
       artworkUrl: newMusicData.artwork_url,
       duration: newMusicData.duration / 1000,
     };
@@ -117,6 +118,7 @@ export const playPrevSong = () => async (dispatch, getState) => {
     const newPlayingMusic = {
       songId: newMusicData.id,
       title: newMusicData.title,
+      singer: newMusicData.user.username,
       artworkUrl: newMusicData.artwork_url,
       duration: newMusicData.duration / 1000,
     };
