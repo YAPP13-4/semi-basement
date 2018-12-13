@@ -20,7 +20,6 @@ const audio = InnerComponent => {
     }
 
     componentDidMount() {
-      //console.log("audio", this.props);
       const { audioElement } = this;
       audioElement.play();
     }
@@ -65,7 +64,6 @@ const audio = InnerComponent => {
       prevProps.player.myPlayerVolume !== props.player.myPlayerVolume;
 
     onEnded() {
-      console.log(this.props);
       const { props } = this;
       const { playNexSong } = props;
       playNexSong();

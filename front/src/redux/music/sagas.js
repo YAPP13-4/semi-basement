@@ -25,7 +25,6 @@ import {
 export function* updateHistoryLocalStorage(action) {
   const { songId } = action;
   const targetId = songId;
-  console.log('tagetId', targetId);
   yield put(historySongRequest());
 
   try {
@@ -56,9 +55,9 @@ export function* updateHistoryLocalStorage(action) {
       localStorage.historySong = JSON.stringify(newHistory);
     }
     const data = yield all(newHistory.map(id => call(getSoundCloudSong, id)));
-    yield put(historySongSuccess(data));
+    const filData = data.data;
+    yield put(historySongSuccess(filData));
   } catch (err) {
-    console.log(err);
     yield put(historySongFailure(err));
   }
 }
@@ -68,7 +67,6 @@ export function* watchHistorySongInfoFlow() {
 
 ///////
 export function* loadSongsInfoFrom(action) {
-  console.log('load song info from ', action);
   const { songUrlArr } = action;
   yield put(loadSongInfoRequest());
   try {
