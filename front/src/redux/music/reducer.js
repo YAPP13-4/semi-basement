@@ -9,19 +9,12 @@ import {
   LOAD_SONG_INFO_SUCCESS,
   LOAD_KEYWORD_MUSIC,
   LOAD_KEYWORD_MUSIC_SUCCESS,
-  LOAD_KEYWORD_MUSIC_FAILURE
-} from "./actions"
-
-const initSong = [
-  278197314,
-  "Everywhere (Beat by. NSOUL)",
-  "https://i1.sndcdn.com/artworks-000235180753-oc72f3-large.jpg",
-  230.29
-]
+  LOAD_KEYWORD_MUSIC_FAILURE,
+} from './actions';
 
 const music = (
   state = {
-    song: "",
+    playingMusic: null,
     loading: false,
     infoLoading: false,
     musicInfo: null,
@@ -29,73 +22,73 @@ const music = (
     recommendMusicInfo2: null,
     songDetail: null,
     historySong: [],
-    searchKeyword: "",
-    searchResult: null
+    searchKeyword: '',
+    searchResult: null,
   },
-  action
+  action,
 ) => {
   switch (action.type) {
     case LOAD_SONG_INFO_REQUEST:
       return {
         ...state,
-        infoLoading: true
-      }
+        infoLoading: true,
+      };
 
     case LOAD_SONG_INFO_SUCCESS:
       return {
         ...state,
         infoLoading: false,
-        musicInfo: [...action.data]
-      }
+        musicInfo: [...action.data],
+      };
     case SELECT_SONG:
       return {
         ...state,
-        song: action.song
-      }
+        playingMusic: action.playingMusic,
+      };
     case HISTORY_SONG_REQUEST:
       return {
-        ...state
-      }
+        ...state,
+      };
     case HISTORY_SONG_SUCCESS:
       return {
         ...state,
-        historySong: [...action.data]
-      }
+        historySong: [...action.data],
+      };
     case LOAD_SONG_DETAIL_REQUEST:
       return {
         ...state,
-        loading: true
-      }
+        loading: true,
+      };
     case LOAD_SONG_DETAIL_SUCCESS:
       return {
         ...state,
         loading: false,
-        songDetail: { ...action.data }
-      }
+        songDetail: { ...action.data },
+      };
     case LOAD_SONG_DETAIL_FAILURE:
       return {
         ...state,
         loading: false,
-        error: { ...action.err }
-      }
+        error: { ...action.err },
+      };
     case LOAD_KEYWORD_MUSIC:
       return {
         ...state,
-        searchKeyword: action.keyword
-      }
+        searchKeyword: action.keyword,
+      };
     case LOAD_KEYWORD_MUSIC_SUCCESS:
       return {
         ...state,
-        searchResult: { ...action.data }
-      }
+        searchResult: { ...action.data },
+      };
     case LOAD_KEYWORD_MUSIC_FAILURE:
       return {
         ...state,
-        error: { ...action.err }
-      }
+        error: { ...action.err },
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default music
+export default music;

@@ -1,19 +1,19 @@
-import React from "react"
-import { Link } from "react-router-dom"
-import classnames from "classnames/bind"
-import getImageUrl from "src/utils/ImageUtils"
-import css from "./ArtworkPlay.scss"
-import IMAGE_SIZES from "../../../constants/ImageConstants"
+import React from 'react';
+import { Link } from 'react-router-dom';
+import classnames from 'classnames/bind';
+import getImageUrl from 'src/utils/ImageUtils';
+import css from './ArtworkPlay.scss';
+import IMAGE_SIZES from '../../../constants/ImageConstants';
 
-const cx = classnames.bind(css)
-const moduleName = "ArtworkPlay"
+const cx = classnames.bind(css);
+const moduleName = 'ArtworkPlay';
 
 const ArtWorkPlay = ({ musicInfo, onClickPlay }) => {
-  const songId = musicInfo.id
-  const title = musicInfo.title
-  const creator = musicInfo.user.username
-  const artworkUrl = musicInfo.artwork_url
-  const duration = musicInfo.duration / 1000
+  const songId = musicInfo.id;
+  const title = musicInfo.title;
+  const creator = musicInfo.user.username;
+  const artworkUrl = musicInfo.artwork_url;
+  const duration = musicInfo.duration / 1000;
 
   return (
     <div className={cx(`${moduleName}`)}>
@@ -23,22 +23,20 @@ const ArtWorkPlay = ({ musicInfo, onClickPlay }) => {
             <div
               className={cx(`${moduleName}-song-body-card-artwork`)}
               onClick={() => {
-                onClickPlay({ songId, title, artworkUrl, duration })
+                onClickPlay({ songId, title, creator, artworkUrl, duration });
               }}
               style={{
                 backgroundImage: `url(${getImageUrl(
                   artworkUrl,
-                  IMAGE_SIZES.XLARGE
-                )})`
-              }}
-            >
+                  IMAGE_SIZES.XLARGE,
+                )})`,
+              }}>
               <div className={cx(`${moduleName}-song-body-card-playicon`)} />
             </div>
 
             <Link
               className={cx(`${moduleName}-song-body-card-link`)}
-              to={"/songDetail/" + songId}
-            >
+              to={'/songDetail/' + songId}>
               <div className={cx(`${moduleName}-song-body-card-info`)}>
                 <div className={cx(`${moduleName}-song-body-card-title`)}>
                   {title}
@@ -52,6 +50,6 @@ const ArtWorkPlay = ({ musicInfo, onClickPlay }) => {
         </div>
       </div>
     </div>
-  )
-}
-export default ArtWorkPlay
+  );
+};
+export default ArtWorkPlay;

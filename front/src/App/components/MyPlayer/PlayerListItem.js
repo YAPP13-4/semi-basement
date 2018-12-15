@@ -1,44 +1,34 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import classnames from 'classnames/bind'
+import React from 'react';
+import classnames from 'classnames/bind';
 
-import { formatSeconds } from 'src/utils/NumberUtils'
-import getImageUrl from 'src/utils/ImageUtils'
-import IMAGE_SIZES from 'src/App/constants/ImageConstants'
+import { formatSeconds } from 'src/utils/NumberUtils';
+import getImageUrl from 'src/utils/ImageUtils';
+import IMAGE_SIZES from 'src/App/constants/ImageConstants';
 
-import css from './PlayerListItem.scss'
-import MyPlayerTooltip from './components/MyPlayerTooltip'
+import css from './PlayerListItem.scss';
+import MyPlayerTooltip from './components/MyPlayerTooltip';
 
-const cx = classnames.bind(css)
-const moduleName = 'PlayerListItem'
+const cx = classnames.bind(css);
+const moduleName = 'PlayerListItem';
 
-const PlayerListItem = ({
-  info,
-  index,
-  musicList,
-  onClickPlay,
-}) => {
+const PlayerListItem = ({ info, index, onClickPlay }) => {
+  console.log('info', info);
+  const { songId, title, singer, artworkUrl, duration } = info;
   return (
     <div
       className={cx(`${moduleName}`)}
       key={index}
       onClick={() => {
-        onClickPlay({
-          songId: musicList[index],
-          title: info.title,
-          artworkUrl: info.artworkUrl,
-          duration: info.duration
-        })
-      }}
-    >
+        onClickPlay({ songId, title, singer, artworkUrl, duration });
+      }}>
       <i className={cx(`${moduleName}-move`)} />
       <div
         className={cx(`${moduleName}-artwork`)}
         style={{
           backgroundImage: `url(${getImageUrl(
             info.artworkUrl,
-            IMAGE_SIZES.SMALL
-          )})`
+            IMAGE_SIZES.SMALL,
+          )})`,
         }}
       />
       <div className={cx(`${moduleName}-center`)}>
@@ -56,12 +46,7 @@ const PlayerListItem = ({
         </MyPlayerTooltip>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default connect(
-  ({ playList }) => ({
-    musicList: playList.musicList,
-  }),
-  {}
-)(PlayerListItem)
+export default PlayerListItem;
