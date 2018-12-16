@@ -89,7 +89,7 @@ export function* loadSongDetailFlow(action) {
 
   yield put(loadSongDetailRequest());
   try {
-    const { data } = yield call(getSoundCloudSong, songId);
+    const data = yield call(getSoundCloudSong, songId);
 
     yield put(loadSongDetailSuccess(data));
   } catch (error) {
