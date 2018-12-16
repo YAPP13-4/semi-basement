@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import classnames from 'classnames/bind';
 import css from './HistoryComponent.scss';
 import IMAGE_SIZES from '../../constants/ImageConstants';
-import getImageUrl from '../../../utils/ImageUtils';
+import * as utils from 'src/utils';
 import { selectSong } from '../../../redux/music/actions';
 import { connect } from 'react-redux';
 import { onPlay, onPause } from 'src/redux/player/actions';
@@ -75,7 +75,7 @@ class HistoryComponent extends PureComponent {
           className={cx(`${moduleName}__artwork`)}
           onClick={this.artowrkClickEvent}
           style={{
-            backgroundImage: `url(${getImageUrl(
+            backgroundImage: `url(${utils.getImageUrl(
               this.props.artwork,
               IMAGE_SIZES.XLARGE,
             )})`,

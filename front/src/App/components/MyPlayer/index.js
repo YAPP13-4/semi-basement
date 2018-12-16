@@ -19,9 +19,8 @@ import {
   setMyPlayerSubPlayList,
 } from 'src/redux/myPlayer/actions';
 import Slider from 'src/App/components/Slider/';
-import { formatSeconds } from 'src/utils/NumberUtils';
+import * as utils from 'src/utils';
 import { SONG_URL } from 'src/App/constants/ApiConstants';
-import getImageUrl from 'src/utils/ImageUtils';
 import IMAGE_SIZES from 'src/App/constants/ImageConstants';
 
 import css from './index.scss';
@@ -121,7 +120,7 @@ class MyPlayer extends Component {
         <div
           className={cx(`${moduleName}-topImageWrapper`)}
           style={{
-            backgroundImage: `url(${getImageUrl(
+            backgroundImage: `url(${utils.getImageUrl(
               artworkUrl,
               IMAGE_SIZES.XLARGE,
             )})`,
@@ -129,7 +128,7 @@ class MyPlayer extends Component {
           <div
             className={cx(`${moduleName}-topImage`)}
             style={{
-              backgroundImage: `url(${getImageUrl(
+              backgroundImage: `url(${utils.getImageUrl(
                 artworkUrl,
                 IMAGE_SIZES.XLARGE,
               )})`,
@@ -141,7 +140,7 @@ class MyPlayer extends Component {
             <div
               className={cx(`${moduleName}-top-musicCard-coverImg`)}
               style={{
-                backgroundImage: `url(${getImageUrl(
+                backgroundImage: `url(${utils.getImageUrl(
                   artworkUrl,
                   IMAGE_SIZES.XLARGE,
                 )})`,
@@ -178,7 +177,7 @@ class MyPlayer extends Component {
             <div className={cx(`${moduleName}-top-musicController-slider`)}>
               <div
                 className={cx(`${moduleName}-top-musicController-slider-left`)}>
-                {formatSeconds(currentTime)}
+                {utils.formatSeconds(currentTime)}
               </div>
               <div
                 className={cx(
@@ -194,7 +193,7 @@ class MyPlayer extends Component {
                 className={cx(
                   `${moduleName}-top-musicController-slider-right`,
                 )}>
-                {formatSeconds(duration)}
+                {utils.formatSeconds(duration)}
               </div>
             </div>
             <div

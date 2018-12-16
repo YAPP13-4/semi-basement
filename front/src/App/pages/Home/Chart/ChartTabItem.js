@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import classnames from 'classnames/bind';
 import css from './ChartTabItem.scss';
 import IMAGE_SIZES from '../../../constants/ImageConstants';
-import getImageUrl from '../../../../utils/ImageUtils';
-import { formatSeconds } from 'src/utils/NumberUtils';
+import * as utils from 'src/utils';
 const cx = classnames.bind(css);
 const moduleName = 'ChartTabContainer';
 
@@ -26,7 +25,7 @@ const ChartTabItem = ({ musicInfo, onClickPlay, ind }) => {
           onClickPlay({ songId, title, artworkUrl, duration });
         }}>
         <img
-          src={`${getImageUrl(artworkUrl, IMAGE_SIZES.SMALL)}`}
+          src={`${utils.getImageUrl(artworkUrl, IMAGE_SIZES.SMALL)}`}
           alt="artwork"
         />
       </td>
@@ -34,7 +33,9 @@ const ChartTabItem = ({ musicInfo, onClickPlay, ind }) => {
         <Link to={'/songDetail/' + songId}>{title}</Link>
       </td>
       <td className={cx(`${moduleName}-singer`)}>{creator}</td>
-      <td className={cx(`${moduleName}-time`)}>{formatSeconds(duration)}</td>
+      <td className={cx(`${moduleName}-time`)}>
+        {utils.formatSeconds(duration)}
+      </td>
       <td>
         <span className={cx(`${moduleName}-likeIcon`)} />{' '}
       </td>

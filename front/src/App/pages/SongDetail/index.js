@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadSongDetail, selectSong } from 'src/redux/music/actions';
 
-import { formatDdMonthYyyy } from 'src/utils/DateUtils';
+import * as utils from 'src/utils';
 import IMAGE_SIZES from 'src/App/constants/ImageConstants';
-import getImageUrl from 'src/utils/ImageUtils';
 import Loading from 'src/App/components/Loading';
 
-import { formatString } from 'src/utils/StringUtils';
 import classnames from 'classnames/bind';
 import css from './index.scss';
 
@@ -47,12 +45,12 @@ class SongDetail extends Component {
       return <Loading />;
     } else {
       const artworkUrl = songDetail.artwork_url;
-      const parsedDesc = formatString(songDetail.description, 5);
+      const parsedDesc = utils.formatString(songDetail.description, 5);
       return (
         <div className={cx(`${moduleName}`)}>
           <div
             style={{
-              backgroundImage: `url(${getImageUrl(
+              backgroundImage: `url(${utils.getImageUrl(
                 artworkUrl,
                 IMAGE_SIZES.XLARGE,
               )})`,
@@ -63,7 +61,7 @@ class SongDetail extends Component {
             <div
               className={cx(`${moduleName}-albumCover`)}
               style={{
-                backgroundImage: `url(${getImageUrl(
+                backgroundImage: `url(${utils.getImageUrl(
                   artworkUrl,
                   IMAGE_SIZES.XLARGE,
                 )})`,
@@ -94,7 +92,7 @@ class SongDetail extends Component {
                 />
                 <div>
                   <p>Released date</p>
-                  <h4>{formatDdMonthYyyy(songDetail.created_at)}</h4>
+                  <h4>{utils.formatDdMonthYyyy(songDetail.created_at)}</h4>
                   <h3>{songDetail.user.username}</h3>
                 </div>
               </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames/bind';
-import getImageUrl from 'src/utils/ImageUtils';
+import * as utils from 'src/utils';
 import css from './ArtworkPlay.scss';
 import IMAGE_SIZES from '../../../constants/ImageConstants';
 
@@ -26,7 +26,7 @@ const ArtWorkPlay = ({ musicInfo, onClickPlay }) => {
                 onClickPlay({ songId, title, creator, artworkUrl, duration });
               }}
               style={{
-                backgroundImage: `url(${getImageUrl(
+                backgroundImage: `url(${utils.getImageUrl(
                   artworkUrl,
                   IMAGE_SIZES.XLARGE,
                 )})`,

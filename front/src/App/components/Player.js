@@ -3,10 +3,9 @@ import classnames from 'classnames/bind';
 import css from './Player.scss';
 import audio from './audio';
 
-import getImageUrl from '../../utils/ImageUtils';
+import * as utils from 'src/utils';
 import IMAGE_SIZES from '../constants/ImageConstants';
 import Slider from './Slider';
-import { formatSeconds } from '../../utils/NumberUtils';
 import HistoryTab from './HistoryTab/HistoryTab';
 
 const cx = classnames.bind(css);
@@ -89,7 +88,7 @@ const Player = ({
           <div className={cx(`${moduleName}__section--time`)}>
             <div
               style={{ color: '#45f7aa', width: '50px', textAlign: 'center' }}>
-              {formatSeconds(currentTime)}
+              {utils.formatSeconds(currentTime)}
             </div>
           </div>
           <div className={cx(`${moduleName}__section--seek`)}>
@@ -100,7 +99,7 @@ const Player = ({
             />
           </div>
           <div className={cx(`${moduleName}__section--time`)}>
-            <div className="player__time">{formatSeconds(duration)}</div>
+            <div className="player__time">{utils.formatSeconds(duration)}</div>
           </div>
 
           <div className={cx(`${moduleName}__section`)}>
@@ -126,7 +125,7 @@ const Player = ({
                 <div
                   className={cx(`${moduleName}__song__artwork`)}
                   style={{
-                    backgroundImage: `url(${getImageUrl(
+                    backgroundImage: `url(${utils.getImageUrl(
                       artworkUrl,
                       IMAGE_SIZES.SMALL,
                     )})`,
