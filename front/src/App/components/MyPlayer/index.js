@@ -85,7 +85,7 @@ class MyPlayer extends Component {
             songId: musicId,
             artworkUrl: artwork_url,
             title,
-            username,
+            singer: username,
             duration: duration / 1000,
           };
         },
@@ -110,7 +110,6 @@ class MyPlayer extends Component {
     const { playingMusic, player } = this.props;
     const { currentTime } = player;
     const { title, singer, artworkUrl, duration } = playingMusic || {};
-
     return (
       <div
         className={cx(`${moduleName}`, {

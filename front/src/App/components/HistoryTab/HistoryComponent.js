@@ -77,7 +77,7 @@ class HistoryComponent extends PureComponent {
           style={{
             backgroundImage: `url(${utils.getImageUrl(
               this.props.artwork,
-              IMAGE_SIZES.XLARGE,
+              IMAGE_SIZES.SMALL,
             )})`,
           }}
           onMouseOver={this.artowrkMouseOver}
