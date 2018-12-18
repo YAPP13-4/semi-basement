@@ -14,6 +14,7 @@
   &-topImageWrapper {
     background: no-repeat center center;
     background-size: cover;
+    background-color: black;
     overflow: hidden;
   }
   &-topImage {
@@ -78,7 +79,7 @@
             position: absolute;
             top: 90px;
             left: 60px;
-            background: url("src/assets/icons/icon2.png") no-repeat -47px -237px;
+            background: url('src/assets/icons/icon2.png') no-repeat -47px -237px;
             width: 17px;
             height: 18px;
             &:hover {
@@ -91,7 +92,7 @@
             position: absolute;
             top: 85px;
             left: 159px;
-            background: url("src/assets/icons/icon2.png") no-repeat -115px -282px;
+            background: url('src/assets/icons/icon2.png') no-repeat -115px -282px;
             width: 21px;
             height: 25px;
             &:hover {
@@ -104,7 +105,7 @@
             position: absolute;
             top: 85px;
             left: 159px;
-            background: url("src/assets/icons/icon2.png") no-repeat -115px -236px;
+            background: url('src/assets/icons/icon2.png') no-repeat -115px -236px;
             width: 22px;
             height: 26px;
             &:hover {
@@ -117,7 +118,7 @@
             position: absolute;
             top: 90px;
             right: 0px;
-            background: url("src/assets/icons/icon2.png") no-repeat -187px -237px;
+            background: url('src/assets/icons/icon2.png') no-repeat -187px -237px;
             width: 18px;
             height: 18px;
             &:hover {
@@ -183,7 +184,7 @@
           position: absolute;
           top: 31px;
           left: 32px;
-          background: url("src/assets/icons/icon2.png") no-repeat -445px -92px;
+          background: url('src/assets/icons/icon2.png') no-repeat -445px -92px;
           width: 17px;
           height: 17px;
         }
@@ -209,7 +210,7 @@
           position: absolute;
           top: 3px;
           right: -30px;
-          background: url("src/assets/icons/icon2.png") no-repeat -292px -160px;
+          background: url('src/assets/icons/icon2.png') no-repeat -292px -160px;
           width: 12px;
           height: 18px;
         }
@@ -225,7 +226,7 @@
     position: absolute;
     top: 30px;
     right: 35px;
-    background: url("src/assets/icons/Artboard.png") no-repeat -449px -187px;
+    background: url('src/assets/icons/Artboard.png') no-repeat -449px -187px;
     width: 16px;
     height: 16px;
     z-index: 101;

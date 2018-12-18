@@ -24,17 +24,17 @@ const PlayerListItem = ({ info, index, onClickPlay }) => {
         className={cx(`${moduleName}-artwork`)}
         style={{
           backgroundImage: `url(${utils.getImageUrl(
-            info.artworkUrl,
+            artworkUrl,
             IMAGE_SIZES.SMALL,
           )})`,
         }}
       />
       <div className={cx(`${moduleName}-center`)}>
-        <p className={cx(`${moduleName}-center-top`)}>{info.title}</p>
-        <p className={cx(`${moduleName}-center-bottom`)}>{info.username}</p>
+        <p className={cx(`${moduleName}-center-top`)}>{title}</p>
+        <p className={cx(`${moduleName}-center-bottom`)}>{singer}</p>
       </div>
       <p className={cx(`${moduleName}-duration`)}>
-        {utils.formatSeconds(info.duration)}
+        {utils.formatSeconds(duration)}
       </p>
       <div className={cx(`${moduleName}-etcWrapper`)}>
         <MyPlayerTooltip index={index}>
