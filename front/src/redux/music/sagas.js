@@ -22,9 +22,9 @@ import {
   loadKeywordMusicSuccess,
   loadKeywordMusicFailure,
 } from './actions';
+
 export function* updateHistoryLocalStorage(action) {
   const { songId } = action;
-  const targetId = songId;
   yield put(historySongRequest());
 
   try {
@@ -32,30 +32,27 @@ export function* updateHistoryLocalStorage(action) {
     if (checkValidValue(localStorage.historySong)) {
       let localData = JSON.parse(localStorage.historySong);
       let containsId = false;
-
       const localDataLen = localData.length;
-      //let newHistory = []
       let index;
       for (index = 0; index < localDataLen; index++) {
-        if (targetId === localData[index]) {
+        if (songId === localData[index]) {
           containsId = true;
           break;
         }
       }
       if (!checkValidValue(containsId)) {
-        localData.push(targetId);
+        localData.push(songId);
         localStorage.setItem('historySong', JSON.stringify(localData));
       }
-
       for (index = 0; index < localData.length; index++) {
         newHistory.push(localData[index]);
       }
     } else {
-      newHistory = [targetId];
+      newHistory = [songId];
       localStorage.historySong = JSON.stringify(newHistory);
     }
     const data = yield all(newHistory.map(id => call(getSoundCloudSong, id)));
-    const filData = data.data;
+    const filData = data;
     yield put(historySongSuccess(filData));
   } catch (err) {
     yield put(historySongFailure(err));
@@ -65,7 +62,6 @@ export function* watchHistorySongInfoFlow() {
   yield takeEvery(HISTORY_SONG, updateHistoryLocalStorage);
 }
 
-///////
 export function* loadSongsInfoFrom(action) {
   const { songUrlArr } = action;
   yield put(loadSongInfoRequest());
