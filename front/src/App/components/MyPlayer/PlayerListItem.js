@@ -1,8 +1,7 @@
 import React from 'react';
 import classnames from 'classnames/bind';
 
-import { formatSeconds } from 'src/utils/NumberUtils';
-import getImageUrl from 'src/utils/ImageUtils';
+import * as utils from 'src/utils';
 import IMAGE_SIZES from 'src/App/constants/ImageConstants';
 
 import css from './PlayerListItem.scss';
@@ -12,7 +11,6 @@ const cx = classnames.bind(css);
 const moduleName = 'PlayerListItem';
 
 const PlayerListItem = ({ info, index, onClickPlay }) => {
-  console.log('info', info);
   const { songId, title, singer, artworkUrl, duration } = info;
   return (
     <div
@@ -25,7 +23,7 @@ const PlayerListItem = ({ info, index, onClickPlay }) => {
       <div
         className={cx(`${moduleName}-artwork`)}
         style={{
-          backgroundImage: `url(${getImageUrl(
+          backgroundImage: `url(${utils.getImageUrl(
             info.artworkUrl,
             IMAGE_SIZES.SMALL,
           )})`,
@@ -36,7 +34,7 @@ const PlayerListItem = ({ info, index, onClickPlay }) => {
         <p className={cx(`${moduleName}-center-bottom`)}>{info.username}</p>
       </div>
       <p className={cx(`${moduleName}-duration`)}>
-        {formatSeconds(info.duration)}
+        {utils.formatSeconds(info.duration)}
       </p>
       <div className={cx(`${moduleName}-etcWrapper`)}>
         <MyPlayerTooltip index={index}>

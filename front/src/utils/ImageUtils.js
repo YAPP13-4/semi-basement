@@ -1,6 +1,6 @@
 import IMAGE_SIZES from '../App/constants/ImageConstants';
 
-const getImageUrl = (s, size = null) => {
+export const getImageUrl = (s, size = null) => {
   if (!s) {
     return '';
   }
@@ -18,5 +18,3 @@ const getImageUrl = (s, size = null) => {
       return url;
   }
 };
-
-export default getImageUrl;

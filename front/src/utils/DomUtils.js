@@ -1,4 +1,4 @@
-const offsetLeft = (element) => {
+export const offsetLeft = element => {
   let el = element;
   let x = el.offsetLeft;
 
@@ -9,5 +9,3 @@ const offsetLeft = (element) => {
 
   return x;
 };
-
-export default offsetLeft;
