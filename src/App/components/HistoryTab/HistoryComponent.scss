@@ -1,0 +1,28 @@
+@import "src/variable.scss";
+.HistoryComponent {
+  display: flex;
+  padding: 13px 15px 15px 19px;
+  color: #ffffff;
+  opacity: 0.7;
+  &:hover {
+    background-color: #323232;
+    opacity: 1;
+  }
+  &__artwork {
+    width: 56px;
+    height: 56px;
+    border-radius: 28px;
+    margin-right: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__title {
+    font-family: $font-Extra-bold;
+    font-size: 17px;
+  }
+  &__singer {
+    font-size: 14px;
+  }
+} //13 0 16 19

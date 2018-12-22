@@ -1,0 +1,12 @@
+/* Webfont: AvertaCY-BoldItalic */@font-face {
+    font-family: 'AvertaCYBold';
+    src: url('AvertaCY-BoldItalic.eot'); /* IE9 Compat Modes */
+    src: url('AvertaCY-BoldItalic.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('AvertaCY-BoldItalic.woff') format('woff'), /* Modern Browsers */
+         url('AvertaCY-BoldItalic.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('AvertaCY-BoldItalic.svg#AvertaCY-BoldItalic') format('svg'); /* Legacy iOS */
+    font-style: italic;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+

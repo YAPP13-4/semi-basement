@@ -1,0 +1,62 @@
+@import "src/variable.scss";
+.RightSideForm {
+  width: 375px;
+  height: 108px;
+  background-color: #000000;
+  margin-top: 20px;
+  padding: 19px 0px 19px 9px;
+  border-radius: 3px;
+  overflow: auto;
+  &_wrapper {
+    display: flex;
+    //tmp width;
+    width: 560px;
+    div {
+      width: 70px;
+      height: 70px;
+      border: 1px solid #d1d1d1;
+      margin-right: 23px;
+      border-radius: 3px;
+    }
+    div:hover {
+      cursor: pointer;
+    }
+
+    //FIXME! 리팩토링
+    div:nth-child(1) {
+      background-image: url("src/assets/default_cover/cover1-1.png");
+    }
+    div:nth-child(2) {
+      background-image: url("src/assets/default_cover/cover1-2.png");
+    }
+    div:nth-child(3) {
+      background-image: url("src/assets/default_cover/cover1-3.png");
+    }
+    div:nth-child(4) {
+      background-image: url("src/assets/default_cover/cover1-4.png");
+    }
+    div:nth-child(5) {
+      background-image: url("src/assets/default_cover/cover1-5.png");
+    }
+    /*TODO : DELETE , For TEST*/
+    ///////////////////////////
+    div {
+      background-size: cover;
+    }
+  }
+}
+.RightSideForm_right_bot_check {
+  div:first-child {
+    margin-top: 15px;
+  }
+  input {
+    width: 15px;
+    height: 15px;
+    margin-top: 5px;
+  }
+  label {
+    margin-left: 10px;
+    font-family: $font-normal;
+    font-size: 15px;
+  }
+}

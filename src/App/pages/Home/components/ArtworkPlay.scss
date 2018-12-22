@@ -1,0 +1,54 @@
+@import "src/variable.scss";
+
+.ArtworkPlay {
+  font-family: $font-normal;
+  &-song-body-card {
+    width: 188px;
+    border-radius: 3px;
+  }
+  &-song-body-card:hover {
+    background-color: #393939;
+    &-song-body-card-singer {
+      color: white;
+    }
+  }
+  &-song-body-card-artwork {
+    position: relative;
+    cursor: pointer;
+    height: 188px;
+    background-size: contain;
+    border-radius: 3px 3px 0px 0px;
+  }
+  &-song-body-card-playicon {
+    position: absolute;
+    display: none;
+    background: url("src/assets/icons/icon2.png") no-repeat -446px -209px;
+    width: 79px;
+    height: 80px;
+    top: 30%;
+    left: 31%;
+  }
+  &-song-body-card-artwork:hover {
+    div {
+      display: block;
+    }
+  }
+
+  &-song-body-card-link,
+  &-song-body-card-link:hover {
+    text-decoration: none;
+    color: white;
+  }
+  &-song-body-card-info {
+    padding: 8px 0px 10px 7px;
+  }
+  &-song-body-card-title {
+    font-family: $font-bold;
+    padding-bottom: 5px;
+    font-size: 14px;
+  }
+  &-song-body-card-singer {
+    color: white;
+    font-size: 13px;
+  }
+}
