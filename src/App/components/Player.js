@@ -12,7 +12,7 @@ const cx = classnames.bind(css);
 const moduleName = 'Player';
 const Player = ({
   meta,
-  song,
+  music,
   player,
   changeCurrentTime,
   changeVolume,
@@ -20,11 +20,11 @@ const Player = ({
   toggleMuted,
   toggleHistory,
   toggleShuffle,
-  playNextSong,
-  playPrevSong,
-  addSongMyPlaylist,
+  playNextMusic,
+  playPrevMusic,
+  addMusicMyPlaylist,
 }) => {
-  const { songId, title, singer, artworkUrl, duration } = song;
+  const { id, title, musician, artworkUrl, duration } = music;
 
   const { currentTime, isPlaying, muted, shuffle } = player;
   const volume = muted ? 0 : player.volume;
@@ -48,7 +48,7 @@ const Player = ({
                 className={cx(`${moduleName}__button`)}
                 role="button"
                 tabIndex="0"
-                onClick={playPrevSong}>
+                onClick={playPrevMusic}>
                 <i className={cx(`${moduleName}__button__prev`)} />
               </div>
               <div
@@ -69,7 +69,7 @@ const Player = ({
                 role="button"
                 tabIndex="0"
                 onClick={() => {
-                  playNextSong(songId);
+                  playNextMusic(id);
                 }}>
                 <i className={cx(`${moduleName}__button__forward`)} />
               </div>
@@ -152,7 +152,7 @@ const Player = ({
                   style={{ marginLeft: '10px' }}
                   className={cx(`${moduleName}__add_playlist`)}
                   onClick={() => {
-                    addSongMyPlaylist(songId);
+                    addMusicMyPlaylist(id);
                   }}
                 />
               </div>

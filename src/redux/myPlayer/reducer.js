@@ -1,9 +1,4 @@
-import {
-  ADD_SONG_MYPLAYLIST,
-  REMOVE_SONG_MYPLAYLIST,
-  SET_MYPLAYER_SUB_PLAYLIST
-} from './actions'
-
+import * as myPlayerActions from "./actions"
 const myPlayer = (
   state = {
     subPlayList: [
@@ -19,7 +14,7 @@ const myPlayer = (
   action
 ) => {
   switch (action.type) {
-    case ADD_SONG_MYPLAYLIST:
+    case myPlayerActions.ADD_MUSIC_MYPLAYLIST:
       // 임시 방편이다. 백엔드와 연동되고 나면, saga를 통해 api로 DB에 저장할것.
       const myPlayList = JSON.parse(localStorage.getItem('myPlayList')) || []
       const reducer = (acc, v) => {
@@ -27,19 +22,19 @@ const myPlayer = (
         return acc
       }
       const isNotContain = (arr, v) => arr.indexOf(v) < 0
-      const newMyPlayList = [...myPlayList, action.songId].reduce(reducer, [])
+      const newMyPlayList = [...myPlayList, action.musicId].reduce(reducer, [])
       localStorage.setItem('myPlayList', JSON.stringify(newMyPlayList))
       return {
         ...state
       }
-    case REMOVE_SONG_MYPLAYLIST:
+    case myPlayerActions.REMOVE_MUSIC_MYPLAYLIST:
       const myPlayList2 = JSON.parse(localStorage.getItem('myPlayList')) || []
-      const filteredMyPlayList = myPlayList2.filter(songId => songId !== action.songId)
+      const filteredMyPlayList = myPlayList2.filter(musicId => musicId !== action.musicId)
       localStorage.setItem('myPlayList', JSON.stringify(filteredMyPlayList))
       return {
         ...state
       }
-    case SET_MYPLAYER_SUB_PLAYLIST:
+    case myPlayerActions.SET_MYPLAYER_SUB_PLAYLIST:
       return {
         ...state,
         subPlayList: [...action.list],

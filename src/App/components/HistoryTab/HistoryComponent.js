@@ -3,7 +3,7 @@ import classnames from 'classnames/bind';
 import css from './HistoryComponent.scss';
 import IMAGE_SIZES from '../../constants/ImageConstants';
 import * as utils from 'src/utils';
-import { selectSong } from '../../../redux/music/actions';
+import { selectMusic } from '../../../redux/music/actions';
 import { connect } from 'react-redux';
 import { onPlay, onPause } from 'src/redux/player/actions';
 import selectIcon from 'src/assets/icons/icon2.png';
@@ -27,7 +27,7 @@ class HistoryComponent extends PureComponent {
     iconStyle: null,
   };
   artowrkClickEvent = () => {
-    this.fetchSong();
+    this.fetchMusic();
     this.setState(prevState => {
       return {
         ...prevState,
@@ -53,18 +53,11 @@ class HistoryComponent extends PureComponent {
       };
     });
   };
-  fetchSong = () => {
-    const { songId, title, artwork, singer, rawDuration } = this.props;
-    const duration = rawDuration / 1000;
-    const targetMusic = {
-      songId: songId,
-      title: title,
-      singer: singer,
-      artworkUrl: artwork,
-      duration: duration,
-    };
+  fetchMusic = () => {
+    const { id, title, artworkUrl, musician, duaration } = this.props;
 
-    this.props.selectSong(targetMusic);
+
+    this.props.selectMusic({ id, title, artworkUrl, musician, duaration });
   };
 
   render() {
@@ -95,7 +88,7 @@ class HistoryComponent extends PureComponent {
 export default connect(
   null,
   {
-    selectSong,
+    selectMusic,
     onPlay,
     onPause,
   },

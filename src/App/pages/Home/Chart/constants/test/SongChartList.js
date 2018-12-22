@@ -1,4 +1,4 @@
-const SongChartList = [
+const MusicChartList = [
   "https://soundcloud.com/amirarief/love-will-set-you-free-amirarief-kodaline-cover-mp3",
   "https://soundcloud.com/filous/kodaline-high-hopes-filous",
   "https://soundcloud.com/undiscoveredsounds/coldplay-ft-beyonce-hymn-for-the-weekend-ash-remix",
@@ -8,4 +8,4 @@ const SongChartList = [
   "https://soundcloud.com/nydge/float-ft-joe-hertler-and-the-rainbow-seekers"
 ];
 
-export default SongChartList;
+export default MusicChartList;

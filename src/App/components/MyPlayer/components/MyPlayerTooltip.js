@@ -2,8 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import {
-  addSongMyPlaylist,
-  removeSongMyPlaylist
+  addMusicMyPlaylist,
+  removeMusicMyPlaylist
 } from 'src/redux/myPlayer/actions'
 import Tooltip2 from 'src/components/Tooltip2'
 import icons from 'src/assets/icons/icon2.png'
@@ -13,8 +13,8 @@ const MyPlayerTooltip = ({
   children,
   musicList,
   currentMusicListName,
-  addSongMyPlaylist,
-  removeSongMyPlaylist
+  addMusicMyPlaylist,
+  removeMusicMyPlaylist
 }) => {
   const tooltipList = [
     {
@@ -27,9 +27,8 @@ const MyPlayerTooltip = ({
         left: '20px'
       },
       action: e => {
-        // TODO: 으하... songId를 얻기위해 index를 이렇게 따로 들고 다녀야 하는건 ㅠㅠㅠ 꼭 데이터 구조를 Object로 바꾸자....
-        const songId = musicList[index]
-        addSongMyPlaylist(songId)
+        const musicId = musicList[index]
+        addMusicMyPlaylist(musicId)
         e.stopPropagation()
       }
     },
@@ -68,8 +67,8 @@ const MyPlayerTooltip = ({
         left: '20px'
       },
       action: e => {
-        const songId = musicList[index]
-        removeSongMyPlaylist(songId)
+        const musicId = musicList[index]
+        removeMusicMyPlaylist(musicId)
         e.stopPropagation()
       }
     }
@@ -83,5 +82,5 @@ export default connect(
     musicList: playList.musicList,
     currentMusicListName: playList.currentList
   }),
-  { addSongMyPlaylist, removeSongMyPlaylist }
+  { addMusicMyPlaylist, removeMusicMyPlaylist }
 )(MyPlayerTooltip)

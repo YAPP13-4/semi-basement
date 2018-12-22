@@ -1,68 +1,57 @@
 import { takeEvery, all, put, fork, call, select } from 'redux-saga/effects';
-import { getSoundCloudSong } from 'src/api';
+import { getSoundCloudMusic } from 'src/api';
 
-import {
-  PLAY_NEXT_SONG,
-  playNextSongRequest,
-  playNextSongSuccess,
-  playNextSongFailure,
-  PLAY_PREV_SONG,
-  playPrevSongRequest,
-  playPrevSongFailure,
-  playPrevSongSuccess,
-  PLAY_NEXT_SONG_SUCCESS,
-  PLAY_PREV_SONG_SUCCESS,
-} from './actions';
+import * as palyerActions from "./actions"
 
-import { selectSong } from 'src/redux/music/actions';
+import { selectMusic } from 'src/redux/music/actions';
 
-export function* playNextSong(action) {
-  yield put(playNextSongRequest());
+export function* playNextMusic(action) {
+  yield put(palyerActions.playNextMusicRequest());
 
   const isShuffle = yield select(state => state.player.shuffle);
-  const currentSongInfoArray = yield select(state => state.music.playingMusic);
+  const currentMusicInfoArray = yield select(state => state.music.playingMusic);
   const targetPlayList = yield select(state => state.playList.musicList);
   try {
     if (targetPlayList) {
-      const currentSongIndex = targetPlayList.indexOf(
-        currentSongInfoArray.songId,
+      const currentMusicIndex = targetPlayList.indexOf(
+        currentMusicInfoArray.musicId,
       );
-      const nextSongId = isShuffle
-        ? targetPlayList[randomIndex(currentSongIndex, targetPlayList.length)]
-        : targetPlayList[(currentSongIndex + 1) % targetPlayList.length];
+      const nextMusicId = isShuffle
+        ? targetPlayList[randomIndex(currentMusicIndex, targetPlayList.length)]
+        : targetPlayList[(currentMusicIndex + 1) % targetPlayList.length];
 
-      const data = yield call(getSoundCloudSong, nextSongId);
+      const data = yield call(getSoundCloudMusic, nextMusicId);
 
-      yield put(playNextSongSuccess(data));
+      yield put(palyerActions.playNextMusicSuccess(data));
     }
   } catch (err) {
-    yield put(playNextSongFailure(err));
+    yield put(palyerActions.playNextMusicFailure(err));
   }
 }
 
-export function* playPrevSong(action) {
-  yield put(playPrevSongRequest);
+export function* playPrevMusic(action) {
+  yield put(palyerActions.playPrevMusicRequest);
 
   const isShuffle = yield select(state => state.player.shuffle);
-  const currentSongInfoArray = yield select(state => state.music.playingMusic);
+  const currentMusicInfoArray = yield select(state => state.music.playingMusic);
   const targetPlayList = yield select(state => state.playList.musicList);
 
   try {
     if (targetPlayList) {
-      const currentSongIndex = targetPlayList.indexOf(
-        currentSongInfoArray.songId,
+      const currentMusicIndex = targetPlayList.indexOf(
+        currentMusicInfoArray.musicId,
       );
-      let nextSongId = targetPlayList[0];
-      if (currentSongIndex !== -1)
-        nextSongId = isShuffle
-          ? targetPlayList[randomIndex(currentSongIndex, targetPlayList.length)]
-          : targetPlayList[(currentSongIndex - 1) % targetPlayList.length];
+      let nextMusicId = targetPlayList[0];
+      if (currentMusicIndex !== -1)
+      nextMusicId = isShuffle
+          ? targetPlayList[randomIndex(currentMusicIndex, targetPlayList.length)]
+          : targetPlayList[(currentMusicIndex - 1) % targetPlayList.length];
 
-      const data = yield call(getSoundCloudSong, nextSongId);
-      yield put(playPrevSongSuccess(data));
+      const data = yield call(getSoundCloudMusic, nextMusicId);
+      yield put(palyerActions.playPrevMusicSuccess(data));
     }
   } catch (err) {
-    yield put(playPrevSongFailure(err));
+    yield put(palyerActions.playPrevMusicFailure(err));
   }
 }
 
@@ -74,14 +63,14 @@ function randomIndex(currentIndex, maxIndex) {
   return nextIndex;
 }
 
-export function* watchPlayNextSongFlow() {
-  yield takeEvery(PLAY_NEXT_SONG, playNextSong);
+export function* watchPlayNextMusicFlow() {
+  yield takeEvery(palyerActions.PLAY_NEXT_MUSIC, playNextMusic);
 }
 
-export function* watchPlayPreSongFlow() {
-  yield takeEvery(PLAY_PREV_SONG, playPrevSong);
+export function* watchPlayPrevMusicFlow() {
+  yield takeEvery(palyerActions.PLAY_PREV_MUSIC, playPrevMusic);
 }
 
 export default function* playerRoot() {
-  yield all([watchPlayNextSongFlow(), watchPlayPreSongFlow()]);
+  yield all([watchPlayNextMusicFlow(), watchPlayPrevMusicFlow()]);
 }
