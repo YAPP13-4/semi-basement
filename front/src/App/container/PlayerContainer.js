@@ -11,7 +11,7 @@ import {
   onVolumeChange,
   playSong,
   // addPlaylist,
-  playNexSong,
+  playNextSong,
   playPrevSong,
   toggleShuffle,
 } from '../../redux/player/actions';
@@ -50,7 +50,7 @@ export default connect(
     toggleHistory,
     playSong,
     toggleShuffle,
-    playNexSong,
+    playNextSong,
     playPrevSong,
     addSongMyPlaylist,
   },

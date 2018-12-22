@@ -27,7 +27,6 @@ class HistoryComponent extends PureComponent {
     iconStyle: null,
   };
   artowrkClickEvent = () => {
-    console.log('artwork click event');
     this.fetchSong();
     this.setState(prevState => {
       return {

@@ -1,4 +1,11 @@
-import { takeEvery, all, put, call, select } from 'redux-saga/effects';
+import {
+  takeEvery,
+  takeLatest,
+  all,
+  put,
+  call,
+  select,
+} from 'redux-saga/effects';
 import {
   getSoundCloudSong,
   getSoundCloudSongInfo,
@@ -21,7 +28,13 @@ import {
   loadKeywordMusicRequest,
   loadKeywordMusicSuccess,
   loadKeywordMusicFailure,
+  selectSong,
 } from './actions';
+
+import {
+  PLAY_NEXT_SONG_SUCCESS,
+  PLAY_PREV_SONG_SUCCESS,
+} from 'src/redux/player/actions';
 
 export function* updateHistoryLocalStorage(action) {
   const { songId } = action;
@@ -29,8 +42,9 @@ export function* updateHistoryLocalStorage(action) {
 
   try {
     let newHistory = [];
-    if (checkValidValue(localStorage.historySong)) {
-      let localData = JSON.parse(localStorage.historySong);
+    const historySong = localStorage.historySong;
+    if (checkValidValue(historySong)) {
+      let localData = JSON.parse(historySong);
       let containsId = false;
       const localDataLen = localData.length;
       let index;
@@ -45,12 +59,13 @@ export function* updateHistoryLocalStorage(action) {
         localStorage.setItem('historySong', JSON.stringify(localData));
       }
       for (index = 0; index < localData.length; index++) {
-        newHistory.push(localData[index]);
+        if (localData[index]) newHistory.push(localData[index]);
       }
     } else {
       newHistory = [songId];
       localStorage.historySong = JSON.stringify(newHistory);
     }
+
     const data = yield all(newHistory.map(id => call(getSoundCloudSong, id)));
     const filData = data;
     yield put(historySongSuccess(filData));
@@ -86,7 +101,6 @@ export function* loadSongDetailFlow(action) {
   yield put(loadSongDetailRequest());
   try {
     const data = yield call(getSoundCloudSong, songId);
-
     yield put(loadSongDetailSuccess(data));
   } catch (error) {
     yield put(loadSongDetailFailure(error));
@@ -99,12 +113,9 @@ export function* watchLoadSongDtailFlow() {
 
 export function* loadKeywordMusicFlow(action) {
   const { keyword } = action;
-  //console.log("keyword ", keyword) OK
   //FIXME : show issue #109 comment !!!!! 일시적 처리임.
   const getMusicInfo = state => state.music.musicInfo;
-  //console.log("getMusicInfo ", getMusicInfo)  OK
   const musicInfo = yield select(getMusicInfo);
-  //console.log("musicInfo ", musicInfo) OK
   yield put(loadKeywordMusicRequest());
   try {
     // 이 call 이 .... 내가 아는 call 이라면 apply로 처리해야 함.
@@ -115,15 +126,38 @@ export function* loadKeywordMusicFlow(action) {
     yield put(loadKeywordMusicFailure(error));
   }
 }
+
 export function* watchLoadKeywordMusicFlow() {
   yield takeEvery(LOAD_KEYWORD_MUSIC, loadKeywordMusicFlow);
 }
+
+export function* selectSongFlow() {
+  const songInfo = yield select(state => state.player.songInfo);
+  yield put(
+    selectSong({
+      songId: songInfo.id,
+      title: songInfo.title,
+      singer: songInfo.user.username,
+      artworkUrl: songInfo.artwork_url,
+      duration: songInfo.duration / 1000,
+    }),
+  );
+}
+
+export function* watchSelectSongFlow() {
+  yield takeLatest(
+    [PLAY_NEXT_SONG_SUCCESS, PLAY_PREV_SONG_SUCCESS],
+    selectSongFlow,
+  );
+}
+
 export default function* musicRoot() {
   yield all([
     watchLoadSongDtailFlow(),
     watchLoadSongInfoFlow(),
     watchHistorySongInfoFlow(),
     watchLoadKeywordMusicFlow(),
+    watchSelectSongFlow(),
   ]);
 }
 

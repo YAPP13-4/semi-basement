@@ -8,7 +8,7 @@ import { selectSong, historySong } from 'src/redux/music/actions';
 import {
   onPlay,
   onPause,
-  playNexSong,
+  playNextSong,
   playPrevSong,
   changeMyPlayerCurrentTime,
   changeMyPlayerVolume,
@@ -166,7 +166,7 @@ class MyPlayer extends Component {
                 </div>
                 <div
                   className={cx(`${moduleName}-top-musicCard-player-next`)}
-                  onClick={this.props.playNexSong}>
+                  onClick={this.props.playNextSong}>
                   <i />
                 </div>
               </div>
@@ -259,7 +259,7 @@ export default connect(
     changePlayList,
     onPlay,
     onPause,
-    playNexSong,
+    playNextSong,
     playPrevSong,
     setMyPlayerSubPlayList,
     removeSongMyPlaylist,

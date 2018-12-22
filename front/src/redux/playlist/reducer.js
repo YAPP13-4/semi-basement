@@ -1,23 +1,23 @@
-import * as types from './ActionType'
+import { LOAD_NEW_LIST } from './actions';
 
-const myPlayList = JSON.parse(localStorage.getItem('myPlayList')) || []
+const myPlayList = JSON.parse(localStorage.getItem('myPlayList')) || [];
 
 const initialState = {
   musicList: [...myPlayList],
-  currentList: 'My PlayList'
-}
+  currentList: 'My PlayList',
+};
 
 const playList = (state = initialState, action) => {
   switch (action.type) {
-    case types.LOAD_NEW_LIST:
+    case LOAD_NEW_LIST:
       return {
         ...state,
         musicList: action.playlist,
-        currentList: action.currentList
-      }
+        currentList: action.currentList,
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default playList
+export default playList;
