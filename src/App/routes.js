@@ -4,8 +4,8 @@ import Sign from "./pages/Sign"
 
 import ChartTabPage from "./pages/Home/Chart/ChartTabPage"
 import Landing from "./pages/Landing"
-import SongDetail from "./pages/SongDetail"
-import SongRegist from "./pages/SongRegister"
+import MusicDetail from "./pages/SongDetail"
+import MusicRegist from "./pages/SongRegister"
 import SearchResult from "./pages/SearchResult"
 const routes = [
   {
@@ -28,11 +28,11 @@ const routes = [
   },
   {
     path: "/songDetail/:songId",
-    component: SongDetail
+    component: MusicDetail
   },
   {
     path: "/regSong",
-    component: SongRegist
+    component: MusicRegist
   },
   {
     path: "/search/:keyword",

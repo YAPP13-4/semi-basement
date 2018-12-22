@@ -1,11 +1,11 @@
-import { SONG_URL, resolveUrl } from '../apiConstants';
+import { MUSIC_URL, resolveUrl } from '../apiConstants';
 import axios from 'axios';
 
-export function getSoundCloudSongInfo(url) {
+export function getSoundCloudMusicInfo(url) {
   return axios.get(resolveUrl(url)).then(response => response.data);
 }
 
-export function getSoundCloudSong(songId) {
-  const songUrl = SONG_URL.replace(':id', songId);
-  return axios.get(songUrl).then(response => response.data);
+export function getSoundCloudMusic(musicId) {
+  const musicUrl = MUSIC_URL.replace(':id', musicId);
+  return axios.get(musicUrl).then(response => response.data);
 }

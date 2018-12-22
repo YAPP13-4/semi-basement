@@ -1,20 +1,20 @@
 const PREFIX = 'MYPLAYER';
 
-export const ADD_SONG_MYPLAYLIST = `${PREFIX}/ADD_SONG_MYPLAYLIST`;
-export const REMOVE_SONG_MYPLAYLIST = `${PREFIX}/REMOVE_SONG_MYPLAYLIST`;
+export const ADD_MUSIC_MYPLAYLIST = `${PREFIX}/ADD_MUSIC_MYPLAYLIST`;
+export const REMOVE_MUSIC_MYPLAYLIST = `${PREFIX}/REMOVE_MUSIC_MYPLAYLIST`;
 export const SET_MYPLAYER_SUB_PLAYLIST = `${PREFIX}/SET_MYPLAYER_SUB_PLAYLIST`;
 
-export function addSongMyPlaylist(songId) {
+export function addMusicMyPlaylist(musicId) {
   return {
-    type: ADD_SONG_MYPLAYLIST,
-    songId,
+    type: ADD_MUSIC_MYPLAYLIST,
+    musicId,
   };
 }
 
-export function removeSongMyPlaylist(songId) {
+export function removeMusicMyPlaylist(musicId) {
   return {
-    type: REMOVE_SONG_MYPLAYLIST,
-    songId,
+    type: REMOVE_MUSIC_MYPLAYLIST,
+    musicId,
   };
 }
 

@@ -8,14 +8,14 @@ const moduleName = 'HistoryTab';
 
 export class HistoryTab extends Component {
   renderHistory = () => {
-    return this.props.historySong.map((song, index) => (
+    return this.props.historyMusic.map((music, index) => (
       <HistoryComponent
         key={`history-${index}`}
-        songId={song.id}
-        artwork={song.artwork_url}
-        duration={song.duration}
-        title={song.title}
-        singer={song.user.username}
+        id={music.id}
+        artworkUrl={music.artwork_url}
+        duration={music.duration/1000}
+        title={music.title}
+        musician={music.user.username}
       />
     ));
   };
@@ -25,8 +25,7 @@ export class HistoryTab extends Component {
         <div
           className={cx(`${moduleName}__Wrapper`)}
           style={{ color: '#ffffff' }}>
-          {/*<button onClick={this._getHistorySong}>butn</button> */}
-          {this.props.historySong ? this.renderHistory() : 'Loading'}
+          {this.props.historyMusic ? this.renderHistory() : 'Loading'}
         </div>
       </div>
     );
@@ -34,7 +33,7 @@ export class HistoryTab extends Component {
 }
 function mapStateToProps(state) {
   return {
-    historySong: state.music.historySong,
+    historyMusic: state.music.historyMusic,
   };
 }
 

@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import Navigation from './components/Navigation';
 import Loading from 'src/App/components/Loading';
 import Featured from './components/Featured';
-import { loadSongsInfo } from 'src/redux/music/actions';
-import { loadFirstSubSongInfo } from 'src/redux/submusic1/actions';
+import { loadMusicsInfo } from 'src/redux/music/actions';
+import { loadFirstSubMusicInfo } from 'src/redux/submusic1/actions';
 //TODO : FIX (with BE)
-import SONG_URL_LIST2 from '../../constants/test/SongUrlConstants2';
-import SONG_URL_LIST1 from '../../constants/test/SongUrlConstants1';
+import MUSIC_URL_LIST2 from '../../constants/test/SongUrlConstants2';
+import MUSIC_URL_LIST1 from '../../constants/test/SongUrlConstants1';
 import ArtWorkContainer from '../Home/container/ArtWrokContainer';
 import classnames from 'classnames/bind';
 import css from './index.scss';
@@ -26,8 +26,8 @@ class Home extends PureComponent {
   }
 
   componentDidMount() {
-    this.props.loadSongsInfo(SONG_URL_LIST1);
-    this.props.loadFirstSubSongInfo(SONG_URL_LIST2);
+    this.props.loadMusicsInfo(MUSIC_URL_LIST1);
+    this.props.loadFirstSubMusicInfo(MUSIC_URL_LIST2);
   }
 
   render() {
@@ -66,7 +66,7 @@ export default connect(
     };
   },
   {
-    loadSongsInfo,
-    loadFirstSubSongInfo,
+    loadMusicsInfo,
+    loadFirstSubMusicInfo,
   },
 )(Home);

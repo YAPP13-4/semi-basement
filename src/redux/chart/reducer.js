@@ -1,7 +1,7 @@
 import {
-  LOAD_CHART_SONG_INFO_REQUEST,
-  LOAD_CHART_SONG_INFO_SUCCESS,
-  LOAD_CHART_SONG_INFO_FAILURE
+  LOAD_CHART_MUSIC_INFO_REQUEST,
+  LOAD_CHART_MUSIC_INFO_SUCCESS,
+  LOAD_CHART_MUSIC_INFO_FAILURE
 } from "./actions"
 
 const chartMusic = (
@@ -13,18 +13,18 @@ const chartMusic = (
   action
 ) => {
   switch (action.type) {
-    case LOAD_CHART_SONG_INFO_REQUEST:
+    case LOAD_CHART_MUSIC_INFO_REQUEST:
       return {
         ...state,
         loading: true
       }
-    case LOAD_CHART_SONG_INFO_SUCCESS:
+    case LOAD_CHART_MUSIC_INFO_SUCCESS:
       return {
         ...state,
         loading: false,
         musicInfo: [...action.data]
       }
-    case LOAD_CHART_SONG_INFO_FAILURE:
+    case LOAD_CHART_MUSIC_INFO_FAILURE:
       return {
         ...state,
         err: [...action.err]
