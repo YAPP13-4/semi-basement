@@ -5,25 +5,25 @@
 // 2. 툴팁의 아이템들(icon, text, action(with args)) // props로 받을까...? 아니면 함수의 인자로...?
 // 3. 툴팁의 event.(툴팁을 켰다가 다른곳을 누르면 꺼지게 하기)
 // 위치 바꾸어야 하나..? hoc 폴더로..?
-import React from 'react'
+import React from 'react';
 
-import classnames from 'classnames/bind'
-import css from './index.scss'
+import classnames from 'classnames/bind';
+import css from './index.scss';
 
-const cx = classnames.bind(css)
-const moduleName = 'Tooltip'
+const cx = classnames.bind(css);
+const moduleName = 'Tooltip';
 
 const Tooltip = tooltipFunctions => Component => {
   class _Tooltip extends React.Component {
     constructor(props) {
-      super(props)
-      this.state = { opacity: false }
-      this.state.handleClick = this.handleClick.bind(this)
+      super(props);
+      this.state = { opacity: false };
+      this.state.handleClick = this.handleClick.bind(this);
     }
 
     handleClick(e) {
-      this.setState({ opacity: !this.state.opacity })
-      e.stopPropagation()
+      this.setState({ opacity: !this.state.opacity });
+      e.stopPropagation();
     }
 
     render() {
@@ -32,11 +32,8 @@ const Tooltip = tooltipFunctions => Component => {
         zIndex: this.state.opacity ? 1000 : -1000,
         top: 60,
         left: -210,
-        position: 'absolute'
-      }
-
-      console.log(tooltipFunctions)
-      debugger
+        position: 'absolute',
+      };
 
       return (
         <div>
@@ -46,37 +43,34 @@ const Tooltip = tooltipFunctions => Component => {
             <div
               className={cx(`${moduleName}-innerFirst`)}
               onClick={e => {
-                this.props.onClickAdd(e)
-                this.toggle(e)
-              }}
-            >
+                this.props.onClickAdd(e);
+                this.toggle(e);
+              }}>
               <div className={cx(`${moduleName}-innerFirst-addIcon`)} />
               <span>add</span>
             </div>
             <div
               className={cx(`${moduleName}-innerSecond`)}
               onClick={() => {
-                alert('share!')
-              }}
-            >
+                alert('share!');
+              }}>
               <div className={cx(`${moduleName}-innerSecond-shareIcon`)} />
               <span>share</span>
             </div>
             <div
               className={cx(`${moduleName}-innerThird`)}
               onClick={() => {
-                alert('like!')
-              }}
-            >
+                alert('like!');
+              }}>
               <div className={cx(`${moduleName}-innerThird-likeIcon`)} />
               <span>like</span>
             </div>
           </div>
         </div>
-      )
+      );
     }
   }
-  return _Tooltip
-}
+  return _Tooltip;
+};
 
-export default Tooltip
+export default Tooltip;

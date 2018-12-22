@@ -1,40 +1,39 @@
-import React, { PureComponent } from "react"
-import { connect } from "react-redux"
-import { Redirect } from "react-router-dom"
-import classnames from "classnames/bind"
-import { loadKeywordMusic } from "src/redux/music/actions"
-import css from "./SearchBar.scss"
-const cx = classnames.bind(css)
-const moduleName = "SearchBar"
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import classnames from 'classnames/bind';
+import { loadKeywordMusic } from 'src/redux/music/actions';
+import css from './SearchBar.scss';
+const cx = classnames.bind(css);
+const moduleName = 'SearchBar';
 class SearchBar extends PureComponent {
   state = {
-    term: "",
-    redir: false
-  }
+    term: '',
+    redir: false,
+  };
   handleSubmit = e => {
-    e.preventDefault()
-    console.log("submit", this.state.term)
-    this.props.loadKeywordMusic(this.state.term)
+    e.preventDefault();
+    this.props.loadKeywordMusic(this.state.term);
 
     this.setState(() => {
       return {
         //term: "",
-        redir: true
-      }
-    })
-  }
+        redir: true,
+      };
+    });
+  };
   getTargetValue = e => {
-    return this.onInputChange(e.target.value)
-  }
+    return this.onInputChange(e.target.value);
+  };
   onInputChange = targetValue => {
-    this.setState(() => ({ term: targetValue }))
-  }
+    this.setState(() => ({ term: targetValue }));
+  };
 
   renderRedirect = () => {
     if (this.state.redir) {
-      return <Redirect to={"/search/" + this.state.term} />
+      return <Redirect to={'/search/' + this.state.term} />;
     }
-  }
+  };
   render() {
     return (
       <div className={cx(`${moduleName}`)}>
@@ -49,11 +48,11 @@ class SearchBar extends PureComponent {
           />
         </form>
       </div>
-    )
+    );
   }
 }
 export default connect(
   null,
-  { loadKeywordMusic }
-)(SearchBar)
+  { loadKeywordMusic },
+)(SearchBar);
 //export default SearchBar

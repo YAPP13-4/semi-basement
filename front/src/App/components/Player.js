@@ -20,7 +20,7 @@ const Player = ({
   toggleMuted,
   toggleHistory,
   toggleShuffle,
-  playNexSong,
+  playNextSong,
   playPrevSong,
   addSongMyPlaylist,
 }) => {
@@ -69,7 +69,7 @@ const Player = ({
                 role="button"
                 tabIndex="0"
                 onClick={() => {
-                  playNexSong(song[0]);
+                  playNextSong(songId);
                 }}>
                 <i className={cx(`${moduleName}__button__forward`)} />
               </div>

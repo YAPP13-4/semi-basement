@@ -20,6 +20,7 @@ class Slider extends PureComponent {
   };
   static defaultProps = {
     className: '',
+    max: 0,
   };
   constructor() {
     super();
@@ -41,7 +42,6 @@ class Slider extends PureComponent {
     const percent =
       (e.clientX - utils.offsetLeft(e.currentTarget)) /
       e.currentTarget.offsetWidth;
-    console.log('percent*max', percent * max);
     onChange(percent * max);
   }
 

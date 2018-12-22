@@ -24,12 +24,6 @@ const activePalyList = {
   height: '35px',
 };
 
-const inactivePalyList = {
-  cursor: 'pointer',
-  background: `url(${selectIcon}) no-repeat -111px -152px`,
-  width: '35px',
-  height: '35px',
-};
 class ArtWorkPlayContainer extends PureComponent {
   onClickPlay = ({ songId, title, creator, artworkUrl, duration }) => {
     const targetMusic = {
@@ -39,10 +33,10 @@ class ArtWorkPlayContainer extends PureComponent {
       artworkUrl: artworkUrl,
       duration: duration,
     };
-    console.log('targetmusic', targetMusic);
     this.props.selectSong(targetMusic);
     this.props.historySong(songId);
   };
+
   onClickChangePlayList = playlist => {
     if (
       !this.props.currentMusicListName ||
@@ -58,6 +52,7 @@ class ArtWorkPlayContainer extends PureComponent {
       this.props.setMyPlayerSubPlayList(myPlayList, 'My PlayList');
     }
   };
+
   renderArtworks = () => {
     return this.props.musicInfos.map(musicInfo => {
       return (
@@ -100,6 +95,7 @@ const mapStateToProps = ({ playList }) => {
     currentMusicListName: playList.currentList,
   };
 };
+
 export default connect(
   mapStateToProps,
   {

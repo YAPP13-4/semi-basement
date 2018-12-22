@@ -17,9 +17,11 @@ class SongDetail extends Component {
   state = {
     isOpen: false,
   };
+
   componentDidMount() {
     this.props.loadSongDetail(this.props.match.params.songId);
   }
+
   onClickPlay = (songId, title, singer, artworkUrl, duration) => {
     const targetMusic = {
       songId: songId,
@@ -30,15 +32,18 @@ class SongDetail extends Component {
     };
     this.props.selectSong(targetMusic);
   };
+
   getRenderedItems(itemNumber, items) {
     if (this.state.isOpen) {
       return items;
     }
     return items.slice(0, itemNumber);
   }
+
   toggle = () => {
     this.setState({ isOpen: !this.state.isOpen });
   };
+
   render() {
     const { songDetail } = this.props;
     if (!songDetail) {

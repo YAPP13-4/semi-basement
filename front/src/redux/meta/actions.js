@@ -1,53 +1,52 @@
-// example
-const MODULE_NAME = `META`
+const PREFIX = 'META';
 
-export const EXAMPLE = `${MODULE_NAME}/EXAMPLE`
-export const EXAMPLE_REQUEST = `${MODULE_NAME}/EXAMPLE_REQUEST`
-export const EXAMPLE_SUCCESS = `${MODULE_NAME}/EXAMPLE_SUCCESS`
-export const EXAMPLE_FAILURE = `${MODULE_NAME}/EXAMPLE_FAILURE`
-export const TOGGLE_HISTORY = `${MODULE_NAME}/TOGGLE_HISTORY`
-export const TOGGLE_MYPLAYER = `${MODULE_NAME}/TOGGLE_MYPLAYER`
-export const SHOW_GNB = `${MODULE_NAME}/SHOW_GNB`
+export const EXAMPLE = `${PREFIX}/EXAMPLE`;
+export const EXAMPLE_REQUEST = `${PREFIX}/EXAMPLE_REQUEST`;
+export const EXAMPLE_SUCCESS = `${PREFIX}/EXAMPLE_SUCCESS`;
+export const EXAMPLE_FAILURE = `${PREFIX}/EXAMPLE_FAILURE`;
+export const TOGGLE_HISTORY = `${PREFIX}/TOGGLE_HISTORY`;
+export const TOGGLE_MYPLAYER = `${PREFIX}/TOGGLE_MYPLAYER`;
+export const SHOW_GNB = `${PREFIX}/SHOW_GNB`;
 
 export function example() {
   return {
-    type: EXAMPLE
-  }
+    type: EXAMPLE,
+  };
 }
 
 export function exampleRequest() {
   return {
-    type: EXAMPLE_REQUEST
-  }
+    type: EXAMPLE_REQUEST,
+  };
 }
 
 export function exampleSuccess() {
   return {
-    type: EXAMPLE_SUCCESS
-  }
+    type: EXAMPLE_SUCCESS,
+  };
 }
 
 export function exampleFailure(error) {
   return {
     type: EXAMPLE_FAILURE,
-    error
-  }
+    error,
+  };
 }
 
 export function toggleHistory() {
   return {
-    type: TOGGLE_HISTORY
-  }
+    type: TOGGLE_HISTORY,
+  };
 }
 
 export function toggleMyplayer() {
   return {
-    type: TOGGLE_MYPLAYER
-  }
+    type: TOGGLE_MYPLAYER,
+  };
 }
 
 export function toggleGNB() {
   return {
-    type: SHOW_GNB
-  }
+    type: SHOW_GNB,
+  };
 }

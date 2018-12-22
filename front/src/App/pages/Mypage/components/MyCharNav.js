@@ -1,59 +1,54 @@
-import React, { PureComponent } from "react"
-import { Link } from "react-router-dom"
-import classnames from "classnames/bind"
-import css from "./MyChartNav.scss"
+import React, { PureComponent } from 'react';
+import { Link } from 'react-router-dom';
+import classnames from 'classnames/bind';
+import css from './MyChartNav.scss';
 
-const cx = classnames.bind(css)
-const moduleName = "MyChartNav"
+const cx = classnames.bind(css);
+const moduleName = 'MyChartNav';
 
 class MyChartNav extends PureComponent {
   state = {
-    selected: "playlist"
-  }
+    selected: 'playlist',
+  };
   selectedTab = info => {
-    console.log("state", this.state.selected, "info", info)
     if (info !== this.state.selected) {
       this.setState(() => {
         return {
-          selected: info
-        }
-      })
+          selected: info,
+        };
+      });
     }
-  }
+  };
 
   render() {
     const paintingCurrentStyle = path => {
-      console.log("state", this.state.selected, "path", path)
-      if (this.state.selected === path) return underStyle
-    }
+      if (this.state.selected === path) return underStyle;
+    };
     const underStyle = {
-      borderBottom: "2px solid #45f7aa"
-    }
+      borderBottom: '2px solid #45f7aa',
+    };
     return (
       <div className={cx(`${moduleName}`)}>
         <div className={cx(`${moduleName}-left`)}>
           <div
             onClick={() => {
-              this.selectedTab("albums")
+              this.selectedTab('albums');
             }}
-            style={paintingCurrentStyle("albums")}
-          >
+            style={paintingCurrentStyle('albums')}>
             Albums
           </div>
           <div
             onClick={() => {
-              this.selectedTab("playlist")
+              this.selectedTab('playlist');
             }}
-            style={paintingCurrentStyle("playlist")}
-          >
+            style={paintingCurrentStyle('playlist')}>
             Playlist
           </div>
           <div
             onClick={() => {
-              this.selectedTab("liked")
+              this.selectedTab('liked');
             }}
-            style={paintingCurrentStyle("liked")}
-          >
+            style={paintingCurrentStyle('liked')}>
             liked
           </div>
           <div>
@@ -61,8 +56,8 @@ class MyChartNav extends PureComponent {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default MyChartNav
+export default MyChartNav;

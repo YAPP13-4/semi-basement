@@ -1,32 +1,33 @@
-export const NAME = "SUBMUSIC1"
-export const LOAD_SONG_INFO = `${NAME}/LOAD_SONG_INFO`
-export const LOAD_SONG_INFO_REQUEST = `${NAME}/LOAD_SONG_INFO_REQUEST`
-export const LOAD_SONG_INFO_SUCCESS = `${NAME}/LOAD_SONG_INFO_SUCCESS`
-export const LOAD_SONG_INFO_FAILURE = `${NAME}/LOAD_SONG_INFO_FAILURE`
+export const PREFIX = 'SUBMUSIC1';
+
+export const LOAD_SONG_INFO = `${PREFIX}/LOAD_SONG_INFO`;
+export const LOAD_SONG_INFO_REQUEST = `${PREFIX}/LOAD_SONG_INFO_REQUEST`;
+export const LOAD_SONG_INFO_SUCCESS = `${PREFIX}/LOAD_SONG_INFO_SUCCESS`;
+export const LOAD_SONG_INFO_FAILURE = `${PREFIX}/LOAD_SONG_INFO_FAILURE`;
 
 export function loadFirstSubSongInfo(songArr) {
   return {
     type: LOAD_SONG_INFO,
-    songArr
-  }
+    songArr,
+  };
 }
 
 export function loadSongInfoRequest() {
   return {
-    type: LOAD_SONG_INFO_REQUEST
-  }
+    type: LOAD_SONG_INFO_REQUEST,
+  };
 }
 
 export function loadSongInfoSuccess(data) {
   return {
     type: LOAD_SONG_INFO_SUCCESS,
-    data
-  }
+    data,
+  };
 }
 
 export function loadSongInfoFailure(err) {
   return {
     type: LOAD_SONG_INFO_FAILURE,
-    err
-  }
+    err,
+  };
 }

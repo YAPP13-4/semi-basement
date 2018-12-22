@@ -27,7 +27,6 @@ class HistoryComponent extends PureComponent {
     iconStyle: null,
   };
   artowrkClickEvent = () => {
-    console.log('artwork click event');
     this.fetchSong();
     this.setState(prevState => {
       return {
@@ -77,7 +76,7 @@ class HistoryComponent extends PureComponent {
           style={{
             backgroundImage: `url(${utils.getImageUrl(
               this.props.artwork,
-              IMAGE_SIZES.XLARGE,
+              IMAGE_SIZES.SMALL,
             )})`,
           }}
           onMouseOver={this.artowrkMouseOver}

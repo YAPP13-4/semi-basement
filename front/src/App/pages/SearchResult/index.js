@@ -1,64 +1,60 @@
-import React, { PureComponent } from "react"
-import { connect } from "react-redux"
-import classnames from "classnames/bind"
-import { loadKeywordMusic } from "src/redux/music/actions"
-import NavBar from "./components/NavBar"
-import ChartTab from "../Home/Chart/ChartTab"
-import css from "./index.scss"
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import classnames from 'classnames/bind';
+import { loadKeywordMusic } from 'src/redux/music/actions';
+import NavBar from './components/NavBar';
+import ChartTab from '../Home/Chart/ChartTab';
+import css from './index.scss';
 
-const cx = classnames.bind(css)
-const moduleName = "SearchResult"
+const cx = classnames.bind(css);
+const moduleName = 'SearchResult';
 
 class SearchResult extends PureComponent {
   //FIX ME!
   state = {
-    term: "",
+    term: '',
     research: false, //SearchResult에서 재검색 하는지 검사할 state
-    selectedResult: "All"
-  }
+    selectedResult: 'All',
+  };
   onInputChange = term => {
     this.setState(() => {
       return {
         term: term,
-        research: true
-      }
-    })
-  }
+        research: true,
+      };
+    });
+  };
   handleExposedResultChange = option => {
     this.setState(prevState => ({
       ...prevState,
-      selectedResult: option
-    }))
-  }
+      selectedResult: option,
+    }));
+  };
   handleSubmit = e => {
-    e.preventDefault()
-    this.props.loadKeywordMusic(this.state.term)
-  }
+    e.preventDefault();
+    this.props.loadKeywordMusic(this.state.term);
+  };
   componentDidMount() {
-    console.log("params. keyword ", this.props.match.params.keyword)
-    this.props.loadKeywordMusic(this.props.match.params.keyword)
+    this.props.loadKeywordMusic(this.props.match.params.keyword);
   }
 
   isValidValue = (data, validAction, noValidACtion) => {
-    console.log("data : ", data)
-    return data ? validAction : noValidACtion
-  }
+    return data ? validAction : noValidACtion;
+  };
   render() {
-    const { searchResult } = this.props
-    console.log("searchResult ", searchResult)
-    const matchResult = searchResult ? Object.values(searchResult) : null
-    console.log("matchResult ", matchResult)
+    const { searchResult } = this.props;
+    const matchResult = searchResult ? Object.values(searchResult) : null;
     const matchResultItem = matchResult
       ? matchResult
           .filter(
             this.isValidValue(
-              this.state.selectedResult === "All",
+              this.state.selectedResult === 'All',
               res => res,
-              res => res.matches[0].key === this.state.selectedResult
-            )
+              res => res.matches[0].key === this.state.selectedResult,
+            ),
           )
           .map(filteredRes => filteredRes.item)
-      : null
+      : null;
     /*
     const matchResultItem = this.isValidValue(
       matchResult,
@@ -73,8 +69,6 @@ class SearchResult extends PureComponent {
         .map(filteredRes => filteredRes.item),
       null
     )*/
-    console.log("matchresult item ", matchResultItem)
-
     return !matchResult ? (
       <div>No result</div>
     ) : (
@@ -107,16 +101,16 @@ class SearchResult extends PureComponent {
           <ChartTab chartInstanceData={matchResultItem} />
         </div>
       </div>
-    )
+    );
   }
 }
 const mapStateToProps = ({ music }) => {
   return {
     searchKeyword: music.searchKeyword,
-    searchResult: music.searchResult
-  }
-}
+    searchResult: music.searchResult,
+  };
+};
 export default connect(
   mapStateToProps,
-  { loadKeywordMusic }
-)(SearchResult)
+  { loadKeywordMusic },
+)(SearchResult);

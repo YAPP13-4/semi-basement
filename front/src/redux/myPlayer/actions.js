@@ -1,27 +1,27 @@
-const MODULE_NAME = `MYPLAYER`
+const PREFIX = 'MYPLAYER';
 
-export const ADD_SONG_MYPLAYLIST = `${MODULE_NAME}/ADD_SONG_MYPLAYLIST`
-export const REMOVE_SONG_MYPLAYLIST = `${MODULE_NAME}/REMOVE_SONG_MYPLAYLIST`
-export const SET_MYPLAYER_SUB_PLAYLIST = `${MODULE_NAME}/SET_MYPLAYER_SUB_PLAYLIST`
+export const ADD_SONG_MYPLAYLIST = `${PREFIX}/ADD_SONG_MYPLAYLIST`;
+export const REMOVE_SONG_MYPLAYLIST = `${PREFIX}/REMOVE_SONG_MYPLAYLIST`;
+export const SET_MYPLAYER_SUB_PLAYLIST = `${PREFIX}/SET_MYPLAYER_SUB_PLAYLIST`;
 
 export function addSongMyPlaylist(songId) {
   return {
     type: ADD_SONG_MYPLAYLIST,
-    songId
-  }
+    songId,
+  };
 }
 
 export function removeSongMyPlaylist(songId) {
   return {
     type: REMOVE_SONG_MYPLAYLIST,
-    songId
-  }
+    songId,
+  };
 }
 
-export function setMyPlayerSubPlayList(list,name) {
+export function setMyPlayerSubPlayList(list, name) {
   return {
     type: SET_MYPLAYER_SUB_PLAYLIST,
     list,
-    name
-  }
+    name,
+  };
 }

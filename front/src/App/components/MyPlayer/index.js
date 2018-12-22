@@ -8,7 +8,7 @@ import { selectSong, historySong } from 'src/redux/music/actions';
 import {
   onPlay,
   onPause,
-  playNexSong,
+  playNextSong,
   playPrevSong,
   changeMyPlayerCurrentTime,
   changeMyPlayerVolume,
@@ -85,7 +85,7 @@ class MyPlayer extends Component {
             songId: musicId,
             artworkUrl: artwork_url,
             title,
-            username,
+            singer: username,
             duration: duration / 1000,
           };
         },
@@ -110,7 +110,6 @@ class MyPlayer extends Component {
     const { playingMusic, player } = this.props;
     const { currentTime } = player;
     const { title, singer, artworkUrl, duration } = playingMusic || {};
-
     return (
       <div
         className={cx(`${moduleName}`, {
@@ -167,7 +166,7 @@ class MyPlayer extends Component {
                 </div>
                 <div
                   className={cx(`${moduleName}-top-musicCard-player-next`)}
-                  onClick={this.props.playNexSong}>
+                  onClick={this.props.playNextSong}>
                   <i />
                 </div>
               </div>
@@ -260,7 +259,7 @@ export default connect(
     changePlayList,
     onPlay,
     onPause,
-    playNexSong,
+    playNextSong,
     playPrevSong,
     setMyPlayerSubPlayList,
     removeSongMyPlaylist,
