@@ -7,19 +7,19 @@ export function* playNextMusic(action) {
   yield put(palyerActions.playNextMusicRequest());
 
   const isShuffle = yield select(state => state.player.shuffle);
-  const currentMusicInfoArray = yield select(state => state.music.playingMusic);
+  const currentMusicInfo = yield select(state => state.music.playingMusic);
   const targetPlayList = yield select(state => state.playList.musicList);
   try {
     if (targetPlayList) {
       const currentMusicIndex = targetPlayList.indexOf(
-        currentMusicInfoArray.musicId,
+        currentMusicInfo.id,
       );
       const nextMusicId = isShuffle
         ? targetPlayList[randomIndex(currentMusicIndex, targetPlayList.length)]
         : targetPlayList[(currentMusicIndex + 1) % targetPlayList.length];
 
       const data = yield call(getSoundCloudMusic, nextMusicId);
-
+      console.log('nexmusic test',currentMusicIndex,nextMusicId,data)
       yield put(palyerActions.playNextMusicSuccess(data));
     }
   } catch (err) {
@@ -31,13 +31,13 @@ export function* playPrevMusic(action) {
   yield put(palyerActions.playPrevMusicRequest);
 
   const isShuffle = yield select(state => state.player.shuffle);
-  const currentMusicInfoArray = yield select(state => state.music.playingMusic);
+  const currentMusicInfo = yield select(state => state.music.playingMusic);
   const targetPlayList = yield select(state => state.playList.musicList);
 
   try {
     if (targetPlayList) {
       const currentMusicIndex = targetPlayList.indexOf(
-        currentMusicInfoArray.musicId,
+        currentMusicInfo.id,
       );
       let nextMusicId = targetPlayList[0];
       if (currentMusicIndex !== -1)
