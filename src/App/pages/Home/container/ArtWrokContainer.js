@@ -24,8 +24,8 @@ const activePalyList = {
   height: '35px',
 };
 class ArtWorkPlayContainer extends PureComponent {
-  onClickPlay = ({ id, title, muscian, artworkUrl, duration }) => {
-    this.props.selectMusic({ id, title, muscian, artworkUrl, duration });
+  onClickPlay = ({ id, title, musician, artworkUrl, duration }) => {
+    this.props.selectMusic({ id, title, musician, artworkUrl, duration });
     this.props.historyMusic(id);
   };
 
