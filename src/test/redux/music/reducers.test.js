@@ -10,25 +10,25 @@ function getInitialState() {
     musicInfo: null,
     recommendMusicInfo1: null,
     recommendMusicInfo2: null,
-    songDetail: null,
-    historySong: [],
+    musicDetail: null,
+    historyMusic: [],
     searchKeyword: '',
     searchResult: null,
   };
 }
 
 describe('redux/music [LOAD DATA]', () => {
-  it('actions.LOAD_SONG_INFO_SUCCESS, [LOAD_MUSIC_INFO_MAINPAGE]', () => {
+  it('actions.LOAD_MUSIC_INFO_SUCCESS, [LOAD_MUSIC_INFO_MAINPAGE]', () => {
     //Given
     const mockData = musicInfoMockData;
-    const loadSongSuccessAction = {
-      type: musicActions.LOAD_SONG_INFO_SUCCESS,
+    const loadMusicSuccessAction = {
+      type: musicActions.LOAD_MUSIC_INFO_SUCCESS,
       data: [mockData],
     };
     const initialState = getInitialState();
 
     //When
-    const result = musicReducer(initialState, loadSongSuccessAction);
+    const result = musicReducer(initialState, loadMusicSuccessAction);
 
     //Then
     const expected = {
@@ -38,11 +38,11 @@ describe('redux/music [LOAD DATA]', () => {
     };
     expect(result).toEqual(expected);
   });
-  it('actions.HISTORY_SONG_SUCCESS, [ADD_HISTORYDATA]', () => {
+  it('actions.HISTORY_MUSIC_SUCCESS, [ADD_HISTORYDATA]', () => {
     //Given
     const initialState = getInitialState();
     const addHistoryAction = {
-      type: musicActions.HISTORY_SONG_SUCCESS,
+      type: musicActions.HISTORY_MUSIC_SUCCESS,
       data: [historyMockData],
     };
     //When
@@ -50,33 +50,33 @@ describe('redux/music [LOAD DATA]', () => {
     //Then
     const expected = {
       ...initialState,
-      historySong: [historyMockData],
+      historyMusic: [historyMockData],
     };
     expect(result).toEqual(expected);
   });
 });
 describe('redux/music [LOAD DATA]', () => {
-  it('actions.SELECT_SONG, [CHANGE_MUSIC_WHEN_CLICK]', () => {
+  it('actions.SELECT_MUSIC, [CHANGE_MUSIC_WHEN_CLICK]', () => {
     //Given
-    const mockSong = {
-      songId: 331622174,
+    const mockMusic = {
+      musicId: 331622174,
       title: '지금 뭐 해 (feat. PLANET)',
-      singer: 'Bluite',
+      musician: 'Bluite',
       artworkUrl:
         'https://i1.sndcdn.com/artworks-000232037629-yspo52-large.jpg',
       duration: 186.479,
     };
-    const selectSongAction = {
-      type: musicActions.SELECT_SONG,
-      playingMusic: mockSong,
+    const selectMusicAction = {
+      type: musicActions.SELECT_MUSIC,
+      playingMusic: mockMusic,
     };
     const initialState = getInitialState();
     //When
-    const result = musicReducer(initialState, selectSongAction);
+    const result = musicReducer(initialState, selectMusicAction);
     //Then
     const expected = {
       ...initialState,
-      playingMusic: mockSong,
+      playingMusic: mockMusic,
     };
     expect(result).toEqual(expected);
   });

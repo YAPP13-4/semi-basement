@@ -1,38 +1,41 @@
-import React, { Component } from "react"
-import { connect } from "react-redux"
-import { loadChartMusicsInfo } from "src/redux/chart/actions"
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { loadChartMusicsInfo } from 'src/redux/chart/actions';
 import {
   selectMusic,
   historyMusic,
   loadMusicDetail,
-  loadMusicsInfo
-} from "src/redux/music/actions"
-import PropTypes from "prop-types"
-import Loading from "src/App/components/Loading"
-import classnames from "classnames/bind"
-import MusicChartList from "./constants/test/SongChartList"
-import css from "./ChartTab.scss"
-import ChartTabItem from "./ChartTabItem"
+  loadMusicsInfo,
+} from 'src/redux/music/actions';
+import PropTypes from 'prop-types';
+import Loading from 'src/App/components/Loading';
+import classnames from 'classnames/bind';
+import MusicChartList from './constants/test/MusicChartList';
+import css from './ChartTab.scss';
+import ChartTabItem from './ChartTabItem';
 
-const cx = classnames.bind(css)
-const moduleName = "ChartTab"
+const cx = classnames.bind(css);
+const moduleName = 'ChartTab';
 
 class ChartTab extends Component {
   static propTypes = {
     isMypge: PropTypes.bool,
-    searchKeyWord: PropTypes.string
-  }
+    searchKeyWord: PropTypes.string,
+  };
+
   static defaultProps = {
     isMypge: false,
-    searchKeyWord: ""
-  }
+    searchKeyWord: '',
+  };
+
   componentDidMount() {
-    this.props.loadChartMusicsInfo(MusicChartList)
+    this.props.loadChartMusicsInfo(MusicChartList);
   }
-  onClickPlay = ({ id, title,musician, artworkUrl, duration }) => {
-    this.props.selectMusic({id, title,musician, artworkUrl, duration})
-    this.props.historyMusic(id)
-  }
+
+  onClickPlay = ({ id, title, musician, artworkUrl, duration }) => {
+    this.props.selectMusic({ id, title, musician, artworkUrl, duration });
+    this.props.historyMusic(id);
+  };
 
   renderChart = () => {
     return this.props.chartInstanceData.map((musicInfo, index) => {
@@ -42,9 +45,9 @@ class ChartTab extends Component {
           musicInfo={musicInfo}
           onClickPlay={this.onClickPlay}
         />
-      )
-    })
-  }
+      );
+    });
+  };
   render() {
     return (
       <div className={cx(`${moduleName}`)}>
@@ -56,15 +59,21 @@ class ChartTab extends Component {
           </table>
         </div>
       </div>
-    )
+    );
   }
 }
 function mapStateToProps({ chartMusic }) {
   return {
-    chartMusicInfo: chartMusic.musicInfo
-  }
+    chartMusicInfo: chartMusic.musicInfo,
+  };
 }
 export default connect(
   mapStateToProps,
-  { loadChartMusicsInfo, selectMusic, historyMusic, loadMusicDetail, loadMusicsInfo }
-)(ChartTab)
+  {
+    loadChartMusicsInfo,
+    selectMusic,
+    historyMusic,
+    loadMusicDetail,
+    loadMusicsInfo,
+  },
+)(ChartTab);

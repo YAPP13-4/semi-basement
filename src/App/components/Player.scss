@@ -36,7 +36,7 @@
       bottom: 0;
     }
   }
-  &__section--song {
+  &__section--music {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -70,27 +70,27 @@
   }
 
   &__add_playlist {
-    background: url("src/assets/icons/icon2.png") no-repeat -224px -91px;
+    background: url('src/assets/icons/icon2.png') no-repeat -224px -91px;
     width: 17px;
     height: 16px;
   }
   &__heart {
-    background: url("src/assets/icons/icon2.png") no-repeat -276px -39px;
+    background: url('src/assets/icons/icon2.png') no-repeat -276px -39px;
     width: 17px;
     height: 16px;
   }
 
   &__toggle__history {
-    background: url("src/assets/icons/icon2.png") no-repeat -326px -37px;
+    background: url('src/assets/icons/icon2.png') no-repeat -326px -37px;
     width: 22px;
     height: 19px;
   }
   &__button:last-child::after {
-    content: "";
+    content: '';
     margin-right: 1em;
   }
   &__button::after {
-    content: "";
+    content: '';
     margin-right: 2em;
   }
   &__button {
@@ -114,35 +114,35 @@
   &__button__shuffle {
     width: 19px;
     height: 23px;
-    background: url("src/assets/icons/icon2.png") no-repeat -444px -56px;
+    background: url('src/assets/icons/icon2.png') no-repeat -444px -56px;
   }
   &__button__no-shuffle {
     width: 19px;
     height: 23px;
-    background: url("src/assets/icons/icon2.png") no-repeat -468px -56px;
+    background: url('src/assets/icons/icon2.png') no-repeat -468px -56px;
   }
   &__button__pause {
     width: 12px;
     height: 14px;
-    background: url("../../assets/icons/icon2.png") no-repeat -117px -92px;
+    background: url('../../assets/icons/icon2.png') no-repeat -117px -92px;
   }
   &__button__play {
     width: 16px;
     height: 19px;
-    background: url("../../assets/icons/icon2.png") no-repeat -56px -89px;
+    background: url('../../assets/icons/icon2.png') no-repeat -56px -89px;
   }
   &__button__prev {
-    background: url("../../assets/icons/icon2.png") no-repeat -111px -38px;
+    background: url('../../assets/icons/icon2.png') no-repeat -111px -38px;
     width: 13px;
     height: 13px;
   }
   &__button__forward {
-    background: url("../../assets/icons/icon2.png") no-repeat -169px -38px;
+    background: url('../../assets/icons/icon2.png') no-repeat -169px -38px;
     width: 13px;
     height: 13px;
   }
   &__button__mute {
-    background: url("../../assets/icons/icon2.png") no-repeat -498px -91px;
+    background: url('../../assets/icons/icon2.png') no-repeat -498px -91px;
     width: 19px;
     height: 18px;
   }
@@ -157,25 +157,25 @@
     margin-left: 14px;
     width: 100px;
   }
-  &__song__artwork {
+  &__music__artwork {
     width: 56px;
     height: 56px;
     background: no-repeat center center;
     background-size: cover;
     margin-right: 25px;
   }
-  &__song_infoWrapper {
+  &__music_infoWrapper {
     position: relative;
     width: 180px;
   }
-  &__song__title {
+  &__music__title {
     display: block;
     overflow: hidden;
     white-space: nowrap;
     font-size: 17px;
     text-overflow: ellipsis;
   }
-  &__song__username {
+  &__music__username {
     display: block;
     font-size: 15px;
     position: absolute;
@@ -184,7 +184,7 @@
     white-space: nowrap;
     text-overflow: ellipsis;
   }
-  &__song__main {
+  &__music__main {
     display: flex;
   }
   &-historyTab {

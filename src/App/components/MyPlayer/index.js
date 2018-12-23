@@ -146,8 +146,8 @@ class MyPlayer extends Component {
               }}
             />
             <div>
-              <div className={cx(`${moduleName}-top-musicCard-songInfo`)}>
-                <p>{singer}</p>
+              <div className={cx(`${moduleName}-top-musicCard-musicInfo`)}>
+                <p>{musician}</p>
                 <h2>{title}</h2>
               </div>
               <div className={cx(`${moduleName}-top-musicCard-player`)}>
@@ -231,7 +231,7 @@ class MyPlayer extends Component {
               <i />
             </h4>
           </div>
-          <div className={cx(`${moduleName}-bottom-songWrapper`)}>
+          <div className={cx(`${moduleName}-bottom-musicWrapper`)}>
             {this.renderPlayList()}
           </div>
         </div>

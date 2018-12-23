@@ -12,8 +12,8 @@ import test5 from 'src/assets/default_cover/cover1-5.png';
 import TextInputForm from './component/textInput';
 import RightSideForm from './component/RightSideForm';
 const cx = classnames.bind(css);
-const moduleName = 'SongRegist';
-class SongRegist extends PureComponent {
+const moduleName = 'MusicRegist';
+class MusicRegist extends PureComponent {
   state = {
     selectedArtWork: `url(${test1})`,
   };
@@ -69,7 +69,7 @@ class SongRegist extends PureComponent {
       <div className={cx(`${moduleName}`)}>
         <div className={cx(`${moduleName}-inner`)}>
           <div className={cx(`${moduleName}_top`)}>
-            <h4>Register Song</h4>
+            <h4>Register Music</h4>
           </div>
           <form onSubmit={handleSubmit(this.submitTest)}>
             <div className={cx(`${moduleName}_body`)}>
@@ -101,6 +101,6 @@ class SongRegist extends PureComponent {
 }
 export default reduxForm({
   form: 'RegisterMusic',
-})(SongRegist);
+})(MusicRegist);
 
-//export default SongRegist
+//export default MusicRegist

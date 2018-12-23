@@ -13,7 +13,7 @@ export class HistoryTab extends Component {
         key={`history-${index}`}
         id={music.id}
         artworkUrl={music.artwork_url}
-        duration={music.duration/1000}
+        duration={music.duration / 1000}
         title={music.title}
         musician={music.user.username}
       />

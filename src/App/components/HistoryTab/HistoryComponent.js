@@ -55,8 +55,6 @@ class HistoryComponent extends PureComponent {
   };
   fetchMusic = () => {
     const { id, title, artworkUrl, musician, duaration } = this.props;
-
-
     this.props.selectMusic({ id, title, artworkUrl, musician, duaration });
   };
 
@@ -78,7 +76,9 @@ class HistoryComponent extends PureComponent {
         </div>
         <div>
           <div className={cx(`${moduleName}__title`)}>{this.props.title}</div>
-          <div className={cx(`${moduleName}__singer`)}>{this.props.singer}</div>
+          <div className={cx(`${moduleName}__musician`)}>
+            {this.props.musician}
+          </div>
         </div>
       </div>
     );

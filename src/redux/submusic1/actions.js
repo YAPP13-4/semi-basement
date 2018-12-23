@@ -1,33 +1,33 @@
 export const PREFIX = 'SUBMUSIC1';
 
-export const LOAD_SONG_INFO = `${PREFIX}/LOAD_SONG_INFO`;
-export const LOAD_SONG_INFO_REQUEST = `${PREFIX}/LOAD_SONG_INFO_REQUEST`;
-export const LOAD_SONG_INFO_SUCCESS = `${PREFIX}/LOAD_SONG_INFO_SUCCESS`;
-export const LOAD_SONG_INFO_FAILURE = `${PREFIX}/LOAD_SONG_INFO_FAILURE`;
+export const LOAD_MUSIC_INFO = `${PREFIX}/LOAD_MUSIC_INFO`;
+export const LOAD_MUSIC_INFO_REQUEST = `${PREFIX}/LOAD_MUSIC_INFO_REQUEST`;
+export const LOAD_MUSIC_INFO_SUCCESS = `${PREFIX}/LOAD_MUSIC_INFO_SUCCESS`;
+export const LOAD_MUSIC_INFO_FAILURE = `${PREFIX}/LOAD_MUSIC_INFO_FAILURE`;
 
-export function loadFirstSubSongInfo(songArr) {
+export function loadFirstSubMusicInfo(musicArr) {
   return {
-    type: LOAD_SONG_INFO,
-    songArr,
+    type: LOAD_MUSIC_INFO,
+    musicArr,
   };
 }
 
-export function loadSongInfoRequest() {
+export function loadMusicInfoRequest() {
   return {
-    type: LOAD_SONG_INFO_REQUEST,
+    type: LOAD_MUSIC_INFO_REQUEST,
   };
 }
 
-export function loadSongInfoSuccess(data) {
+export function loadMusicInfoSuccess(data) {
   return {
-    type: LOAD_SONG_INFO_SUCCESS,
+    type: LOAD_MUSIC_INFO_SUCCESS,
     data,
   };
 }
 
-export function loadSongInfoFailure(err) {
+export function loadMusicInfoFailure(err) {
   return {
-    type: LOAD_SONG_INFO_FAILURE,
+    type: LOAD_MUSIC_INFO_FAILURE,
     err,
   };
 }
