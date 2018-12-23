@@ -66,7 +66,7 @@ class HistoryComponent extends PureComponent {
           onClick={this.artowrkClickEvent}
           style={{
             backgroundImage: `url(${utils.getImageUrl(
-              this.props.artwork,
+              this.props.artworkUrl,
               IMAGE_SIZES.SMALL,
             )})`,
           }}
