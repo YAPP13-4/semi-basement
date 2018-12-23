@@ -45,7 +45,7 @@
         -moz-box-shadow: 18px 19px 48px -10px rgba(0, 0, 0, 0.52);
         box-shadow: 18px 19px 48px -10px rgba(0, 0, 0, 0.52);
       }
-      &-songInfo {
+      &-musicInfo {
         padding-left: 45px;
         top: 0px;
         right: 0px;
@@ -216,7 +216,7 @@
         }
       }
     }
-    &-songWrapper {
+    &-musicWrapper {
       overflow: scroll;
       height: 480px;
       background: #000000;

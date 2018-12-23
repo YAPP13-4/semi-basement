@@ -25,7 +25,6 @@ const Player = ({
   addMusicMyPlaylist,
 }) => {
   const { id, title, musician, artworkUrl, duration } = music;
-
   const { currentTime, isPlaying, muted, shuffle } = player;
   const volume = muted ? 0 : player.volume;
 
@@ -120,10 +119,10 @@ const Player = ({
                 <Slider max={1} onChange={changeVolume} value={volume} />
               </div>
             </div>
-            <div className="player__song">
-              <div className={cx(`${moduleName}__song__main`)}>
+            <div className="player__music">
+              <div className={cx(`${moduleName}__music__main`)}>
                 <div
-                  className={cx(`${moduleName}__song__artwork`)}
+                  className={cx(`${moduleName}__music__artwork`)}
                   style={{
                     backgroundImage: `url(${utils.getImageUrl(
                       artworkUrl,
@@ -132,12 +131,12 @@ const Player = ({
                   }}
                 />
                 {/*TODO : Change Link*/}
-                <div className={cx(`${moduleName}__song_infoWrapper`)}>
-                  <div className={cx(`${moduleName}__song__title`)}>
+                <div className={cx(`${moduleName}__music_infoWrapper`)}>
+                  <div className={cx(`${moduleName}__music__title`)}>
                     {title}
                   </div>
-                  <div className={cx(`${moduleName}__song__username`)}>
-                    {singer}
+                  <div className={cx(`${moduleName}__music__username`)}>
+                    {musician}
                   </div>
                 </div>
               </div>

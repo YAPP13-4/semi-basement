@@ -1,4 +1,4 @@
-.SongDetail {
+.MusicDetail {
   background: black;
   position: relative;
   p {
@@ -28,7 +28,7 @@
     &-playicon {
       position: absolute;
       display: none;
-      background: url("src/assets/icons/icon2.png") no-repeat -446px -209px;
+      background: url('src/assets/icons/icon2.png') no-repeat -446px -209px;
       width: 79px;
       height: 80px;
       top: 33%;
@@ -65,7 +65,7 @@
     min-height: 600px;
     display: flex;
   }
-  &-songInfo {
+  &-musicInfo {
     color: #ffffff;
     width: 500px;
     border-right: 1px solid #979797;

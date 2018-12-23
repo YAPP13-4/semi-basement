@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loadSongDetail, selectSong } from 'src/redux/music/actions';
+import { loadMusicDetail, selectMusic } from 'src/redux/music/actions';
 
 import * as utils from 'src/utils';
 import IMAGE_SIZES from 'src/App/constants/ImageConstants';
@@ -10,27 +10,26 @@ import classnames from 'classnames/bind';
 import css from './index.scss';
 
 const cx = classnames.bind(css);
-const moduleName = 'SongDetail';
+const moduleName = 'MusicDetail';
 
-//const { songDetail } = this.props
-class SongDetail extends Component {
+//const { musicDetail } = this.props
+class MusicDetail extends Component {
   state = {
     isOpen: false,
   };
 
   componentDidMount() {
-    this.props.loadSongDetail(this.props.match.params.songId);
+    this.props.loadMusicDetail(this.props.match.params.musicId);
   }
 
-  onClickPlay = (songId, title, singer, artworkUrl, duration) => {
-    const targetMusic = {
-      songId: songId,
-      title: title,
-      singer: singer,
-      artworkUrl: artworkUrl,
-      duration: duration,
-    };
-    this.props.selectSong(targetMusic);
+  onClickPlay = (musicId, title, musician, artworkUrl, duration) => {
+    this.props.selectMusic({
+      musicId,
+      title,
+      musician,
+      artworkUrl,
+      duration,
+    });
   };
 
   getRenderedItems(itemNumber, items) {
@@ -45,12 +44,12 @@ class SongDetail extends Component {
   };
 
   render() {
-    const { songDetail } = this.props;
-    if (!songDetail) {
+    const { musicDetail } = this.props;
+    if (!musicDetail) {
       return <Loading />;
     } else {
-      const artworkUrl = songDetail.artwork_url;
-      const parsedDesc = utils.formatString(songDetail.description, 5);
+      const artworkUrl = musicDetail.artwork_url;
+      const parsedDesc = utils.formatString(musicDetail.description, 5);
       return (
         <div className={cx(`${moduleName}`)}>
           <div
@@ -74,36 +73,37 @@ class SongDetail extends Component {
               /*FIX ME : refactoring */
               onClick={() => {
                 this.onClickPlay(
-                  songDetail.id,
-                  songDetail.title,
-                  songDetail.user.username,
+                  musicDetail.id,
+                  musicDetail.title,
+                  musicDetail.user.username,
                   artworkUrl,
-                  songDetail.duration / 1000,
+                  musicDetail.duration / 1000,
                 );
               }}>
               <div className={cx(`${moduleName}-albumCover-playicon`)} />
             </div>
             <div className={cx(`${moduleName}-wordings`)}>
-              <h3>{songDetail.user.username}</h3>
-              <h2>{songDetail.title}</h2>
+              <h3>{musicDetail.user.username}</h3>
+              <h2>{musicDetail.title}</h2>
             </div>
           </div>
           <div className={cx(`${moduleName}-infoWrapper`)}>
-            <div className={cx(`${moduleName}-songInfo`)}>
-              <div className={cx(`${moduleName}-songInfo-profile`)}>
+            <div className={cx(`${moduleName}-musicInfo`)}>
+              <div className={cx(`${moduleName}-musicInfo-profile`)}>
                 <img
                   alt="artistProfile"
-                  src={songDetail.user.avatar_url.replace('large', 'crop')}
+                  src={musicDetail.user.avatar_url.replace('large', 'crop')}
                 />
                 <div>
                   <p>Released date</p>
-                  <h4>{utils.formatDdMonthYyyy(songDetail.created_at)}</h4>
-                  <h3>{songDetail.user.username}</h3>
+                  <h4>{utils.formatDdMonthYyyy(musicDetail.created_at)}</h4>
+                  <h3>{musicDetail.user.username}</h3>
                 </div>
               </div>
-              <div className={cx(`${moduleName}-songInfo-description`)}>
+              <div className={cx(`${moduleName}-musicInfo-description`)}>
                 <h4>Description</h4>
-                <div className={cx(`${moduleName}-songInfo-description-inner`)}>
+                <div
+                  className={cx(`${moduleName}-musicInfo-description-inner`)}>
                   {this.getRenderedItems(2, parsedDesc).map(
                     (element, index) => {
                       return (
@@ -116,7 +116,7 @@ class SongDetail extends Component {
                   )}
                   <div
                     className={cx(
-                      `${moduleName}-songInfo-description-inner-showmore`,
+                      `${moduleName}-musicInfo-description-inner-showmore`,
                     )}
                     onClick={this.toggle}>
                     <span>show more v</span>
@@ -131,12 +131,14 @@ class SongDetail extends Component {
     }
   }
 }
+
 const mapStateToProps = ({ music }) => {
   return {
-    songDetail: music.songDetail,
+    musicDetail: music.musicDetail,
   };
 };
+
 export default connect(
   mapStateToProps,
-  { loadSongDetail, selectSong },
-)(SongDetail);
+  { loadMusicDetail, selectMusic },
+)(MusicDetail);

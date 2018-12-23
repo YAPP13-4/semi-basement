@@ -31,7 +31,7 @@ const PlayerListItem = ({ info, index, onClickPlay }) => {
       />
       <div className={cx(`${moduleName}-center`)}>
         <p className={cx(`${moduleName}-center-top`)}>{title}</p>
-        <p className={cx(`${moduleName}-center-bottom`)}>{singer}</p>
+        <p className={cx(`${moduleName}-center-bottom`)}>{musician}</p>
       </div>
       <p className={cx(`${moduleName}-duration`)}>
         {utils.formatSeconds(duration)}

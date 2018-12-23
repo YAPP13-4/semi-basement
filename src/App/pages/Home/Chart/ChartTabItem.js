@@ -21,7 +21,7 @@ const ChartTabItem = ({ musicInfo, onClickPlay, ind }) => {
       <td
         className={cx(`${moduleName}-thumbnail`)}
         onClick={() => {
-          onClickPlay({ id, title,musician, artworkUrl, duration });
+          onClickPlay({ id, title, musician, artworkUrl, duration });
         }}>
         <img
           src={`${utils.getImageUrl(artworkUrl, IMAGE_SIZES.SMALL)}`}
@@ -29,9 +29,9 @@ const ChartTabItem = ({ musicInfo, onClickPlay, ind }) => {
         />
       </td>
       <td className={cx(`${moduleName}-title`)}>
-        <Link to={'/songDetail/' + id}>{title}</Link>
+        <Link to={'/musicDetail/' + id}>{title}</Link>
       </td>
-      <td className={cx(`${moduleName}-singer`)}>{creator}</td>
+      <td className={cx(`${moduleName}-musician`)}>{musician}</td>
       <td className={cx(`${moduleName}-time`)}>
         {utils.formatSeconds(duration)}
       </td>

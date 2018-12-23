@@ -34,6 +34,7 @@ const mapStateToProps = ({ player, meta, music }) => {
     music: music.playingMusic,
   };
 };
+
 export default connect(
   mapStateToProps,
   {

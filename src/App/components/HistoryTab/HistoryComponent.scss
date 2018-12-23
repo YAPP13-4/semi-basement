@@ -1,4 +1,4 @@
-@import "src/variable.scss";
+@import 'src/variable.scss';
 .HistoryComponent {
   display: flex;
   padding: 13px 15px 15px 19px;
@@ -22,7 +22,7 @@
     font-family: $font-Extra-bold;
     font-size: 17px;
   }
-  &__singer {
+  &__musician {
     font-size: 14px;
   }
 } //13 0 16 19

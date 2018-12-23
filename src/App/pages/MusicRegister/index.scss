@@ -1,6 +1,6 @@
-@import "src/variable.scss";
+@import 'src/variable.scss';
 
-.SongRegist {
+.MusicRegist {
   width: 100%;
   color: white;
   background-color: #191b1c;
@@ -23,10 +23,10 @@
     textarea {
       min-height: 102px;
     }
-    input[type="text"] {
+    input[type='text'] {
       height: 2.65em;
     }
-    input[type="text"],
+    input[type='text'],
     textarea {
       border: none;
       font-family: $font-normal;

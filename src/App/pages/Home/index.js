@@ -7,8 +7,8 @@ import Featured from './components/Featured';
 import { loadMusicsInfo } from 'src/redux/music/actions';
 import { loadFirstSubMusicInfo } from 'src/redux/submusic1/actions';
 //TODO : FIX (with BE)
-import MUSIC_URL_LIST2 from '../../constants/test/SongUrlConstants2';
-import MUSIC_URL_LIST1 from '../../constants/test/SongUrlConstants1';
+import MUSIC_URL_LIST2 from '../../constants/test/MusicUrlConstants2';
+import MUSIC_URL_LIST1 from '../../constants/test/MusicUrlConstants1';
 import ArtWorkContainer from '../Home/container/ArtWrokContainer';
 import classnames from 'classnames/bind';
 import css from './index.scss';

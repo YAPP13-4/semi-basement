@@ -1,4 +1,4 @@
-import * as musicActions from "./actions"
+import * as musicActions from './actions';
 
 const music = (
   state = {

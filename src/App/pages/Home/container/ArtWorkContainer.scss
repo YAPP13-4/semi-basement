@@ -1,4 +1,4 @@
-@import "src/variable.scss";
+@import 'src/variable.scss';
 
 .ArtWorkPlayContainer {
   &-category {
@@ -10,7 +10,7 @@
   &-category-title {
     margin-left: 20px;
   }
-  &-songWrapper {
+  &-musicWrapper {
     padding: 0px 75px;
     display: flex;
     justify-content: space-between;

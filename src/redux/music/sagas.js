@@ -12,11 +12,8 @@ import {
   getKeywordSearchResult,
 } from 'src/api';
 
-import * as musicActions from "./actions"
-import {
-  PLAY_NEXT_MUSIC_SUCCESS,
-  PLAY_PREV_MUSIC_SUCCESS,
-} from 'src/redux/player/actions';
+import * as musicActions from './actions';
+import * as playerActions from 'src/redux/player/actions';
 
 export function* updateHistoryLocalStorage(action) {
   const { musicId } = action;
@@ -49,8 +46,7 @@ export function* updateHistoryLocalStorage(action) {
     }
 
     const data = yield all(newHistory.map(id => call(getSoundCloudMusic, id)));
-    const filData = data;
-    yield put(musicActions.historyMusicSuccess(filData));
+    yield put(musicActions.historyMusicSuccess(data));
   } catch (err) {
     yield put(musicActions.historyMusicFailure(err));
   }
@@ -85,7 +81,7 @@ export function* loadMusicDetailFlow(action) {
     const data = yield call(getSoundCloudMusic, musicId);
     yield put(musicActions.loadMusicDetailSuccess(data));
   } catch (error) {
-    yield put(loadMusicDetailFailure(error));
+    yield put(musicActions.loadMusicDetailFailure(error));
   }
 }
 
@@ -128,7 +124,10 @@ export function* selectMusicFlow() {
 
 export function* watchSelectMusicFlow() {
   yield takeLatest(
-    [musicActions.PLAY_NEXT_MUSIC_SUCCESS,musicActions.PLAY_PREV_MUSIC_SUCCESS],
+    [
+      playerActions.PLAY_NEXT_MUSIC_SUCCESS,
+      playerActions.PLAY_PREV_MUSIC_SUCCESS,
+    ],
     selectMusicFlow,
   );
 }

@@ -1,20 +1,20 @@
-import { SEARCH_SONG_INFO_REQUEST } from "./actions"
+import { SEARCH_MUSIC_INFO_REQUEST } from './actions';
 const search = (
   state = {
-    searchKeyWord: ""
+    searchKeyWord: '',
   },
-  action
+  action,
 ) => {
   switch (action.type) {
-    case SEARCH_SONG_INFO_REQUEST:
+    case SEARCH_MUSIC_INFO_REQUEST:
       return {
         ...state,
-        searchKeyWord: action.searchKeyWord
-      }
+        searchKeyWord: action.searchKeyWord,
+      };
 
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default search
+export default search;
