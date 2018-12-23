@@ -4,23 +4,23 @@ import classnames from 'classnames/bind';
 import axios from 'axios';
 
 import { toggleMyplayer } from 'src/redux/meta/actions.js';
-import { selectSong, historySong } from 'src/redux/music/actions';
+import { selectMusic, historyMusic } from 'src/redux/music/actions';
 import {
   onPlay,
   onPause,
-  playNextSong,
-  playPrevSong,
+  playNextMusic,
+  playPrevMusic,
   changeMyPlayerCurrentTime,
   changeMyPlayerVolume,
 } from 'src/redux/player/actions';
 import { changePlayList } from 'src/redux/playlist/actions';
 import {
-  removeSongMyPlaylist,
+  removeMusicMyPlaylist,
   setMyPlayerSubPlayList,
 } from 'src/redux/myPlayer/actions';
 import Slider from 'src/App/components/Slider/';
 import * as utils from 'src/utils';
-import { SONG_URL } from 'src/App/constants/ApiConstants';
+import { MUSIC_URL } from 'src/App/constants/ApiConstants';
 import IMAGE_SIZES from 'src/App/constants/ImageConstants';
 
 import css from './index.scss';
@@ -57,9 +57,9 @@ class MyPlayer extends Component {
     player.isPlaying ? onPause() : onPlay();
   };
 
-  onClickPlay = ({ songId, title, singer, artworkUrl, duration }) => {
-    this.props.selectSong({ songId, title, singer, artworkUrl, duration });
-    this.props.historySong(songId);
+  onClickPlay = ({ id, title, musician, artworkUrl, duration }) => {
+    this.props.selectMusic({ id, title, musician, artworkUrl, duration });
+    this.props.historyMusic(id);
   };
 
   getMusicListInfos = musicList => {
@@ -71,7 +71,7 @@ class MyPlayer extends Component {
 
   getMusicInfo = musicId => {
     return axios
-      .get(SONG_URL.replace(':id', musicId))
+      .get(MUSIC_URL.replace(':id', musicId))
       .then(
         ({
           data: {
@@ -82,10 +82,10 @@ class MyPlayer extends Component {
           },
         }) => {
           return {
-            songId: musicId,
+            id: musicId,
             artworkUrl: artwork_url,
             title,
-            singer: username,
+            musician: username,
             duration: duration / 1000,
           };
         },
@@ -109,7 +109,7 @@ class MyPlayer extends Component {
   render() {
     const { playingMusic, player } = this.props;
     const { currentTime } = player;
-    const { title, singer, artworkUrl, duration } = playingMusic || {};
+    const { title, musician, artworkUrl, duration } = playingMusic || {};
     return (
       <div
         className={cx(`${moduleName}`, {
@@ -146,14 +146,14 @@ class MyPlayer extends Component {
               }}
             />
             <div>
-              <div className={cx(`${moduleName}-top-musicCard-songInfo`)}>
-                <p>{singer}</p>
+              <div className={cx(`${moduleName}-top-musicCard-musicInfo`)}>
+                <p>{musician}</p>
                 <h2>{title}</h2>
               </div>
               <div className={cx(`${moduleName}-top-musicCard-player`)}>
                 <div
                   className={cx(`${moduleName}-top-musicCard-player-prev`)}
-                  onClick={this.props.playPrevSong}>
+                  onClick={this.props.playPrevMusic}>
                   <i />
                 </div>
                 <div
@@ -166,7 +166,7 @@ class MyPlayer extends Component {
                 </div>
                 <div
                   className={cx(`${moduleName}-top-musicCard-player-next`)}
-                  onClick={this.props.playNextSong}>
+                  onClick={this.props.playNextMusic}>
                   <i />
                 </div>
               </div>
@@ -231,7 +231,7 @@ class MyPlayer extends Component {
               <i />
             </h4>
           </div>
-          <div className={cx(`${moduleName}-bottom-songWrapper`)}>
+          <div className={cx(`${moduleName}-bottom-musicWrapper`)}>
             {this.renderPlayList()}
           </div>
         </div>
@@ -259,11 +259,11 @@ export default connect(
     changePlayList,
     onPlay,
     onPause,
-    playNextSong,
-    playPrevSong,
+    playNextMusic,
+    playPrevMusic,
     setMyPlayerSubPlayList,
-    removeSongMyPlaylist,
-    selectSong,
-    historySong,
+    removeMusicMyPlaylist,
+    selectMusic,
+    historyMusic,
   },
 )(MyPlayer);

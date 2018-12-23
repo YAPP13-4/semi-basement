@@ -52,7 +52,7 @@ class MyChartNav extends PureComponent {
             liked
           </div>
           <div>
-            <Link to="/regSong"> AddTrack </Link>
+            <Link to="/regMusic"> AddTrack </Link>
           </div>
         </div>
       </div>

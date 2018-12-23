@@ -1,47 +1,47 @@
-import Home from "./pages/Home"
-import Mypage from "./pages/Mypage"
-import Sign from "./pages/Sign"
+import Home from './pages/Home';
+import Mypage from './pages/Mypage';
+import Sign from './pages/Sign';
 
-import ChartTabPage from "./pages/Home/Chart/ChartTabPage"
-import Landing from "./pages/Landing"
-import SongDetail from "./pages/SongDetail"
-import SongRegist from "./pages/SongRegister"
-import SearchResult from "./pages/SearchResult"
+import ChartTabPage from './pages/Home/Chart/ChartTabPage';
+import Landing from './pages/Landing';
+import MusicDetail from './pages/MusicDetail';
+import MusicRegist from './pages/MusicRegister';
+import SearchResult from './pages/SearchResult';
 const routes = [
   {
-    path: "/mypage",
+    path: '/mypage',
     exact: true,
-    component: Mypage
+    component: Mypage,
   },
   {
-    path: "/sign",
+    path: '/sign',
     exact: true,
-    component: Sign
+    component: Sign,
   },
   {
-    path: "/chart",
-    component: ChartTabPage
+    path: '/chart',
+    component: ChartTabPage,
   },
   {
-    path: "/main",
-    component: Home
+    path: '/main',
+    component: Home,
   },
   {
-    path: "/songDetail/:songId",
-    component: SongDetail
+    path: '/musicDetail/:musicId',
+    component: MusicDetail,
   },
   {
-    path: "/regSong",
-    component: SongRegist
+    path: '/regMusic',
+    component: MusicRegist,
   },
   {
-    path: "/search/:keyword",
-    component: SearchResult
+    path: '/search/:keyword',
+    component: SearchResult,
   },
   {
-    path: "/",
-    component: Landing
-  }
-]
+    path: '/',
+    component: Landing,
+  },
+];
 
-export default routes
+export default routes;

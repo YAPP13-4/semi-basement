@@ -12,7 +12,7 @@ const cx = classnames.bind(css);
 const moduleName = 'Player';
 const Player = ({
   meta,
-  song,
+  music,
   player,
   changeCurrentTime,
   changeVolume,
@@ -20,12 +20,11 @@ const Player = ({
   toggleMuted,
   toggleHistory,
   toggleShuffle,
-  playNextSong,
-  playPrevSong,
-  addSongMyPlaylist,
+  playNextMusic,
+  playPrevMusic,
+  addMusicMyPlaylist,
 }) => {
-  const { songId, title, singer, artworkUrl, duration } = song;
-
+  const { id, title, musician, artworkUrl, duration } = music;
   const { currentTime, isPlaying, muted, shuffle } = player;
   const volume = muted ? 0 : player.volume;
 
@@ -48,7 +47,7 @@ const Player = ({
                 className={cx(`${moduleName}__button`)}
                 role="button"
                 tabIndex="0"
-                onClick={playPrevSong}>
+                onClick={playPrevMusic}>
                 <i className={cx(`${moduleName}__button__prev`)} />
               </div>
               <div
@@ -69,7 +68,7 @@ const Player = ({
                 role="button"
                 tabIndex="0"
                 onClick={() => {
-                  playNextSong(songId);
+                  playNextMusic(id);
                 }}>
                 <i className={cx(`${moduleName}__button__forward`)} />
               </div>
@@ -120,10 +119,10 @@ const Player = ({
                 <Slider max={1} onChange={changeVolume} value={volume} />
               </div>
             </div>
-            <div className="player__song">
-              <div className={cx(`${moduleName}__song__main`)}>
+            <div className="player__music">
+              <div className={cx(`${moduleName}__music__main`)}>
                 <div
-                  className={cx(`${moduleName}__song__artwork`)}
+                  className={cx(`${moduleName}__music__artwork`)}
                   style={{
                     backgroundImage: `url(${utils.getImageUrl(
                       artworkUrl,
@@ -132,12 +131,12 @@ const Player = ({
                   }}
                 />
                 {/*TODO : Change Link*/}
-                <div className={cx(`${moduleName}__song_infoWrapper`)}>
-                  <div className={cx(`${moduleName}__song__title`)}>
+                <div className={cx(`${moduleName}__music_infoWrapper`)}>
+                  <div className={cx(`${moduleName}__music__title`)}>
                     {title}
                   </div>
-                  <div className={cx(`${moduleName}__song__username`)}>
-                    {singer}
+                  <div className={cx(`${moduleName}__music__username`)}>
+                    {musician}
                   </div>
                 </div>
               </div>
@@ -152,7 +151,7 @@ const Player = ({
                   style={{ marginLeft: '10px' }}
                   className={cx(`${moduleName}__add_playlist`)}
                   onClick={() => {
-                    addSongMyPlaylist(songId);
+                    addMusicMyPlaylist(id);
                   }}
                 />
               </div>

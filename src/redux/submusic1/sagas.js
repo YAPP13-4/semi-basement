@@ -1,30 +1,30 @@
 import { takeEvery, all, put, call } from 'redux-saga/effects';
-import { getSoundCloudSongInfo } from 'src/api';
+import { getSoundCloudMusicInfo } from 'src/api';
 
 import {
-  LOAD_SONG_INFO,
-  loadSongInfoRequest,
-  loadSongInfoSuccess,
-  loadSongInfoFailure,
+  LOAD_MUSIC_INFO,
+  loadMusicInfoRequest,
+  loadMusicInfoSuccess,
+  loadMusicInfoFailure,
 } from './actions';
 
-export function* loadSubSongsInfo(action) {
-  const { songArr } = action;
-  yield put(loadSongInfoRequest());
+export function* loadSubMusicInfo(action) {
+  const { musicArr } = action;
+  yield put(loadMusicInfoRequest());
   try {
     const data = yield all(
-      songArr.map(url => call(getSoundCloudSongInfo, url)),
+      musicArr.map(url => call(getSoundCloudMusicInfo, url)),
     );
-    yield put(loadSongInfoSuccess(data));
+    yield put(loadMusicInfoSuccess(data));
   } catch (err) {
-    yield put(loadSongInfoFailure(err));
+    yield put(loadMusicInfoFailure(err));
   }
 }
 
-export function* watchLoadSongInfoFlow() {
-  yield takeEvery(LOAD_SONG_INFO, loadSubSongsInfo);
+export function* watchLoadMusicInfoFlow() {
+  yield takeEvery(LOAD_MUSIC_INFO, loadSubMusicInfo);
 }
 
 export default function* subMusicRoot() {
-  yield all([watchLoadSongInfoFlow()]);
+  yield all([watchLoadMusicInfoFlow()]);
 }

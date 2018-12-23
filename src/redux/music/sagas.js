@@ -7,108 +7,86 @@ import {
   select,
 } from 'redux-saga/effects';
 import {
-  getSoundCloudSong,
-  getSoundCloudSongInfo,
+  getSoundCloudMusic,
+  getSoundCloudMusicInfo,
   getKeywordSearchResult,
 } from 'src/api';
-import {
-  LOAD_SONG_DETAIL,
-  loadSongDetailRequest,
-  loadSongDetailSuccess,
-  loadSongDetailFailure,
-  LOAD_SONG_INFO,
-  loadSongInfoRequest,
-  loadSongInfoSuccess,
-  loadSongInfoFailure,
-  HISTORY_SONG,
-  historySongRequest,
-  historySongSuccess,
-  historySongFailure,
-  LOAD_KEYWORD_MUSIC,
-  loadKeywordMusicRequest,
-  loadKeywordMusicSuccess,
-  loadKeywordMusicFailure,
-  selectSong,
-} from './actions';
 
-import {
-  PLAY_NEXT_SONG_SUCCESS,
-  PLAY_PREV_SONG_SUCCESS,
-} from 'src/redux/player/actions';
+import * as musicActions from './actions';
+import * as playerActions from 'src/redux/player/actions';
 
 export function* updateHistoryLocalStorage(action) {
-  const { songId } = action;
-  yield put(historySongRequest());
+  const { musicId } = action;
+  yield put(musicActions.historyMusicRequest());
 
   try {
     let newHistory = [];
-    const historySong = localStorage.historySong;
-    if (checkValidValue(historySong)) {
-      let localData = JSON.parse(historySong);
+    const historyMusic = localStorage.historyMusic;
+    if (checkValidValue(historyMusic)) {
+      let localData = JSON.parse(historyMusic);
       let containsId = false;
       const localDataLen = localData.length;
       let index;
       for (index = 0; index < localDataLen; index++) {
-        if (songId === localData[index]) {
+        if (musicId === localData[index]) {
           containsId = true;
           break;
         }
       }
       if (!checkValidValue(containsId)) {
-        localData.push(songId);
-        localStorage.setItem('historySong', JSON.stringify(localData));
+        localData.push(musicId);
+        localStorage.setItem('historyMusic', JSON.stringify(localData));
       }
       for (index = 0; index < localData.length; index++) {
         if (localData[index]) newHistory.push(localData[index]);
       }
     } else {
-      newHistory = [songId];
-      localStorage.historySong = JSON.stringify(newHistory);
+      newHistory = [musicId];
+      localStorage.historyMusic = JSON.stringify(newHistory);
     }
 
-    const data = yield all(newHistory.map(id => call(getSoundCloudSong, id)));
-    const filData = data;
-    yield put(historySongSuccess(filData));
+    const data = yield all(newHistory.map(id => call(getSoundCloudMusic, id)));
+    yield put(musicActions.historyMusicSuccess(data));
   } catch (err) {
-    yield put(historySongFailure(err));
+    yield put(musicActions.historyMusicFailure(err));
   }
 }
-export function* watchHistorySongInfoFlow() {
-  yield takeEvery(HISTORY_SONG, updateHistoryLocalStorage);
+export function* watchHistoryMusicInfoFlow() {
+  yield takeEvery(musicActions.HISTORY_MUSIC, updateHistoryLocalStorage);
 }
 
-export function* loadSongsInfoFrom(action) {
-  const { songUrlArr } = action;
-  yield put(loadSongInfoRequest());
+export function* loadMusicsInfoFrom(action) {
+  const { musicUrlArr } = action;
+  yield put(musicActions.loadMusicInfoRequest());
   try {
     //yield all(urls.map((url) => call(url)));
     const data = yield all(
-      songUrlArr.map(url => call(getSoundCloudSongInfo, url)),
+      musicUrlArr.map(url => call(getSoundCloudMusicInfo, url)),
     );
-    yield put(loadSongInfoSuccess(data));
+    yield put(musicActions.loadMusicInfoSuccess(data));
   } catch (err) {
-    yield put(loadSongInfoFailure(err));
+    yield put(musicActions.loadMusicInfoFailure(err));
   }
 }
 
-export function* watchLoadSongInfoFlow() {
-  yield takeEvery(LOAD_SONG_INFO, loadSongsInfoFrom);
+export function* watchLoadMusicInfoFlow() {
+  yield takeEvery(musicActions.LOAD_MUSIC_INFO, loadMusicsInfoFrom);
 }
 
-export function* loadSongDetailFlow(action) {
-  const { songId } = action;
+export function* loadMusicDetailFlow(action) {
+  const { musicId } = action;
 
-  yield put(loadSongDetailRequest());
+  yield put(musicActions.loadMusicDetailRequest());
   try {
-    const data = yield call(getSoundCloudSong, songId);
-    yield put(loadSongDetailSuccess(data));
+    const data = yield call(getSoundCloudMusic, musicId);
+    yield put(musicActions.loadMusicDetailSuccess(data));
   } catch (error) {
-    yield put(loadSongDetailFailure(error));
+    yield put(musicActions.loadMusicDetailFailure(error));
   }
 }
 
-export function* watchLoadSongDtailFlow() {
-  yield takeEvery(LOAD_SONG_DETAIL, loadSongDetailFlow);
+export function* watchLoadMusicDetailFlow() {
+  yield takeEvery(musicActions.LOAD_MUSIC_DETAIL, loadMusicDetailFlow);
 }
 
 export function* loadKeywordMusicFlow(action) {
@@ -116,48 +94,51 @@ export function* loadKeywordMusicFlow(action) {
   //FIXME : show issue #109 comment !!!!! 일시적 처리임.
   const getMusicInfo = state => state.music.musicInfo;
   const musicInfo = yield select(getMusicInfo);
-  yield put(loadKeywordMusicRequest());
+  yield put(musicActions.loadKeywordMusicRequest());
   try {
     // 이 call 이 .... 내가 아는 call 이라면 apply로 처리해야 함.
     //2018.11.20 여기고치면 됨.
     const data = yield call(getKeywordSearchResult, { musicInfo, keyword });
-    yield put(loadKeywordMusicSuccess(data));
+    yield put(musicActions.loadKeywordMusicSuccess(data));
   } catch (error) {
-    yield put(loadKeywordMusicFailure(error));
+    yield put(musicActions.loadKeywordMusicFailure(error));
   }
 }
 
 export function* watchLoadKeywordMusicFlow() {
-  yield takeEvery(LOAD_KEYWORD_MUSIC, loadKeywordMusicFlow);
+  yield takeEvery(musicActions.LOAD_KEYWORD_MUSIC, loadKeywordMusicFlow);
 }
 
-export function* selectSongFlow() {
-  const songInfo = yield select(state => state.player.songInfo);
+export function* selectMusicFlow() {
+  const musicInfo = yield select(state => state.player.musicInfo);
   yield put(
-    selectSong({
-      songId: songInfo.id,
-      title: songInfo.title,
-      singer: songInfo.user.username,
-      artworkUrl: songInfo.artwork_url,
-      duration: songInfo.duration / 1000,
+    musicActions.selectMusic({
+      id: musicInfo.id,
+      title: musicInfo.title,
+      musician: musicInfo.user.username,
+      artworkUrl: musicInfo.artwork_url,
+      duration: musicInfo.duration / 1000,
     }),
   );
 }
 
-export function* watchSelectSongFlow() {
+export function* watchSelectMusicFlow() {
   yield takeLatest(
-    [PLAY_NEXT_SONG_SUCCESS, PLAY_PREV_SONG_SUCCESS],
-    selectSongFlow,
+    [
+      playerActions.PLAY_NEXT_MUSIC_SUCCESS,
+      playerActions.PLAY_PREV_MUSIC_SUCCESS,
+    ],
+    selectMusicFlow,
   );
 }
 
 export default function* musicRoot() {
   yield all([
-    watchLoadSongDtailFlow(),
-    watchLoadSongInfoFlow(),
-    watchHistorySongInfoFlow(),
+    watchLoadMusicDetailFlow(),
+    watchLoadMusicInfoFlow(),
+    watchHistoryMusicInfoFlow(),
     watchLoadKeywordMusicFlow(),
-    watchSelectSongFlow(),
+    watchSelectMusicFlow(),
   ]);
 }
 

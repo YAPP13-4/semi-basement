@@ -1,4 +1,4 @@
-const SONG_URL_LIST = [
+const MUSIC_URL_LIST = [
   "https://soundcloud.com/dailywshh/lil-baby-seattle",
   "https://soundcloud.com/godtjd777/sets/pluto",
   "https://soundcloud.com/lxwl4ih4tphn/0fsjwwdgv95b",
@@ -7,4 +7,4 @@ const SONG_URL_LIST = [
   "https://soundcloud.com/rd-urbans-music/unica-ozuna-original"
 ]
 
-export default SONG_URL_LIST
+export default MUSIC_URL_LIST

@@ -8,12 +8,11 @@ const cx = classnames.bind(css);
 const moduleName = 'ChartTabContainer';
 
 const ChartTabItem = ({ musicInfo, onClickPlay, ind }) => {
-  const songId = musicInfo.id;
+  const id = musicInfo.id;
   const title = musicInfo.title;
-  const creator = musicInfo.user.username;
+  const musician = musicInfo.user.username;
   const artworkUrl = musicInfo.artwork_url;
   const duration = musicInfo.duration / 1000;
-  //FIX ME : WITH BE
   const playCount = (musicInfo.playback_count / 1000000).toFixed(2);
   const likeCount = (musicInfo.favoritings_count / 1000000).toFixed(2);
   return (
@@ -22,7 +21,7 @@ const ChartTabItem = ({ musicInfo, onClickPlay, ind }) => {
       <td
         className={cx(`${moduleName}-thumbnail`)}
         onClick={() => {
-          onClickPlay({ songId, title, artworkUrl, duration });
+          onClickPlay({ id, title, musician, artworkUrl, duration });
         }}>
         <img
           src={`${utils.getImageUrl(artworkUrl, IMAGE_SIZES.SMALL)}`}
@@ -30,9 +29,9 @@ const ChartTabItem = ({ musicInfo, onClickPlay, ind }) => {
         />
       </td>
       <td className={cx(`${moduleName}-title`)}>
-        <Link to={'/songDetail/' + songId}>{title}</Link>
+        <Link to={'/musicDetail/' + id}>{title}</Link>
       </td>
-      <td className={cx(`${moduleName}-singer`)}>{creator}</td>
+      <td className={cx(`${moduleName}-musician`)}>{musician}</td>
       <td className={cx(`${moduleName}-time`)}>
         {utils.formatSeconds(duration)}
       </td>

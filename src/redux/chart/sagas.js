@@ -1,30 +1,30 @@
 import { takeEvery, all, put, call } from 'redux-saga/effects';
-import { getSoundCloudSongInfo } from 'src/api';
+import { getSoundCloudMusicInfo } from 'src/api';
 
 import {
-  LOAD_CHART_SONG_INFO,
-  loadChartSongInfoRequest,
-  loadChartSongInfoSuccess,
-  loadChartSongInfoFailure,
+  LOAD_CHART_MUSIC_INFO,
+  loadChartMusicInfoRequest,
+  loadChartMusicInfoSuccess,
+  loadChartMusicInfoFailure,
 } from './actions';
 
-export function* loadChartSongDetailFlow(action) {
-  const { songUrlArr } = action;
-  yield put(loadChartSongInfoRequest());
+export function* loadChartMusicDetailFlow(action) {
+  const { musicUrlArr } = action;
+  yield put(loadChartMusicInfoRequest());
   try {
     const data = yield all(
-      songUrlArr.map(url => call(getSoundCloudSongInfo, url)),
+      musicUrlArr.map(url => call(getSoundCloudMusicInfo, url)),
     );
-    yield put(loadChartSongInfoSuccess(data));
+    yield put(loadChartMusicInfoSuccess(data));
   } catch (err) {
-    yield put(loadChartSongInfoFailure(err));
+    yield put(loadChartMusicInfoFailure(err));
   }
 }
 
-export function* watchLoadChartSongInfoFlow() {
-  yield takeEvery(LOAD_CHART_SONG_INFO, loadChartSongDetailFlow);
+export function* watchLoadChartMusicInfoFlow() {
+  yield takeEvery(LOAD_CHART_MUSIC_INFO, loadChartMusicDetailFlow);
 }
 
 export default function* chartMusicRoot() {
-  yield all([watchLoadChartSongInfoFlow()]);
+  yield all([watchLoadChartMusicInfoFlow()]);
 }

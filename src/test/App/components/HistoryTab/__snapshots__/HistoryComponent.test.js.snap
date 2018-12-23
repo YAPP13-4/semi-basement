@@ -4,7 +4,7 @@ exports[`components/HistoryTab render.HistoryTab [Render Correctly] 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <HistoryTab
-    historySong={
+    historyMusic={
         Array [
             Object {
               "config": Object {
@@ -195,8 +195,8 @@ ShallowWrapper {
         <Connect(HistoryComponent)
                 artwork="https://i1.sndcdn.com/artworks-000232037629-yspo52-large.jpg"
                 duration={186479}
-                singer="Bluite"
-                songId={331622174}
+                musician="Bluite"
+                musicId={331622174}
                 title="지금 뭐 해 (feat. PLANET)"
         />
 </div>,
@@ -212,8 +212,8 @@ ShallowWrapper {
           <Connect(HistoryComponent)
             artwork="https://i1.sndcdn.com/artworks-000232037629-yspo52-large.jpg"
             duration={186479}
-            singer="Bluite"
-            songId={331622174}
+            musician="Bluite"
+            musicId={331622174}
             title="지금 뭐 해 (feat. PLANET)"
 />,
         ],
@@ -231,8 +231,8 @@ ShallowWrapper {
           "props": Object {
             "artwork": "https://i1.sndcdn.com/artworks-000232037629-yspo52-large.jpg",
             "duration": 186479,
-            "singer": "Bluite",
-            "songId": 331622174,
+            "musician": "Bluite",
+            "musicId": 331622174,
             "title": "지금 뭐 해 (feat. PLANET)",
           },
           "ref": null,
@@ -261,8 +261,8 @@ ShallowWrapper {
           <Connect(HistoryComponent)
                     artwork="https://i1.sndcdn.com/artworks-000232037629-yspo52-large.jpg"
                     duration={186479}
-                    singer="Bluite"
-                    songId={331622174}
+                    musician="Bluite"
+                    musicId={331622174}
                     title="지금 뭐 해 (feat. PLANET)"
           />
 </div>,
@@ -278,8 +278,8 @@ ShallowWrapper {
             <Connect(HistoryComponent)
               artwork="https://i1.sndcdn.com/artworks-000232037629-yspo52-large.jpg"
               duration={186479}
-              singer="Bluite"
-              songId={331622174}
+              musician="Bluite"
+              musicId={331622174}
               title="지금 뭐 해 (feat. PLANET)"
 />,
           ],
@@ -297,8 +297,8 @@ ShallowWrapper {
             "props": Object {
               "artwork": "https://i1.sndcdn.com/artworks-000232037629-yspo52-large.jpg",
               "duration": 186479,
-              "singer": "Bluite",
-              "songId": 331622174,
+              "musician": "Bluite",
+              "musicId": 331622174,
               "title": "지금 뭐 해 (feat. PLANET)",
             },
             "ref": null,
@@ -335,7 +335,7 @@ exports[`components/HistoryTab/HistoryComponent render.HistoryComponent [Render 
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <HistoryTab
-    historySong={
+    historyMusic={
         Array [
             Object {
               "config": Object {
@@ -526,8 +526,8 @@ ShallowWrapper {
         <Connect(HistoryComponent)
                 artwork="https://i1.sndcdn.com/artworks-000232037629-yspo52-large.jpg"
                 duration={186479}
-                singer="Bluite"
-                songId={331622174}
+                musician="Bluite"
+                musicId={331622174}
                 title="지금 뭐 해 (feat. PLANET)"
         />
 </div>,
@@ -543,8 +543,8 @@ ShallowWrapper {
           <Connect(HistoryComponent)
             artwork="https://i1.sndcdn.com/artworks-000232037629-yspo52-large.jpg"
             duration={186479}
-            singer="Bluite"
-            songId={331622174}
+            musician="Bluite"
+            musicId={331622174}
             title="지금 뭐 해 (feat. PLANET)"
 />,
         ],
@@ -562,8 +562,8 @@ ShallowWrapper {
           "props": Object {
             "artwork": "https://i1.sndcdn.com/artworks-000232037629-yspo52-large.jpg",
             "duration": 186479,
-            "singer": "Bluite",
-            "songId": 331622174,
+            "musician": "Bluite",
+            "musicId": 331622174,
             "title": "지금 뭐 해 (feat. PLANET)",
           },
           "ref": null,
@@ -592,8 +592,8 @@ ShallowWrapper {
           <Connect(HistoryComponent)
                     artwork="https://i1.sndcdn.com/artworks-000232037629-yspo52-large.jpg"
                     duration={186479}
-                    singer="Bluite"
-                    songId={331622174}
+                    musician="Bluite"
+                    musicId={331622174}
                     title="지금 뭐 해 (feat. PLANET)"
           />
 </div>,
@@ -609,8 +609,8 @@ ShallowWrapper {
             <Connect(HistoryComponent)
               artwork="https://i1.sndcdn.com/artworks-000232037629-yspo52-large.jpg"
               duration={186479}
-              singer="Bluite"
-              songId={331622174}
+              musician="Bluite"
+              musicId={331622174}
               title="지금 뭐 해 (feat. PLANET)"
 />,
           ],
@@ -628,8 +628,8 @@ ShallowWrapper {
             "props": Object {
               "artwork": "https://i1.sndcdn.com/artworks-000232037629-yspo52-large.jpg",
               "duration": 186479,
-              "singer": "Bluite",
-              "songId": 331622174,
+              "musician": "Bluite",
+              "musicId": 331622174,
               "title": "지금 뭐 해 (feat. PLANET)",
             },
             "ref": null,

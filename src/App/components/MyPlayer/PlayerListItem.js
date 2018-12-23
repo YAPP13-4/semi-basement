@@ -11,13 +11,13 @@ const cx = classnames.bind(css);
 const moduleName = 'PlayerListItem';
 
 const PlayerListItem = ({ info, index, onClickPlay }) => {
-  const { songId, title, singer, artworkUrl, duration } = info;
+  const { id, title, musician, artworkUrl, duration } = info;
   return (
     <div
       className={cx(`${moduleName}`)}
       key={index}
       onClick={() => {
-        onClickPlay({ songId, title, singer, artworkUrl, duration });
+        onClickPlay({ id, title, musician, artworkUrl, duration });
       }}>
       <i className={cx(`${moduleName}-move`)} />
       <div
@@ -31,7 +31,7 @@ const PlayerListItem = ({ info, index, onClickPlay }) => {
       />
       <div className={cx(`${moduleName}-center`)}>
         <p className={cx(`${moduleName}-center-top`)}>{title}</p>
-        <p className={cx(`${moduleName}-center-bottom`)}>{singer}</p>
+        <p className={cx(`${moduleName}-center-bottom`)}>{musician}</p>
       </div>
       <p className={cx(`${moduleName}-duration`)}>
         {utils.formatSeconds(duration)}
