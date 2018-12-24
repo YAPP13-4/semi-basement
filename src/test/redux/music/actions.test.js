@@ -4,7 +4,7 @@ describe('/redux/music/actions', () => {
   it('actions.selectMusic [SELECT_MUSIC dispatch Test]', () => {
     //Given
     const mockMusic = {
-      musicId: 331622174,
+      id: 331622174,
       title: '지금 뭐 해 (feat. PLANET)',
       musician: 'Bluite',
       artworkUrl:
