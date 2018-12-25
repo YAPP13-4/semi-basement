@@ -5,7 +5,7 @@ import {
   addMusicMyPlaylist,
   removeMusicMyPlaylist
 } from 'src/redux/myPlayer/actions'
-import Tooltip2 from 'src/components/Tooltip2'
+import Tooltip from 'src/App/components/Tooltip'
 import icons from 'src/assets/icons/icon2.png'
 
 const MyPlayerTooltip = ({
@@ -74,7 +74,7 @@ const MyPlayerTooltip = ({
     }
   }
 
-  return <Tooltip2 tooltipList={tooltipList}>{children}</Tooltip2>
+  return <Tooltip tooltipList={tooltipList}>{children}</Tooltip>
 }
 
 export default connect(
