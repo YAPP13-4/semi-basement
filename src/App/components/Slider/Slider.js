@@ -1,8 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import classnames from 'classnames/bind';
-import css from './slider.scss';
+
 import * as utils from 'src/utils';
+
+import css from './Slider.scss';
+
 const cx = classnames.bind(css);
 const moduleName = 'Slider';
 
