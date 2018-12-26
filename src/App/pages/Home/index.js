@@ -17,13 +17,10 @@ const cx = classnames.bind(css);
 const moduleName = 'Home';
 
 class Home extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      sebaChoiceActive: false,
-      knowListActive: false,
-    };
-  }
+  state = {
+    sebaChoiceActive: false,
+    knowListActive: false,
+  };
 
   componentDidMount() {
     this.props.loadMusicsInfo(MUSIC_URL_LIST1);

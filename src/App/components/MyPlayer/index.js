@@ -30,13 +30,9 @@ const cx = classnames.bind(css);
 const moduleName = 'MyPlayer';
 
 class MyPlayer extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      musicListInfos: [],
-    };
-  }
+  state = {
+    musicListInfos: [],
+  };
 
   componentDidMount() {
     this.getMusicListInfos(this.props.musicList);

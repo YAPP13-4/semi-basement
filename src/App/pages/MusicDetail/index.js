@@ -11,8 +11,6 @@ import css from './index.scss';
 
 const cx = classnames.bind(css);
 const moduleName = 'MusicDetail';
-
-//const { musicDetail } = this.props
 class MusicDetail extends Component {
   state = {
     isOpen: false,

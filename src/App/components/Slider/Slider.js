@@ -21,16 +21,14 @@ class Slider extends PureComponent {
     onChange: PropTypes.func.isRequired,
     value: PropTypes.number.isRequired,
   };
+
   static defaultProps = {
     className: '',
     max: 0,
   };
-  constructor() {
-    super();
-    this.onClick = this.onClick.bind(this);
-    this.onMouseDown = this.onMouseDown.bind(this);
-    this.onMouseMove = this.onMouseMove.bind(this);
-    this.onMouseUp = this.onMouseUp.bind(this);
+
+  constructor(props) {
+    super(props);
     this.domNode = null;
   }
 
@@ -39,33 +37,33 @@ class Slider extends PureComponent {
     document.removeEventListener('mouseup', this.onMouseUp);
   }
 
-  onClick(e) {
+  onClick = e => {
     const { max, onChange } = this.props;
 
     const percent =
       (e.clientX - utils.offsetLeft(e.currentTarget)) /
       e.currentTarget.offsetWidth;
     onChange(percent * max);
-  }
+  };
 
-  onMouseDown() {
+  onMouseDown = () => {
     document.addEventListener('mousemove', this.onMouseMove);
     document.addEventListener('mouseup', this.onMouseUp);
-  }
+  };
 
-  onMouseMove(e) {
+  onMouseMove = e => {
     const { domNode, props } = this;
     const { max, onChange } = props;
 
     const diff = e.clientX - utils.offsetLeft(domNode);
     const percent = Math.min(Math.max(diff / domNode.offsetWidth, 0), 1);
     onChange(percent * max);
-  }
+  };
 
-  onMouseUp() {
+  onMouseUp = () => {
     document.removeEventListener('mousemove', this.onMouseMove);
     document.removeEventListener('mouseup', this.onMouseUp);
-  }
+  };
 
   render() {
     const { className, max, value } = this.props;
