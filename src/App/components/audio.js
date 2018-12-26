@@ -5,18 +5,6 @@ const audio = InnerComponent => {
     constructor() {
       super();
       this.audioElement = null;
-      this.onEnded = this.onEnded.bind(this);
-      this.onLoadStart = this.onLoadStart.bind(this);
-      this.onLoadedMetadata = this.onLoadedMetadata.bind(this);
-      this.onPause = this.onPause.bind(this);
-      this.onPlay = this.onPlay.bind(this);
-      this.onTimeUpdate = this.onTimeUpdate.bind(this);
-      this.onVolumeChange = this.onVolumeChange.bind(this);
-
-      this.changeCurrentTime = this.changeCurrentTime.bind(this);
-      this.changeVolume = this.changeVolume.bind(this);
-      this.toggleMuted = this.toggleMuted.bind(this);
-      this.togglePlay = this.togglePlay.bind(this);
     }
 
     componentDidMount() {
@@ -63,69 +51,69 @@ const audio = InnerComponent => {
     shouldChangeVolume = (prevProps, props) =>
       prevProps.player.myPlayerVolume !== props.player.myPlayerVolume;
 
-    onEnded() {
+    onEnded = () => {
       const { props } = this;
       const { playNexMusic } = props;
       playNexMusic();
-    }
-    onLoadedMetadata() {
+    };
+    onLoadedMetadata = () => {
       const { audioElement, props } = this;
       const { onLoadedMetadata } = props;
       onLoadedMetadata(Math.floor(audioElement.duration));
-    }
-    onLoadStart() {
+    };
+    onLoadStart = () => {
       const { onLoadStart } = this.props;
       onLoadStart();
-    }
+    };
 
-    onPlay() {
+    onPlay = () => {
       const { onPlay } = this.props;
       onPlay();
-    }
+    };
 
-    onPause() {
+    onPause = () => {
       const { onPause } = this.props;
       onPause();
-    }
+    };
 
-    onTimeUpdate() {
+    onTimeUpdate = () => {
       const { audioElement, props } = this;
       const { onTimeUpdate } = props;
       onTimeUpdate(Math.floor(audioElement.currentTime));
-    }
+    };
 
-    onVolumeChange() {
+    onVolumeChange = () => {
       const { audioElement, props } = this;
 
       const { muted, volume } = audioElement;
       const { onVolumeChange } = props;
       onVolumeChange(muted, volume);
-    }
+    };
 
-    changeCurrentTime(currentTime) {
+    changeCurrentTime = currentTime => {
       this.audioElement.currentTime = currentTime;
-    }
+    };
 
-    changeVolume(volume) {
+    changeVolume = volume => {
       const { audioElement } = this;
       audioElement.muted = false;
       audioElement.volume = volume;
-    }
+    };
 
-    toggleMuted() {
+    toggleMuted = () => {
       const { audioElement } = this;
       const { muted } = audioElement;
       audioElement.muted = !muted;
-    }
+    };
 
-    togglePlay() {
+    togglePlay = () => {
       const { audioElement } = this;
       if (this.props.player.isPlaying) {
         audioElement.pause();
       } else {
         audioElement.play();
       }
-    }
+    };
 
     render() {
       const { music } = this.props;
