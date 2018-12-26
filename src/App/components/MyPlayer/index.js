@@ -24,7 +24,7 @@ import { MUSIC_URL } from 'src/App/constants/ApiConstants';
 import IMAGE_SIZES from 'src/App/constants/ImageConstants';
 
 import css from './index.scss';
-import PlayerListItem from './PlayerListItem';
+import PlayerListItem from './components/PlayerListItem';
 
 const cx = classnames.bind(css);
 const moduleName = 'MyPlayer';

@@ -5,7 +5,7 @@ import * as utils from 'src/utils';
 import IMAGE_SIZES from 'src/App/constants/ImageConstants';
 
 import css from './PlayerListItem.scss';
-import MyPlayerTooltip from './components/MyPlayerTooltip';
+import MyPlayerTooltip from './MyPlayerTooltip';
 
 const cx = classnames.bind(css);
 const moduleName = 'PlayerListItem';
