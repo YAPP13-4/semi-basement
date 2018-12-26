@@ -6,9 +6,9 @@ import classnames from 'classnames/bind'
 import css from './index.scss'
 
 const cx = classnames.bind(css)
-const moduleName = 'Tooltip2'
+const moduleName = 'Tooltip'
 
-class Tooltip2 extends Component {
+class Tooltip extends Component {
   constructor(props) {
     super(props)
 
@@ -88,8 +88,8 @@ class Tooltip2 extends Component {
   }
 }
 
-Tooltip2.propTypes = {
+Tooltip.propTypes = {
   children: PropTypes.element.isRequired
 }
 
-export default Tooltip2
+export default Tooltip

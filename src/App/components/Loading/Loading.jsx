@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react"
 import Lottie from "react-lottie"
-import * as animationData from "../../assets/loading.json"
+import * as animationData from "src/assets/loading.json"
 import classnames from "classnames/bind"
 import css from "./Loading.scss"
 const cx = classnames.bind(css)

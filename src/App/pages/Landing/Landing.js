@@ -2,11 +2,12 @@ import React, { PureComponent } from "react"
 import { connect } from "react-redux"
 import { compose } from "redux"
 import { Link } from "react-router-dom"
-
 import classnames from "classnames/bind"
+
+import getIntoBtn from "src/assets/landing/get-into-button@2x.png"
+import landingBgVideo from "src/assets/landing/video.mp4"
+
 import css from "./Landing.scss"
-import getIntoBtn from "./get-into-button@2x.png"
-import landingBgVideo from "./video.mp4"
 
 const cx = classnames.bind(css)
 const moduleName = "Landing"

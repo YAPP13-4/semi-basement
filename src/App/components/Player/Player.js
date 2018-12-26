@@ -1,12 +1,13 @@
 import React from 'react';
 import classnames from 'classnames/bind';
-import css from './Player.scss';
-import audio from './audio';
 
+import audio from 'src/App/components/audio';
 import * as utils from 'src/utils';
-import IMAGE_SIZES from '../constants/ImageConstants';
-import Slider from './Slider';
-import HistoryTab from './HistoryTab/HistoryTab';
+import IMAGE_SIZES from 'src/App/constants/ImageConstants';
+import Slider from 'src/App/components/Slider';
+import HistoryTab from 'src/App/components/HistoryTab/HistoryTab';
+
+import css from './Player.scss';
 
 const cx = classnames.bind(css);
 const moduleName = 'Player';
