@@ -9,7 +9,7 @@ import { loadFirstSubMusicInfo } from 'src/redux/submusic1/actions';
 //TODO : FIX (with BE)
 import MUSIC_URL_LIST2 from '../../constants/test/MusicUrlConstants2';
 import MUSIC_URL_LIST1 from '../../constants/test/MusicUrlConstants1';
-import ArtWorkContainer from '../Home/container/ArtWrokContainer';
+import ArtWorkPlayContainer from '../Home/container/ArtWorkPlayContainer';
 import classnames from 'classnames/bind';
 import css from './index.scss';
 
@@ -39,13 +39,13 @@ class Home extends PureComponent {
       <div className={cx(`${moduleName}`)}>
         <Navigation />
         <div>
-          <ArtWorkContainer
+          <ArtWorkPlayContainer
             category="Seba's Choice"
             musicInfos={this.props.musicInfos}
           />
         </div>
         <div>
-          <ArtWorkContainer
+          <ArtWorkPlayContainer
             category="Artists you should know"
             musicInfos={this.props.subMusicInfos1}
           />

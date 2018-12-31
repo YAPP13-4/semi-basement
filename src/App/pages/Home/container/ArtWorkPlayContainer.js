@@ -10,7 +10,7 @@ import { setMyPlayerSubPlayList } from 'src/redux/myPlayer/actions';
 
 import ArtworkPlay from '../components/ArtworkPlay';
 import classnames from 'classnames/bind';
-import css from './ArtWorkContainer.scss';
+import css from './ArtWorkPlayContainer.scss';
 
 import selectIcon from 'src/assets/icons/icon2.png';
 
