@@ -13,6 +13,9 @@ import ArtWorkContainer from '../Home/container/ArtWrokContainer';
 import classnames from 'classnames/bind';
 import css from './index.scss';
 
+// 임시
+import axios from 'axios';
+
 const cx = classnames.bind(css);
 const moduleName = 'Home';
 
@@ -25,6 +28,10 @@ class Home extends PureComponent {
   componentDidMount() {
     this.props.loadMusicsInfo(MUSIC_URL_LIST1);
     this.props.loadFirstSubMusicInfo(MUSIC_URL_LIST2);
+    axios.get('http://localhost:6508/musics/seba-choice').then(res => {
+      console.log(res);
+      this.setState({ sebaChoice: res.data });
+    });
   }
 
   render() {
