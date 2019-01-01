@@ -23,6 +23,7 @@ class Home extends PureComponent {
   state = {
     sebaChoiceActive: false,
     knowListActive: false,
+    sebaChoice: [],
   };
 
   componentDidMount() {
@@ -35,21 +36,22 @@ class Home extends PureComponent {
   }
 
   render() {
-    return !this.props.mainMusicLoading && !this.props.subMusicLoading ? (
+    // return !this.props.mainMusicLoading && !this.props.subMusicLoading ? (
+    return this.state.sebaChoice.length ? (
       <div className={cx(`${moduleName}`)}>
         <Navigation />
         <div>
           <ArtWorkPlayContainer
             category="Seba's Choice"
-            musicInfos={this.props.musicInfos}
+            musicInfos={this.state.sebaChoice}
           />
         </div>
-        <div>
+        {/* <div>
           <ArtWorkPlayContainer
             category="Artists you should know"
             musicInfos={this.props.subMusicInfos1}
           />
-        </div>
+        </div> */}
         <div>
           <Featured />
         </div>

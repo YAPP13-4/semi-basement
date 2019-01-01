@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
   selectMusic,
@@ -24,8 +25,8 @@ const activePalyList = {
   height: '35px',
 };
 class ArtWorkPlayContainer extends PureComponent {
-  onClickPlay = ({ id, title, musician, artworkUrl, duration }) => {
-    this.props.selectMusic({ id, title, musician, artworkUrl, duration });
+  onClickPlay = ({ id, title, musician, artworkImg, duration }) => {
+    this.props.selectMusic({ id, title, musician, artworkImg, duration });
     this.props.historyMusic(id);
   };
 
@@ -45,8 +46,8 @@ class ArtWorkPlayContainer extends PureComponent {
     }
   };
 
-  renderArtworks = () => {
-    return this.props.musicInfos.map(musicInfo => {
+  renderArtworks = musicInfos => {
+    return musicInfos.map(musicInfo => {
       return (
         <ArtworkPlay
           key={musicInfo.id}
@@ -58,7 +59,7 @@ class ArtWorkPlayContainer extends PureComponent {
   };
 
   render() {
-    return this.props.musicInfos ? (
+    return (
       <div className={cx(`${moduleName}`)}>
         <div className={cx(`${moduleName}-category`)}>
           <div
@@ -74,10 +75,10 @@ class ArtWorkPlayContainer extends PureComponent {
           </div>
         </div>
         <div className={cx(`${moduleName}-musicWrapper`)}>
-          {this.renderArtworks()}
+          {this.renderArtworks(this.props.musicInfos)}
         </div>
       </div>
-    ) : null;
+    );
   }
 }
 
@@ -98,3 +99,8 @@ export default connect(
     setMyPlayerSubPlayList,
   },
 )(ArtWorkPlayContainer);
+
+ArtWorkPlayContainer.propTypes = {
+  musicInfos: PropTypes.array.isRequired,
+  category: PropTypes.string.isRequired,
+};

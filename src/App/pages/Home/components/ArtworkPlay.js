@@ -8,12 +8,11 @@ import IMAGE_SIZES from '../../../constants/ImageConstants';
 const cx = classnames.bind(css);
 const moduleName = 'ArtworkPlay';
 
-const ArtWorkPlay = ({ musicInfo, onClickPlay }) => {
-  const id = musicInfo.id;
-  const title = musicInfo.title;
-  const musician = musicInfo.user.username;
-  const artworkUrl = musicInfo.artwork_url;
-  const duration = musicInfo.duration / 1000;
+const ArtWorkPlay = ({
+  musicInfo: { id, title, musician, artworkImg, duration },
+  onClickPlay,
+}) => {
+  duration = duration / 1000;
 
   return (
     <div className={cx(`${moduleName}`)}>
@@ -23,11 +22,11 @@ const ArtWorkPlay = ({ musicInfo, onClickPlay }) => {
             <div
               className={cx(`${moduleName}-music-body-card-artwork`)}
               onClick={() => {
-                onClickPlay({ id, title, musician, artworkUrl, duration });
+                onClickPlay({ id, title, musician, artworkImg, duration });
               }}
               style={{
                 backgroundImage: `url(${utils.getImageUrl(
-                  artworkUrl,
+                  artworkImg,
                   IMAGE_SIZES.XLARGE,
                 )})`,
               }}>
