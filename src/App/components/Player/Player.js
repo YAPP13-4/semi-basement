@@ -25,7 +25,7 @@ const Player = ({
   playPrevMusic,
   addMusicMyPlaylist,
 }) => {
-  const { id, title, musician, artworkUrl, duration } = music;
+  const { id, title, musician, artworkImg, duration } = music;
   const { currentTime, isPlaying, muted, shuffle } = player;
   const volume = muted ? 0 : player.volume;
 
@@ -126,7 +126,7 @@ const Player = ({
                   className={cx(`${moduleName}__music__artwork`)}
                   style={{
                     backgroundImage: `url(${utils.getImageUrl(
-                      artworkUrl,
+                      artworkImg,
                       IMAGE_SIZES.SMALL,
                     )})`,
                   }}

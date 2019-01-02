@@ -25,8 +25,16 @@ const activePalyList = {
   height: '35px',
 };
 class ArtWorkPlayContainer extends PureComponent {
-  onClickPlay = ({ id, title, musician, artworkImg, duration }) => {
-    this.props.selectMusic({ id, title, musician, artworkImg, duration });
+  // id 없앨 수 있으면 없애자. streamUrl로 대체 가능
+  onClickPlay = ({ id, title, musician, artworkImg, streamUrl, duration }) => {
+    this.props.selectMusic({
+      id,
+      title,
+      musician,
+      artworkImg,
+      streamUrl,
+      duration,
+    });
     this.props.historyMusic(id);
   };
 

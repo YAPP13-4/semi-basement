@@ -30,7 +30,6 @@ class Home extends PureComponent {
     this.props.loadMusicsInfo(MUSIC_URL_LIST1);
     this.props.loadFirstSubMusicInfo(MUSIC_URL_LIST2);
     axios.get('http://localhost:6508/musics/seba-choice').then(res => {
-      console.log(res);
       this.setState({ sebaChoice: res.data });
     });
   }

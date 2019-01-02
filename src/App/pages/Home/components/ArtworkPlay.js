@@ -9,7 +9,7 @@ const cx = classnames.bind(css);
 const moduleName = 'ArtworkPlay';
 
 const ArtWorkPlay = ({
-  musicInfo: { id, title, musician, artworkImg, duration },
+  musicInfo: { id, title, musician, artworkImg, streamUrl, duration },
   onClickPlay,
 }) => {
   duration = duration / 1000;
@@ -21,8 +21,16 @@ const ArtWorkPlay = ({
           <div className={cx(`${moduleName}-music-body-card`)}>
             <div
               className={cx(`${moduleName}-music-body-card-artwork`)}
-              onClick={() => {
-                onClickPlay({ id, title, musician, artworkImg, duration });
+              onClick={e => {
+                onClickPlay({
+                  id,
+                  title,
+                  musician,
+                  artworkImg,
+                  streamUrl,
+                  duration,
+                });
+                e.stopPropagation();
               }}
               style={{
                 backgroundImage: `url(${utils.getImageUrl(
