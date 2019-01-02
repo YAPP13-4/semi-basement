@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { MUSIC_STREAM_URL, withClientId } from '../constants/ApiConstants';
+import { withClientId } from '../constants/ApiConstants';
+
 const audio = InnerComponent => {
   class AudioComponent extends Component {
     constructor() {
