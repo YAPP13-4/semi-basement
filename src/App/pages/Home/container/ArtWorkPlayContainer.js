@@ -6,7 +6,7 @@ import {
   historyMusic,
   loadMusicDetail,
 } from 'src/redux/music/actions';
-import { changePlayList } from 'src/redux/playlist/actions';
+import { changePlayList, selectPlaylist } from 'src/redux/playlist/actions';
 import { setMyPlayerSubPlayList } from 'src/redux/myPlayer/actions';
 
 import ArtworkPlay from '../components/ArtworkPlay';
@@ -73,7 +73,8 @@ class ArtWorkPlayContainer extends PureComponent {
           <div
             style={activePalyList}
             onClick={() => {
-              this.onClickChangePlayList(this.props.category);
+              // this.onClickChangePlayList(this.props.category);
+              this.props.selectPlaylist(this.props.apiPath);
             }}
             className="patch-icon"
           />
@@ -104,6 +105,7 @@ export default connect(
     loadMusicDetail,
     historyMusic,
     changePlayList,
+    selectPlaylist,
     setMyPlayerSubPlayList,
   },
 )(ArtWorkPlayContainer);

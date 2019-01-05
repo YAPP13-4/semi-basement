@@ -9,3 +9,15 @@ export function changePlayList(playlist, currentList) {
     currentList,
   };
 }
+
+export const SELECT_PLAY_LIST = `${PREFIX}/SELECT_PLAY_LIST`;
+export const SELECT_PLAY_LIST_REQUEST = `${PREFIX}/SELECT_PLAY_LIST_REQUEST`;
+export const SELECT_PLAY_LIST_SUCCESS = `${PREFIX}/SELECT_PLAY_LIST_SUCCESS`;
+export const SELECT_PLAY_LIST_FAILURE = `${PREFIX}/SELECT_PLAY_LIST_FAILURE`;
+
+export function selectPlaylist(apiPath) {
+  return {
+    type: SELECT_PLAY_LIST,
+    apiPath,
+  };
+}

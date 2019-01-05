@@ -41,6 +41,7 @@ class Home extends PureComponent {
         <div>
           <ArtWorkPlayContainer
             category="Seba's Choice"
+            apiPath="seba-choice"
             musicInfos={this.state.sebaChoice}
           />
         </div>
