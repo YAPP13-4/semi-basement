@@ -4,10 +4,6 @@ const music = (
   state = {
     playingMusic: null,
     loading: false,
-    infoLoading: false,
-    musicInfo: null,
-    recommendMusicInfo1: null,
-    recommendMusicInfo2: null,
     musicDetail: null,
     historyMusic: [],
     searchKeyword: '',
@@ -16,18 +12,6 @@ const music = (
   action,
 ) => {
   switch (action.type) {
-    case musicActions.LOAD_MUSIC_INFO_REQUEST:
-      return {
-        ...state,
-        infoLoading: true,
-      };
-
-    case musicActions.LOAD_MUSIC_INFO_SUCCESS:
-      return {
-        ...state,
-        infoLoading: false,
-        musicInfo: [...action.data],
-      };
     case musicActions.SELECT_MUSIC:
       return {
         ...state,

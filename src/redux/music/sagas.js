@@ -6,11 +6,7 @@ import {
   call,
   select,
 } from 'redux-saga/effects';
-import {
-  getSoundCloudMusic,
-  getSoundCloudMusicInfo,
-  getKeywordSearchResult,
-} from 'src/api';
+import { getSoundCloudMusic, getKeywordSearchResult } from 'src/api';
 
 import * as musicActions from './actions';
 import * as playerActions from 'src/redux/player/actions';
@@ -53,24 +49,6 @@ export function* updateHistoryLocalStorage(action) {
 }
 export function* watchHistoryMusicInfoFlow() {
   yield takeEvery(musicActions.HISTORY_MUSIC, updateHistoryLocalStorage);
-}
-
-export function* loadMusicsInfoFrom(action) {
-  const { musicUrlArr } = action;
-  yield put(musicActions.loadMusicInfoRequest());
-  try {
-    //yield all(urls.map((url) => call(url)));
-    const data = yield all(
-      musicUrlArr.map(url => call(getSoundCloudMusicInfo, url)),
-    );
-    yield put(musicActions.loadMusicInfoSuccess(data));
-  } catch (err) {
-    yield put(musicActions.loadMusicInfoFailure(err));
-  }
-}
-
-export function* watchLoadMusicInfoFlow() {
-  yield takeEvery(musicActions.LOAD_MUSIC_INFO, loadMusicsInfoFrom);
 }
 
 export function* loadMusicDetailFlow(action) {
@@ -135,7 +113,6 @@ export function* watchSelectMusicFlow() {
 export default function* musicRoot() {
   yield all([
     watchLoadMusicDetailFlow(),
-    watchLoadMusicInfoFlow(),
     watchHistoryMusicInfoFlow(),
     watchLoadKeywordMusicFlow(),
     watchSelectMusicFlow(),
