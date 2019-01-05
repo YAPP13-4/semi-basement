@@ -21,3 +21,26 @@ export function selectPlaylist(apiPath) {
     apiPath,
   };
 }
+
+export function selectPlaylistRequest() {
+  return {
+    type: SELECT_PLAY_LIST_REQUEST,
+    loading: true,
+  };
+}
+
+export function selectPlaylistSuccess(data) {
+  return {
+    type: SELECT_PLAY_LIST_SUCCESS,
+    loading: false,
+    data,
+  };
+}
+
+export function selectPlaylistFailure(err) {
+  return {
+    type: SELECT_PLAY_LIST_FAILURE,
+    loading: false,
+    err,
+  };
+}
