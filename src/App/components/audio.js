@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { MUSIC_STREAM_URL } from '../constants/ApiConstants';
+import { withClientId } from '../constants/ApiConstants';
+
 const audio = InnerComponent => {
   class AudioComponent extends Component {
     constructor() {
@@ -117,7 +118,7 @@ const audio = InnerComponent => {
 
     render() {
       const { music } = this.props;
-      const musicUrl = 'https:' + MUSIC_STREAM_URL.replace(':id', music.id);
+      // const musicUrl = 'https:' + MUSIC_STREAM_URL.replace(':id', music.id);
       return (
         <div>
           <audio
@@ -132,7 +133,7 @@ const audio = InnerComponent => {
             ref={node => {
               this.audioElement = node;
             }}
-            src={musicUrl}
+            src={withClientId(music.streamUrl)}
           />
           <InnerComponent
             {...this.state}

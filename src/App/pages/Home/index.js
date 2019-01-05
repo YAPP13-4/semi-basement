@@ -9,9 +9,12 @@ import { loadFirstSubMusicInfo } from 'src/redux/submusic1/actions';
 //TODO : FIX (with BE)
 import MUSIC_URL_LIST2 from '../../constants/test/MusicUrlConstants2';
 import MUSIC_URL_LIST1 from '../../constants/test/MusicUrlConstants1';
-import ArtWorkContainer from '../Home/container/ArtWrokContainer';
+import ArtWorkPlayContainer from '../Home/container/ArtWorkPlayContainer';
 import classnames from 'classnames/bind';
 import css from './index.scss';
+
+// 임시
+import axios from 'axios';
 
 const cx = classnames.bind(css);
 const moduleName = 'Home';
@@ -20,29 +23,34 @@ class Home extends PureComponent {
   state = {
     sebaChoiceActive: false,
     knowListActive: false,
+    sebaChoice: [],
   };
 
   componentDidMount() {
     this.props.loadMusicsInfo(MUSIC_URL_LIST1);
     this.props.loadFirstSubMusicInfo(MUSIC_URL_LIST2);
+    axios.get('http://localhost:6508/musics/seba-choice').then(res => {
+      this.setState({ sebaChoice: res.data });
+    });
   }
 
   render() {
-    return !this.props.mainMusicLoading && !this.props.subMusicLoading ? (
+    // return !this.props.mainMusicLoading && !this.props.subMusicLoading ? (
+    return this.state.sebaChoice.length ? (
       <div className={cx(`${moduleName}`)}>
         <Navigation />
         <div>
-          <ArtWorkContainer
+          <ArtWorkPlayContainer
             category="Seba's Choice"
-            musicInfos={this.props.musicInfos}
+            musicInfos={this.state.sebaChoice}
           />
         </div>
-        <div>
-          <ArtWorkContainer
+        {/* <div>
+          <ArtWorkPlayContainer
             category="Artists you should know"
             musicInfos={this.props.subMusicInfos1}
           />
-        </div>
+        </div> */}
         <div>
           <Featured />
         </div>
