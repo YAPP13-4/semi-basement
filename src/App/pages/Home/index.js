@@ -5,9 +5,7 @@ import Navigation from './components/Navigation';
 import Loading from 'src/App/components/Loading';
 import Featured from './components/Featured';
 import { loadMusicsInfo } from 'src/redux/music/actions';
-import { loadFirstSubMusicInfo } from 'src/redux/submusic1/actions';
 //TODO : FIX (with BE)
-import MUSIC_URL_LIST2 from '../../constants/test/MusicUrlConstants2';
 import MUSIC_URL_LIST1 from '../../constants/test/MusicUrlConstants1';
 import ArtWorkPlayContainer from '../Home/container/ArtWorkPlayContainer';
 import classnames from 'classnames/bind';
@@ -28,7 +26,6 @@ class Home extends PureComponent {
 
   componentDidMount() {
     this.props.loadMusicsInfo(MUSIC_URL_LIST1);
-    this.props.loadFirstSubMusicInfo(MUSIC_URL_LIST2);
     axios.get('http://localhost:6508/musics/seba-choice').then(res => {
       this.setState({ sebaChoice: res.data });
     });
@@ -45,12 +42,6 @@ class Home extends PureComponent {
             musicInfos={this.state.sebaChoice}
           />
         </div>
-        {/* <div>
-          <ArtWorkPlayContainer
-            category="Artists you should know"
-            musicInfos={this.props.subMusicInfos1}
-          />
-        </div> */}
         <div>
           <Featured />
         </div>
@@ -62,16 +53,13 @@ class Home extends PureComponent {
 }
 
 export default connect(
-  ({ submusic1, music }) => {
+  ({ music }) => {
     return {
-      subMusicInfos1: submusic1.musicInfo,
       musicInfos: music.musicInfo,
       mainMusicLoading: music.loading,
-      subMusicLoading: submusic1.loading,
     };
   },
   {
     loadMusicsInfo,
-    loadFirstSubMusicInfo,
   },
 )(Home);
