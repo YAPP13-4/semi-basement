@@ -1,14 +1,18 @@
-import { takeEvery, put, all } from 'redux-saga/effects';
-
+import { takeEvery, put, all, call } from 'redux-saga/effects';
+import { getPlaylist } from 'src/api';
 import * as playlistActions from './actions';
 
 export function* selectPlaylistFlow({ apiPath }) {
   yield put(playlistActions.selectPlaylistRequest());
 
   try {
+    const data = yield call(getPlaylist, apiPath);
+
+    debugger;
+
     yield put(playlistActions.selectPlaylistSuccess());
   } catch (err) {
-    yield put(playlistActions.selectPlaylistFailure());
+    yield put(playlistActions.selectPlaylistFailure(err));
   }
 }
 
