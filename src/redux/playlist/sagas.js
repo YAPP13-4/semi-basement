@@ -7,10 +7,7 @@ export function* selectPlaylistFlow({ apiPath }) {
 
   try {
     const data = yield call(getPlaylist, apiPath);
-
-    debugger;
-
-    yield put(playlistActions.selectPlaylistSuccess());
+    yield put(playlistActions.selectPlaylistSuccess(data));
   } catch (err) {
     yield put(playlistActions.selectPlaylistFailure(err));
   }
