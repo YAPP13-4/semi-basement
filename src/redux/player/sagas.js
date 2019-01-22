@@ -1,7 +1,8 @@
-import { takeEvery, all, put, call, select } from 'redux-saga/effects';
-import { getSoundCloudMusic } from 'src/api';
+import {takeEvery, all, put, call, select} from 'redux-saga/effects';
+import {getSoundCloudMusic} from 'src/api';
 
 import * as palyerActions from './actions';
+import * as musicActions from 'src/redux/music/actions'
 
 export function* playNextMusic(action) {
   yield put(palyerActions.playNextMusicRequest());
@@ -22,16 +23,11 @@ export function* playNextMusic(action) {
     //   yield put(palyerActions.playNextMusicSuccess(data));
     // }
 
-    // 현재 재생중인 곡의 id를 통해, 현재 재생목록에서의 위치를 찾고, 그 다음곡을 select 해준다.
-    console.log(currentMusic.id);
-    console.log(targetPlayList);
-    console.log(
-      targetPlayList.filter((music, index) => {
-        console.log(index);
-        return music.id === currentMusic.id;
-      }),
-    );
-    debugger;
+    // -1 반환시에 예외처리하기 (플레이리스트에 현재 재생곡이 없을때..?)
+    const currentMusicIdx = targetPlayList.findIndex(music => music.id === currentMusic.id)
+    const {id, title, musician, artworkImg, streamUrl, duration} = targetPlayList[currentMusicIdx + 1];
+    yield put(musicActions.selectMusic({id, title, musician, artworkImg, streamUrl, duration}));
+    yield put(palyerActions.playNextMusicSuccess())
   } catch (err) {
     yield put(palyerActions.playNextMusicFailure(err));
   }
@@ -51,8 +47,8 @@ export function* playPrevMusic(action) {
       if (currentMusicIndex !== -1)
         nextMusicId = isShuffle
           ? targetPlayList[
-              randomIndex(currentMusicIndex, targetPlayList.length)
-            ]
+          randomIndex(currentMusicIndex, targetPlayList.length)
+          ]
           : targetPlayList[(currentMusicIndex - 1) % targetPlayList.length];
 
       const data = yield call(getSoundCloudMusic, nextMusicId);

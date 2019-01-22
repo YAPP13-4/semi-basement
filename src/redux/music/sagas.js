@@ -87,35 +87,35 @@ export function* watchLoadKeywordMusicFlow() {
   yield takeEvery(musicActions.LOAD_KEYWORD_MUSIC, loadKeywordMusicFlow);
 }
 
-export function* selectMusicFlow() {
-  const musicInfo = yield select(state => state.player.musicInfo);
-  yield put(
-    musicActions.selectMusic({
-      id: musicInfo.id,
-      title: musicInfo.title,
-      musician: musicInfo.user.username,
-      artworkUrl: musicInfo.artwork_url,
-      duration: musicInfo.duration / 1000,
-    }),
-  );
-}
+// export function* selectMusicFlow() {
+//   const musicInfo = yield select(state => state.player.musicInfo);
+//   yield put(
+//     musicActions.selectMusic({
+//       id: musicInfo.id,
+//       title: musicInfo.title,
+//       musician: musicInfo.user.username,
+//       artworkUrl: musicInfo.artwork_url,
+//       duration: musicInfo.duration / 1000,
+//     }),
+//   );
+// }
 
-export function* watchSelectMusicFlow() {
-  yield takeLatest(
-    [
-      playerActions.PLAY_NEXT_MUSIC_SUCCESS,
-      playerActions.PLAY_PREV_MUSIC_SUCCESS,
-    ],
-    selectMusicFlow,
-  );
-}
+// export function* watchSelectMusicFlow() {
+//   yield takeLatest(
+//     [
+//       playerActions.PLAY_NEXT_MUSIC_SUCCESS,
+//       playerActions.PLAY_PREV_MUSIC_SUCCESS,
+//     ],
+//     selectMusicFlow,
+//   );
+// }
 
 export default function* musicRoot() {
   yield all([
     watchLoadMusicDetailFlow(),
     watchHistoryMusicInfoFlow(),
     watchLoadKeywordMusicFlow(),
-    watchSelectMusicFlow(),
+    // watchSelectMusicFlow(),
   ]);
 }
 
