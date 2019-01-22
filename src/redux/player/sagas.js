@@ -7,7 +7,7 @@ import * as musicActions from 'src/redux/music/actions'
 export function* playNextMusic(action) {
   yield put(palyerActions.playNextMusicRequest());
 
-  const isShuffle = yield select(state => state.player.shuffle);
+  // const isShuffle = yield select(state => state.player.shuffle);
   const currentMusic = yield select(state => state.music.playingMusic);
   const targetPlayList = yield select(state => state.playList.musicList);
 

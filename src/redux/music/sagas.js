@@ -1,6 +1,6 @@
 import {
   takeEvery,
-  takeLatest,
+  // takeLatest,
   all,
   put,
   call,
@@ -9,7 +9,7 @@ import {
 import { getSoundCloudMusic, getKeywordSearchResult } from 'src/api';
 
 import * as musicActions from './actions';
-import * as playerActions from 'src/redux/player/actions';
+// import * as playerActions from 'src/redux/player/actions';
 
 export function* updateHistoryLocalStorage(action) {
   const { musicId } = action;
