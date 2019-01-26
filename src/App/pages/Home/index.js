@@ -20,6 +20,7 @@ import css from './index.scss';
 
 const cx = classnames.bind(css);
 const moduleName = 'Home';
+const sebaChoiceRequestUrl = 'http://localhost:6508/musics/seba-choice';
 
 class Home extends PureComponent {
   state = {
@@ -29,7 +30,7 @@ class Home extends PureComponent {
   };
 
   componentDidMount() {
-    axios.get('http://localhost:6508/musics/seba-choice').then(res => {
+    axios.get(sebaChoiceRequestUrl).then(res => {
       this.setState({ sebaChoice: res.data });
     });
   }
