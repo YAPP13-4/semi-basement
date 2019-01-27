@@ -12,6 +12,7 @@ export function* selectPlaylistFlow({ apiPath }) {
 
     const [firstMusic] = yield select(state => state.playList.musicList);
     let { id, title, musician, artworkImg, streamUrl, duration } = firstMusic;
+    debugger
     duration = duration / 1000; // backend에서 duration을 1000나눈 값으로 넘겨주어야 한다.(참고: https://github.com/YAPP13-4/seba-api-v1/issues/17)
     yield put(
       musicActions.selectMusic({

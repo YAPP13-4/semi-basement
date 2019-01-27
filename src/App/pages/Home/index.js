@@ -1,18 +1,9 @@
-/**
- * module imports
- */
 import React, { PureComponent } from 'react';
 import classnames from 'classnames/bind';
 import axios from 'axios';
 
-/**
- * src path
- */
 import Loading from 'src/App/components/Loading';
 
-/**
- * relative path
- */
 import Navigation from './components/Navigation';
 import Featured from './components/Featured';
 import ArtWorkPlayContainer from '../Home/container/ArtWorkPlayContainer';
@@ -20,7 +11,8 @@ import css from './index.scss';
 
 const cx = classnames.bind(css);
 const moduleName = 'Home';
-const sebaChoiceRequestUrl = 'http://localhost:6508/musics/seba-choice';
+const SEBACHOICE_REQUEST_URL = 'http://localhost:6508/musics/seba-choice';
+
 
 class Home extends PureComponent {
   state = {
@@ -30,7 +22,7 @@ class Home extends PureComponent {
   };
 
   componentDidMount() {
-    axios.get(sebaChoiceRequestUrl).then(res => {
+    axios.get(SEBACHOICE_REQUEST_URL).then(res => {
       this.setState({ sebaChoice: res.data });
     });
   }

@@ -25,7 +25,6 @@ const activePalyList = {
   height: '35px',
 };
 class ArtWorkPlayContainer extends PureComponent {
-  // id 없앨 수 있으면 없애자. streamUrl로 대체 가능
   onClickPlay = ({ id, title, musician, artworkImg, streamUrl, duration }) => {
     this.props.selectMusic({
       id,
@@ -73,7 +72,6 @@ class ArtWorkPlayContainer extends PureComponent {
           <div
             style={activePalyList}
             onClick={() => {
-              // this.onClickChangePlayList(this.props.category);
               this.props.selectPlaylist(this.props.apiPath);
             }}
             className="patch-icon"

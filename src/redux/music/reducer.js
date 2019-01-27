@@ -11,7 +11,6 @@ const music = (
   },
   action,
 ) => {
-  console.log(action)
   switch (action.type) {
     case musicActions.SELECT_MUSIC:
       return {
