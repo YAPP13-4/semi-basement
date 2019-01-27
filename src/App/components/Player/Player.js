@@ -25,8 +25,8 @@ const Player = ({
   playPrevMusic,
   addMusicMyPlaylist,
 }) => {
-  const { id, title, musician, artworkImg, duration } = music;
-  const { currentTime, isPlaying, muted, shuffle } = player;
+  const {id, title, musician, artworkImg, duration} = music;
+  const {currentTime, isPlaying, muted, shuffle} = player;
   const volume = muted ? 0 : player.volume;
 
   return (
@@ -34,7 +34,7 @@ const Player = ({
       className={cx(`${moduleName}`, {
         [`${moduleName}--hide`]: !meta.showBottomplayer,
       })}
-      // style={{ display: meta.showBottomplayer ? "" : "none" }}
+    // style={{ display: meta.showBottomplayer ? "" : "none" }}
     >
       <div
         className={cx(`${moduleName}-control`, {
@@ -56,7 +56,7 @@ const Player = ({
                 role="button"
                 onClick={togglePlay}
                 tabIndex="0"
-                style={{ color: '#ffffff' }}>
+                style={{color: '#ffffff'}}>
                 <i
                   className={cx(
                     `${moduleName}__button__` + (isPlaying ? 'play' : 'pause'),
@@ -68,9 +68,7 @@ const Player = ({
                 className={cx(`${moduleName}__button`)}
                 role="button"
                 tabIndex="0"
-                onClick={() => {
-                  playNextMusic(id);
-                }}>
+                onClick={playNextMusic}>
                 <i className={cx(`${moduleName}__button__forward`)} />
               </div>
               <div
@@ -79,7 +77,7 @@ const Player = ({
                 <i
                   className={cx(
                     `${moduleName}__button__` +
-                      (shuffle ? 'shuffle' : 'no-shuffle'),
+                    (shuffle ? 'shuffle' : 'no-shuffle'),
                   )}
                 />
               </div>
@@ -87,7 +85,7 @@ const Player = ({
           </div>
           <div className={cx(`${moduleName}__section--time`)}>
             <div
-              style={{ color: '#45f7aa', width: '50px', textAlign: 'center' }}>
+              style={{color: '#45f7aa', width: '50px', textAlign: 'center'}}>
               {utils.formatSeconds(currentTime)}
             </div>
           </div>
@@ -145,11 +143,11 @@ const Player = ({
           </div>
           <div
             className="player__section player__section--options"
-            style={{ marginLeft: '30px' }}>
+            style={{marginLeft: '30px'}}>
             <div className={cx(`${moduleName}__buttons`)}>
               <div role="button" tabIndex="0">
                 <span
-                  style={{ marginLeft: '10px' }}
+                  style={{marginLeft: '10px'}}
                   className={cx(`${moduleName}__add_playlist`)}
                   onClick={() => {
                     addMusicMyPlaylist(id);
@@ -158,13 +156,13 @@ const Player = ({
               </div>
               <div role="button" tabIndex="0">
                 <span
-                  style={{ marginLeft: '10px' }}
+                  style={{marginLeft: '10px'}}
                   className={cx(`${moduleName}__heart`)}
                 />
               </div>
               <div role="button" tabIndex="0">
                 <span
-                  style={{ marginLeft: '16px' }}
+                  style={{marginLeft: '16px'}}
                   className={cx(`${moduleName}__toggle__history`)}
                   onClick={toggleHistory}
                 />

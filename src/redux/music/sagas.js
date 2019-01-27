@@ -1,19 +1,13 @@
 import {
   takeEvery,
-  takeLatest,
   all,
   put,
   call,
   select,
 } from 'redux-saga/effects';
-import {
-  getSoundCloudMusic,
-  getSoundCloudMusicInfo,
-  getKeywordSearchResult,
-} from 'src/api';
+import { getKeywordSearchResult } from 'src/api';
 
 import * as musicActions from './actions';
-import * as playerActions from 'src/redux/player/actions';
 
 export function* updateHistoryLocalStorage(action) {
   const { musicId } = action;
@@ -45,7 +39,7 @@ export function* updateHistoryLocalStorage(action) {
       localStorage.historyMusic = JSON.stringify(newHistory);
     }
 
-    const data = yield all(newHistory.map(id => call(getSoundCloudMusic, id)));
+    const data = yield all(newHistory.map(id => call(id)));
     yield put(musicActions.historyMusicSuccess(data));
   } catch (err) {
     yield put(musicActions.historyMusicFailure(err));
@@ -55,30 +49,12 @@ export function* watchHistoryMusicInfoFlow() {
   yield takeEvery(musicActions.HISTORY_MUSIC, updateHistoryLocalStorage);
 }
 
-export function* loadMusicsInfoFrom(action) {
-  const { musicUrlArr } = action;
-  yield put(musicActions.loadMusicInfoRequest());
-  try {
-    //yield all(urls.map((url) => call(url)));
-    const data = yield all(
-      musicUrlArr.map(url => call(getSoundCloudMusicInfo, url)),
-    );
-    yield put(musicActions.loadMusicInfoSuccess(data));
-  } catch (err) {
-    yield put(musicActions.loadMusicInfoFailure(err));
-  }
-}
-
-export function* watchLoadMusicInfoFlow() {
-  yield takeEvery(musicActions.LOAD_MUSIC_INFO, loadMusicsInfoFrom);
-}
-
 export function* loadMusicDetailFlow(action) {
   const { musicId } = action;
 
   yield put(musicActions.loadMusicDetailRequest());
   try {
-    const data = yield call(getSoundCloudMusic, musicId);
+    const data = yield call(musicId);
     yield put(musicActions.loadMusicDetailSuccess(data));
   } catch (error) {
     yield put(musicActions.loadMusicDetailFailure(error));
@@ -109,36 +85,11 @@ export function* watchLoadKeywordMusicFlow() {
   yield takeEvery(musicActions.LOAD_KEYWORD_MUSIC, loadKeywordMusicFlow);
 }
 
-export function* selectMusicFlow() {
-  const musicInfo = yield select(state => state.player.musicInfo);
-  yield put(
-    musicActions.selectMusic({
-      id: musicInfo.id,
-      title: musicInfo.title,
-      musician: musicInfo.user.username,
-      artworkUrl: musicInfo.artwork_url,
-      duration: musicInfo.duration / 1000,
-    }),
-  );
-}
-
-export function* watchSelectMusicFlow() {
-  yield takeLatest(
-    [
-      playerActions.PLAY_NEXT_MUSIC_SUCCESS,
-      playerActions.PLAY_PREV_MUSIC_SUCCESS,
-    ],
-    selectMusicFlow,
-  );
-}
-
 export default function* musicRoot() {
   yield all([
     watchLoadMusicDetailFlow(),
-    watchLoadMusicInfoFlow(),
     watchHistoryMusicInfoFlow(),
     watchLoadKeywordMusicFlow(),
-    watchSelectMusicFlow(),
   ]);
 }
 

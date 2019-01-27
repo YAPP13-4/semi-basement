@@ -1,23 +1,18 @@
 import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
+import classnames from 'classnames/bind';
+import axios from 'axios';
+
+import Loading from 'src/App/components/Loading';
 
 import Navigation from './components/Navigation';
-import Loading from 'src/App/components/Loading';
 import Featured from './components/Featured';
-import { loadMusicsInfo } from 'src/redux/music/actions';
-import { loadFirstSubMusicInfo } from 'src/redux/submusic1/actions';
-//TODO : FIX (with BE)
-import MUSIC_URL_LIST2 from '../../constants/test/MusicUrlConstants2';
-import MUSIC_URL_LIST1 from '../../constants/test/MusicUrlConstants1';
 import ArtWorkPlayContainer from '../Home/container/ArtWorkPlayContainer';
-import classnames from 'classnames/bind';
 import css from './index.scss';
-
-// 임시
-import axios from 'axios';
 
 const cx = classnames.bind(css);
 const moduleName = 'Home';
+const SEBACHOICE_REQUEST_URL = 'http://localhost:6508/musics/seba-choice';
+
 
 class Home extends PureComponent {
   state = {
@@ -27,30 +22,36 @@ class Home extends PureComponent {
   };
 
   componentDidMount() {
-    this.props.loadMusicsInfo(MUSIC_URL_LIST1);
-    this.props.loadFirstSubMusicInfo(MUSIC_URL_LIST2);
-    axios.get('http://localhost:6508/musics/seba-choice').then(res => {
+    axios.get(SEBACHOICE_REQUEST_URL).then(res => {
       this.setState({ sebaChoice: res.data });
     });
   }
 
   render() {
-    // return !this.props.mainMusicLoading && !this.props.subMusicLoading ? (
     return this.state.sebaChoice.length ? (
       <div className={cx(`${moduleName}`)}>
         <Navigation />
         <div>
           <ArtWorkPlayContainer
             category="Seba's Choice"
+            apiPath="seba-choice"
             musicInfos={this.state.sebaChoice}
           />
         </div>
-        {/* <div>
+        <div>
           <ArtWorkPlayContainer
-            category="Artists you should know"
-            musicInfos={this.props.subMusicInfos1}
+            category="Seba's Choice"
+            apiPath="seba-choice"
+            musicInfos={this.state.sebaChoice}
           />
-        </div> */}
+        </div>
+        <div>
+          <ArtWorkPlayContainer
+            category="Seba's Choice"
+            apiPath="seba-choice"
+            musicInfos={this.state.sebaChoice}
+          />
+        </div>
         <div>
           <Featured />
         </div>
@@ -61,17 +62,4 @@ class Home extends PureComponent {
   }
 }
 
-export default connect(
-  ({ submusic1, music }) => {
-    return {
-      subMusicInfos1: submusic1.musicInfo,
-      musicInfos: music.musicInfo,
-      mainMusicLoading: music.loading,
-      subMusicLoading: submusic1.loading,
-    };
-  },
-  {
-    loadMusicsInfo,
-    loadFirstSubMusicInfo,
-  },
-)(Home);
+export default Home;
