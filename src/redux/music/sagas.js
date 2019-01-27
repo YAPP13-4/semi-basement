@@ -5,7 +5,7 @@ import {
   call,
   select,
 } from 'redux-saga/effects';
-import { getSoundCloudMusic, getKeywordSearchResult } from 'src/api';
+import { getKeywordSearchResult } from 'src/api';
 
 import * as musicActions from './actions';
 
@@ -39,7 +39,7 @@ export function* updateHistoryLocalStorage(action) {
       localStorage.historyMusic = JSON.stringify(newHistory);
     }
 
-    const data = yield all(newHistory.map(id => call(getSoundCloudMusic, id)));
+    const data = yield all(newHistory.map(id => call(id)));
     yield put(musicActions.historyMusicSuccess(data));
   } catch (err) {
     yield put(musicActions.historyMusicFailure(err));
@@ -54,7 +54,7 @@ export function* loadMusicDetailFlow(action) {
 
   yield put(musicActions.loadMusicDetailRequest());
   try {
-    const data = yield call(getSoundCloudMusic, musicId);
+    const data = yield call(musicId);
     yield put(musicActions.loadMusicDetailSuccess(data));
   } catch (error) {
     yield put(musicActions.loadMusicDetailFailure(error));

@@ -1,5 +1,4 @@
-import { takeEvery, all, put, call } from 'redux-saga/effects';
-import { getSoundCloudMusicInfo } from 'src/api';
+import { takeEvery, all, put, call } from 'redux-saga/effects'
 
 import {
   LOAD_CHART_MUSIC_INFO,
@@ -13,7 +12,7 @@ export function* loadChartMusicDetailFlow(action) {
   yield put(loadChartMusicInfoRequest());
   try {
     const data = yield all(
-      musicUrlArr.map(url => call(getSoundCloudMusicInfo, url)),
+      musicUrlArr.map(url => call(url)),
     );
     yield put(loadChartMusicInfoSuccess(data));
   } catch (err) {

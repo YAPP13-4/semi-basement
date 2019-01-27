@@ -1,10 +1,9 @@
 import {takeEvery, all, put, call, select} from 'redux-saga/effects';
-import {getSoundCloudMusic} from 'src/api';
 
 import * as palyerActions from './actions';
 import * as musicActions from 'src/redux/music/actions'
 
-export function* playNextMusic(action) {
+export function* playNextMusic() {
   yield put(palyerActions.playNextMusicRequest());
 
   const currentMusic = yield select(state => state.music.playingMusic);
@@ -20,7 +19,7 @@ export function* playNextMusic(action) {
   }
 }
 
-export function* playPrevMusic(action) {
+export function* playPrevMusic() {
   yield put(palyerActions.playPrevMusicRequest);
 
   const isShuffle = yield select(state => state.player.shuffle);
@@ -38,7 +37,7 @@ export function* playPrevMusic(action) {
           ]
           : targetPlayList[(currentMusicIndex - 1) % targetPlayList.length];
 
-      const data = yield call(getSoundCloudMusic, nextMusicId);
+      const data = yield call(nextMusicId);
       yield put(palyerActions.playPrevMusicSuccess(data));
     }
   } catch (err) {
