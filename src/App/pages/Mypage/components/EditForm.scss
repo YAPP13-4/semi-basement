@@ -1,3 +1,4 @@
+@import 'src/variable.scss';
 .EditForm-none {
     display: none;
 }
@@ -18,7 +19,12 @@
     button {
         display: block;
         width: 100%;
+        font-family: AvertaCYBold;
         text-align: center;
-        color: #45f7aa;
+        background: #45f7aa;
+        color: black;
+        border: none;
+        padding: 9px;
+        border-radius: 5px;
     }
 }
