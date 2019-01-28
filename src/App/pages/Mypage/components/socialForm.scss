@@ -1,0 +1,18 @@
+@import 'src/variable.scss';
+.SocialForm {
+    h3 {
+        font-family: AvertaCYBold;
+        font-size: 15px;
+    }
+    input[type='text'] {
+        height: 2.65em;
+        border: none;
+        font-family: $font-normal;
+        font-size: 16px;
+        border-radius: 7px;
+        background-color: rgba(255, 255, 255, 0.04);
+        color: #d1d1d1;
+        width: 100%;
+        padding: 12px;
+    }  
+}

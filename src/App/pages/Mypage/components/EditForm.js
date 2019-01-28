@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react"
-import { SocialEditForm } from './socialForm'
+import { SocialEditForm } from './SocialForm'
 import classnames from "classnames/bind"
 import css from "./EditForm.scss"
 
@@ -9,11 +9,14 @@ const moduleName = "EditForm"
 export class EditForm extends PureComponent {
     
     render() {
-        const { isVisible } = this.props;
+        const { isVisible, toggleModal } = this.props;
         return (
             <div className={ (isVisible) ? cx(`${moduleName}`) : cx(`${moduleName}-none`)}>
+                <h1 className={cx(`${moduleName}-title`)}>social Media</h1>
+                <span onClick={toggleModal}>Close</span>
                 <SocialEditForm title="Instargram" placeholder="input your insta address"/>
                 <SocialEditForm title="facebook" placeholder="input your facebook address"/>
+                <button> Save </button>
             </div>
         )
     }

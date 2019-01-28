@@ -3,9 +3,22 @@
 }
 .EditForm {
     display: block;
+    padding: 39px 24px 0px 24px;
     position: absolute;
     right: 0;
     height: 100%;
     min-width: 375px;
     background-color: #232323;
+
+    &-title{
+        font-size: 12px;
+        color: #45f7aa
+    }
+    
+    button {
+        display: block;
+        width: 100%;
+        text-align: center;
+        color: #45f7aa;
+    }
 }

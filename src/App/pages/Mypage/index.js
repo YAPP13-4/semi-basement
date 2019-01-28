@@ -14,7 +14,7 @@ class Mypage extends PureComponent {
   render() {
     return (
       <div className={cx(`${moduleName}`)}>
-        <EditForm isVisible={this.state.toggle}/>
+        <EditForm isVisible={this.state.toggle} toggleModal={this.toggleEditForm}/>
         <div className={cx(`${moduleName}-myinfo`)}>
           <div className={cx(`${moduleName}-myinfo-wrapper`)}>
             <div className={cx(`${moduleName}-myinfo-wrapper-img`)}>image</div>
