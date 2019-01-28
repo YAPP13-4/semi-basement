@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react"
 import { SocialEditForm } from './SocialForm'
+import { PhotoContainer } from './PhotoContainer'
 import classnames from "classnames/bind"
 import css from "./EditForm.scss"
 
@@ -17,6 +18,7 @@ export class EditForm extends PureComponent {
                 <SocialEditForm title="Instargram" placeholder="input your insta address"/>
                 <SocialEditForm title="facebook" placeholder="input your facebook address"/>
                 <button> Save </button>
+                <PhotoContainer />
             </div>
         )
     }
