@@ -1,5 +1,5 @@
 .Mypage {
-  //FIX ME !
+  position: relative;
   color: #dddddd;
   &-myinfo {
     height: 300px;
@@ -18,12 +18,13 @@
       }
       &-name {
         margin-top: 10px;
-        span {
+        &-user {
           //FIX ME !
           background-color: cornflowerblue;
           padding: 10px;
         }
       }
+
     }
   }
   &-chart {
