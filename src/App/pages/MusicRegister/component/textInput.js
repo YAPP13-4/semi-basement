@@ -8,6 +8,15 @@ class TextInputForm extends PureComponent {
         <div className="form-group">
           <Field
             type="text"
+            name="URL"
+            label="URL"
+            component={renderInputField}
+            hintText="https://"
+          />
+        </div>
+        <div className="form-group">
+          <Field
+            type="text"
             name="title"
             label="Title"
             component={renderInputField}
@@ -16,18 +25,9 @@ class TextInputForm extends PureComponent {
         <div className="form-group">
           <Field
             type="text"
-            name="Feat"
-            label="Feat"
+            name="Musician"
+            label="Musi"
             component={renderInputField}
-          />
-        </div>
-        <div className="form-group">
-          <Field
-            type="text"
-            name="Upload"
-            label="Upload"
-            component={renderInputField}
-            hintText="https://"
           />
         </div>
         <div className="form-group">
@@ -44,14 +44,6 @@ class TextInputForm extends PureComponent {
             name="Description"
             label="Description"
             component={renderAreaField}
-          />
-        </div>
-        <div className="form-group">
-          <Field
-            type="text"
-            name="Email"
-            label="Email"
-            component={renderInputField}
           />
         </div>
       </div>

@@ -8,7 +8,7 @@ import test2 from 'src/assets/default_cover/cover1-2.png';
 import test3 from 'src/assets/default_cover/cover1-3.png';
 import test4 from 'src/assets/default_cover/cover1-4.png';
 import test5 from 'src/assets/default_cover/cover1-5.png';
-///
+
 import TextInputForm from './component/textInput';
 import RightSideForm from './component/RightSideForm';
 const cx = classnames.bind(css);
@@ -67,9 +67,8 @@ class MusicRegist extends PureComponent {
     const { handleSubmit } = this.props;
     return (
       <div className={cx(`${moduleName}`)}>
-        <div className={cx(`${moduleName}-inner`)}>
           <div className={cx(`${moduleName}_top`)}>
-            <h4>Register Music</h4>
+            <h4>Register Song</h4>
           </div>
           <form onSubmit={handleSubmit(this.submitTest)}>
             <div className={cx(`${moduleName}_body`)}>
@@ -94,7 +93,6 @@ class MusicRegist extends PureComponent {
               </div>
             </div>
           </form>
-        </div>
       </div>
     );
   }

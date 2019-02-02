@@ -1,20 +1,8 @@
 @import 'src/variable.scss';
 
 .MusicRegist {
-  width: 100%;
   color: white;
-  background-color: #191b1c;
-  height: 100%;
-
-  position: fixed;
-  top: 94px;
-  left: 0;
-  &-inner {
-    margin: 0 auto;
-    min-width: 1440px;
-  }
-
-  //width: 100%;
+  width: 100%;
   form {
     //space between input form
     div:nth-child(1) {
@@ -40,7 +28,10 @@
     font-family: $font-Extra-bold;
     color: $green;
     text-align: center;
-    padding: 37px 0px 50px 0px;
+    padding: 78px 0px 50px 0px;
+  }
+  &_top > h4 {
+    margin: 0; 
   }
   &_body {
     display: flex;
@@ -78,9 +69,10 @@
   }
 
   &_right_bot_submit {
-    position: absolute;
-    bottom: 38px;
-    right: 35px;
+    width: 375px;
+    padding: 30px 0px 0px;
+    display: flex;
+    justify-content: flex-end;
     button {
       padding: 0.5rem 2.5rem;
       font-family: $font-Extra-bold;
