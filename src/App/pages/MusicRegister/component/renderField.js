@@ -4,7 +4,7 @@ export const renderInputField = ({
   label,
   type,
   hintText,
-  meta: { touched, error, warning }
+  meta: { touched, error, warning },
 }) => (
   <div>
     <label>{label}</label>

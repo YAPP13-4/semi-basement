@@ -1,17 +1,30 @@
-import React, { PureComponent } from 'react';
-import { Field, reduxForm } from 'redux-form';
-import { renderInputField, renderAreaField } from './renderField';
+import React, {PureComponent} from 'react';
+import {Field, reduxForm} from 'redux-form';
+import { getMusicInfo } from 'src/api'
+import {renderInputField, renderAreaField} from './renderField';
 class TextInputForm extends PureComponent {
+  
+  componentDidMount() {
+    this.getMusicInfo1()
+  }
+  
+  getMusicInfo1 = () => {
+    getMusicInfo('https://soundcloud.com/cshanryang/dbqo?in=cshanryang/sets/chosvn').then(res => {console.log(res)})
+  }
+  
   render() {
     return (
       <div>
         <div className="form-group">
           <Field
             type="text"
-            name="URL"
+            name="url"
             label="URL"
             component={renderInputField}
             hintText="https://"
+            onBlur={() => {
+              this.getMusicInfo(this.props.url)
+            }}
           />
         </div>
         <div className="form-group">
@@ -26,7 +39,7 @@ class TextInputForm extends PureComponent {
           <Field
             type="text"
             name="Musician"
-            label="Musi"
+            label="Musician"
             component={renderInputField}
           />
         </div>
@@ -76,7 +89,9 @@ const isUrlValid = userInput => {
   if (res == null) return false;
   else return true;
 };
+
 export default reduxForm({
   form: 'RegisterMusic',
   validate,
+  asyncBlurFields: ['url']
 })(TextInputForm);
