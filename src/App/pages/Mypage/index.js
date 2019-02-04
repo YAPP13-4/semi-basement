@@ -25,9 +25,10 @@ class Mypage extends PureComponent {
               </div>
             </div>
             <div className={cx(`${moduleName}-myinfo-wrapper-sns`)}>
-              <span>insta</span>
-              <span>facebook</span>
-              <span onClick={this.toggleEditForm}>edit</span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span onClick={this.toggleEditForm}>e</span>
             </div>
           </div>
         </div>

@@ -26,6 +26,17 @@
       }
       &-sns {
         margin-left: auto;
+        display: flex;
+        display: flex;
+        min-width: 230px;
+        justify-content: space-between;
+        span {
+          width: 39.4px;
+          height: 39.8px;
+          border-radius: 19.7px;
+          background-color: white;
+          display: inline-block;
+        } 
       }
     }
   }
