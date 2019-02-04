@@ -3,7 +3,7 @@
   color: #dddddd;
   &-myinfo {
     height: 300px;
-    padding: 41px 0px 63px 51px;
+    padding: 41px 50px 63px 51px;
     //FIX ME !
     border: 1px solid #dddddd;
     &-wrapper {
@@ -24,7 +24,9 @@
           padding: 10px;
         }
       }
-
+      &-sns {
+        margin-left: auto;
+      }
     }
   }
   &-chart {
