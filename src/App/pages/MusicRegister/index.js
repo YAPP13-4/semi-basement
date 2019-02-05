@@ -1,26 +1,33 @@
 import React, {Component} from 'react';
 import classnames from 'classnames/bind';
+import {getMusicInfo} from 'src/api'
 import css from './index.scss';
 
 const cx = classnames.bind(css);
 const moduleName = 'MusicRegister';
 class MusicRegister extends Component {
-    
+
     state = {
-        url:'',
+        url: '',
         title: '',
         musician: '',
         lyrics: '',
         description: '',
         albumCover: ''
     }
-    
+
     handleChange = (e) => {
         const {name, value} = e.target
         this.setState({[name]: value})
     }
-    
-    
+
+    fetchMusicInfo = url => e => {
+        getMusicInfo(url).then(({title, musician, description, artworkImg}) => {
+            this.setState({title, musician, description, albumCover: artworkImg})
+        })
+        e.preventDefault();
+    }
+
     render() {
         return <div className={cx(`${moduleName}`)}>
             <h1>Register Song</h1>
@@ -29,25 +36,30 @@ class MusicRegister extends Component {
                     <form>
                         <label>
                             URL
-                            <input name='url' value={this.state.url} onChange={this.handleChange} />
+                            <input
+                                name='url'
+                                value={this.state.url}
+                                onChange={this.handleChange}
+                                onBlur={this.fetchMusicInfo(this.state.url)}
+                            />
                         </label>
                         <label>
                             Title
-                            <input name='title' value={this.state.title} onChange={this.handleChange}/>
+                            <input name='title' value={this.state.title} onChange={this.handleChange} />
                         </label>
                         <label>
                             Musician
-                            <input name='musician' value={this.state.musician} onChange={this.handleChange}/>
+                            <input name='musician' value={this.state.musician} onChange={this.handleChange} />
                         </label>
                         <label>
                             Lyrics
-                            <textarea name='lyrics' value={this.state.lyrics} onChange={this.handleChange}/>
+                            <textarea name='lyrics' value={this.state.lyrics} onChange={this.handleChange} />
                         </label>
                         <label>
                             Description
-                            <textarea name='description' value={this.state.description} onChange={this.handleChange}/>
+                            <textarea name='description' value={this.state.description} onChange={this.handleChange} />
                         </label>
-                        <input name="albumCover" value={this.state.albumCover}/>
+                        <input name="albumCover" value={this.state.albumCover} />
                     </form>
                 </div>
                 <div className={cx(`${moduleName}-albumCover`)}>
