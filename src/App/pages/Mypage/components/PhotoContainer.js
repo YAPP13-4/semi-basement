@@ -16,14 +16,14 @@ export class PhotoContainer extends Component {
     super(props);
 
     this.state = {
-      photoList: null,
+      photoList: [],
       keyword: '',
       fetched: false,
       totalPage: 0,
       currentPage: 1
     }
 
-    this.handleScroll = debounce(this.handleScroll.bind(this),500);
+    this.handleScroll = debounce(this.handleScroll.bind(this),1000);
   }
 
   render() {
@@ -52,7 +52,7 @@ export class PhotoContainer extends Component {
       (window.scrollY + window.innerHeight)
     
     const isTriggerPosition = distanceToBottom < BASE_LINE
-    
+    console.log('distanceToBottom',distanceToBottom,'isTriggerPosition',isTriggerPosition)
     if (!isTriggerPosition) {
       this.ticking = false
       return
@@ -72,17 +72,17 @@ export class PhotoContainer extends Component {
 
   renderPhotoComponent = () => {
       const { photoList, fetched } = this.state
+    console.log('photoList',photoList)
+      if(!fetched || !photoList) return;
 
-      if(!fetched) return;
-
-      return photoList.results.map((photo,index) => (
-        <PhotoComponent key={index} photo={photo} />
+      return photoList.map((photo,index) => (
+         photo.results.map( (item) => (
+           <PhotoComponent key={item.id} photo={item} />
+        ))
       ))
   }
 
   changeSearchKeyword = keyword => {
-
-
     this.setState(() => ({
       keyword,
       currentPage : 1
@@ -102,14 +102,14 @@ export class PhotoContainer extends Component {
         `https://api.unsplash.com/search/photos?page=${currentPage}&query=${keyword}&client_id=${USP_CLIENT_ID}`,
       )
       .then(res => {
-        this.setState({
-            photoList: res.data,
-        }, () => {
+        this.setState((prevState) => ({
+            photoList: [...prevState.photoList, res.data],
+        }), () => {
             console.log('this state ', this.state.photoList)
             this.setState((prevState) => {
               return {
                 fetched: true,
-                totalPage : prevState.photoList.total_pages
+                totalPage : this.state.photoList[this.state.photoList.length -1].total_pages
               }
             })
         });
