@@ -7,3 +7,9 @@ export function getMusicInfo(url) {
         throw response.data;
     })
 }
+
+export function postMusic(musicInfo) {
+    return axios.post(`http://localhost:6508/musics`, musicInfo)
+    .then(res=>{console.log(res)})
+    .catch(err=>{console.log(err)})
+}

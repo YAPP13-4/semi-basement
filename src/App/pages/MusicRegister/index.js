@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import classnames from 'classnames/bind';
-import {getMusicInfo} from 'src/api'
+import {getMusicInfo, postMusic} from 'src/api'
 import css from './index.scss';
 
 const cx = classnames.bind(css);
@@ -13,27 +13,29 @@ class MusicRegister extends Component {
         musician: '',
         lyrics: '',
         description: '',
-        albumCover: ''
+        artworkImg: ''
     }
 
     handleChange = e => {
         const {id, value} = e.target
         this.setState({[id]: value})
     }
-    
+
     handleKeyDown = e => {
-        if(e.key === 'Enter') e.preventDefault()
+        if (e.key === 'Enter') e.preventDefault()
     }
 
     handleSubmit = e => {
         // insert api call
+        const {url, title, musician, lyrics, description, artworkImg} = this.state
+        postMusic({url, title, musician, lyrics, description, artworkImg})
         console.log('서브밋!')
         e.preventDefault()
     }
 
     fetchMusicInfo = url => e => {
         getMusicInfo(url).then(({title, musician, description, artworkImg}) => {
-            this.setState({title, musician, description, albumCover: artworkImg})
+            this.setState({title, musician, description, artworkImg})
         })
         e.preventDefault();
     }
@@ -64,7 +66,7 @@ class MusicRegister extends Component {
                         <label htmlFor="musician">Musician</label>
                         <input
                             id='musician'
-                            value={this.state.musician} 
+                            value={this.state.musician}
                             onChange={this.handleChange}
                             onKeyDown={this.handleKeyDown}
                         />
@@ -75,11 +77,12 @@ class MusicRegister extends Component {
                         <label htmlFor="description">Description</label>
                         <textarea id='description' value={this.state.description} onChange={this.handleChange} />
 
-                        <input id="albumCover" value={this.state.albumCover} />
+                        <input id="artworkImg" value={this.state.artworkImg} />
                     </form>
                 </div>
-                <div className={cx(`${moduleName}-albumCover`)}>
+                <div className={cx(`${moduleName}-artworkImg`)}>
                     album cover
+                    <img src={this.state.artworkImg} alt='artworkImg'></img>
                     <button>Cancel</button>
                     <button form="registerForm">Register</button>
                 </div>
