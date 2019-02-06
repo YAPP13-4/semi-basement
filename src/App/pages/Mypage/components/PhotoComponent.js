@@ -8,8 +8,8 @@ const moduleName = 'PhotoComponent';
 export const PhotoComponent = props => {
   const imgUrl  = props.photo.urls.small
   return (
-    <div className={cx(`${moduleName}`)}>
-      <img src={imgUrl} />
-    </div>
+
+      <div className={cx(`${moduleName}`)} style={{backgroundImage: `url(${imgUrl})`}}></div>
+
   );
 };
