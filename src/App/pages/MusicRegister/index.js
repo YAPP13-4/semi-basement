@@ -13,11 +13,15 @@ class MusicRegister extends Component {
         musician: '',
         lyrics: '',
         description: '',
-        artworkImg: ''
+        artworkImg: '',
+        isAgree: false
     }
 
     handleChange = e => {
-        const {id, value} = e.target
+        const target = e.target
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const id = target.id
+        
         this.setState({[id]: value})
     }
 
@@ -26,11 +30,11 @@ class MusicRegister extends Component {
     }
 
     handleSubmit = e => {
-        // insert api call
+        e.preventDefault()
+        if(!this.state.isAgree) return alert('plz check the box');
         const {url, title, musician, lyrics, description, artworkImg} = this.state
         postMusic({url, title, musician, lyrics, description, artworkImg})
         console.log('서브밋!')
-        e.preventDefault()
     }
 
     fetchMusicInfo = url => e => {
@@ -83,6 +87,15 @@ class MusicRegister extends Component {
                 <div className={cx(`${moduleName}-artworkImg`)}>
                     album cover
                     <img src={this.state.artworkImg} alt='artworkImg'></img>
+                    
+                    <input
+                        id="isAgree"
+                        type="checkbox"
+                        checked={this.state.isAgree}
+                        onChange={this.handleChange}
+                    />
+                    <label htmlFor="isAgree">I agree on the responsibility of using this artwork</label>
+                    
                     <button>Cancel</button>
                     <button form="registerForm">Register</button>
                 </div>
