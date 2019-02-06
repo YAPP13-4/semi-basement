@@ -1,31 +1,21 @@
 @import 'src/variable.scss';
 
 .MusicRegister {
-    // background: gray;
     margin: 0 auto;
     width: 1000px;
     &-body {
-        // background: darkcyan;
         display: flex;
         justify-content: space-between;
         width: 905px;
         margin: 0 auto;
     }
-    &-inputs {
-        width: 460px;
-        // background: tomato;
-    }
-    &-albumCover {
-        width: 377px;
-        background: olive;
-    }
     &-form {
+        width: 460px;
         label {
             display: block;
             height: 21px;
             font-size: 17px;
             font-weight: bold;
-            // background: red;
             color: white;
             margin: 0;
         }
@@ -48,6 +38,66 @@
             background-color: rgba(255, 255, 255, 0.04);
             margin: 9px 0 22px 0;
             padding: 12px 0 0 12px;
+        }
+    }
+    &-albumCover {
+        width: 377px;
+        &-imgs {
+            width: 375px;
+            height: 108px;
+            margin: 19px 0 12px 0;
+            border: #979797 1px solid;
+            border-radius: 3px;
+            background-color: black;
+        }
+        &-checkBox {
+            input {
+                width: 15px;
+                height: 15px;
+                border-radius: 7.5px;
+            }
+            label {
+                height: 20px;
+                margin: 0 0 0 5px;
+                font-size: 16px;
+                font-weight: 100;
+                color: #b3b3b3;
+            }
+        }
+        &-buttons {
+            display: flex;
+            justify-content: flex-end;
+            margin: 63px 0 0 0;
+            button {
+                width: 120px;
+                height: 37px;
+                border-radius: 2px;
+                border: none;
+                margin: 0 0 0 20px;
+                font-size: 16px;
+                font-weight: 800;
+                color: #818181;
+                background-color: transparent;
+            }
+            button:nth-child(2) {
+                color: #000000;
+                background-color: $green;
+            }
+        }
+        h5 {
+            height: 21px;
+            margin: 0 0 13px 0;
+            font-size: 17px;
+            font-weight: bold;
+            color: white;
+        }
+        img {
+            display: block;
+            width: 377px;
+            height: 377px;
+            border: #979797 1px solid;
+            border-radius: 3px;
+            background-color: #212324;
         }
     }
     h1 {

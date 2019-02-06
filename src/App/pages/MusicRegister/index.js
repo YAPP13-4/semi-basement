@@ -21,7 +21,7 @@ class MusicRegister extends Component {
         const target = e.target
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const id = target.id
-        
+
         this.setState({[id]: value})
     }
 
@@ -31,7 +31,7 @@ class MusicRegister extends Component {
 
     handleSubmit = e => {
         e.preventDefault()
-        if(!this.state.isAgree) return alert('plz check the box');
+        if (!this.state.isAgree) return alert('plz check the box');
         const {url, title, musician, lyrics, description, artworkImg} = this.state
         postMusic({url, title, musician, lyrics, description, artworkImg})
         console.log('서브밋!')
@@ -48,72 +48,78 @@ class MusicRegister extends Component {
         return <div className={cx(`${moduleName}`)}>
             <h1>Register Song</h1>
             <div className={cx(`${moduleName}-body`)}>
-                <div className={cx(`${moduleName}-inputs`)}>
-                    <form
-                        className={cx(`${moduleName}-form`)}
-                        onSubmit={this.handleSubmit} id="registerForm"
-                    >
-                        <label htmlFor="url">URL</label>
-                        <input
-                            id='url'
-                            value={this.state.url}
-                            placeholder='https://'
-                            onChange={this.handleChange}
-                            onBlur={this.fetchMusicInfo(this.state.url)}
-                            onKeyDown={this.handleKeyDown}
-                        />
-
-                        <label htmlFor="title">Title</label>
-                        <input
-                            id='title'
-                            value={this.state.title}
-                            placeholder='this is title'
-                            onChange={this.handleChange}
-                            onKeyDown={this.handleKeyDown}
-                        />
-
-                        <label htmlFor="musician">Musician</label>
-                        <input
-                            id='musician'
-                            value={this.state.musician}
-                            placeholder='xxxtentacion'
-                            onChange={this.handleChange}
-                            onKeyDown={this.handleKeyDown}
-                        />
-
-                        <label htmlFor="lyrics">Lyrics</label>
-                        <textarea
-                            id='lyrics'
-                            value={this.state.lyrics}
-                            placeholder='here comes text'
-                            onChange={this.handleChange}
-                        />
-
-                        <label htmlFor="description">Description</label>
-                        <textarea
-                            id='description'
-                            value={this.state.description}
-                            placeholder='here comes text'
-                            onChange={this.handleChange}
-                        />
-
-                        <input id="artworkImg" value={this.state.artworkImg} />
-                    </form>
-                </div>
-                <div className={cx(`${moduleName}-albumCover`)}>
-                    album cover
-                    <img src={this.state.artworkImg} alt='artworkImg'></img>
-                    
+                <form
+                    className={cx(`${moduleName}-form`)}
+                    onSubmit={this.handleSubmit} id="registerForm"
+                >
+                    <label htmlFor="url">URL</label>
                     <input
-                        id="isAgree"
-                        type="checkbox"
-                        checked={this.state.isAgree}
+                        id='url'
+                        value={this.state.url}
+                        placeholder='https://'
+                        onChange={this.handleChange}
+                        onBlur={this.fetchMusicInfo(this.state.url)}
+                        onKeyDown={this.handleKeyDown}
+                    />
+
+                    <label htmlFor="title">Title</label>
+                    <input
+                        id='title'
+                        value={this.state.title}
+                        placeholder='this is title'
+                        onChange={this.handleChange}
+                        onKeyDown={this.handleKeyDown}
+                    />
+
+                    <label htmlFor="musician">Musician</label>
+                    <input
+                        id='musician'
+                        value={this.state.musician}
+                        placeholder='xxxtentacion'
+                        onChange={this.handleChange}
+                        onKeyDown={this.handleKeyDown}
+                    />
+
+                    <label htmlFor="lyrics">Lyrics</label>
+                    <textarea
+                        id='lyrics'
+                        value={this.state.lyrics}
+                        placeholder='here comes text'
                         onChange={this.handleChange}
                     />
-                    <label htmlFor="isAgree">I agree on the responsibility of using this artwork</label>
-                    
-                    <button>Cancel</button>
-                    <button form="registerForm">Register</button>
+
+                    <label htmlFor="description">Description</label>
+                    <textarea
+                        id='description'
+                        value={this.state.description}
+                        placeholder='here comes text'
+                        onChange={this.handleChange}
+                    />
+
+                    <input id="artworkImg" value={this.state.artworkImg} />
+                </form>
+                <div className={cx(`${moduleName}-albumCover`)}>
+                    <h5>Album cover</h5>
+                    <img src={this.state.artworkImg} alt='artworkImg'></img>
+
+                    <div className={cx(`${moduleName}-albumCover-imgs`)}>
+
+                    </div>
+
+                    <div className={cx(`${moduleName}-albumCover-checkBox`)}>
+                        <input
+                            id="isAgree"
+                            type="checkbox"
+                            checked={this.state.isAgree}
+                            onChange={this.handleChange}
+                        />
+                        <label htmlFor="isAgree">I agree on the responsibility of using this artwork</label>
+                    </div>
+
+                    <div className={cx(`${moduleName}-albumCover-buttons`)}>
+                        <button>Cancel</button>
+                        <button form="registerForm">Register</button>
+                    </div>
                 </div>
             </div>
         </div>
