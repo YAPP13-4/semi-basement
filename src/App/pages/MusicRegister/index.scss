@@ -1,11 +1,11 @@
 @import 'src/variable.scss';
 
 .MusicRegister {
-    background: gray;
+    // background: gray;
     margin: 0 auto;
     width: 1000px;
     &-body {
-        background: darkcyan;
+        // background: darkcyan;
         display: flex;
         justify-content: space-between;
         width: 905px;
@@ -13,18 +13,49 @@
     }
     &-inputs {
         width: 460px;
-        background: tomato;
+        // background: tomato;
     }
     &-albumCover {
         width: 377px;
         background: olive;
+    }
+    &-form {
+        label {
+            display: block;
+            height: 21px;
+            font-size: 17px;
+            font-weight: bold;
+            // background: red;
+            color: white;
+            margin: 0;
+        }
+        input {
+            height: 42px;
+            width: 100%;
+            border: none;
+            border-radius: 7px;
+            color: rgba(255, 255, 255, 0.842);
+            background-color: rgba(255, 255, 255, 0.04);
+            margin: 9px 0 22px 0;
+            padding: 0 0 0 12px;
+        }
+        textarea {
+            height: 102px;
+            width: 100%;
+            border: none;
+            border-radius: 7px;
+            color: rgba(255, 255, 255, 0.842);
+            background-color: rgba(255, 255, 255, 0.04);
+            margin: 9px 0 22px 0;
+            padding: 12px 0 0 12px;
+        }
     }
     h1 {
         color: $green;
         font-size: 25px;
         font-weight: 800;
         margin: 0;
-        padding: 78px 0px 50px;
+        padding: 78px 0px 53px;
         text-align: center;
     }   
 }

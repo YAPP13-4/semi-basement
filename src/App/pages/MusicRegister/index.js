@@ -49,11 +49,15 @@ class MusicRegister extends Component {
             <h1>Register Song</h1>
             <div className={cx(`${moduleName}-body`)}>
                 <div className={cx(`${moduleName}-inputs`)}>
-                    <form onSubmit={this.handleSubmit} id="registerForm">
+                    <form
+                        className={cx(`${moduleName}-form`)}
+                        onSubmit={this.handleSubmit} id="registerForm"
+                    >
                         <label htmlFor="url">URL</label>
                         <input
                             id='url'
                             value={this.state.url}
+                            placeholder='https://'
                             onChange={this.handleChange}
                             onBlur={this.fetchMusicInfo(this.state.url)}
                             onKeyDown={this.handleKeyDown}
@@ -63,6 +67,7 @@ class MusicRegister extends Component {
                         <input
                             id='title'
                             value={this.state.title}
+                            placeholder='this is title'
                             onChange={this.handleChange}
                             onKeyDown={this.handleKeyDown}
                         />
@@ -71,20 +76,31 @@ class MusicRegister extends Component {
                         <input
                             id='musician'
                             value={this.state.musician}
+                            placeholder='xxxtentacion'
                             onChange={this.handleChange}
                             onKeyDown={this.handleKeyDown}
                         />
 
                         <label htmlFor="lyrics">Lyrics</label>
-                        <textarea id='lyrics' value={this.state.lyrics} onChange={this.handleChange} />
+                        <textarea
+                            id='lyrics'
+                            value={this.state.lyrics}
+                            placeholder='here comes text'
+                            onChange={this.handleChange}
+                        />
 
                         <label htmlFor="description">Description</label>
-                        <textarea id='description' value={this.state.description} onChange={this.handleChange} />
+                        <textarea
+                            id='description'
+                            value={this.state.description}
+                            placeholder='here comes text'
+                            onChange={this.handleChange}
+                        />
 
                         <input id="artworkImg" value={this.state.artworkImg} />
                     </form>
                 </div>
-                <div className={cx(`${moduleName}-artworkImg`)}>
+                <div className={cx(`${moduleName}-albumCover`)}>
                     album cover
                     <img src={this.state.artworkImg} alt='artworkImg'></img>
                     
