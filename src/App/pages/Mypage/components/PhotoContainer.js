@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { debounce } from 'lodash-es'
 import axios from 'axios';
 import classnames from 'classnames/bind';
 import { PhotoSearchForm } from './PhotoForm';
@@ -8,28 +9,26 @@ import css from './PhotoContainer.scss';
 
 const cx = classnames.bind(css);
 const moduleName = 'PhotoContainer';
-const BASE_LINE = 80
+const BASE_LINE = 50
 
 export class PhotoContainer extends Component {
-  state = {
-    photoList: null,
-    keyword: '',
-    fetched: false,
-    totalPage: 0,
-    currentPage: 1
-  };
+  constructor(props) {
+    super(props);
 
-  componentDidMount() {
-    window.addEventListener(`scroll`, this.handleScroll, { passive: false })
-  }
+    this.state = {
+      photoList: null,
+      keyword: '',
+      fetched: false,
+      totalPage: 0,
+      currentPage: 1
+    }
 
-  componentWillUnmount() {
-    window.removeEventListener(`scroll`, this.handleScroll, { passive: false })
+    this.handleScroll = debounce(this.handleScroll.bind(this),500);
   }
 
   render() {
     return (
-      <div className={cx(`${moduleName}`)}>
+      <div className={cx(`${moduleName}`)} onScroll={this.handleScroll}>
         Photos by Unsplash
           <PhotoSearchForm onChange={this.changeSearchKeyword} />
         <div className={cx(`${moduleName}-photowrapper`)} >
@@ -39,7 +38,8 @@ export class PhotoContainer extends Component {
     );
   }
   
-  handelScroll = () => {
+  handleScroll() {
+    // console.log('scroll event')
     if (!this.ticking) {
       this.ticking = true
       requestAnimationFrame(() => this.updateStatus())
@@ -50,20 +50,22 @@ export class PhotoContainer extends Component {
     const distanceToBottom =
       document.documentElement.offsetHeight -
       (window.scrollY + window.innerHeight)
-
+    
     const isTriggerPosition = distanceToBottom < BASE_LINE
-
+    
     if (!isTriggerPosition) {
       this.ticking = false
       return
     }
 
     const { totalPage, currentPage } = this.state
+    
     if(totalPage > currentPage && isTriggerPosition) {
       this.setState((prevState) => ({
         currentPage : prevState.currentPage + 1
       }), () => {
         this.ticking = false;
+        this.fetchUnsplashPhoto()
       })
     } 
   }

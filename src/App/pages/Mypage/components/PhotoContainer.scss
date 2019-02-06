@@ -4,5 +4,7 @@
         flex-flow: row wrap;
         align-content: flex-start;
         justify-content: space-between;
+        overflow-y: scroll;
+        height: 500px;
     }
 }
