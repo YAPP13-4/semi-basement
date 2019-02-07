@@ -2,6 +2,11 @@ import React, {Component} from 'react';
 import classnames from 'classnames/bind';
 import {getMusicInfo, postMusic} from 'src/api'
 import css from './index.scss';
+import test1 from 'src/assets/default_cover/cover1-1.png';
+import test2 from 'src/assets/default_cover/cover1-2.png';
+import test3 from 'src/assets/default_cover/cover1-3.png';
+import test4 from 'src/assets/default_cover/cover1-4.png';
+import test5 from 'src/assets/default_cover/cover1-5.png';
 
 const cx = classnames.bind(css);
 const moduleName = 'MusicRegister';
@@ -42,6 +47,10 @@ class MusicRegister extends Component {
             this.setState({title, musician, description, artworkImg})
         })
         e.preventDefault();
+    }
+    
+    renderArtWorkImgs = imgs => {
+        return imgs.map((img, i) => <img src={img} alt="artwork" key={i} />)
     }
 
     render() {
@@ -103,7 +112,7 @@ class MusicRegister extends Component {
                     <img src={this.state.artworkImg} alt='artworkImg'></img>
 
                     <div className={cx(`${moduleName}-albumCover-imgs`)}>
-
+                        {this.renderArtWorkImgs([test1, test2, test3, test4, test5])}
                     </div>
 
                     <div className={cx(`${moduleName}-albumCover-checkBox`)}>
