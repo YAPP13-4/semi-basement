@@ -20,6 +20,7 @@ class MusicRegister extends Component {
         lyrics: '',
         description: '',
         artworkImg: '',
+        selectedArtworkImg: '',
         isAgree: false
     }
 
@@ -45,14 +46,14 @@ class MusicRegister extends Component {
 
     fetchMusicInfo = url => e => {
         getMusicInfo(url).then(({title, musician, description, artworkImg}) => {
-            this.setState({title, musician, description, artworkImg})
+            this.setState({title, musician, description, artworkImg, selectedArtworkImg: artworkImg})
         })
         e.preventDefault();
     }
 
     renderMainArtWorkImg = () => {
-        return this.state.artworkImg
-            ? <img className={cx(`${moduleName}-albumCover-mainImg`)} src={this.state.artworkImg} alt='artworkImg' />
+        return this.state.selectedArtworkImg
+            ? <img className={cx(`${moduleName}-albumCover-mainImg`)} src={this.state.selectedArtworkImg} alt='artworkImg' />
             : <div className={cx(`${moduleName}-albumCover-mainImg`)}>
                 <span className={cx(`${moduleName}-albumCover-defaultLogo`)} />
                 <div className={cx(`${moduleName}-albumCover-explain`)}>
@@ -67,7 +68,22 @@ class MusicRegister extends Component {
     }
 
     renderArtWorkImgs = imgs => {
-        return imgs.map((img, i) => <img src={img} alt="artwork" key={i} />)
+        return imgs.map((img, i) => (
+            <div>
+                {img
+                    ? <img
+                        onClick={() => {this.setState({selectedArtworkImg: img})}}
+                        src={img}
+                        alt="artwork"
+                        key={i} />
+                    : <div
+                        className={cx(`${moduleName}-albumCover-imgs-soundCloudLogo`)}
+                        onClick={() => {this.setState({selectedArtworkImg: ""})}}
+                    >
+                        <i />
+                    </div>}
+            </div>
+        ))
     }
 
     render() {
@@ -122,13 +138,13 @@ class MusicRegister extends Component {
                         onChange={this.handleChange}
                     />
 
-                    <input id="artworkImg" value={this.state.artworkImg} />
+                    <input id="artworkImg" value={this.state.selectedArtworkImg} />
                 </form>
                 <div className={cx(`${moduleName}-albumCover`)}>
                     <h5>Album cover</h5>
                     {this.renderMainArtWorkImg()}
                     <div className={cx(`${moduleName}-albumCover-imgs`)}>
-                        {this.renderArtWorkImgs([test1, test2, test3, test4, test5])}
+                        {this.renderArtWorkImgs([this.state.artworkImg, test1, test2, test3, test4, test5])}
                     </div>
 
                     <div className={cx(`${moduleName}-albumCover-checkBox`)}>
