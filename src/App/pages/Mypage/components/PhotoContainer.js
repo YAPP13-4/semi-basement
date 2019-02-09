@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { debounce, range } from 'lodash-es';
 import axios from 'axios';
 import classnames from 'classnames/bind';
+import { unsplashImageRequest } from 'src/redux/unsplash/actions';
 import { PhotoSearchForm } from './PhotoForm';
 import { PhotoComponent } from './PhotoComponent';
 import { USP_CLIENT_ID } from 'src/App/constants/ApiConstants';
@@ -26,7 +27,6 @@ export class PhotoContainer extends Component {
       count: 10,
     };
     this.handleScroll = this.handleScroll.bind(this);
-    // this.handleScroll = debounce(this.handleScroll.bind(this), 500);
     this.changeSearchKeyword = debounce(
       this.changeSearchKeyword.bind(this),
       500,
@@ -58,18 +58,11 @@ export class PhotoContainer extends Component {
 
   updateStatus = () => {
     const elm = this.scrollWrapper.current;
-    console.log(elm);
     const distanceToBottom =
       window.innerHeight - elm.getBoundingClientRect().bottom;
     // elm.getBoundingClientRect().bottom - (elm.scrollTop + elm.offsetHeight);
     const isTriggerPosition = distanceToBottom < BASE_LINE;
 
-    console.log(
-      'distanceToBottom',
-      distanceToBottom,
-      'isTriggerPosition',
-      isTriggerPosition,
-    );
     if (!isTriggerPosition) {
       this.ticking = false;
       return;
@@ -92,7 +85,7 @@ export class PhotoContainer extends Component {
 
   renderPhotoComponent = () => {
     const { photoList, fetched, count } = this.state;
-    console.log('photoList', photoList);
+
     if (!fetched) return;
 
     return photoList
@@ -113,6 +106,9 @@ export class PhotoContainer extends Component {
       },
     );
   }
+
+  fetchDatas = (targetPage, keyword) =>
+    unsplashImageRequest({ targetPage, keyword });
 
   fetchData = (targetPage, keyword) => {
     return axios.get(
