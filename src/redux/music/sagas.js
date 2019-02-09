@@ -96,8 +96,6 @@ export function* loadKeywordMusicFlow(action) {
   const musicInfo = yield select(getMusicInfo);
   yield put(musicActions.loadKeywordMusicRequest());
   try {
-    // 이 call 이 .... 내가 아는 call 이라면 apply로 처리해야 함.
-    //2018.11.20 여기고치면 됨.
     const data = yield call(getKeywordSearchResult, { musicInfo, keyword });
     yield put(musicActions.loadKeywordMusicSuccess(data));
   } catch (error) {
