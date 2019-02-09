@@ -24,6 +24,8 @@ const unsplashInfo = (
         ...state,
         err: action.err,
       };
+    default:
+      return state;
   }
 };
 
