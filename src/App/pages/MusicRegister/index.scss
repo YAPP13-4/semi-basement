@@ -42,17 +42,59 @@
     }
     &-albumCover {
         width: 377px;
+        &-mainImg {
+            display: block;
+            width: 377px;
+            height: 377px;
+            border: #979797 1px solid;
+            border-radius: 3px;
+            background-color: #212324;
+        }
+        &-defaultLogo {
+            display: block;
+            margin: 148px auto 25px;
+            background: url('src/assets/icons/icon2.png') no-repeat -490px -365px;
+            width: 68px;
+            height: 39px;
+        }
+        &-explain {
+            &-bold {
+                width: 186px;
+                height: 14px;
+                font-family: SFProDisplay;
+                font-size: 12px;
+                font-weight: 500;
+                letter-spacing: -0.2px;
+                color: #e1d1d1;
+                margin: 0 auto 4.4px;
+            }
+            &-text {
+                width: 229.2px;
+                height: 45px;
+                font-family: SFProText;
+                font-size: 11px;
+                font-weight: 300;
+                line-height: 1.36;
+                text-align: center;
+                color: #bababa;
+                margin: 0 auto;
+            }
+        }
         &-imgs {
             display: flex;
+            align-items: center;
             width: 375px;
             height: 108px;
+            padding: 0 16px;
             margin: 19px 0 12px 0;
             border: #979797 1px solid;
             border-radius: 3px;
             background-color: black;
+            overflow: scroll;
             img {
                 width: 69px !important;
                 height: 69px !important;
+                margin: 0 18.5px 0 0;
             }
         }
         &-checkBox {
@@ -98,14 +140,6 @@
             font-size: 17px;
             font-weight: bold;
             color: white;
-        }
-        img {
-            display: block;
-            width: 377px;
-            height: 377px;
-            border: #979797 1px solid;
-            border-radius: 3px;
-            background-color: #212324;
         }
     }
     h1 {

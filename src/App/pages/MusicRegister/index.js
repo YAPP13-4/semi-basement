@@ -8,6 +8,7 @@ import test3 from 'src/assets/default_cover/cover1-3.png';
 import test4 from 'src/assets/default_cover/cover1-4.png';
 import test5 from 'src/assets/default_cover/cover1-5.png';
 
+
 const cx = classnames.bind(css);
 const moduleName = 'MusicRegister';
 class MusicRegister extends Component {
@@ -48,7 +49,23 @@ class MusicRegister extends Component {
         })
         e.preventDefault();
     }
-    
+
+    renderMainArtWorkImg = () => {
+        return this.state.artworkImg
+            ? <img className={cx(`${moduleName}-albumCover-mainImg`)} src={this.state.artworkImg} alt='artworkImg' />
+            : <div className={cx(`${moduleName}-albumCover-mainImg`)}>
+                <span className={cx(`${moduleName}-albumCover-defaultLogo`)} />
+                <div className={cx(`${moduleName}-albumCover-explain`)}>
+                    <p className={cx(`${moduleName}-albumCover-explain-bold`)}>Bring album cover from SoundCloud.</p>
+                    <p className={cx(`${moduleName}-albumCover-explain-text`)}>
+                        *if you having trouble whit using artwork.<br />
+                        feel free to use our open license artwork<br />
+                        there is no responsibility and copyright
+                    </p>
+                </div>
+            </div>
+    }
+
     renderArtWorkImgs = imgs => {
         return imgs.map((img, i) => <img src={img} alt="artwork" key={i} />)
     }
@@ -109,8 +126,7 @@ class MusicRegister extends Component {
                 </form>
                 <div className={cx(`${moduleName}-albumCover`)}>
                     <h5>Album cover</h5>
-                    <img src={this.state.artworkImg} alt='artworkImg'></img>
-
+                    {this.renderMainArtWorkImg()}
                     <div className={cx(`${moduleName}-albumCover-imgs`)}>
                         {this.renderArtWorkImgs([test1, test2, test3, test4, test5])}
                     </div>
