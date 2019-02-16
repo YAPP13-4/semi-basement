@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import classnames from 'classnames/bind';
 import {getMusicInfo, postMusic} from 'src/api'
+import {loadSoundcloudMusicInfo} from 'src/redux/register/actions'
 import css from './index.scss';
 import test1 from 'src/assets/default_cover/cover1-1.png';
 import test2 from 'src/assets/default_cover/cover1-2.png';
@@ -40,15 +42,15 @@ class MusicRegister extends Component {
     e.preventDefault()
     if (!this.state.isAgree) return alert('plz check the box');
     const {url, title, musician, lyrics, description, artworkImg} = this.state
-    postMusic({url, title, musician, lyrics, description, artworkImg})
-    console.log('서브밋!')
+    postMusic({url, title, musician, lyrics, description, artworkImg});
   }
 
   fetchMusicInfo = url => e => {
-    if(!url) return
-    getMusicInfo(url).then(({title, musician, description, artworkImg}) => {
-      this.setState({title, musician, description, artworkImg, selectedArtworkImg: artworkImg})
-    })
+    if (!url) return
+    this.props.loadSoundcloudMusicInfo(url);
+    // getMusicInfo(url).then(({title, musician, description, artworkImg}) => {
+    //   this.setState({title, musician, description, artworkImg, selectedArtworkImg: artworkImg})
+    // })
     e.preventDefault();
   }
 
@@ -168,4 +170,10 @@ class MusicRegister extends Component {
   }
 }
 
-export default MusicRegister
+const mapStateToProps = () => ({});
+
+const mapDispatchToProps = {
+  loadSoundcloudMusicInfo
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MusicRegister);

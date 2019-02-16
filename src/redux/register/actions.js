@@ -1,10 +1,10 @@
-const PREFIX = 'REGISTER_SONG';
+const PREFIX = 'REGISTER';
 
 export const LOAD_SOUNDCLOUD_MUSIC_INFO = `${PREFIX}/LOAD_SOUNDCLOUD_MUSIC_INFO`;
 export const LOAD_SOUNDCLOUD_MUSIC_INFO_SUCCESS = `${PREFIX}/LOAD_SOUNDCLOUD_MUSIC_INFO_SUCCESS`;
 export const LOAD_SOUNDCLOUD_MUSIC_INFO_FAILURE = `${PREFIX}/LOAD_SOUNDCLOUD_MUSIC_INFO_FAILURE`;
 
-export const loadSoundcloudMusicInfo = ({url}) => ({
+export const loadSoundcloudMusicInfo = (url) => ({
   type: LOAD_SOUNDCLOUD_MUSIC_INFO,
   url
 })
