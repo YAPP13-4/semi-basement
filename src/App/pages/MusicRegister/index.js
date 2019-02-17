@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import classnames from 'classnames/bind';
-import {getMusicInfo, postMusic} from 'src/api'
-import {loadSoundcloudMusicInfo} from 'src/redux/register/actions'
+import {postMusic} from 'src/api'
+import {loadSoundcloudMusicInfo, resetRegistMusicState} from 'src/redux/register/actions'
 import css from './index.scss';
 import test1 from 'src/assets/default_cover/cover1-1.png';
 import test2 from 'src/assets/default_cover/cover1-2.png';
@@ -24,6 +25,30 @@ class MusicRegister extends Component {
     artworkImg: '',
     selectedArtworkImg: '',
     isAgree: false
+  }
+
+  static getDerivedStateFromProps(props) {
+    const {
+      registMusic: {
+        title,
+        musician,
+        description,
+        artworkImg
+      },
+      registMusicState: {fulfilled},
+      resetRegistMusicState
+    } = props;
+    if (fulfilled) {
+      resetRegistMusicState();
+      return {
+        title,
+        musician,
+        description,
+        artworkImg,
+        selectedArtworkImg: artworkImg
+      }
+    }
+    return null;
   }
 
   handleChange = e => {
@@ -48,9 +73,6 @@ class MusicRegister extends Component {
   fetchMusicInfo = url => e => {
     if (!url) return
     this.props.loadSoundcloudMusicInfo(url);
-    // getMusicInfo(url).then(({title, musician, description, artworkImg}) => {
-    //   this.setState({title, musician, description, artworkImg, selectedArtworkImg: artworkImg})
-    // })
     e.preventDefault();
   }
 
@@ -170,10 +192,19 @@ class MusicRegister extends Component {
   }
 }
 
-const mapStateToProps = () => ({});
+MusicRegister.propTypes = {
+  registMusic: PropTypes.object,
+  registMusicState: PropTypes.object,
+  loadSoundcloudMusicInfo: PropTypes.func,
+  resetRegistMusicState: PropTypes.func
+}
 
+const mapStateToProps = ({
+  register: {registMusic, registMusicState},
+}) => ({registMusic, registMusicState});
 const mapDispatchToProps = {
-  loadSoundcloudMusicInfo
+  loadSoundcloudMusicInfo,
+  resetRegistMusicState
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MusicRegister);

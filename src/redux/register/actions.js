@@ -4,15 +4,22 @@ export const LOAD_SOUNDCLOUD_MUSIC_INFO = `${PREFIX}/LOAD_SOUNDCLOUD_MUSIC_INFO`
 export const LOAD_SOUNDCLOUD_MUSIC_INFO_SUCCESS = `${PREFIX}/LOAD_SOUNDCLOUD_MUSIC_INFO_SUCCESS`;
 export const LOAD_SOUNDCLOUD_MUSIC_INFO_FAILURE = `${PREFIX}/LOAD_SOUNDCLOUD_MUSIC_INFO_FAILURE`;
 
-export const loadSoundcloudMusicInfo = (url) => ({
+export const RESET_REGIST_MUSIC_STATE = `${PREFIX}/RESET_REGIST_MUSIC_STATE`;
+
+export const loadSoundcloudMusicInfo = url => ({
   type: LOAD_SOUNDCLOUD_MUSIC_INFO,
   url
 })
 
-export const loadSoundcloudMusicInfoSuccess = () => ({
-  type: LOAD_SOUNDCLOUD_MUSIC_INFO_SUCCESS
+export const loadSoundcloudMusicInfoSuccess = data => ({
+  type: LOAD_SOUNDCLOUD_MUSIC_INFO_SUCCESS,
+  data
 })
 
 export const loadSoundcloudMusicInfoFailure = () => ({
   type: LOAD_SOUNDCLOUD_MUSIC_INFO_FAILURE
+})
+
+export const resetRegistMusicState = () => ({
+  type: RESET_REGIST_MUSIC_STATE
 })
