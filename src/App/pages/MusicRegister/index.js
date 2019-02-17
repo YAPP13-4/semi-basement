@@ -11,6 +11,8 @@ import test2 from 'src/assets/default_cover/cover1-2.png';
 import test3 from 'src/assets/default_cover/cover1-3.png';
 import test4 from 'src/assets/default_cover/cover1-4.png';
 import test5 from 'src/assets/default_cover/cover1-5.png';
+import {getImageUrl} from 'src/utils/ImageUtils';
+import IMAGE_SIZES from 'src/App/constants/ImageConstants';
 
 
 const cx = classnames.bind(css);
@@ -79,18 +81,27 @@ class MusicRegister extends Component {
 
   renderMainArtWorkImg = () => {
     return this.state.selectedArtworkImg
-      ? <img className={cx(`${moduleName}-albumCover-mainImg`)} src={this.state.selectedArtworkImg} alt='artworkImg' />
+      ? <img
+          className={cx(`${moduleName}-albumCover-mainImg`)}
+          src={
+            getImageUrl(
+              this.state.selectedArtworkImg,
+              IMAGE_SIZES.XLARGE
+            )}
+          alt='artworkImg' />
       : <div className={cx(`${moduleName}-albumCover-mainImg`)}>
-        <span className={cx(`${moduleName}-albumCover-defaultLogo`)} />
-        <div className={cx(`${moduleName}-albumCover-explain`)}>
-          <p className={cx(`${moduleName}-albumCover-explain-bold`)}>Bring album cover from SoundCloud.</p>
-          <p className={cx(`${moduleName}-albumCover-explain-text`)}>
-            * if you having trouble whit using artwork.<br />
-            feel free to use our open license artwork<br />
-            there is no responsibility and copyright
-                    </p>
+          <span className={cx(`${moduleName}-albumCover-defaultLogo`)} />
+          <div className={cx(`${moduleName}-albumCover-explain`)}>
+            <p className={cx(`${moduleName}-albumCover-explain-bold`)}>
+              Bring album cover from SoundCloud.
+            </p>
+            <p className={cx(`${moduleName}-albumCover-explain-text`)}>
+              * if you having trouble whit using artwork.<br />
+              feel free to use our open license artwork<br />
+              there is no responsibility and copyright
+            </p>
+          </div>
         </div>
-      </div>
   }
 
   renderArtWorkImgs = imgs => {
