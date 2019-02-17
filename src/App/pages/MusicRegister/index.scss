@@ -157,6 +157,15 @@
             color: white;
         }
     }
+    &-loading {
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      width: 100vw;
+      height: 100vh;
+      background-color: #000000;
+      opacity: 0.8;
+    }
     h1 {
         color: $green;
         font-size: 25px;

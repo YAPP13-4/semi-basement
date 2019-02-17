@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import classnames from 'classnames/bind';
 import {postMusic} from 'src/api'
 import {loadSoundcloudMusicInfo, resetRegistMusicState} from 'src/redux/register/actions'
+import Loading from 'src/App/components/Loading';
 import css from './index.scss';
 import test1 from 'src/assets/default_cover/cover1-1.png';
 import test2 from 'src/assets/default_cover/cover1-2.png';
@@ -110,85 +111,97 @@ class MusicRegister extends Component {
       </div>
     ))
   }
+  
+  renderLoading = () => {
+    return (
+      <div className={cx(`${moduleName}-loading`)}>
+        <Loading />
+      </div>
+    );
+  }
 
   render() {
-    return <div className={cx(`${moduleName}`)}>
-      <h1>Register Song</h1>
-      <div className={cx(`${moduleName}-body`)}>
-        <form
-          className={cx(`${moduleName}-form`)}
-          onSubmit={this.handleSubmit} id="registerForm"
-        >
-          <label htmlFor="url">URL</label>
-          <input
-            id='url'
-            value={this.state.url}
-            placeholder='https://'
-            onChange={this.handleChange}
-            onBlur={this.fetchMusicInfo(this.state.url)}
-            onKeyDown={this.handleKeyDown}
-          />
-
-          <label htmlFor="title">Title</label>
-          <input
-            id='title'
-            value={this.state.title}
-            placeholder='this is title'
-            onChange={this.handleChange}
-            onKeyDown={this.handleKeyDown}
-          />
-
-          <label htmlFor="musician">Musician</label>
-          <input
-            id='musician'
-            value={this.state.musician}
-            placeholder='xxxtentacion'
-            onChange={this.handleChange}
-            onKeyDown={this.handleKeyDown}
-          />
-
-          <label htmlFor="lyrics">Lyrics</label>
-          <textarea
-            id='lyrics'
-            value={this.state.lyrics}
-            placeholder='here comes text'
-            onChange={this.handleChange}
-          />
-
-          <label htmlFor="description">Description</label>
-          <textarea
-            id='description'
-            value={this.state.description}
-            placeholder='here comes text'
-            onChange={this.handleChange}
-          />
-
-          <input id="artworkImg" value={this.state.selectedArtworkImg} />
-        </form>
-        <div className={cx(`${moduleName}-albumCover`)}>
-          <h5>Album cover</h5>
-          {this.renderMainArtWorkImg()}
-          <div className={cx(`${moduleName}-albumCover-imgs`)}>
-            {this.renderArtWorkImgs([this.state.artworkImg, test1, test2, test3, test4, test5])}
-          </div>
-
-          <div className={cx(`${moduleName}-albumCover-checkBox`)}>
+    const {registMusicState: {pending}} = this.props;
+    return (
+      <div className={cx(`${moduleName}`)}>
+        {pending && this.renderLoading()}
+        <h1>Register Song</h1>
+        <div className={cx(`${moduleName}-body`)}>
+          <form
+            className={cx(`${moduleName}-form`)}
+            onSubmit={this.handleSubmit} id="registerForm"
+          >
+            <label htmlFor="url">URL</label>
             <input
-              id="isAgree"
-              type="checkbox"
-              checked={this.state.isAgree}
+              id='url'
+              value={this.state.url}
+              placeholder='https://'
+              onChange={this.handleChange}
+              onBlur={this.fetchMusicInfo(this.state.url)}
+              onKeyDown={this.handleKeyDown}
+            />
+
+            <label htmlFor="title">Title</label>
+            <input
+              id='title'
+              value={this.state.title}
+              placeholder='this is title'
+              onChange={this.handleChange}
+              onKeyDown={this.handleKeyDown}
+            />
+
+            <label htmlFor="musician">Musician</label>
+            <input
+              id='musician'
+              value={this.state.musician}
+              placeholder='xxxtentacion'
+              onChange={this.handleChange}
+              onKeyDown={this.handleKeyDown}
+            />
+
+            <label htmlFor="lyrics">Lyrics</label>
+            <textarea
+              id='lyrics'
+              value={this.state.lyrics}
+              placeholder='here comes text'
               onChange={this.handleChange}
             />
-            <label htmlFor="isAgree">I agree on the responsibility of using this artwork</label>
-          </div>
 
-          <div className={cx(`${moduleName}-albumCover-buttons`)}>
-            <button>Cancel</button>
-            <button form="registerForm">Register</button>
+            <label htmlFor="description">Description</label>
+            <textarea
+              id='description'
+              value={this.state.description}
+              placeholder='here comes text'
+              onChange={this.handleChange}
+            />
+
+            <input id="artworkImg" value={this.state.selectedArtworkImg} />
+          </form>
+          <div className={cx(`${moduleName}-albumCover`)}>
+            <h5>Album cover</h5>
+            {this.renderMainArtWorkImg()}
+            <div className={cx(`${moduleName}-albumCover-imgs`)}>
+              {this.renderArtWorkImgs([this.state.artworkImg, test1, test2, test3, test4, test5])}
+            </div>
+
+            <div className={cx(`${moduleName}-albumCover-checkBox`)}>
+              <input
+                id="isAgree"
+                type="checkbox"
+                checked={this.state.isAgree}
+                onChange={this.handleChange}
+              />
+              <label htmlFor="isAgree">I agree on the responsibility of using this artwork</label>
+            </div>
+
+            <div className={cx(`${moduleName}-albumCover-buttons`)}>
+              <button>Cancel</button>
+              <button form="registerForm">Register</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    )
   }
 }
 
