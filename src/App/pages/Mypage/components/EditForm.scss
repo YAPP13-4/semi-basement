@@ -1,31 +1,38 @@
 @import 'src/variable.scss';
 .EditForm-none {
-    display: none;
+  display: none;
 }
 .EditForm {
-    display: block;
-    padding: 39px 24px 0px 24px;
-    position: absolute;
-    right: 0;
-    height: 100vh;
-    min-width: 375px;
-    max-width: 375px;
-    background-color: #232323;
+  display: block;
+  padding: 39px 24px 0px 24px;
+  position: absolute;
+  right: 0;
+  height: 100vh;
+  min-width: 375px;
+  max-width: 375px;
+  background-color: #232323;
 
-    &-title{
-        font-size: 12px;
-        color: #45f7aa
-    }
-    
-    button {
-        display: block;
-        width: 100%;
-        font-family: AvertaCYBold;
-        text-align: center;
-        background: #45f7aa;
-        color: black;
-        border: none;
-        padding: 9px;
-        border-radius: 5px;
-    }
+  &-title {
+    font-size: 12px;
+    color: #45f7aa;
+    margin-bottom: 12px;
+    display: inline-block;
+  }
+
+  &-close {
+    display: inline-block;
+    float: right;
+  }
+
+  button {
+    display: block;
+    width: 100%;
+    font-family: AvertaCYBold;
+    text-align: center;
+    background: #45f7aa;
+    color: black;
+    border: none;
+    padding: 9px;
+    border-radius: 5px;
+  }
 }
