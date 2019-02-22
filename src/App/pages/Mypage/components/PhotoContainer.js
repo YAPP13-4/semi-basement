@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { debounce, range } from 'lodash-es';
+import { debounce, range, throttle } from 'lodash-es';
 import axios from 'axios';
 import classnames from 'classnames/bind';
 import { unsplashImageRequest } from 'src/redux/unsplash/actions';
@@ -10,7 +10,7 @@ import css from './PhotoContainer.scss';
 
 const cx = classnames.bind(css);
 const moduleName = 'PhotoContainer';
-const BASE_LINE = 150;
+const BASE_LINE = 80;
 
 export class PhotoContainer extends Component {
   constructor(props) {
@@ -26,7 +26,7 @@ export class PhotoContainer extends Component {
       renderTargets: [],
       count: 10,
     };
-    this.handleScroll = this.handleScroll.bind(this);
+    this.handleScroll = throttle(this.handleScroll.bind(this), 500);
     this.changeSearchKeyword = debounce(
       this.changeSearchKeyword.bind(this),
       500,
@@ -36,13 +36,12 @@ export class PhotoContainer extends Component {
 
   render() {
     return (
-      <div
-        className={cx(`${moduleName}`)}
-        onScroll={this.handleScroll}
-        ref={this.scrollWrapper}>
-        Photos by Unsplash
+      <div className={cx(`${moduleName}`)} onScroll={this.handleScroll}>
+        <h2>Photos by Unsplash</h2>
         <PhotoSearchForm onChange={this.changeSearchKeyword} />
-        <div className={cx(`${moduleName}-photowrapper`)}>
+        <div
+          className={cx(`${moduleName}-photowrapper`)}
+          ref={this.scrollWrapper}>
           {this.renderPhotoComponent()}
         </div>
       </div>
@@ -52,16 +51,23 @@ export class PhotoContainer extends Component {
   handleScroll() {
     if (!this.ticking) {
       this.ticking = true;
+      // TODO: 수정. 알고써야지... ;;; blame...
       requestAnimationFrame(() => this.updateStatus());
     }
   }
 
+  /*
+  1. distanceToBottom
+  2. scroll debounce 걸기 
+  3. 요청 똑같은 숫자로 감. 
+  */
+
   updateStatus = () => {
+    console.log('hi');
+    console.log('elm', this.scrollWrapper);
     const elm = this.scrollWrapper.current;
-    const distanceToBottom =
-      window.innerHeight - elm.getBoundingClientRect().bottom;
-    // elm.getBoundingClientRect().bottom - (elm.scrollTop + elm.offsetHeight);
-    const isTriggerPosition = distanceToBottom < BASE_LINE;
+    const distanceToBottom = elm.scrollHeight - elm.scrollTop;
+    const isTriggerPosition = distanceToBottom < elm.clientHeight + 100;
 
     if (!isTriggerPosition) {
       this.ticking = false;
@@ -119,10 +125,11 @@ export class PhotoContainer extends Component {
   fetchUnsplashPhoto = () => {
     const { keyword, currentPage, fetchPage } = this.state;
     const fetchTargets = range(currentPage, fetchPage + 1);
-    console.log(fetchTargets);
 
     if (!keyword) return;
 
+    // promsie.all을 this.xxx 에 저장  ?
+    // promise resolve 되면 null로 해버리고 null일때만 api 요청
     Promise.all(fetchTargets.map(index => this.fetchData(index, keyword))).then(
       results =>
         results.map(({ data }) => {
