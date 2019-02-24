@@ -21,10 +21,11 @@ export const LOAD_KEYWORD_MUSIC_REQUEST = `${PREFIX}/LOAD_KEYWORD_MUSIC_REQUEST`
 export const LOAD_KEYWORD_MUSIC_SUCCESS = `${PREFIX}/LOAD_KEYWORD_MUSIC_SUCCESS`;
 export const LOAD_KEYWORD_MUSIC_FAILURE = `${PREFIX}/LOAD_KEYWORD_MUSIC_FAILURE`;
 
-export function loadMusicsInfo(musicUrlArr) {
+export function loadMusicsInfo(musicListName) {
+  console.log('loadMusicsInfo', musicListName);
   return {
     type: LOAD_MUSIC_INFO,
-    musicUrlArr,
+    musicListName,
   };
 }
 
@@ -35,6 +36,7 @@ export function loadMusicInfoRequest() {
 }
 
 export function loadMusicInfoSuccess(data) {
+  console.log('success ', data);
   return {
     type: LOAD_MUSIC_INFO_SUCCESS,
     data,

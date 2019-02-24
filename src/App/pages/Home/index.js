@@ -27,30 +27,26 @@ class Home extends PureComponent {
   };
 
   componentDidMount() {
-    this.props.loadMusicsInfo(MUSIC_URL_LIST1);
-    this.props.loadFirstSubMusicInfo(MUSIC_URL_LIST2);
-    axios.get('http://localhost:6508/musics/seba-choice').then(res => {
-      this.setState({ sebaChoice: res.data });
-    });
+    this.props.loadMusicsInfo('seba-choice');
+    // this.props.loadFirstSubMusicInfo();
+    console.log('this.props.', this.props);
+  }
+
+  componentDidUpdate() {
+    console.log('this.props.didupdate', this.props);
   }
 
   render() {
     // return !this.props.mainMusicLoading && !this.props.subMusicLoading ? (
-    return this.state.sebaChoice.length ? (
+    return !this.props.mainMusicLoading ? (
       <div className={cx(`${moduleName}`)}>
         <Navigation />
         <div>
           <ArtWorkPlayContainer
             category="Seba's Choice"
-            musicInfos={this.state.sebaChoice}
+            musicInfos={this.props.musicInfos}
           />
         </div>
-        {/* <div>
-          <ArtWorkPlayContainer
-            category="Artists you should know"
-            musicInfos={this.props.subMusicInfos1}
-          />
-        </div> */}
         <div>
           <Featured />
         </div>
@@ -66,7 +62,7 @@ export default connect(
     return {
       subMusicInfos1: submusic1.musicInfo,
       musicInfos: music.musicInfo,
-      mainMusicLoading: music.loading,
+      mainMusicLoading: music.infoLoading,
       subMusicLoading: submusic1.loading,
     };
   },

@@ -47,14 +47,14 @@ class ArtWorkPlayContainer extends PureComponent {
         if (!id) return info.id;
         else return id.concat(info.id);
       });
-      this.props.changePlayList(id, playlist); //FIXME musicIds만 배열로 넘겨주고 있는데, 어떻게 하는것이 맞는걸까? 마이 플레이 리스트에서 보여줄때, 상세정보들을 알아야 하기때문에, 일일히 url을 call해서 보여주어야 하나?(해보고 성능상 괜찮다면, redux에 id의 배열만 넣어주는것도 상태를 적게관리 하는 측면에서는 좋은 방법이다.)
-      // changePlayList 에는 musicId들의 배열을 넘기고, 현재 플레이리스트의 이름을 넘긴다.  // 나중에 고치자... 물린게 너무 많다....
+      this.props.changePlayList(id, playlist);
       const myPlayList = JSON.parse(localStorage.getItem('myPlayList')) || [];
       this.props.setMyPlayerSubPlayList(myPlayList, 'My PlayList');
     }
   };
 
   renderArtworks = musicInfos => {
+    if (!musicInfos) return;
     return musicInfos.map(musicInfo => {
       return (
         <ArtworkPlay
@@ -77,7 +77,6 @@ class ArtWorkPlayContainer extends PureComponent {
             }}
             className="patch-icon"
           />
-          {/* 여기에 onClick Event 달기 */}
           <div className={cx(`${moduleName}-category-title`)}>
             {this.props.category}
           </div>

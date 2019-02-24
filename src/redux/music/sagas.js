@@ -7,8 +7,8 @@ import {
   select,
 } from 'redux-saga/effects';
 import {
-  getSoundCloudMusic,
-  getSoundCloudMusicInfo,
+  getCurationMusicList,
+  getMusicDetail,
   getKeywordSearchResult,
 } from 'src/api';
 
@@ -45,7 +45,7 @@ export function* updateHistoryLocalStorage(action) {
       localStorage.historyMusic = JSON.stringify(newHistory);
     }
 
-    const data = yield all(newHistory.map(id => call(getSoundCloudMusic, id)));
+    const data = yield all(newHistory.map(id => call(getMusicDetail, id)));
     yield put(musicActions.historyMusicSuccess(data));
   } catch (err) {
     yield put(musicActions.historyMusicFailure(err));
@@ -56,13 +56,11 @@ export function* watchHistoryMusicInfoFlow() {
 }
 
 export function* loadMusicsInfoFrom(action) {
-  const { musicUrlArr } = action;
+  const { musicListName } = action;
   yield put(musicActions.loadMusicInfoRequest());
   try {
-    //yield all(urls.map((url) => call(url)));
-    const data = yield all(
-      musicUrlArr.map(url => call(getSoundCloudMusicInfo, url)),
-    );
+    const data = yield call(getCurationMusicList, musicListName);
+
     yield put(musicActions.loadMusicInfoSuccess(data));
   } catch (err) {
     yield put(musicActions.loadMusicInfoFailure(err));
@@ -78,7 +76,7 @@ export function* loadMusicDetailFlow(action) {
 
   yield put(musicActions.loadMusicDetailRequest());
   try {
-    const data = yield call(getSoundCloudMusic, musicId);
+    const data = yield call(getMusicDetail, musicId);
     yield put(musicActions.loadMusicDetailSuccess(data));
   } catch (error) {
     yield put(musicActions.loadMusicDetailFailure(error));
@@ -121,7 +119,7 @@ export function* selectMusicFlow() {
 }
 
 export function* watchSelectMusicFlow() {
-  yield takeLatest(
+  yield takeEvery(
     [
       playerActions.PLAY_NEXT_MUSIC_SUCCESS,
       playerActions.PLAY_PREV_MUSIC_SUCCESS,

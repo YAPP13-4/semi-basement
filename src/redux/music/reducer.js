@@ -5,17 +5,24 @@ const music = (
     playingMusic: null,
     loading: false,
     infoLoading: false,
-    musicInfo: null,
+    musicInfo: [],
     recommendMusicInfo1: null,
     recommendMusicInfo2: null,
     musicDetail: null,
     historyMusic: [],
     searchKeyword: '',
     searchResult: null,
+    musicListName: null,
   },
   action,
 ) => {
   switch (action.type) {
+    case musicActions.LOAD_MUSIC_INFO:
+      console.log('musicActions.LOAD_MUSIC_INFO', action.musicListName);
+      return {
+        ...state,
+        musicListName: action.musicListName,
+      };
     case musicActions.LOAD_MUSIC_INFO_REQUEST:
       return {
         ...state,
@@ -23,6 +30,7 @@ const music = (
       };
 
     case musicActions.LOAD_MUSIC_INFO_SUCCESS:
+      console.log('LOAD_MUSIC_INFO_SUCCESS', action.data);
       return {
         ...state,
         infoLoading: false,
