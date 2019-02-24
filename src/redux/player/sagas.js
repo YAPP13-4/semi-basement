@@ -1,5 +1,5 @@
 import { takeEvery, all, put, call, select } from 'redux-saga/effects';
-import { getSoundCloudMusic } from 'src/api';
+import { getMusicDetail } from 'src/api';
 
 import * as palyerActions from './actions';
 
@@ -11,15 +11,13 @@ export function* playNextMusic(action) {
   const targetPlayList = yield select(state => state.playList.musicList);
   try {
     if (targetPlayList) {
-      const currentMusicIndex = targetPlayList.indexOf(
-        currentMusicInfo.id,
-      );
+      const currentMusicIndex = targetPlayList.indexOf(currentMusicInfo.id);
       const nextMusicId = isShuffle
         ? targetPlayList[randomIndex(currentMusicIndex, targetPlayList.length)]
         : targetPlayList[(currentMusicIndex + 1) % targetPlayList.length];
 
-      const data = yield call(getSoundCloudMusic, nextMusicId);
-      console.log('nexmusic test',currentMusicIndex,nextMusicId,data)
+      const data = yield call(getMusicDetail, nextMusicId);
+      console.log('nexmusic test', currentMusicIndex, nextMusicId, data);
       yield put(palyerActions.playNextMusicSuccess(data));
     }
   } catch (err) {
@@ -36,9 +34,7 @@ export function* playPrevMusic(action) {
 
   try {
     if (targetPlayList) {
-      const currentMusicIndex = targetPlayList.indexOf(
-        currentMusicInfo.id,
-      );
+      const currentMusicIndex = targetPlayList.indexOf(currentMusicInfo.id);
       let nextMusicId = targetPlayList[0];
       if (currentMusicIndex !== -1)
         nextMusicId = isShuffle
@@ -47,7 +43,7 @@ export function* playPrevMusic(action) {
             ]
           : targetPlayList[(currentMusicIndex - 1) % targetPlayList.length];
 
-      const data = yield call(getSoundCloudMusic, nextMusicId);
+      const data = yield call(getMusicDetail, nextMusicId);
       yield put(palyerActions.playPrevMusicSuccess(data));
     }
   } catch (err) {
