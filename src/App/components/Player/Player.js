@@ -33,9 +33,7 @@ const Player = ({
     <div
       className={cx(`${moduleName}`, {
         [`${moduleName}--hide`]: !meta.showBottomplayer,
-      })}
-      // style={{ display: meta.showBottomplayer ? "" : "none" }}
-    >
+      })}>
       <div
         className={cx(`${moduleName}-control`, {
           [`${moduleName}-control--open`]: meta.toggleHistory,
@@ -43,7 +41,6 @@ const Player = ({
         <div className={cx(`${moduleName}__inner`)}>
           <div className={cx(`${moduleName}__section`)}>
             <div className={cx(`${moduleName}__buttons`)}>
-              {/*TODO : prevButton*/}
               <div
                 className={cx(`${moduleName}__button`)}
                 role="button"

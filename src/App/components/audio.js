@@ -34,7 +34,6 @@ const audio = InnerComponent => {
         props.meta.showMyplayer &&
         this.shouldChangeVolume(prevProps, props)
       ) {
-        // audioElement.muted = false
         audioElement.volume = props.player.myPlayerVolume;
       }
     }
@@ -54,8 +53,8 @@ const audio = InnerComponent => {
 
     onEnded = () => {
       const { props } = this;
-      const { playNexMusic } = props;
-      playNexMusic();
+      const { playNextMusic } = props;
+      playNextMusic();
     };
     onLoadedMetadata = () => {
       const { audioElement, props } = this;
@@ -118,7 +117,6 @@ const audio = InnerComponent => {
 
     render() {
       const { music } = this.props;
-      // const musicUrl = 'https:' + MUSIC_STREAM_URL.replace(':id', music.id);
       return (
         <div>
           <audio
@@ -133,7 +131,7 @@ const audio = InnerComponent => {
             ref={node => {
               this.audioElement = node;
             }}
-            src={withClientId(music.streamUrl)}
+            src={withClientId(music.streamUrl.concat('/stream'))}
           />
           <InnerComponent
             {...this.state}

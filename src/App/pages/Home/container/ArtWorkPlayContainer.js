@@ -1,11 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {
-  selectMusic,
-  historyMusic,
-  loadMusicDetail,
-} from 'src/redux/music/actions';
+import { selectMusic, loadMusicDetail } from 'src/redux/music/actions';
 import { changePlayList } from 'src/redux/playlist/actions';
 import { setMyPlayerSubPlayList } from 'src/redux/myPlayer/actions';
 
@@ -35,7 +31,6 @@ class ArtWorkPlayContainer extends PureComponent {
       streamUrl,
       duration,
     });
-    this.props.historyMusic(id);
   };
 
   onClickChangePlayList = playlist => {
@@ -101,7 +96,6 @@ export default connect(
   {
     selectMusic,
     loadMusicDetail,
-    historyMusic,
     changePlayList,
     setMyPlayerSubPlayList,
   },

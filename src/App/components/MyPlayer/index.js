@@ -4,7 +4,7 @@ import classnames from 'classnames/bind';
 import axios from 'axios';
 
 import { toggleMyplayer } from 'src/redux/meta/actions.js';
-import { selectMusic, historyMusic } from 'src/redux/music/actions';
+import { selectMusic } from 'src/redux/music/actions';
 import {
   onPlay,
   onPause,
@@ -55,7 +55,6 @@ class MyPlayer extends Component {
 
   onClickPlay = ({ id, title, musician, artworkUrl, duration }) => {
     this.props.selectMusic({ id, title, musician, artworkUrl, duration });
-    this.props.historyMusic(id);
   };
 
   getMusicListInfos = musicList => {
@@ -260,6 +259,5 @@ export default connect(
     setMyPlayerSubPlayList,
     removeMusicMyPlaylist,
     selectMusic,
-    historyMusic,
   },
 )(MyPlayer);

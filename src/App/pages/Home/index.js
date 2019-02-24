@@ -1,20 +1,13 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-
 import Navigation from './components/Navigation';
 import Loading from 'src/App/components/Loading';
 import Featured from './components/Featured';
 import { loadMusicsInfo } from 'src/redux/music/actions';
 import { loadFirstSubMusicInfo } from 'src/redux/submusic1/actions';
-//TODO : FIX (with BE)
-import MUSIC_URL_LIST2 from '../../constants/test/MusicUrlConstants2';
-import MUSIC_URL_LIST1 from '../../constants/test/MusicUrlConstants1';
 import ArtWorkPlayContainer from '../Home/container/ArtWorkPlayContainer';
 import classnames from 'classnames/bind';
 import css from './index.scss';
-
-// 임시
-import axios from 'axios';
 
 const cx = classnames.bind(css);
 const moduleName = 'Home';
@@ -28,16 +21,9 @@ class Home extends PureComponent {
 
   componentDidMount() {
     this.props.loadMusicsInfo('seba-choice');
-    // this.props.loadFirstSubMusicInfo();
-    console.log('this.props.', this.props);
-  }
-
-  componentDidUpdate() {
-    console.log('this.props.didupdate', this.props);
   }
 
   render() {
-    // return !this.props.mainMusicLoading && !this.props.subMusicLoading ? (
     return !this.props.mainMusicLoading ? (
       <div className={cx(`${moduleName}`)}>
         <Navigation />

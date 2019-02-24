@@ -12,10 +12,10 @@ export class HistoryTab extends Component {
       <HistoryComponent
         key={`history-${index}`}
         id={music.id}
-        artworkUrl={music.artwork_url}
+        artworkUrl={music.artworkImg}
         duration={music.duration / 1000}
         title={music.title}
-        musician={music.user.username}
+        musician={music.musician}
       />
     ));
   };
