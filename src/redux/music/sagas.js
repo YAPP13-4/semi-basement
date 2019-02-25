@@ -16,7 +16,7 @@ import * as musicActions from './actions';
 import * as playerActions from 'src/redux/player/actions';
 
 export function* updateHistoryLocalStorage(action) {
-  const { musicId } = action;
+  const { playingMusicInfo } = action;
   yield put(musicActions.historyMusicRequest());
 
   try {
@@ -28,31 +28,32 @@ export function* updateHistoryLocalStorage(action) {
       const localDataLen = localData.length;
       let index;
       for (index = 0; index < localDataLen; index++) {
-        if (musicId === localData[index]) {
+        if (playingMusicInfo.id === localData[index].id) {
           containsId = true;
           break;
         }
       }
-      if (!checkValidValue(containsId)) {
-        localData.push(musicId);
+      if (!containsId) {
+        localData.push(playingMusicInfo);
         localStorage.setItem('historyMusic', JSON.stringify(localData));
       }
-      for (index = 0; index < localData.length; index++) {
-        if (localData[index]) newHistory.push(localData[index]);
-      }
+
+      // for (index = 0; index < localData.length; index++) {
+      //   if (localData[index]) newHistory.push(localData[index]);
+      // }
     } else {
-      newHistory = [musicId];
+      newHistory = [playingMusicInfo];
       localStorage.historyMusic = JSON.stringify(newHistory);
     }
 
-    const data = yield all(newHistory.map(id => call(getMusicDetail, id)));
-    yield put(musicActions.historyMusicSuccess(data));
+    // const data = yield all(newHistory.map(id => call(getMusicDetail, id)));
+    yield put(musicActions.historyMusicSuccess(newHistory));
   } catch (err) {
     yield put(musicActions.historyMusicFailure(err));
   }
 }
 export function* watchHistoryMusicInfoFlow() {
-  yield takeEvery(musicActions.HISTORY_MUSIC, updateHistoryLocalStorage);
+  yield takeEvery(musicActions.SELECT_MUSIC, updateHistoryLocalStorage);
 }
 
 export function* loadMusicsInfoFrom(action) {

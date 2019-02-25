@@ -2,12 +2,10 @@ import * as musicActions from './actions';
 
 const music = (
   state = {
-    playingMusic: null,
+    playingMusicInfo: null,
     loading: false,
     infoLoading: false,
     musicInfo: [],
-    recommendMusicInfo1: null,
-    recommendMusicInfo2: null,
     musicDetail: null,
     historyMusic: [],
     searchKeyword: '',
@@ -18,7 +16,6 @@ const music = (
 ) => {
   switch (action.type) {
     case musicActions.LOAD_MUSIC_INFO:
-      console.log('musicActions.LOAD_MUSIC_INFO', action.musicListName);
       return {
         ...state,
         musicListName: action.musicListName,
@@ -30,7 +27,6 @@ const music = (
       };
 
     case musicActions.LOAD_MUSIC_INFO_SUCCESS:
-      console.log('LOAD_MUSIC_INFO_SUCCESS', action.data);
       return {
         ...state,
         infoLoading: false,
@@ -39,7 +35,7 @@ const music = (
     case musicActions.SELECT_MUSIC:
       return {
         ...state,
-        playingMusic: action.playingMusic,
+        playingMusicInfo: action.playingMusicInfo,
       };
     case musicActions.HISTORY_MUSIC_REQUEST:
       return {

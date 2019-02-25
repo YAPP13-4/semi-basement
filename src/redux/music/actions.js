@@ -22,7 +22,6 @@ export const LOAD_KEYWORD_MUSIC_SUCCESS = `${PREFIX}/LOAD_KEYWORD_MUSIC_SUCCESS`
 export const LOAD_KEYWORD_MUSIC_FAILURE = `${PREFIX}/LOAD_KEYWORD_MUSIC_FAILURE`;
 
 export function loadMusicsInfo(musicListName) {
-  console.log('loadMusicsInfo', musicListName);
   return {
     type: LOAD_MUSIC_INFO,
     musicListName,
@@ -51,10 +50,10 @@ export function loadMusicInfoFailure(err) {
 }
 
 //Legacy actions
-export function historyMusic(musicId) {
+export function historyMusic(musicInfo) {
   return {
     type: HISTORY_MUSIC,
-    musicId,
+    musicInfo,
   };
 }
 
@@ -78,10 +77,10 @@ export function historyMusicFailure(err) {
   };
 }
 
-export function selectMusic(playingMusic) {
+export function selectMusic(playingMusicInfo) {
   return {
     type: SELECT_MUSIC,
-    playingMusic,
+    playingMusicInfo,
   };
 }
 
