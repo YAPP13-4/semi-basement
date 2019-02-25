@@ -38,12 +38,9 @@ class ArtWorkPlayContainer extends PureComponent {
       !this.props.currentMusicListName ||
       this.props.currentMusicListName !== playlist
     ) {
-      const id = this.props.musicInfos.map(info => {
-        if (!id) return info.id;
-        else return id.concat(info.id);
-      });
-      this.props.changePlayList(id, playlist);
+      this.props.changePlayList(this.props.musicInfos, playlist);
       const myPlayList = JSON.parse(localStorage.getItem('myPlayList')) || [];
+
       this.props.setMyPlayerSubPlayList(myPlayList, 'My PlayList');
     }
   };
