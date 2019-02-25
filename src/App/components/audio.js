@@ -131,7 +131,7 @@ const audio = InnerComponent => {
             ref={node => {
               this.audioElement = node;
             }}
-            src={withClientId(music.streamUrl.concat('/stream'))}
+            src={withClientId(music.streamUrl)}
           />
           <InnerComponent
             {...this.state}
