@@ -29,10 +29,6 @@ export function* updateHistoryLocalStorage(action) {
         localData.push(playingMusicInfo);
         localStorage.setItem('historyMusic', JSON.stringify(localData));
       }
-
-      // for (index = 0; index < localData.length; index++) {
-      //   if (localData[index]) newHistory.push(localData[index]);
-      // }
     } else {
       newHistory = [playingMusicInfo];
       localStorage.historyMusic = JSON.stringify(newHistory);
@@ -52,7 +48,6 @@ export function* loadMusicsInfoFrom(action) {
   yield put(musicActions.loadMusicInfoRequest());
   try {
     const data = yield call(getCurationMusicList, musicListName);
-
     yield put(musicActions.loadMusicInfoSuccess(data));
   } catch (err) {
     yield put(musicActions.loadMusicInfoFailure(err));
@@ -81,7 +76,6 @@ export function* watchLoadMusicDetailFlow() {
 
 export function* loadKeywordMusicFlow(action) {
   const { keyword } = action;
-  //FIXME : show issue #109 comment !!!!! 일시적 처리임.
   const getMusicInfo = state => state.music.musicInfo;
   const musicInfo = yield select(getMusicInfo);
   yield put(musicActions.loadKeywordMusicRequest());
@@ -122,6 +116,7 @@ export function* watchSelectMusicFlow() {
 
 export default function* musicRoot() {
   yield all([
+    watchLoadMusicInfoFlow(),
     watchLoadMusicDetailFlow(),
     watchHistoryMusicInfoFlow(),
     watchLoadKeywordMusicFlow(),
