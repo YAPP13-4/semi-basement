@@ -12,7 +12,7 @@ const unsplashInfo = (
     case Actions.REQUEST:
       return {
         ...state,
-        requestInfo: action.requestInfo,
+        requestInfo: action.reqInfo,
       };
     case Actions.SUCCESS:
       return {

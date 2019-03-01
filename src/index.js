@@ -1,18 +1,18 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
-import { ConnectedRouter } from 'react-router-redux'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'react-router-redux';
 
-import createHistory from 'history/createBrowserHistory'
+import createHistory from 'history/createBrowserHistory';
 
-import App from 'src/App'
+import App from 'src/App';
 import createNewStore from 'src/redux/createNewStore';
 
-import registerServiceWorker from './registerServiceWorker'
-import './index.css'
+import registerServiceWorker from './registerServiceWorker';
+import './index.css';
 
-const history = createHistory()
-const store = createNewStore(history)
+const history = createHistory();
+const store = createNewStore(history);
 
 const render = Component => {
   ReactDOM.render(
@@ -21,10 +21,10 @@ const render = Component => {
         <Component />
       </ConnectedRouter>
     </Provider>,
-    document.getElementById('root')
-  )
-}
+    document.getElementById('root'),
+  );
+};
 
-render(App)
+render(App);
 
-registerServiceWorker()
+registerServiceWorker();

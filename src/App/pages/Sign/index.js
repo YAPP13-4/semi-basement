@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import axios from 'axios';
 import logo from 'src/assets/logos/logo.png';
 import classnames from 'classnames/bind';
 import css from './index.scss';
@@ -8,12 +7,8 @@ const cx = classnames.bind(css);
 const moduleName = 'SignUp';
 
 class SignUp extends PureComponent {
-  signUpGoogle = () => {
-    // axios.get('http://localhost:7260/auth/google').catch(err => console.log(err))
-    axios
-      .get('http://172.30.1.31:6508/auth/facebook')
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
+  signUpFacebook = () => {
+    window.location.href = 'https://seba-api.cf/auth/facebook';
   };
 
   render() {
@@ -37,7 +32,8 @@ class SignUp extends PureComponent {
               />
               <div
                 // onClick={this.signUpGoogle}
-                className={cx(`${moduleName}_wrapper_content_bottom_title`)}>
+                className={cx(`${moduleName}_wrapper_content_bottom_title`)}
+                onClick={this.signUpGoogle}>
                 Continue With Facebook
               </div>
             </div>
