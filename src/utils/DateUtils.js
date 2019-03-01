@@ -1,4 +1,4 @@
-import moment from 'moment';
+import { format } from 'date-fns/';
 
 export const formatDdMonthYyyy = initDate => {
   const [year, month, date] = initDate.split(' ')[0].split('/');
@@ -22,5 +22,5 @@ export const formatDdMonthYyyy = initDate => {
 };
 
 export const dateFormat = (date, dateFormat) => {
-  return moment(date).format(dateFormat);
+  return format(date, dateFormat);
 };

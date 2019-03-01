@@ -47,6 +47,7 @@
     "ajv": "^6.5.3",
     "chalk": "1.1.3",
     "classnames": "^2.2.6",
+    "date-fns": "^1.30.1",
     "dotenv": "4.0.0",
     "dotenv-expand": "4.2.0",
     "fs-extra": "3.0.1",

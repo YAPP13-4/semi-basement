@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import axios from 'axios';
 import logo from 'src/assets/logos/logo.png';
 import classnames from 'classnames/bind';
 import css from './index.scss';
