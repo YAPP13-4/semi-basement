@@ -2,8 +2,7 @@ import { MUSIC_URL, MUSIC_DETAIL_URL, constructUrl } from '../apiConstants';
 import axios from 'axios';
 
 export function getCurationMusicList(list) {
-  const musicUrl = MUSIC_URL.replace(':list', list);
-  return axios.get(musicUrl).then(response => response.data);
+  return axios.get(`${MUSIC_URL}/${list}`).then(response => response.data);
 }
 
 export function getSoundCloudMusicInfo(url) {

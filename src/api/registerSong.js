@@ -1,7 +1,8 @@
 import axios from 'axios'
+import {MUSIC_URL} from 'src/api/apiConstants';
 
 export function getMusicInfo(url) {
-  return axios.get(`http://localhost:6508/musics/register-form?url=${url}`)
+  return axios.get(`${MUSIC_URL}/register-form?url=${url}`)
     .then(res => res.data)
     .catch(({response}) => {
       throw response.data;
@@ -9,7 +10,7 @@ export function getMusicInfo(url) {
 }
 
 export function postMusic(musicInfo) {
-  return axios.post(`http://localhost:6508/musics`, musicInfo)
+  return axios.post(MUSIC_URL, musicInfo)
     .then(res => res)
     .catch(err => {
       throw err
