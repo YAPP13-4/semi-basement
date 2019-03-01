@@ -1,4 +1,4 @@
-@import "src/variable.scss";
+@import 'src/variable.scss';
 .SignUp {
   position: fixed;
   top: 0;
@@ -9,7 +9,7 @@
   color: $ivory;
   background-blend-mode: multiply;
   background: linear-gradient(to bottom, rgba(98, 98, 98, 0.2) 18%, #000000),
-    url("src/assets/landing/landing_img.png");
+    url('src/assets/landing/landing_img.png');
   background-size: cover;
   &_wrapper {
     text-align: center;
@@ -21,9 +21,9 @@
     &_content {
       position: absolute;
       left: 35%;
-      top: 43%;
+      top: 30%;
       &_top {
-        font-family: $fornt-sanfran-light;
+        font-family: $font-bold;
         font-size: 40px;
         padding-bottom: 30px;
       }
@@ -35,21 +35,21 @@
       }
       &_bottom {
         margin: 0px 50px;
-        background-color: #4286f5;
+        background-color: #3b579d;
         padding: 13px 0px 13px 14px;
-        border-radius: 3px;
+        border-radius: 5px;
         color: white;
         text-align: center;
         &_icon {
           float: left;
           width: 27px;
           height: 28px;
-          background-size: contain;
-          //FIXME : 용량문제
-          background-image: url("src/assets/icons/group.jpg");
+
+          background: url('src/assets/icons/icon2.png') no-repeat -242px -286px;
         }
         &_title {
-          font-family: $font-bold;
+          font-family: $font-normal;
+          font-size: 12px;
         }
       }
     }
