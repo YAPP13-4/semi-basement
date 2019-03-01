@@ -7,8 +7,9 @@ export function* loadSoundcloudMusicInfoFlow({url}) {
   try {
     const data = yield call(getMusicInfo, url);
     yield put(registerActions.loadSoundcloudMusicInfoSuccess(data));
-  } catch (err) {
-    yield put(registerActions.loadSoundcloudMusicInfoFailure(err));
+  } catch ({error}) {
+    alert(error)
+    yield put(registerActions.loadSoundcloudMusicInfoFailure(error));
   }
 };
 
@@ -26,7 +27,6 @@ export function* registSoundcloudMusicFlow({music}) {
     alert('track이 잘 등록 되었습니다 ;)');
     yield put(push(`/musicDetail/${id}`));
   } catch (err) {
-    console.log(err.err)
     yield put(registerActions.registSoundcloudMusicFailure(err));
   }
 };

@@ -2,8 +2,11 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import classnames from 'classnames/bind';
-import {postMusic} from 'src/api'
-import {loadSoundcloudMusicInfo, resetRegistMusicState, registSoundcloudMusic} from 'src/redux/register/actions'
+import {
+  loadSoundcloudMusicInfo,
+  resetRegistMusicState,
+  registSoundcloudMusic
+} from 'src/redux/register/actions'
 import Loading from 'src/App/components/Loading';
 import css from './index.scss';
 import {getImageUrl} from 'src/utils/ImageUtils';
@@ -63,9 +66,15 @@ class MusicRegister extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const {url, title, musician, lyrics, description, artworkImg, isAgree} = this.state
+    const {
+      url, title, musician, lyrics,
+      description, selectedArtworkImg, isAgree
+    } = this.state
     if (!isAgree) return alert('plz check the box');
-    this.props.registSoundcloudMusic({url, title, musician, lyrics, description, artworkImg});
+    this.props.registSoundcloudMusic({
+      url, title, musician, lyrics,
+      description, artworkImg: selectedArtworkImg
+    });
   }
 
   fetchMusicInfo = url => e => {
@@ -180,8 +189,6 @@ class MusicRegister extends Component {
               placeholder='here comes text'
               onChange={this.handleChange}
             />
-
-            <input id="artworkImg" value={this.state.selectedArtworkImg} />
           </form>
           <div className={cx(`${moduleName}-albumCover`)}>
             <h5>Album cover</h5>
@@ -201,7 +208,9 @@ class MusicRegister extends Component {
             </div>
 
             <div className={cx(`${moduleName}-albumCover-buttons`)}>
-              <button>Cancel</button>
+              <button onClick={
+                () => this.props.history.push('/mypage')
+              }>Cancel</button>
               <button form="registerForm">Register</button>
             </div>
           </div>

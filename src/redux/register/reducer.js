@@ -14,6 +14,7 @@ const INITIAL_STATE = {
 const register = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case registerActions.LOAD_SOUNDCLOUD_MUSIC_INFO:
+    case registerActions.REGIST_SOUNDCLOUD_MUSIC:
       return {
         ...state,
         registMusicState: asyncState(PENDING)
