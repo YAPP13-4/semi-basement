@@ -1,19 +1,11 @@
-import {
-  takeEvery,
-  takeLatest,
-  all,
-  put,
-  call,
-  select,
-} from 'redux-saga/effects';
+import { takeEvery, all, put, call, select } from 'redux-saga/effects';
 import {
   getCurationMusicList,
   getMusicDetail,
   getKeywordSearchResult,
 } from 'src/api';
-
+import * as playerActions from '../player/actions';
 import * as musicActions from './actions';
-import * as playerActions from 'src/redux/player/actions';
 
 export function* updateHistoryLocalStorage(action) {
   const { playingMusicInfo } = action;
@@ -46,7 +38,6 @@ export function* updateHistoryLocalStorage(action) {
       localStorage.historyMusic = JSON.stringify(newHistory);
     }
 
-    // const data = yield all(newHistory.map(id => call(getMusicDetail, id)));
     yield put(musicActions.historyMusicSuccess(newHistory));
   } catch (err) {
     yield put(musicActions.historyMusicFailure(err));
@@ -132,10 +123,8 @@ export function* watchSelectMusicFlow() {
 export default function* musicRoot() {
   yield all([
     watchLoadMusicDetailFlow(),
-    watchLoadMusicInfoFlow(),
     watchHistoryMusicInfoFlow(),
     watchLoadKeywordMusicFlow(),
-    watchSelectMusicFlow(),
   ]);
 }
 

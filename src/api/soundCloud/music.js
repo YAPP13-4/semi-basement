@@ -8,7 +8,6 @@ export function getCurationMusicList(list) {
 
 export function getSoundCloudMusicInfo(url) {
   return axios.get(constructUrl(url)).then(response => {
-    console.log('response', response);
     return response.data;
   });
 }

@@ -8,10 +8,10 @@ export class SignBtn extends PureComponent {
   render() {
     return (
       <div className={cx(`${moduleName}`)}>
-        <Link class={cx(`${moduleName}-signin`)} to="/sign">
+        <Link className={cx(`${moduleName}-signin`)} to="/sign">
           Sign In
         </Link>
-        <Link class={cx(`${moduleName}-signup`)} to="/sign">
+        <Link className={cx(`${moduleName}-signup`)} to="/sign">
           Sign Up
         </Link>
       </div>

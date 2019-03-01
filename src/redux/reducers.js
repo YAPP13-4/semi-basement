@@ -5,9 +5,7 @@ import myPlayer from './myPlayer/reducer';
 import search from './search/reducer';
 import playList from './playlist/reducer';
 import chartMusic from './chart/reducer';
-import submusic1 from './submusic1/reducer';
 import unsplashInfo from './unsplash/reducer';
-
 // 이는 바깥에서 combine 해준다.
 export default {
   meta,
@@ -17,6 +15,5 @@ export default {
   search,
   playList,
   chartMusic,
-  submusic1,
   unsplashInfo,
 };

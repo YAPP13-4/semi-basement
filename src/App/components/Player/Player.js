@@ -65,9 +65,7 @@ const Player = ({
                 className={cx(`${moduleName}__button`)}
                 role="button"
                 tabIndex="0"
-                onClick={() => {
-                  playNextMusic(id);
-                }}>
+                onClick={playNextMusic}>
                 <i className={cx(`${moduleName}__button__forward`)} />
               </div>
               <div

@@ -73,7 +73,6 @@ const player = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        musicInfo: { ...action.data },
       };
     case playerActions.PLAY_NEXT_MUSIC_FAILURE:
       return {

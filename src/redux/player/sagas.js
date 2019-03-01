@@ -1,9 +1,9 @@
 import { takeEvery, all, put, call, select } from 'redux-saga/effects';
-import { getMusicDetail } from 'src/api';
-import * as musicActions from '../music/actions';
-import * as palyerActions from './actions';
 
-export function* playNextMusic(action) {
+import * as palyerActions from './actions';
+import * as musicActions from 'src/redux/music/actions';
+
+export function* playNextMusic() {
   yield put(palyerActions.playNextMusicRequest());
 
   const isShuffle = yield select(state => state.player.shuffle);
@@ -30,7 +30,7 @@ export function* playNextMusic(action) {
   }
 }
 
-export function* playPrevMusic(action) {
+export function* playPrevMusic() {
   yield put(palyerActions.playPrevMusicRequest);
 
   const isShuffle = yield select(state => state.player.shuffle);

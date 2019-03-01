@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { debounce, range, throttle } from 'lodash-es';
 import classnames from 'classnames/bind';
 import { unsplashImageRequest } from 'src/redux/unsplash/actions';
+import { getUnsplashPhoto } from 'src/api/unsplash.js';
 import { PhotoSearchForm } from './PhotoForm';
 import { PhotoComponent } from './PhotoComponent';
 import css from './PhotoContainer.scss';

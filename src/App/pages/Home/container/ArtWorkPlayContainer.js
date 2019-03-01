@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { selectMusic, loadMusicDetail } from 'src/redux/music/actions';
 import { changePlayList } from 'src/redux/playlist/actions';
+
 import { setMyPlayerSubPlayList } from 'src/redux/myPlayer/actions';
 
 import ArtworkPlay from '../components/ArtworkPlay';
@@ -21,7 +22,6 @@ const activePalyList = {
   height: '35px',
 };
 class ArtWorkPlayContainer extends PureComponent {
-  // id 없앨 수 있으면 없애자. streamUrl로 대체 가능
   onClickPlay = ({ id, title, musician, artworkImg, streamUrl, duration }) => {
     this.props.selectMusic({
       id,
@@ -62,13 +62,7 @@ class ArtWorkPlayContainer extends PureComponent {
     return (
       <div className={cx(`${moduleName}`)}>
         <div className={cx(`${moduleName}-category`)}>
-          <div
-            style={activePalyList}
-            onClick={() => {
-              this.onClickChangePlayList(this.props.category);
-            }}
-            className="patch-icon"
-          />
+          <div style={activePalyList} className="patch-icon" />
           <div className={cx(`${moduleName}-category-title`)}>
             {this.props.category}
           </div>

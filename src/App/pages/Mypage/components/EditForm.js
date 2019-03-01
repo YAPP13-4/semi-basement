@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { SocialEditForm } from './SocialForm';
+import { SocialEditForm } from './socialForm';
 import { PhotoContainer } from './PhotoContainer';
 import classnames from 'classnames/bind';
 import css from './EditForm.scss';

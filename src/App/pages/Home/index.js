@@ -5,12 +5,13 @@ import Loading from 'src/App/components/Loading';
 import Featured from './components/Featured';
 import { loadMusicsInfo } from 'src/redux/music/actions';
 import { loadFirstSubMusicInfo } from 'src/redux/submusic1/actions';
-import ArtWorkPlayContainer from '../Home/container/ArtWorkPlayContainer';
 import classnames from 'classnames/bind';
+import ArtWorkPlayContainer from '../Home/container/ArtWorkPlayContainer';
 import css from './index.scss';
 
 const cx = classnames.bind(css);
 const moduleName = 'Home';
+const SEBACHOICE_REQUEST_URL = 'http://localhost:6508/musics/seba-choice';
 
 class Home extends PureComponent {
   state = {
@@ -46,10 +47,8 @@ class Home extends PureComponent {
 export default connect(
   ({ submusic1, music }) => {
     return {
-      subMusicInfos1: submusic1.musicInfo,
       musicInfos: music.musicInfo,
       mainMusicLoading: music.infoLoading,
-      subMusicLoading: submusic1.loading,
     };
   },
   {

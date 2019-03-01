@@ -4,7 +4,6 @@ import { loadChartMusicsInfo } from 'src/redux/chart/actions';
 import {
   selectMusic,
   loadMusicDetail,
-  loadMusicsInfo,
 } from 'src/redux/music/actions';
 import PropTypes from 'prop-types';
 import Loading from 'src/App/components/Loading';
@@ -71,6 +70,5 @@ export default connect(
     loadChartMusicsInfo,
     selectMusic,
     loadMusicDetail,
-    loadMusicsInfo,
   },
 )(ChartTab);
