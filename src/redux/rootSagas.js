@@ -6,6 +6,7 @@ import chartMusicRoot from './chart/sagas';
 import unsplashRoot from './unsplash/sagas';
 import playlistRoot from './playlist/sagas';
 import registerRoot from './register/sagas';
+import { fetchUserData } from './user/sagas';
 
 export default function* root() {
   yield all([
@@ -14,6 +15,7 @@ export default function* root() {
     chartMusicRoot(),
     playlistRoot(),
     registerRoot(),
-    unsplashRoot()
+    unsplashRoot(),
+    fetchUserData(),
   ]);
 }

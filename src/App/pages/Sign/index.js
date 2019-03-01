@@ -20,20 +20,19 @@ class SignUp extends PureComponent {
           </div>
           <div className={cx(`${moduleName}_wrapper_content`)}>
             <div className={cx(`${moduleName}_wrapper_content_top`)}>
-              Starting Semibasement
+              Start Semibasement
             </div>
             <div className={cx(`${moduleName}_wrapper_content_body`)}>
-              복잡한 절차 없이 구글 계정으로간편하게 <br /> 세미베이스먼트를
-              만나보세요!
+              복잡한 절차 없이 SNS계정으로간편하게 <br />
+              세미베이스먼트를 만나보세요!
             </div>
             <div className={cx(`${moduleName}_wrapper_content_bottom`)}>
               <span
                 className={cx(`${moduleName}_wrapper_content_bottom_icon`)}
               />
               <div
-                // onClick={this.signUpGoogle}
                 className={cx(`${moduleName}_wrapper_content_bottom_title`)}
-                onClick={this.signUpGoogle}>
+                onClick={this.signUpFacebook}>
                 Continue With Facebook
               </div>
             </div>

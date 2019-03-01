@@ -31,11 +31,23 @@
         min-width: 230px;
         justify-content: space-between;
         span {
-          width: 39.4px;
-          height: 39.8px;
+          width: 41px;
+          height: 41px;
           border-radius: 19.7px;
-          background-color: white;
           display: inline-block;
+        }
+        &-insta {
+          background: url('src/assets/icons/icon2.png') no-repeat -49px -433px;
+        }
+        &-facebook {
+          background: url('src/assets/icons/icon2.png') no-repeat -109px -433px;
+        }
+
+        &-twitter {
+          background: url('src/assets/icons/icon2.png') no-repeat -49px -433px;
+        }
+        &-edit {
+          background: url('src/assets/icons/icon2.png') no-repeat -235px -434px;
         }
       }
     }
