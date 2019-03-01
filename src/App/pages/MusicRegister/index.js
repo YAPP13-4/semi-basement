@@ -6,14 +6,9 @@ import {postMusic} from 'src/api'
 import {loadSoundcloudMusicInfo, resetRegistMusicState} from 'src/redux/register/actions'
 import Loading from 'src/App/components/Loading';
 import css from './index.scss';
-import test1 from 'src/assets/default_cover/cover1-1.png';
-import test2 from 'src/assets/default_cover/cover1-2.png';
-import test3 from 'src/assets/default_cover/cover1-3.png';
-import test4 from 'src/assets/default_cover/cover1-4.png';
-import test5 from 'src/assets/default_cover/cover1-5.png';
 import {getImageUrl} from 'src/utils/ImageUtils';
 import IMAGE_SIZES from 'src/App/constants/ImageConstants';
-
+import {defaultCover} from 'src/assets/default_cover';
 
 const cx = classnames.bind(css);
 const moduleName = 'MusicRegister';
@@ -192,7 +187,7 @@ class MusicRegister extends Component {
             <h5>Album cover</h5>
             {this.renderMainArtWorkImg()}
             <div className={cx(`${moduleName}-albumCover-imgs`)}>
-              {this.renderArtWorkImgs([this.state.artworkImg, test1, test2, test3, test4, test5])}
+              {this.renderArtWorkImgs([this.state.artworkImg, ...defaultCover])}
             </div>
 
             <div className={cx(`${moduleName}-albumCover-checkBox`)}>
