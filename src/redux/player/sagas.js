@@ -1,4 +1,4 @@
-import { takeEvery, all, put, call, select } from 'redux-saga/effects';
+import { takeEvery, all, put, select } from 'redux-saga/effects';
 
 import * as palyerActions from './actions';
 import * as musicActions from 'src/redux/music/actions';
@@ -9,21 +9,32 @@ export function* playNextMusic() {
   const isShuffle = yield select(state => state.player.shuffle);
   const currentMusicInfo = yield select(state => state.music.playingMusicInfo);
   const targetPlayList = yield select(state => state.playList.musicList);
-  console.log('targetPlayList', targetPlayList);
+
   if (!targetPlayList) return;
 
   try {
-    console.log('targetPlayLisdfsdfdfdsft', targetPlayList, currentMusicInfo);
     if (targetPlayList) {
       const currentMusicIndex = targetPlayList.findIndex(
         music => music.id === currentMusicInfo.id,
       );
-      console.log('currentMusicIndex', currentMusicIndex);
+
       const nextMusic = isShuffle
         ? targetPlayList[randomIndex(currentMusicIndex, targetPlayList.length)]
         : targetPlayList[(currentMusicIndex + 1) % targetPlayList.length];
-      console.log('nextMusic', nextMusic);
-      yield put(musicActions.selectMusic(nextMusic));
+
+      const { id, title, musician, artworkImg, streamUrl } = nextMusic;
+      const duration = nextMusic.duration / 1000;
+
+      yield put(
+        musicActions.selectMusic({
+          id,
+          title,
+          musician,
+          artworkImg,
+          streamUrl,
+          duration,
+        }),
+      );
     }
   } catch (err) {
     yield put(palyerActions.playNextMusicFailure(err));
@@ -48,7 +59,19 @@ export function* playPrevMusic() {
       const nextMusic = isShuffle
         ? targetPlayList[randomIndex(currentMusicIndex, targetPlayList.length)]
         : targetPlayList[(currentMusicIndex - 1) % targetPlayList.length];
-      yield put(musicActions.selectMusic(nextMusic));
+
+      const { id, title, musician, artworkImg, streamUrl } = nextMusic;
+      const duration = nextMusic.duration / 1000;
+      yield put(
+        musicActions.selectMusic({
+          id,
+          title,
+          musician,
+          artworkImg,
+          streamUrl,
+          duration,
+        }),
+      );
     }
   } catch (err) {
     yield put(palyerActions.playPrevMusicFailure(err));

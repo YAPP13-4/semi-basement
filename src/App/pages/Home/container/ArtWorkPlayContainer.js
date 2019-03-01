@@ -62,7 +62,11 @@ class ArtWorkPlayContainer extends PureComponent {
     return (
       <div className={cx(`${moduleName}`)}>
         <div className={cx(`${moduleName}-category`)}>
-          <div style={activePalyList} className="patch-icon" />
+          <div
+            style={activePalyList}
+            className="patch-icon"
+            onClick={() => this.onClickChangePlayList(this.props.category)}
+          />
           <div className={cx(`${moduleName}-category-title`)}>
             {this.props.category}
           </div>
