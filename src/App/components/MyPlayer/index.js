@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import classnames from 'classnames/bind';
 import axios from 'axios';
 
-import { toggleMyplayer } from 'src/redux/meta/actions.js';
-import { selectMusic } from 'src/redux/music/actions';
+import {toggleMyplayer} from 'src/redux/meta/actions.js';
+import {selectMusic} from 'src/redux/music/actions';
 import {
   onPlay,
   onPause,
@@ -13,14 +13,14 @@ import {
   changeMyPlayerCurrentTime,
   changeMyPlayerVolume,
 } from 'src/redux/player/actions';
-import { changePlayList } from 'src/redux/playlist/actions';
+import {changePlayList} from 'src/redux/playlist/actions';
 import {
   removeMusicMyPlaylist,
   setMyPlayerSubPlayList,
 } from 'src/redux/myPlayer/actions';
 import Slider from 'src/App/components/Slider/';
 import * as utils from 'src/utils';
-import { MUSIC_URL } from 'src/App/constants/ApiConstants';
+import {MUSIC_URL} from 'src/App/constants/ApiConstants';
 import IMAGE_SIZES from 'src/App/constants/ImageConstants';
 
 import css from './index.scss';
@@ -49,19 +49,19 @@ class MyPlayer extends Component {
   };
 
   togglePlay = () => {
-    const { player, onPause, onPlay } = this.props;
+    const {player, onPause, onPlay} = this.props;
     player.isPlaying ? onPause() : onPlay();
   };
 
-  onClickPlay = ({ id, title, musician, artworkUrl, duration }) => {
-    this.props.selectMusic({ id, title, musician, artworkUrl, duration });
+  onClickPlay = ({id, title, musician, artworkUrl, duration}) => {
+    this.props.selectMusic({id, title, musician, artworkUrl, duration});
   };
 
   getMusicListInfos = musicList => {
     if (!musicList) return;
     axios
       .all(musicList.map(musicId => this.getMusicInfo(musicId)))
-      .then(res => this.setState({ musicListInfos: res }));
+      .then(res => this.setState({musicListInfos: res}));
   };
 
   getMusicInfo = musicId => {
@@ -73,7 +73,7 @@ class MyPlayer extends Component {
             artwork_url,
             title,
             duration,
-            user: { username },
+            user: {username},
           },
         }) => {
           return {
@@ -102,9 +102,9 @@ class MyPlayer extends Component {
   };
 
   render() {
-    const { playingMusic, player } = this.props;
-    const { currentTime } = player;
-    const { title, musician, artworkUrl, duration } = playingMusic || {};
+    const {playingMusicInfo, player} = this.props;
+    const {currentTime} = player;
+    const {title, musician, artworkImg, duration} = playingMusicInfo;
     return (
       <div
         className={cx(`${moduleName}`, {
@@ -115,7 +115,7 @@ class MyPlayer extends Component {
           className={cx(`${moduleName}-topImageWrapper`)}
           style={{
             backgroundImage: `url(${utils.getImageUrl(
-              artworkUrl,
+              artworkImg,
               IMAGE_SIZES.XLARGE,
             )})`,
           }}>
@@ -123,7 +123,7 @@ class MyPlayer extends Component {
             className={cx(`${moduleName}-topImage`)}
             style={{
               backgroundImage: `url(${utils.getImageUrl(
-                artworkUrl,
+                artworkImg,
                 IMAGE_SIZES.XLARGE,
               )})`,
             }}
@@ -135,7 +135,7 @@ class MyPlayer extends Component {
               className={cx(`${moduleName}-top-musicCard-coverImg`)}
               style={{
                 backgroundImage: `url(${utils.getImageUrl(
-                  artworkUrl,
+                  artworkImg,
                   IMAGE_SIZES.XLARGE,
                 )})`,
               }}
@@ -154,7 +154,7 @@ class MyPlayer extends Component {
                 <div
                   className={cx(
                     `${moduleName}-top-musicCard-player-` +
-                      (this.props.player.isPlaying ? 'pause' : 'play'),
+                    (this.props.player.isPlaying ? 'pause' : 'play'),
                   )}
                   onClick={this.togglePlay}>
                   <i />
@@ -237,11 +237,11 @@ class MyPlayer extends Component {
 
 export default connect(
   state => {
-    const { meta, player, music, playList, myPlayer } = state;
+    const {meta, player, music, playList, myPlayer} = state;
     return {
       showMyplayer: meta.showMyplayer,
       player,
-      playingMusic: music.playingMusic,
+      playingMusicInfo: music.playingMusicInfo,
       currentMusicListName: playList.currentList,
       musicList: playList.musicList,
       myPlayer,

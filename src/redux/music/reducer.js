@@ -1,8 +1,16 @@
 import * as musicActions from './actions';
+import {defaultCover} from 'src/assets/default_cover';
 
 const music = (
   state = {
-    playingMusicInfo: null,
+    playingMusicInfo: {
+      id: null,
+      title: "음악을 선택해 주세요",
+      musician: '',
+      artworkImg: defaultCover[Math.floor(Math.random()*5)],
+      streamUrl: '',
+      duration: 0
+    },
     loading: true,
     infoLoading: false,
     musicInfo: [],
@@ -61,13 +69,13 @@ const music = (
       return {
         ...state,
         loading: false,
-        musicDetail: { ...action.data },
+        musicDetail: {...action.data},
       };
     case musicActions.LOAD_MUSIC_DETAIL_FAILURE:
       return {
         ...state,
         loading: false,
-        error: { ...action.err },
+        error: {...action.err},
       };
     case musicActions.LOAD_KEYWORD_MUSIC:
       return {
@@ -77,12 +85,12 @@ const music = (
     case musicActions.LOAD_KEYWORD_MUSIC_SUCCESS:
       return {
         ...state,
-        searchResult: { ...action.data },
+        searchResult: {...action.data},
       };
     case musicActions.LOAD_KEYWORD_MUSIC_FAILURE:
       return {
         ...state,
-        error: { ...action.err },
+        error: {...action.err},
       };
     default:
       return state;
