@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { debounce, range, throttle } from 'lodash-es';
 import classnames from 'classnames/bind';
-import { unsplashImageRequest } from 'src/redux/unsplash/actions';
-import { getUnsplashPhoto } from 'src/api/unsplash.js';
+import {
+  unsplashImageRequest,
+  unsplashImageSuccess,
+} from 'src/redux/unsplash/actions';
 import { PhotoSearchForm } from './PhotoForm';
 import { PhotoComponent } from './PhotoComponent';
 import css from './PhotoContainer.scss';
@@ -112,11 +115,8 @@ export class PhotoContainer extends Component {
     );
   }
 
-  fetchDatas = (targetPage, keyword) =>
-    unsplashImageRequest({ targetPage, keyword });
-
   fetchData = (targetPage, keyword) => {
-    return getUnsplashPhoto({ page: targetPage, keyword });
+    return this.props.unsplashImageRequest({ page: targetPage, keyword });
   };
 
   fetchUnsplashPhoto = () => {
@@ -124,18 +124,45 @@ export class PhotoContainer extends Component {
     const fetchTargets = range(currentPage, fetchPage + 1);
 
     if (!keyword) return;
-
+    fetchTargets.map(index => this.fetchData(index, keyword));
     Promise.all(fetchTargets.map(index => this.fetchData(index, keyword))).then(
-      results =>
-        results.map(({ data }) => {
-          this.setState(prevState => ({
-            photoList: prevState.photoList.concat(data.results),
-            totalPage: data.total_pages,
-            fetched: true,
-            currentPage: prevState.fetchPage,
-            fetchPage: prevState.fetchPage + 1,
-          }));
-        }),
+      // results => {
+      //   console.log('results', results);
+      //   return results.map(({ data }) => {
+      //     this.setState(prevState => ({
+      //       photoList: prevState.photoList.concat(data.results),
+      //       totalPage: data.total_pages,
+      //       fetched: true,
+      //       currentPage: prevState.fetchPage,
+      //       fetchPage: prevState.fetchPage + 1,
+      //     }));
+      //   });
+      // },
+      () => {
+        const { pictureList } = this.props;
+        console.log('pictureList', pictureList);
+        // return pictureList.map(({ data }) => {
+        //   console.log('data', data);
+        //   this.setState(prevState => ({
+        //     photoList: prevState.photoList.concat(data.imageUrls),
+        //     totalPage: data.total_pages,
+        //     fetched: true,
+        //     currentPage: prevState.fetchPage,
+        //     fetchPage: prevState.fetchPage + 1,
+        //   }));
+        // });
+      },
     );
   };
 }
+
+const mapStateToProps = ({ unsplashInfo }) => ({
+  pictureList: unsplashInfo.pictureList,
+});
+
+export default connect(
+  mapStateToProps,
+  {
+    unsplashImageRequest,
+  },
+)(PhotoContainer);
