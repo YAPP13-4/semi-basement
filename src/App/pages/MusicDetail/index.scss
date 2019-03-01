@@ -1,137 +1,198 @@
 .MusicDetail {
-  background: black;
-  position: relative;
-  p {
-    line-height: 1.97;
-  }
-  &-music {
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    height: 300px;
-    padding: 30px 60px;
-    filter: blur(5px);
-  }
-
-  &-albumCoverWrapper {
-    position: absolute;
-    top: 30px;
-    left: 40px;
-    display: flex;
-  }
-  &-albumCover {
-    height: 240px;
-    width: 240px;
-    display: inline-block;
-    background-size: contain;
-    position: relative;
-    &-playicon {
-      position: absolute;
-      display: none;
-      background: url('src/assets/icons/icon2.png') no-repeat -446px -209px;
-      width: 79px;
-      height: 80px;
-      top: 33%;
-      left: 35%;
-    }
-  }
-  &-albumCover:hover {
-    cursor: pointer;
-    div {
-      display: block;
-    }
-  }
-  &-wordings {
-    margin-left: 40px;
-    color: #ffffff;
-    top: 10px;
-    h3 {
-      margin: 0;
-      font-size: 22px;
-      display: inline-block;
-      padding: 6px 10px;
-      background-color: black;
-    }
-    h2 {
-      margin: 0;
-      margin-top: 15px;
-      font-size: 30px;
-      font-weight: 800;
-      padding: 5px 10px;
-      background-color: black;
-    }
-  }
-  &-infoWrapper {
-    min-height: 600px;
-    display: flex;
-  }
-  &-musicInfo {
-    color: #ffffff;
-    width: 500px;
-    border-right: 1px solid #979797;
-    margin-top: 40px;
-    margin-bottom: 40px;
-    &-profile {
+    background-color: black;
+    color: white;
+  
+    &-header {
+      height: 290px;
+      background-image: linear-gradient(93deg, #7878ff, #ff3f3f);
+      padding: 25px 40px 25px 40px;
       display: flex;
-      height: 200px;
-      img {
-        height: 115px;
-        width: 115px;
-        border-radius: 70px;
-        margin: 50px 50px 0 50px;
+  
+      &-albumCover {
+        width: 240px;
+        height: 240px;
+        border-radius: 5px;
+        box-shadow: 11px 14px 25px 0 rgba(0, 0, 0, 0.5);
+        background-image: linear-gradient(to bottom, rgba(216, 216, 216, 0.2), rgba(216, 216, 216, 0.2));
+        text-align: center;
+  
+        &-playicon {
+          display: none;
+        }
       }
-      div {
-        margin-top: 60px;
+
+
+      &-albumCover:hover {
+        & > div {
+          background: url('src/assets/icons/icon2.png') no-repeat -446px -209px;
+          width: 80px;
+          height: 80px;
+          display: inline-block;
+          margin-top: 80px;
+          top: 50%;
+          cursor: pointer;
+        }
       }
-      div > p {
-        margin: 0;
-        font-weight: 100;
-        font-size: 12px;
-      }
-      div > h4 {
-        margin: 0;
-        font-weight: 100;
-        font-size: 18px;
-      }
-      div > h3 {
-        font-size: 24px;
-        margin-top: 15px;
+  
+      &-albumInfo {
+        margin: 10px 0 0 50px;
+    
+        div {
+          padding: 5px;
+        }
+    
+        @mixin text($size, $weight, $spacing) {
+          font-family: SFProDisplay;
+          font-size: $size;
+          font-weight: $weight;
+          letter-spacing: $spacing;
+          -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+          background-color: rgba(255, 255, 255, 0.12);
+          padding: 3px 6px 3px 6px;
+        }
+    
+        &-text1 {
+          @include text(22px, normal, normal);
+        }
+    
+        &-text2 {
+          @include text(30px, 900, 0.6px);
+        }
+    
+        &-button {
+          background: url('src/assets/icons/icon2.png') no-repeat -280px -123px;
+          width: 17px;
+          height: 17px;
+          margin-left: 15px;
+          display: inline-block;
+        }
       }
     }
-    &-description {
-      margin-left: 50px;
-      margin-right: 50px;
-      h4 {
-        font-size: 20px;
-        font-weight: 100;
-      }
-      &-inner {
-        position: relative;
-        top: 3em;
-        p {
-          transform: translateY(-2em);
-          z-index: -1;
-          transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s,
-            z-index 0s linear 0.01s;
+  
+    &-contents {
+      height: 600px;
+      display: flex;
+  
+      &-left {
+        width: 700px;
+        height: 600px;
+        padding: 66px 100px 0px 100px;
+  
+        &-albumInfo {
+          display: flex;
+      
+          &-profileImage {
+            width: 100px;
+            height: 100px;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            background-blend-mode: screen;
+            background-image: linear-gradient(to bottom, rgba(216, 216, 216, 0.2), rgba(216, 216, 216, 0.2));
+          }
+      
+          &-details {
+            margin: 0 0 0 50px;
+            width: 200px;
+      
+            @mixin text($size, $weight) {
+              font-family: AvertaCY;
+              font-size: $size;
+              font-weight: $weight;
+            }
+      
+            &-text1 {
+              @include text(12px, 300px);
+              margin-bottom: -2px;
+            }
+      
+            &-text2 {
+              @include text(20px, normal);
+            }
+      
+            &-text3 {
+              @include text(24px, bold);
+            }
+          }
         }
-        &-showmore {
-          text-align: center;
-          height: 111.4px;
-          position: absolute;
+  
+        &-tab {
+          padding-top: 20px;
+        }
+      }
+  
+      &-right {
+        width: 100%;
+        height: 600px;
+        padding: 66px 30px 0px 20px;
+    
+        &-musicInfo {
           width: 100%;
-          bottom: -0.5em;
-          background-image: linear-gradient(
-            to bottom,
-            rgba(0, 0, 0, 0),
-            #000000
-          );
-          display: table;
-          span {
-            display: table-cell;
-            vertical-align: middle;
+          color: white;
+          font-family: AvertaCY;
+          font-size: 18px;
+          font-weight: 300;
+          font-style: normal;
+          justify-content: space-between;
+  
+          &-one {
+            width: 250px;
+            float: left;
+  
+            &-commentsIcon {
+              background: url('src/assets/icons/icon2.png') no-repeat -221px -38px;
+              width: 21px;
+              height: 20px;
+              display: inline-block;
+            }
+          }
+    
+          &-two {
+            float: left;
+  
+            &-playIcon {
+              background: url('src/assets/icons/icon2.png') no-repeat -118px -92px;
+              width: 12px;
+              height: 15px;
+              display: inline-block
+            }
+          }
+    
+          &-three {
+            float: right;
+          }
+    
+          &-four {
+            float: right;
+  
+            &-featuredIcon {
+              background: url('src/assets/icons/icon2.png') no-repeat -118px -92px;
+              width: 12px;
+              height: 15px;
+              display: inline-block
+            }
+          }
+    
+          b {
+            font-size: 20px;
+            font-weight: 800;
+          }
+        }
+    
+        &-comments{
+          &-input {
+            width: 100%;
+            display: flex;
+            margin: 15px 15px 15px 0;
+          }
+          
+          &-list {
+            overflow-y: scroll;
+            margin: 15px 15px 15px 0;
+            color: white;
           }
         }
       }
     }
   }
-}
+  
