@@ -1,18 +1,12 @@
 @import "src/variable.scss";
 
 .App {
-  //height: 100vh;
   font-family: $font-normal;
-  background-color: black;
   min-height: 1024px;
-  min-width: 1440px;
-  width: auto !important;
   background-image: linear-gradient(to bottom, #181818, #000000);
   &-body {
-    padding-top: 60px; // top nav padding
+    padding-top: 60px;
     background: transparent;
-    width: 1440px;
-    //height: 100vh;
     margin: 0 auto;
   }
 }

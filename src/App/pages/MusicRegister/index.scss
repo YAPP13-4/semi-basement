@@ -1,102 +1,177 @@
 @import 'src/variable.scss';
 
-.MusicRegist {
-  width: 100%;
-  color: white;
-  background-color: #191b1c;
-  height: 100%;
-
-  position: fixed;
-  top: 94px;
-  left: 0;
-  &-inner {
+.MusicRegister {
     margin: 0 auto;
-    min-width: 1440px;
-  }
-
-  //width: 100%;
-  form {
-    //space between input form
-    div:nth-child(1) {
-      margin-bottom: 1.25rem;
+    width: 1000px;
+    &-body {
+        display: flex;
+        justify-content: space-between;
+        width: 905px;
+        margin: 0 auto;
     }
-    textarea {
-      min-height: 102px;
+    &-form {
+        width: 460px;
+        label {
+            display: block;
+            height: 21px;
+            font-size: 17px;
+            font-weight: bold;
+            color: white;
+            margin: 0;
+        }
+        input {
+            height: 42px;
+            width: 100%;
+            border: none;
+            border-radius: 7px;
+            color: rgba(255, 255, 255, 0.842);
+            background-color: rgba(255, 255, 255, 0.04);
+            margin: 9px 0 22px 0;
+            padding: 0 0 0 12px;
+        }
+        textarea {
+            height: 102px;
+            width: 100%;
+            border: none;
+            border-radius: 7px;
+            color: rgba(255, 255, 255, 0.842);
+            background-color: rgba(255, 255, 255, 0.04);
+            margin: 9px 0 22px 0;
+            padding: 12px 0 0 12px;
+        }
     }
-    input[type='text'] {
-      height: 2.65em;
+    &-albumCover {
+        width: 377px;
+        &-mainImg {
+            display: block;
+            width: 377px;
+            height: 377px;
+            border: #979797 1px solid;
+            border-radius: 3px;
+            background-color: #212324;
+        }
+        &-defaultLogo {
+            display: block;
+            margin: 148px auto 25px;
+            background: url('src/assets/icons/icon2.png') no-repeat -490px -365px;
+            width: 68px;
+            height: 39px;
+        }
+        &-explain {
+            &-bold {
+                width: 186px;
+                height: 14px;
+                font-family: SFProDisplay;
+                font-size: 12px;
+                font-weight: 500;
+                letter-spacing: -0.2px;
+                color: #e1d1d1;
+                margin: 0 auto 4.4px;
+            }
+            &-text {
+                width: 229.2px;
+                height: 45px;
+                font-family: SFProText;
+                font-size: 11px;
+                font-weight: 300;
+                line-height: 1.36;
+                text-align: center;
+                color: #bababa;
+                margin: 0 auto;
+            }
+        }
+        &-imgs {
+            display: flex;
+            align-items: center;
+            width: 375px;
+            height: 108px;
+            padding: 0 16px;
+            margin: 19px 0 12px 0;
+            border: #979797 1px solid;
+            border-radius: 3px;
+            background-color: black;
+            overflow: scroll;
+            &-soundCloudLogo {
+                width: 69px;
+                height: 69px;
+                margin: 0 18.5px 0 0;
+                padding: 25px 0 0;
+                border-radius: 3px;
+                background-color: #212324;
+                i {
+                    display: block;
+                    background: url('src/assets/icons/icon2.png') no-repeat -506px -434px;
+                    margin: 0 auto;
+                    width: 38px;
+                    height: 22px;
+                }
+            }
+            img {
+                width: 69px;
+                height: 69px;
+                margin: 0 18.5px 0 0;
+                border-radius: 3px;
+            }
+        }
+        &-checkBox {
+            input {
+                width: 15px;
+                height: 15px;
+            }    
+            label {
+                height: 20px;
+                margin: 0 0 0 5px;
+                font-size: 16px;
+                font-weight: 100;
+                color: #b3b3b3;
+            }
+        }
+        &-buttons {
+            display: flex;
+            justify-content: flex-end;
+            margin: 63px 0 0 0;
+            button {
+                width: 120px;
+                height: 37px;
+                border-radius: 2px;
+                border: none;
+                margin: 0 0 0 20px;
+                font-size: 16px;
+                font-weight: 800;
+                color: #818181;
+                background-color: transparent;
+            }
+            button:nth-child(2) {
+                color: #000000;
+                background-color: $green;
+            }
+            button:hover {
+                opacity: 0.8;
+            }
+        }
+        h5 {
+            height: 21px;
+            margin: 0 0 13px 0;
+            font-size: 17px;
+            font-weight: bold;
+            color: white;
+        }
     }
-    input[type='text'],
-    textarea {
-      border: none;
-      font-family: $font-normal;
-      font-size: 16px;
-      background-color: rgba(255, 255, 255, 0.04);
-      color: #d1d1d1;
+    &-loading {
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      width: 100vw;
+      height: 100vh;
+      background-color: #000000;
+      opacity: 0.8;
     }
-  }
-
-  &_top {
-    font-family: $font-Extra-bold;
-    color: $green;
-    text-align: center;
-    padding: 37px 0px 50px 0px;
-  }
-  &_body {
-    display: flex;
-    max-width: 895px;
-    margin: 0 auto;
-  }
-  &_left {
-    font-family: $font-bold;
-    font-size: 17px;
-    flex: 1;
-    span {
-      float: right;
-      font-size: 12px;
-      font-family: $font-normal;
-    }
-  }
-
-  //right area
-  &_right {
-    position: relative;
-    font-family: $font-bold;
-    font-size: 17px;
-    flex: 1;
-    margin-left: 69px;
-  }
-  &_right_top {
-    padding-bottom: 13px;
-  }
-  &_right_mid {
-    width: 366px;
-    height: 366px;
-    background-size: cover;
-    border: 1px solid #d1d1d1;
-    border-radius: 3px;
-  }
-
-  &_right_bot_submit {
-    position: absolute;
-    bottom: 38px;
-    right: 35px;
-    button {
-      padding: 0.5rem 2.5rem;
-      font-family: $font-Extra-bold;
-    }
-    button:focus {
-      outline: none;
-    }
-    button:nth-child(1) {
-      color: #777777;
-      background: none;
-      border: none;
-    }
-    button:nth-child(2) {
-      color: #000000;
-      background: $green;
-      border: none;
-    }
-  }
+    h1 {
+        color: $green;
+        font-size: 25px;
+        font-weight: 800;
+        margin: 0;
+        padding: 78px 0px 53px;
+        text-align: center;
+    }   
 }
