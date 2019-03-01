@@ -38,9 +38,7 @@ class SignUp extends PureComponent {
               <div
                 // onClick={this.signUpGoogle}
                 className={cx(`${moduleName}_wrapper_content_bottom_title`)}>
-                <a href="http://172.30.1.31:6508/auth/facebook">
-                  Continue With Google
-                </a>
+                Continue With Facebook
               </div>
             </div>
           </div>

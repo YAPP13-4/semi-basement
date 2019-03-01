@@ -14,10 +14,9 @@
     //position: relative;
     padding: 0px 50px;
     position: absolute;
-    height:20px;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     display: flex;
     justify-content: space-between;
 
@@ -28,23 +27,23 @@
   &-menu {
     span {
       display: block;
-      background: url("src/assets/icons/icon2.png") no-repeat -442px -41px;
+      background: url('src/assets/icons/icon2.png') no-repeat -442px -41px;
       width: 19px;
       height: 13px;
     }
   }
   &-logo {
     position: absolute;
-    top:50%;
+    top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
   }
   &-rightSide {
     display: flex;
     &-playlist {
       span {
         display: block;
-        background: url("src/assets/icons/icon2.png") no-repeat -169px -93px;
+        background: url('src/assets/icons/icon2.png') no-repeat -169px -93px;
         width: 19px;
         height: 20px;
         margin-left: 124px;
@@ -60,10 +59,10 @@
       cursor: pointer;
       display: inline-block;
       position: relative;
-      top:50%;
+      top: 50%;
       height: 38px;
       line-height: 38px;
-      transform: translate(-50%,-50%);
+      transform: translate(-50%, -50%);
       padding: 0px 32px;
       border-radius: 19px;
       border: solid 1px #979797;

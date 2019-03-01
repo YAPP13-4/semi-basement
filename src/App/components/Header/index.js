@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { SignBtn } from './Component/SignBtn';
 import classnames from 'classnames/bind';
 import { toggleMyplayer, toggleGNB } from 'src/redux/meta/actions.js';
 import logo from 'src/assets/logos/logo.svg';
@@ -27,6 +28,7 @@ class Header extends Component {
             </Link>
           </div>
           <div className={cx(`${moduleName}-rightSide`)}>
+            <SignBtn />
             <div
               className={cx(`${moduleName}-rightSide-playlist`)}
               onClick={this.props.toggleMyplayer}>

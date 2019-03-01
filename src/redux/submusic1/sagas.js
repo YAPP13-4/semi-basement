@@ -9,12 +9,9 @@ import {
 } from './actions';
 
 export function* loadSubMusicInfo(action) {
-  const { musicArr } = action;
   yield put(loadMusicInfoRequest());
   try {
-    const data = yield all(
-      musicArr.map(url => call(getSoundCloudMusicInfo, url)),
-    );
+    const data = yield call(getSoundCloudMusicInfo);
     yield put(loadMusicInfoSuccess(data));
   } catch (err) {
     yield put(loadMusicInfoFailure(err));

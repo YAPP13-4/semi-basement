@@ -5,10 +5,9 @@ export const LOAD_MUSIC_INFO_REQUEST = `${PREFIX}/LOAD_MUSIC_INFO_REQUEST`;
 export const LOAD_MUSIC_INFO_SUCCESS = `${PREFIX}/LOAD_MUSIC_INFO_SUCCESS`;
 export const LOAD_MUSIC_INFO_FAILURE = `${PREFIX}/LOAD_MUSIC_INFO_FAILURE`;
 
-export function loadFirstSubMusicInfo(musicArr) {
+export function loadFirstSubMusicInfo() {
   return {
     type: LOAD_MUSIC_INFO,
-    musicArr,
   };
 }
 
