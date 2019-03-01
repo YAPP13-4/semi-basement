@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { debounce, range, throttle } from 'lodash-es';
 import classnames from 'classnames/bind';
-import { unsplashImageRequest } from 'src/redux/unsplash/actions';
 import { getUnsplashPhoto } from 'src/api/unsplash.js';
 import { PhotoSearchForm } from './PhotoForm';
 import { PhotoComponent } from './PhotoComponent';
@@ -112,9 +111,6 @@ export class PhotoContainer extends Component {
     );
   }
 
-  fetchDatas = (targetPage, keyword) =>
-    unsplashImageRequest({ targetPage, keyword });
-
   fetchData = (targetPage, keyword) => {
     return getUnsplashPhoto({ page: targetPage, keyword });
   };
@@ -127,8 +123,8 @@ export class PhotoContainer extends Component {
 
     Promise.all(fetchTargets.map(index => this.fetchData(index, keyword))).then(
       results =>
-        results.map(({ data }) => {
-          this.setState(prevState => ({
+        results.forEach(({ data }) => {
+          return this.setState(prevState => ({
             photoList: prevState.photoList.concat(data.results),
             totalPage: data.total_pages,
             fetched: true,
