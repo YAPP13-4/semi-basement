@@ -54,8 +54,15 @@ class HistoryComponent extends PureComponent {
     });
   };
   fetchMusic = () => {
-    const { id, title, artworkImg, musician, duaration } = this.props;
-    this.props.selectMusic({ id, title, artworkImg, musician, duaration });
+    const { id, title, artworkImg, musician, duration, streamUrl } = this.props;
+    this.props.selectMusic({
+      id,
+      title,
+      musician,
+      artworkImg,
+      streamUrl,
+      duration,
+    });
   };
 
   render() {
@@ -66,7 +73,7 @@ class HistoryComponent extends PureComponent {
           onClick={this.artowrkClickEvent}
           style={{
             backgroundImage: `url(${utils.getImageUrl(
-              this.props.artworkUrl,
+              this.props.artworkImg,
               IMAGE_SIZES.SMALL,
             )})`,
           }}
