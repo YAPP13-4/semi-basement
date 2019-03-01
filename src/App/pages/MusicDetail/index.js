@@ -11,6 +11,7 @@ import * as utils from 'src/utils';
 import IMAGE_SIZES from 'src/App/constants/ImageConstants';
 import css from './index.scss';
 
+import Loading from 'src/App/components/Loading';
 import Tab from './components/Tab';
 
 const cx = classNames.bind(css);
@@ -36,15 +37,15 @@ class MusicDetail extends Component {
   };
 
   render() {
-    const { music } = this.props.musicDetail;
+    const { musicDetail, loading } = this.props;
     const tabItems = ['description', 'lylics'];
-    return (
+    return !loading ? (
       <div className={cx(`${moduleName}`)}>
         <div className={cx(`${moduleName}-header`)}>
           <div className={cx(`${moduleName}-header-albumCover`)}
             style={{
               backgroundImage: `url(${utils.getImageUrl(
-                music.artworkImg,
+                musicDetail.music.artworkImg,
                 IMAGE_SIZES.LARGE,
               )})`
             }}>
@@ -55,11 +56,11 @@ class MusicDetail extends Component {
           </div>
           <div className={cx(`${moduleName}-header-albumInfo`)}>
             <span className={cx(`${moduleName}-header-albumInfo-text1`)}>
-              {music.musician}
+              {musicDetail.music.musician}
             </span>
             <div />
             <span className={cx(`${moduleName}-header-albumInfo-text2`)}>
-              {music.title}
+              {musicDetail.music.title}
             </span>
             <div className={cx(`${moduleName}-header-albumInfo-button`)} />
           </div>
@@ -70,7 +71,7 @@ class MusicDetail extends Component {
               <div className={cx(`${moduleName}-contents-left-albumInfo-profileImage`)}
                 style={{
                   backgroundImage: `url(${utils.getImageUrl(
-                    music.musicianImg,
+                    musicDetail.music.musicianImg,
                     IMAGE_SIZES.NORMAL,
                   )})`,
                 }}
@@ -80,10 +81,10 @@ class MusicDetail extends Component {
                   Released date
                 </p>
                 <p className={cx(`${moduleName}-contents-left-albumInfo-details-text2`)}>
-                  {utils.dateFormat(music.created_at, 'DD MMM YYYY')}
+                  {utils.dateFormat(musicDetail.music.created_at, 'DD MMM YYYY')}
                 </p>
                 <p className={cx(`${moduleName}-contents-left-albumInfo-details-text3`)}>
-                  {music.musician}
+                  {musicDetail.music.musician}
                 </p>
               </div>
             </div>
@@ -91,10 +92,10 @@ class MusicDetail extends Component {
               <Tab children={tabItems}>
                 {/* TODO 가사 줄바꿈, 가사 길이가 너비보다 긴 경우 다음 행으로 내리기 */}
                 <div label="description" >
-                  {music.description || '설명을 입력하세요.'}
+                  {musicDetail.music.description || '설명을 입력하세요.'}
                 </div>
                 <div label="lylics" >
-                  {music.lylic || '가사를 입력해주세요.'}
+                  {musicDetail.music.lylic || '가사를 입력해주세요.'}
                 </div>
               </Tab>
             </div>
@@ -104,13 +105,16 @@ class MusicDetail extends Component {
           </div>
         </div>
       </div>
-    );
+    ) : (
+        <Loading />
+      );
   }
 }
 
 const mapStateToProps = ({ music }) => {
   return {
     musicDetail: music.musicDetail,
+    loading: music.loading
   };
 };
 
