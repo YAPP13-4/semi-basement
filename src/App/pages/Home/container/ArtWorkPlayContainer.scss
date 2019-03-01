@@ -6,15 +6,16 @@
     display: flex;
     padding: 55px 65px 20px 65px;
     font-size: 20px;
+
+    &-title {
+      margin-left: 20px;
+    }
   }
-  &-category-title {
-    margin-left: 20px;
-  }
+
   &-musicWrapper {
     overflow: scroll;
     width: 1320px;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between;
   }
 }

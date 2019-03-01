@@ -3,10 +3,16 @@ import * as musicActions from './actions';
 const music = (
   state = {
     playingMusicInfo: null,
-    loading: false,
+    loading: true,
     infoLoading: false,
     musicInfo: [],
-    musicDetail: null,
+    musicDetail: {
+      music: {
+        artworkImg: '',
+        title: '',
+      },
+      featured: []
+    },
     historyMusic: [],
     searchKeyword: '',
     searchResult: null,
