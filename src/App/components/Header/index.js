@@ -19,18 +19,18 @@ class Header extends Component {
           backgroundColor: this.props.pathname === '/' ? 'none' : '#000000',
         }}>
         <header className={cx(`${moduleName}-inner`)}>
-          <div className={cx(`${moduleName}-menu`)}>
+          <div className={cx(`${moduleName}-inner-menu`)}>
             <span onClick={this.props.toggleGNB} />
           </div>
-          <div className={cx(`${moduleName}-logo`)}>
+          <div className={cx(`${moduleName}-inner-logo`)}>
             <Link to="/main">
               <img src={logo} alt="logo" />
             </Link>
           </div>
-          <div className={cx(`${moduleName}-rightSide`)}>
+          <div className={cx(`${moduleName}-inner-rightSide`)}>
             <SignBtn />
             <div
-              className={cx(`${moduleName}-rightSide-playlist`)}
+              className={cx(`${moduleName}-inner-rightSide-playlist`)}
               onClick={this.props.toggleMyplayer}>
               <span />
             </div>
