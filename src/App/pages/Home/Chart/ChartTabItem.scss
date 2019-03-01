@@ -1,0 +1,49 @@
+@import "src/variable.scss";
+
+.ChartTabContainer {
+  font-family: $font-normal;
+  font-size: 14px;
+  a,
+  a:hover {
+    color: white;
+    text-decoration: none;
+  }
+  &-thumbnail {
+    width: 87px;
+  }
+  tr {
+    padding-bottom: 30px;
+  }
+  td {
+    height: 86px;
+    img {
+      height: 57px;
+    }
+    span {
+      display: block;
+      float: right;
+    }
+    vertical-align: middle;
+  }
+  &-title {
+    width: 290px;
+    font-family: $font-Extra-bold;
+    font-size: 17px;
+  }
+  &-likeIcon {
+    background: url("src/assets/icons/icon2.png") no-repeat -276px -39px;
+    width: 17px !important;
+    height: 16px !important;
+  }
+  &-playIcon {
+    background: url("src/assets/icons/icon2.png") no-repeat -117px -92px;
+    width: 12px !important;
+    height: 14px !important;
+  }
+  &-addListIcon {
+    cursor: pointer;
+    background: url("src/assets/icons/icon2.png") no-repeat -224px -91px;
+    width: 17px !important;
+    height: 16px !important;
+  }
+}

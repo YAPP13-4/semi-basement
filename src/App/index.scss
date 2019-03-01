@@ -1,0 +1,12 @@
+@import "src/variable.scss";
+
+.App {
+  font-family: $font-normal;
+  min-height: 1024px;
+  background-image: linear-gradient(to bottom, #181818, #000000);
+  &-body {
+    padding-top: 60px;
+    background: transparent;
+    margin: 0 auto;
+  }
+}

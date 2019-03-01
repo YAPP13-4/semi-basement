@@ -1,0 +1,12 @@
+/* Webfont: AvertaCY-Black */@font-face {
+    font-family: 'AvertaCYBlack';
+    src: url('AvertaCY-Black.eot'); /* IE9 Compat Modes */
+    src: url('AvertaCY-Black.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('AvertaCY-Black.woff') format('woff'), /* Modern Browsers */
+         url('AvertaCY-Black.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('AvertaCY-Black.svg#AvertaCY-Black') format('svg'); /* Legacy iOS */
+    font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+

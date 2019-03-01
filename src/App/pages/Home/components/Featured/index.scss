@@ -1,0 +1,41 @@
+@import "./src/variable.scss";
+.Featured {
+  padding: 0px 75px 88px 75px;
+  &-top {
+    font-family: $fornt-sanfran-bold;
+    font-size: 25px;
+    padding: 88px 0px 58px 0px;
+    &-inner {
+      display: flex;
+      justify-content: space-between;
+      div {
+        flex: 0 0 auto;
+      }
+      div:nth-child(2n + 1) {
+        position: relative;
+        //border-bottom: solid 1px rgba(255, 255, 255, 0.48);
+        width: 43%;
+      }
+      div:nth-child(2n + 1):before {
+        content: "";
+        position: absolute;
+        top: 50%;
+
+        border-top: solid 1px rgba(255, 255, 255, 0.48);
+        background: black;
+        width: 90%;
+        transform: translateY(-50%);
+      }
+      div:first-child:before {
+        left: 10%;
+      }
+      div:last-child:before {
+        right: 10%;
+      }
+    }
+  }
+  &-mid {
+    display: flex;
+    justify-content: space-between;
+  }
+}

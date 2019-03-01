@@ -1,0 +1,24 @@
+.SingBtn {
+  display: flex;
+  a,
+  a:hover {
+    height: 100%;
+
+    text-decoration: none;
+    padding: 6px 40px;
+    border-radius: 51%;
+    border-radius: 18.5px;
+  }
+  &-signin,
+  &-signin:hover {
+    color: white;
+    border: 1px solid #979797;
+  }
+
+  &-signup,
+  &-signup:hover {
+    color: black;
+    border: 1px solid #45f7aa;
+    background: #45f7aa;
+  }
+}

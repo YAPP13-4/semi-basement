@@ -1,0 +1,122 @@
+.Header {
+  width: 100%;
+  height: 60px;
+  background: none;
+  z-index: 5;
+  position: fixed;
+  left: 0;
+  right: 0;
+  // background: black;
+  &-inner {
+    max-width: 1440px;
+    min-width: 1440px;
+    //z-index: 5;
+    //position: relative;
+    padding: 0px 50px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: space-between;
+
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &-menu {
+    span {
+      display: block;
+      background: url('src/assets/icons/icon2.png') no-repeat -442px -41px;
+      width: 19px;
+      height: 13px;
+    }
+  }
+  &-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  &-rightSide {
+    display: flex;
+    &-playlist {
+      span {
+        display: block;
+        background: url('src/assets/icons/icon2.png') no-repeat -169px -93px;
+        width: 19px;
+        height: 20px;
+        margin-left: 124px;
+      }
+    }
+  }
+  &-rightSide-user {
+    display: flex;
+    a {
+      text-decoration: none;
+    }
+    span {
+      cursor: pointer;
+      display: inline-block;
+      position: relative;
+      top: 50%;
+      height: 38px;
+      line-height: 38px;
+      transform: translate(-50%, -50%);
+      padding: 0px 32px;
+      border-radius: 19px;
+      border: solid 1px #979797;
+      font-size: 14px;
+      color: white;
+    }
+    &-signIn {
+      margin-right: 21px;
+    }
+  }
+  &-line {
+    text-decoration-line: underline;
+    text-decoration-color: #45f7aa;
+    margin-bottom: 0px;
+  }
+
+  &-button {
+    &-signIn {
+      border: solid 1px #979797;
+      color: white;
+      background-color: transparent;
+      padding: 10px 20px;
+      border-radius: 18.5px;
+      font-family: AvertaCY;
+      font-size: 14px;
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: center;
+      color: #ffffff;
+    }
+
+    &-signUp {
+      border: solid 1px #979797;
+      border-radius: 18.5px;
+      background-color: #45f7aa;
+      padding: 10px 20px;
+      font-family: AvertaCY;
+      font-size: 14px;
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: center;
+      color: #020202;
+    }
+
+    &-gnb {
+      background-color: transparent;
+      border: 0px;
+      cursor: pointer;
+    }
+  }
+}
