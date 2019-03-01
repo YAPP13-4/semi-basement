@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { debounce, range, throttle } from 'lodash-es';
-import axios from 'axios';
 import classnames from 'classnames/bind';
 import { unsplashImageRequest } from 'src/redux/unsplash/actions';
 import { PhotoSearchForm } from './PhotoForm';
 import { PhotoComponent } from './PhotoComponent';
-import { USP_CLIENT_ID } from 'src/App/constants/ApiConstants';
 import css from './PhotoContainer.scss';
 
 const cx = classnames.bind(css);
@@ -117,9 +115,7 @@ export class PhotoContainer extends Component {
     unsplashImageRequest({ targetPage, keyword });
 
   fetchData = (targetPage, keyword) => {
-    return axios.get(
-      `https://api.unsplash.com/search/photos?page=${targetPage}&query=${keyword}&client_id=${USP_CLIENT_ID}`,
-    );
+    return getUnsplashPhoto({ page: targetPage, keyword });
   };
 
   fetchUnsplashPhoto = () => {
@@ -128,8 +124,6 @@ export class PhotoContainer extends Component {
 
     if (!keyword) return;
 
-    // promsie.all을 this.xxx 에 저장  ?
-    // promise resolve 되면 null로 해버리고 null일때만 api 요청
     Promise.all(fetchTargets.map(index => this.fetchData(index, keyword))).then(
       results =>
         results.map(({ data }) => {
