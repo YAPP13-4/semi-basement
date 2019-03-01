@@ -54,8 +54,8 @@ class HistoryComponent extends PureComponent {
     });
   };
   fetchMusic = () => {
-    const { id, title, artworkUrl, musician, duaration } = this.props;
-    this.props.selectMusic({ id, title, artworkUrl, musician, duaration });
+    const { id, title, artworkImg, musician, duaration } = this.props;
+    this.props.selectMusic({ id, title, artworkImg, musician, duaration });
   };
 
   render() {

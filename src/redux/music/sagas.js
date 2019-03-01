@@ -27,10 +27,12 @@ export function* updateHistoryLocalStorage(action) {
       }
       if (!containsId) {
         localData.push(playingMusicInfo);
-        localStorage.setItem('historyMusic', JSON.stringify(localData));
       }
+      newHistory = localData;
+      localStorage.setItem('historyMusic', JSON.stringify(localData));
     } else {
       newHistory = [playingMusicInfo];
+
       localStorage.historyMusic = JSON.stringify(newHistory);
     }
 
