@@ -1,4 +1,4 @@
-const API_HOSTNAME = 'https://seba-api.cf';
+let API_HOSTNAME = process.env.REACT_APP_API_HOSTNAME;
 
 export const constructUrl = url => `${API_HOSTNAME}${url}`;
 export const MUSIC_URL = constructUrl('/musics/:list');
