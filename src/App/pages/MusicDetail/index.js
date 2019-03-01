@@ -6,7 +6,6 @@ import {
 } from 'src/redux/music/actions';
 
 import classNames from 'classnames/bind';
-import axios from 'axios';
 
 import * as utils from 'src/utils';
 import IMAGE_SIZES from 'src/App/constants/ImageConstants';
@@ -107,7 +106,6 @@ class MusicDetail extends Component {
       </div>
     );
   }
-
 }
 
 const mapStateToProps = ({ music }) => {
