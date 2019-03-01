@@ -1,16 +1,14 @@
+import { takeEvery, all, put, call, select } from 'redux-saga/effects';
 import {
-  takeEvery,
-  all,
-  put,
-  call,
-  select,
-} from 'redux-saga/effects';
-import { getKeywordSearchResult } from 'src/api';
-
+  getCurationMusicList,
+  getMusicDetail,
+  getKeywordSearchResult,
+} from 'src/api';
+import * as playerActions from '../player/actions';
 import * as musicActions from './actions';
 
 export function* updateHistoryLocalStorage(action) {
-  const { musicId } = action;
+  const { playingMusicInfo } = action;
   yield put(musicActions.historyMusicRequest());
 
   try {
@@ -22,31 +20,42 @@ export function* updateHistoryLocalStorage(action) {
       const localDataLen = localData.length;
       let index;
       for (index = 0; index < localDataLen; index++) {
-        if (musicId === localData[index]) {
+        if (playingMusicInfo.id === localData[index].id) {
           containsId = true;
           break;
         }
       }
-      if (!checkValidValue(containsId)) {
-        localData.push(musicId);
+      if (!containsId) {
+        localData.push(playingMusicInfo);
         localStorage.setItem('historyMusic', JSON.stringify(localData));
       }
-      for (index = 0; index < localData.length; index++) {
-        if (localData[index]) newHistory.push(localData[index]);
-      }
     } else {
-      newHistory = [musicId];
+      newHistory = [playingMusicInfo];
       localStorage.historyMusic = JSON.stringify(newHistory);
     }
 
-    const data = yield all(newHistory.map(id => call(id)));
-    yield put(musicActions.historyMusicSuccess(data));
+    yield put(musicActions.historyMusicSuccess(newHistory));
   } catch (err) {
     yield put(musicActions.historyMusicFailure(err));
   }
 }
 export function* watchHistoryMusicInfoFlow() {
-  yield takeEvery(musicActions.HISTORY_MUSIC, updateHistoryLocalStorage);
+  yield takeEvery(musicActions.SELECT_MUSIC, updateHistoryLocalStorage);
+}
+
+export function* loadMusicsInfoFrom(action) {
+  const { musicListName } = action;
+  yield put(musicActions.loadMusicInfoRequest());
+  try {
+    const data = yield call(getCurationMusicList, musicListName);
+    yield put(musicActions.loadMusicInfoSuccess(data));
+  } catch (err) {
+    yield put(musicActions.loadMusicInfoFailure(err));
+  }
+}
+
+export function* watchLoadMusicInfoFlow() {
+  yield takeEvery(musicActions.LOAD_MUSIC_INFO, loadMusicsInfoFrom);
 }
 
 export function* loadMusicDetailFlow(action) {
@@ -54,7 +63,7 @@ export function* loadMusicDetailFlow(action) {
 
   yield put(musicActions.loadMusicDetailRequest());
   try {
-    const data = yield call(musicId);
+    const data = yield call(getMusicDetail, musicId);
     yield put(musicActions.loadMusicDetailSuccess(data));
   } catch (error) {
     yield put(musicActions.loadMusicDetailFailure(error));
@@ -67,13 +76,10 @@ export function* watchLoadMusicDetailFlow() {
 
 export function* loadKeywordMusicFlow(action) {
   const { keyword } = action;
-  //FIXME : show issue #109 comment !!!!! 일시적 처리임.
   const getMusicInfo = state => state.music.musicInfo;
   const musicInfo = yield select(getMusicInfo);
   yield put(musicActions.loadKeywordMusicRequest());
   try {
-    // 이 call 이 .... 내가 아는 call 이라면 apply로 처리해야 함.
-    //2018.11.20 여기고치면 됨.
     const data = yield call(getKeywordSearchResult, { musicInfo, keyword });
     yield put(musicActions.loadKeywordMusicSuccess(data));
   } catch (error) {
@@ -85,8 +91,32 @@ export function* watchLoadKeywordMusicFlow() {
   yield takeEvery(musicActions.LOAD_KEYWORD_MUSIC, loadKeywordMusicFlow);
 }
 
+export function* selectMusicFlow() {
+  const musicInfo = yield select(state => state.player.musicInfo);
+  yield put(
+    musicActions.selectMusic({
+      id: musicInfo.id,
+      title: musicInfo.title,
+      musician: musicInfo.user.username,
+      artworkUrl: musicInfo.artwork_url,
+      duration: musicInfo.duration / 1000,
+    }),
+  );
+}
+
+export function* watchSelectMusicFlow() {
+  yield takeEvery(
+    [
+      playerActions.PLAY_NEXT_MUSIC_SUCCESS,
+      playerActions.PLAY_PREV_MUSIC_SUCCESS,
+    ],
+    selectMusicFlow,
+  );
+}
+
 export default function* musicRoot() {
   yield all([
+    watchLoadMusicInfoFlow(),
     watchLoadMusicDetailFlow(),
     watchHistoryMusicInfoFlow(),
     watchLoadKeywordMusicFlow(),

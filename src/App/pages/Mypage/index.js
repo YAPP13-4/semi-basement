@@ -2,29 +2,47 @@ import React, { PureComponent } from "react"
 
 import classnames from "classnames/bind"
 import css from "./index.scss"
-import ChartTab from "../Home/Chart/ChartTab"
+import { EditForm } from './components/EditForm'
 import MyChartNav from "./components/MyCharNav"
 const cx = classnames.bind(css)
 const moduleName = "Mypage"
 
 class Mypage extends PureComponent {
+  state = {
+    toggle: false
+  }
   render() {
     return (
       <div className={cx(`${moduleName}`)}>
+        <EditForm isVisible={this.state.toggle} toggleModal={this.toggleEditForm}/>
         <div className={cx(`${moduleName}-myinfo`)}>
           <div className={cx(`${moduleName}-myinfo-wrapper`)}>
             <div className={cx(`${moduleName}-myinfo-wrapper-img`)}>image</div>
             <div className={cx(`${moduleName}-myinfo-wrapper-name`)}>
-              <span>Name</span>
+              <div className={cx(`${moduleName}-myinfo-wrapper-name-user`)}>Name</div>
+              <div className={cx(`${moduleName}-myinfo-wrapper-desc`)}>
+              Type something about you
+              </div>
+            </div>
+            <div className={cx(`${moduleName}-myinfo-wrapper-sns`)}>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span onClick={this.toggleEditForm}>e</span>
             </div>
           </div>
         </div>
         <div className={cx(`${moduleName}-chart`)}>
           <MyChartNav />
-          <ChartTab />
         </div>
       </div>
     )
+  }
+
+  toggleEditForm = () => {
+    this.setState({
+      toggle : !this.state.toggle
+    })
   }
 }
 

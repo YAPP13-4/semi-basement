@@ -42,12 +42,13 @@ class MusicDetail extends Component {
   };
 
   render() {
-    const { musicDetail } = this.props;
-    if (!musicDetail) {
+    if (!this.props.musicDetail) {
       return <Loading />;
     } else {
-      const artworkUrl = musicDetail.artwork_url;
-      const parsedDesc = utils.formatString(musicDetail.description, 5);
+      const { music } = this.props.musicDetail;
+      const artworkUrl = music.artworkImg;
+      const parsedDesc = utils.formatString(music.description, 5);
+
       return (
         <div className={cx(`${moduleName}`)}>
           <div
@@ -71,18 +72,18 @@ class MusicDetail extends Component {
               /*FIX ME : refactoring */
               onClick={() => {
                 this.onClickPlay(
-                  musicDetail.id,
-                  musicDetail.title,
-                  musicDetail.user.username,
+                  music.id,
+                  music.title,
+                  music.musician,
                   artworkUrl,
-                  musicDetail.duration / 1000,
+                  music.duration / 1000,
                 );
               }}>
               <div className={cx(`${moduleName}-albumCover-playicon`)} />
             </div>
             <div className={cx(`${moduleName}-wordings`)}>
-              <h3>{musicDetail.user.username}</h3>
-              <h2>{musicDetail.title}</h2>
+              <h3>{music.musician}</h3>
+              <h2>{music.title}</h2>
             </div>
           </div>
           <div className={cx(`${moduleName}-infoWrapper`)}>
@@ -90,12 +91,12 @@ class MusicDetail extends Component {
               <div className={cx(`${moduleName}-musicInfo-profile`)}>
                 <img
                   alt="artistProfile"
-                  src={musicDetail.user.avatar_url.replace('large', 'crop')}
+                  src={music.musicianImg.replace('large', 'crop')}
                 />
                 <div>
                   <p>Released date</p>
-                  <h4>{utils.formatDdMonthYyyy(musicDetail.created_at)}</h4>
-                  <h3>{musicDetail.user.username}</h3>
+                  <h4>{utils.formatDdMonthYyyy(music.createdAt)}</h4>
+                  <h3>{music.musician}</h3>
                 </div>
               </div>
               <div className={cx(`${moduleName}-musicInfo-description`)}>

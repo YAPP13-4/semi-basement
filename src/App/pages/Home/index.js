@@ -1,18 +1,15 @@
 import React, { PureComponent } from 'react';
-import classnames from 'classnames/bind';
-import axios from 'axios';
-
-import Loading from 'src/App/components/Loading';
-
+import { connect } from 'react-redux';
 import Navigation from './components/Navigation';
+import Loading from 'src/App/components/Loading';
 import Featured from './components/Featured';
+import { loadMusicsInfo } from 'src/redux/music/actions';
+import classnames from 'classnames/bind';
 import ArtWorkPlayContainer from '../Home/container/ArtWorkPlayContainer';
 import css from './index.scss';
 
 const cx = classnames.bind(css);
 const moduleName = 'Home';
-const SEBACHOICE_REQUEST_URL = 'http://localhost:6508/musics/seba-choice';
-
 
 class Home extends PureComponent {
   state = {
@@ -22,34 +19,17 @@ class Home extends PureComponent {
   };
 
   componentDidMount() {
-    axios.get(SEBACHOICE_REQUEST_URL).then(res => {
-      this.setState({ sebaChoice: res.data });
-    });
+    this.props.loadMusicsInfo('seba-choice');
   }
 
   render() {
-    return this.state.sebaChoice.length ? (
+    return !this.props.mainMusicLoading ? (
       <div className={cx(`${moduleName}`)}>
         <Navigation />
         <div>
           <ArtWorkPlayContainer
             category="Seba's Choice"
-            apiPath="seba-choice"
-            musicInfos={this.state.sebaChoice}
-          />
-        </div>
-        <div>
-          <ArtWorkPlayContainer
-            category="Seba's Choice"
-            apiPath="seba-choice"
-            musicInfos={this.state.sebaChoice}
-          />
-        </div>
-        <div>
-          <ArtWorkPlayContainer
-            category="Seba's Choice"
-            apiPath="seba-choice"
-            musicInfos={this.state.sebaChoice}
+            musicInfos={this.props.musicInfos}
           />
         </div>
         <div>
@@ -62,4 +42,14 @@ class Home extends PureComponent {
   }
 }
 
-export default Home;
+export default connect(
+  ({ submusic1, music }) => {
+    return {
+      musicInfos: music.musicInfo,
+      mainMusicLoading: music.infoLoading,
+    };
+  },
+  {
+    loadMusicsInfo,
+  },
+)(Home);

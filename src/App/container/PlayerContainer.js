@@ -31,7 +31,7 @@ const mapStateToProps = ({ player, meta, music }) => {
   return {
     meta,
     player,
-    music: music.playingMusic,
+    music: music.playingMusicInfo,
   };
 };
 

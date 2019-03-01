@@ -1,9 +1,9 @@
 .Mypage {
-  //FIX ME !
+  position: relative;
   color: #dddddd;
   &-myinfo {
     height: 300px;
-    padding: 41px 0px 63px 51px;
+    padding: 41px 50px 63px 51px;
     //FIX ME !
     border: 1px solid #dddddd;
     &-wrapper {
@@ -18,10 +18,24 @@
       }
       &-name {
         margin-top: 10px;
-        span {
+        &-user {
           //FIX ME !
           background-color: cornflowerblue;
           padding: 10px;
+        }
+      }
+      &-sns {
+        margin-left: auto;
+        display: flex;
+        display: flex;
+        min-width: 230px;
+        justify-content: space-between;
+        span {
+          width: 39.4px;
+          height: 39.8px;
+          border-radius: 19.7px;
+          background-color: white;
+          display: inline-block;
         }
       }
     }

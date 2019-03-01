@@ -1,0 +1,15 @@
+.PhotoContainer {
+  margin-top: 50px;
+  &-photowrapper {
+    display: flex;
+    flex-flow: row wrap;
+    align-content: flex-start;
+    justify-content: space-between;
+    overflow-y: scroll;
+    height: 500px;
+  }
+
+  h2 {
+    font-size: 15px;
+  }
+}

@@ -1,19 +1,20 @@
-import React, { PureComponent } from 'react'
-import axios from 'axios'
-import logo from 'src/assets/logos/logo.png'
-import classnames from 'classnames/bind'
-import css from './index.scss'
+import React, { PureComponent } from 'react';
+import axios from 'axios';
+import logo from 'src/assets/logos/logo.png';
+import classnames from 'classnames/bind';
+import css from './index.scss';
 
-const cx = classnames.bind(css)
-const moduleName = 'SignUp'
+const cx = classnames.bind(css);
+const moduleName = 'SignUp';
 
 class SignUp extends PureComponent {
   signUpGoogle = () => {
     // axios.get('http://localhost:7260/auth/google').catch(err => console.log(err))
-    axios.get('http://localhost:7260/rankingChart')
+    axios
+      .get('http://172.30.1.31:6508/auth/facebook')
       .then(res => console.log(res))
-      .catch(err => console.log(err))
-  }
+      .catch(err => console.log(err));
+  };
 
   render() {
     return (
@@ -35,17 +36,16 @@ class SignUp extends PureComponent {
                 className={cx(`${moduleName}_wrapper_content_bottom_icon`)}
               />
               <div
-                onClick={this.signUpGoogle}
-                className={cx(`${moduleName}_wrapper_content_bottom_title`)}
-              >
-                Continue With Google
+                // onClick={this.signUpGoogle}
+                className={cx(`${moduleName}_wrapper_content_bottom_title`)}>
+                Continue With Facebook
               </div>
             </div>
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default SignUp
+export default SignUp;

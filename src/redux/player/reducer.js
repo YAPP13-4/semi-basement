@@ -1,4 +1,4 @@
-import * as playerActions from "./actions"
+import * as playerActions from './actions';
 
 const initialState = {
   currentTime: 0,
@@ -16,6 +16,11 @@ const initialState = {
 
 const player = (state = initialState, action) => {
   switch (action.type) {
+    case playerActions.ON_PLAY:
+      return {
+        ...state,
+        isPlaying: true,
+      };
     case playerActions.ON_PAUSE:
       return {
         ...state,
@@ -26,11 +31,7 @@ const player = (state = initialState, action) => {
         ...state,
         duration: action.duration,
       };
-    case playerActions.ON_PLAY:
-      return {
-        ...state,
-        isPlaying: true,
-      };
+
     case playerActions.ON_TIME_UPDATE:
       return {
         ...state,

@@ -2,20 +2,40 @@ import * as musicActions from './actions';
 
 const music = (
   state = {
-    playingMusic: null,
+    playingMusicInfo: null,
     loading: false,
+    infoLoading: false,
+    musicInfo: [],
     musicDetail: null,
     historyMusic: [],
     searchKeyword: '',
     searchResult: null,
+    musicListName: null,
   },
   action,
 ) => {
   switch (action.type) {
+    case musicActions.LOAD_MUSIC_INFO:
+      return {
+        ...state,
+        musicListName: action.musicListName,
+      };
+    case musicActions.LOAD_MUSIC_INFO_REQUEST:
+      return {
+        ...state,
+        infoLoading: true,
+      };
+
+    case musicActions.LOAD_MUSIC_INFO_SUCCESS:
+      return {
+        ...state,
+        infoLoading: false,
+        musicInfo: [...action.data],
+      };
     case musicActions.SELECT_MUSIC:
       return {
         ...state,
-        playingMusic: action.playingMusic,
+        playingMusicInfo: action.playingMusicInfo,
       };
     case musicActions.HISTORY_MUSIC_REQUEST:
       return {

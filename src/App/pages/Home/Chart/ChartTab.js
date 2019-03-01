@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { loadChartMusicsInfo } from 'src/redux/chart/actions';
 import {
   selectMusic,
-  historyMusic,
   loadMusicDetail,
 } from 'src/redux/music/actions';
 import PropTypes from 'prop-types';
@@ -33,7 +32,6 @@ class ChartTab extends Component {
 
   onClickPlay = ({ id, title, musician, artworkUrl, duration }) => {
     this.props.selectMusic({ id, title, musician, artworkUrl, duration });
-    this.props.historyMusic(id);
   };
 
   renderChart = () => {
@@ -71,7 +69,6 @@ export default connect(
   {
     loadChartMusicsInfo,
     selectMusic,
-    historyMusic,
     loadMusicDetail,
   },
 )(ChartTab);
