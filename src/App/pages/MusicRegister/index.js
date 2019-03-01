@@ -12,6 +12,7 @@ import css from './index.scss';
 import {getImageUrl} from 'src/utils/ImageUtils';
 import IMAGE_SIZES from 'src/App/constants/ImageConstants';
 import {defaultCover} from 'src/assets/default_cover';
+import TextField from './TextField';
 
 const cx = classnames.bind(css);
 const moduleName = 'MusicRegister';
@@ -60,10 +61,6 @@ class MusicRegister extends Component {
     this.setState({[id]: value})
   }
 
-  handleKeyDown = e => {
-    if (e.key === 'Enter') e.preventDefault()
-  }
-
   handleSubmit = e => {
     e.preventDefault();
     const {
@@ -86,26 +83,26 @@ class MusicRegister extends Component {
   renderMainArtWorkImg = () => {
     return this.state.selectedArtworkImg
       ? <img
-          className={cx(`${moduleName}-albumCover-mainImg`)}
-          src={
-            getImageUrl(
-              this.state.selectedArtworkImg,
-              IMAGE_SIZES.XLARGE
-            )}
-          alt='artworkImg' />
+        className={cx(`${moduleName}-albumCover-mainImg`)}
+        src={
+          getImageUrl(
+            this.state.selectedArtworkImg,
+            IMAGE_SIZES.XLARGE
+          )}
+        alt='artworkImg' />
       : <div className={cx(`${moduleName}-albumCover-mainImg`)}>
-          <span className={cx(`${moduleName}-albumCover-defaultLogo`)} />
-          <div className={cx(`${moduleName}-albumCover-explain`)}>
-            <p className={cx(`${moduleName}-albumCover-explain-bold`)}>
-              Bring album cover from SoundCloud.
+        <span className={cx(`${moduleName}-albumCover-defaultLogo`)} />
+        <div className={cx(`${moduleName}-albumCover-explain`)}>
+          <p className={cx(`${moduleName}-albumCover-explain-bold`)}>
+            Bring album cover from SoundCloud.
             </p>
-            <p className={cx(`${moduleName}-albumCover-explain-text`)}>
-              * if you having trouble whit using artwork.<br />
-              feel free to use our open license artwork<br />
-              there is no responsibility and copyright
+          <p className={cx(`${moduleName}-albumCover-explain-text`)}>
+            * if you having trouble whit using artwork.<br />
+            feel free to use our open license artwork<br />
+            there is no responsibility and copyright
             </p>
-          </div>
         </div>
+      </div>
   }
 
   renderArtWorkImgs = imgs => {
@@ -126,7 +123,7 @@ class MusicRegister extends Component {
       </div>
     ))
   }
-  
+
   renderLoading = () => {
     return (
       <div className={cx(`${moduleName}-loading`)}>
@@ -135,6 +132,82 @@ class MusicRegister extends Component {
     );
   }
 
+  renderFomFields = () => (
+    <form
+      className={cx(`${moduleName}-form`)}
+      onSubmit={this.handleSubmit} id="registerForm"
+    >
+      <TextField
+        type="input"
+        id="url"
+        title="URL"
+        value={this.state.url}
+        placeholder='https://'
+        onChange={this.handleChange}
+        onBlur={this.fetchMusicInfo(this.state.url)}
+      />
+      <TextField
+        type="input"
+        id="title"
+        title="Title"
+        value={this.state.title}
+        placeholder='this is title'
+        onChange={this.handleChange}
+      />
+      <TextField
+        type="input"
+        id="musician"
+        title="Musician"
+        value={this.state.musician}
+        placeholder='xxxtentacion'
+        onChange={this.handleChange}
+      />
+      <TextField
+        type="textarea"
+        id="lyrics"
+        title="Lyrics"
+        value={this.state.lyrics}
+        placeholder='here comes text'
+        onChange={this.handleChange}
+      />
+      <TextField
+        type="textarea"
+        id="description"
+        title="Description"
+        value={this.state.description}
+        placeholder='here comes text'
+        onChange={this.handleChange}
+      />
+    </form>
+  )
+
+  renderAlbumCoverAndButton = () => (
+    <div className={cx(`${moduleName}-albumCover`)}>
+      <h5>Album cover</h5>
+      {this.renderMainArtWorkImg()}
+      <div className={cx(`${moduleName}-albumCover-imgs`)}>
+        {this.renderArtWorkImgs([this.state.artworkImg, ...defaultCover])}
+      </div>
+
+      <div className={cx(`${moduleName}-albumCover-checkBox`)}>
+        <input
+          id="isAgree"
+          type="checkbox"
+          checked={this.state.isAgree}
+          onChange={this.handleChange}
+        />
+        <label htmlFor="isAgree">I agree on the responsibility of using this artwork</label>
+      </div>
+
+      <div className={cx(`${moduleName}-albumCover-buttons`)}>
+        <button onClick={
+          () => this.props.history.push('/mypage')
+        }>Cancel</button>
+        <button form="registerForm">Register</button>
+      </div>
+    </div>
+  )
+
   render() {
     const {registMusicState: {pending}} = this.props;
     return (
@@ -142,78 +215,8 @@ class MusicRegister extends Component {
         {pending && this.renderLoading()}
         <h1>Register Song</h1>
         <div className={cx(`${moduleName}-body`)}>
-          <form
-            className={cx(`${moduleName}-form`)}
-            onSubmit={this.handleSubmit} id="registerForm"
-          >
-            <label htmlFor="url">URL</label>
-            <input
-              id='url'
-              value={this.state.url}
-              placeholder='https://'
-              onChange={this.handleChange}
-              onBlur={this.fetchMusicInfo(this.state.url)}
-              onKeyDown={this.handleKeyDown}
-            />
-
-            <label htmlFor="title">Title</label>
-            <input
-              id='title'
-              value={this.state.title}
-              placeholder='this is title'
-              onChange={this.handleChange}
-              onKeyDown={this.handleKeyDown}
-            />
-
-            <label htmlFor="musician">Musician</label>
-            <input
-              id='musician'
-              value={this.state.musician}
-              placeholder='xxxtentacion'
-              onChange={this.handleChange}
-              onKeyDown={this.handleKeyDown}
-            />
-
-            <label htmlFor="lyrics">Lyrics</label>
-            <textarea
-              id='lyrics'
-              value={this.state.lyrics}
-              placeholder='here comes text'
-              onChange={this.handleChange}
-            />
-
-            <label htmlFor="description">Description</label>
-            <textarea
-              id='description'
-              value={this.state.description}
-              placeholder='here comes text'
-              onChange={this.handleChange}
-            />
-          </form>
-          <div className={cx(`${moduleName}-albumCover`)}>
-            <h5>Album cover</h5>
-            {this.renderMainArtWorkImg()}
-            <div className={cx(`${moduleName}-albumCover-imgs`)}>
-              {this.renderArtWorkImgs([this.state.artworkImg, ...defaultCover])}
-            </div>
-
-            <div className={cx(`${moduleName}-albumCover-checkBox`)}>
-              <input
-                id="isAgree"
-                type="checkbox"
-                checked={this.state.isAgree}
-                onChange={this.handleChange}
-              />
-              <label htmlFor="isAgree">I agree on the responsibility of using this artwork</label>
-            </div>
-
-            <div className={cx(`${moduleName}-albumCover-buttons`)}>
-              <button onClick={
-                () => this.props.history.push('/mypage')
-              }>Cancel</button>
-              <button form="registerForm">Register</button>
-            </div>
-          </div>
+          {this.renderFomFields()}
+          {this.renderAlbumCoverAndButton()}
         </div>
       </div>
     )
