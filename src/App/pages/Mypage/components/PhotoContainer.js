@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { debounce, range, throttle } from 'lodash-es';
 import classnames from 'classnames/bind';
-import {
-  unsplashImageRequest,
-  unsplashImageSuccess,
-} from 'src/redux/unsplash/actions';
+import { unsplashImageRequest } from 'src/redux/unsplash/actions';
 import { PhotoSearchForm } from './PhotoForm';
 import { PhotoComponent } from './PhotoComponent';
 import css from './PhotoContainer.scss';
