@@ -12,7 +12,7 @@ import css from './PhotoContainer.scss';
 
 const cx = classnames.bind(css);
 const moduleName = 'PhotoContainer';
-const BASE_LINE = 80;
+// const BASE_LINE = 80;
 
 export class PhotoContainer extends Component {
   constructor(props) {

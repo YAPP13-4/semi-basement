@@ -1,6 +1,5 @@
 import { combineReducers, createStore, applyMiddleware, compose } from "redux"
 import { routerReducer, routerMiddleware } from "react-router-redux"
-import { reducer as reduxFormReducer } from "redux-form"
 import createSagaMiddleware from "redux-saga"
 
 import ReduxThunk from "redux-thunk"
@@ -15,7 +14,6 @@ export default function createNewStore(history) {
     combineReducers({
       router: routerReducer,
       ...reducer,
-      form: reduxFormReducer
     }),
     {},
     compose(
