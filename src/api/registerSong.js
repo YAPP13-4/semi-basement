@@ -10,6 +10,6 @@ export function getMusicInfo(url) {
 
 export function postMusic(musicInfo) {
     return axios.post(`http://localhost:6508/musics`, musicInfo)
-    .then(res=>{console.log(res)})
-    .catch(err=>{console.log(err)})
+    .then(res=>res)
+    .catch(err=>err)
 }

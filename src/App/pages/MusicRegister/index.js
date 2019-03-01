@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import classnames from 'classnames/bind';
 import {postMusic} from 'src/api'
-import {loadSoundcloudMusicInfo, resetRegistMusicState} from 'src/redux/register/actions'
+import {loadSoundcloudMusicInfo, resetRegistMusicState, registSoundcloudMusic} from 'src/redux/register/actions'
 import Loading from 'src/App/components/Loading';
 import css from './index.scss';
 import {getImageUrl} from 'src/utils/ImageUtils';
@@ -62,10 +62,10 @@ class MusicRegister extends Component {
   }
 
   handleSubmit = e => {
-    e.preventDefault()
-    if (!this.state.isAgree) return alert('plz check the box');
-    const {url, title, musician, lyrics, description, artworkImg} = this.state
-    postMusic({url, title, musician, lyrics, description, artworkImg});
+    e.preventDefault();
+    const {url, title, musician, lyrics, description, artworkImg, isAgree} = this.state
+    if (!isAgree) return alert('plz check the box');
+    this.props.registSoundcloudMusic({url, title, musician, lyrics, description, artworkImg});
   }
 
   fetchMusicInfo = url => e => {
@@ -215,7 +215,8 @@ MusicRegister.propTypes = {
   registMusic: PropTypes.object,
   registMusicState: PropTypes.object,
   loadSoundcloudMusicInfo: PropTypes.func,
-  resetRegistMusicState: PropTypes.func
+  resetRegistMusicState: PropTypes.func,
+  registSoundcloudMusic: PropTypes.func
 }
 
 const mapStateToProps = ({
@@ -223,7 +224,8 @@ const mapStateToProps = ({
 }) => ({registMusic, registMusicState});
 const mapDispatchToProps = {
   loadSoundcloudMusicInfo,
-  resetRegistMusicState
+  resetRegistMusicState,
+  registSoundcloudMusic
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MusicRegister);

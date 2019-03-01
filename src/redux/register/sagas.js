@@ -1,5 +1,6 @@
 import {put, call, takeEvery, all} from 'redux-saga/effects';
-import {getMusicInfo} from 'src/api';
+import {getMusicInfo, postMusic} from 'src/api';
+import {push} from 'react-router-redux';
 import * as registerActions from './actions';
 
 export function* loadSoundcloudMusicInfoFlow({url}) {
@@ -18,6 +19,25 @@ export function* watchLoadSoundcloudMusicInfoFlow() {
   )
 };
 
+export function* registSoundcloudMusicFlow({music}) {
+  try {
+    const {data: {id}} = yield call(postMusic, music)
+    yield put(registerActions.registSoundcloudMusicSuccess());
+    alert('track이 잘 등록 되었습니다 ;)');
+    yield put(push(`/musicDetail/${id}`));
+  } catch (err) {
+    console.log(err.err)
+    yield put(registerActions.registSoundcloudMusicFailure(err));
+  }
+};
+
+export function* watchRegistSoundcloudMusicFlow() {
+  yield takeEvery(
+    registerActions.REGIST_SOUNDCLOUD_MUSIC,
+    registSoundcloudMusicFlow
+  )
+};
+
 export default function* registerRoot() {
-  yield all([watchLoadSoundcloudMusicInfoFlow()]);
+  yield all([watchLoadSoundcloudMusicInfoFlow(), watchRegistSoundcloudMusicFlow()]);
 }
