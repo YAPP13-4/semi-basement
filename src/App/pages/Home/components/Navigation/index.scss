@@ -2,14 +2,16 @@
   width: 1340px;
   height: 75px;
   background-color: transparent;
-  margin: 0 50px;
   display: flex;
   justify-content: space-between;
   border-bottom: 1px gray solid;
+  margin: 0 auto;
+
   a {
     text-decoration: none;
     color: white;
   }
+  
   &-rightBox {
     width: 380px;
     display: flex;

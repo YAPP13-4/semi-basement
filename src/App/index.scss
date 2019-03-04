@@ -2,9 +2,12 @@
 
 .App {
   font-family: $font-normal;
-  min-height: 1024px;
+  height: 100%;
   background-image: linear-gradient(to bottom, #181818, #000000);
+ 
   &-body {
+    height: 100%;
+    width: 100%;
     padding-top: 60px;
     background: transparent;
     margin: 0 auto;

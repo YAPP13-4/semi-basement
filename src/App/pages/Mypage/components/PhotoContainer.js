@@ -62,8 +62,6 @@ export class PhotoContainer extends Component {
   */
 
   updateStatus = () => {
-    console.log('hi');
-    console.log('elm', this.scrollWrapper);
     const elm = this.scrollWrapper.current;
     const distanceToBottom = elm.scrollHeight - elm.scrollTop;
     const isTriggerPosition = distanceToBottom < elm.clientHeight + 100;
