@@ -1,11 +1,16 @@
 @import 'src/variable.scss';
 
 .ArtWorkPlayContainer {
+  width: 100%;
+  margin: 0 auto;
+
   &-category {
+    width: 1340px;
     font-family: AvertaCYBold;
     display: flex;
-    padding: 55px 65px 20px 65px;
+    padding: 55px 0 20px 0;
     font-size: 20px;
+    margin: 0 auto;
 
     &-title {
       margin-left: 20px;
@@ -14,7 +19,7 @@
 
   &-musicWrapper {
     overflow: scroll;
-    width: 1320px;
+    width: 1340px;
     margin: 0 auto;
     display: flex;
   }
