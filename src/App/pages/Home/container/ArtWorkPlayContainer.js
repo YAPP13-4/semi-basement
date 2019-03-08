@@ -15,13 +15,25 @@ import selectIcon from 'src/assets/icons/icon2.png';
 const cx = classnames.bind(css);
 const moduleName = 'ArtWorkPlayContainer';
 
-const activePalyList = {
+const activePlayList = {
   cursor: 'pointer',
   background: `url(${selectIcon}) no-repeat -49px -152px`,
   width: '35px',
   height: '35px',
 };
+
+const deactivePlayList = {
+  cursor: 'pointer',
+  background: `url(${selectIcon}) no-repeat -115px -156px`,
+  width: `28px;`,
+  height: `29px`,
+};
+
 class ArtWorkPlayContainer extends PureComponent {
+  state = {
+    togglePlayList: false,
+  };
+
   onClickPlay = ({ id, title, musician, artworkImg, streamUrl, duration }) => {
     this.props.selectMusic({
       id,
@@ -34,15 +46,16 @@ class ArtWorkPlayContainer extends PureComponent {
   };
 
   onClickChangePlayList = playlist => {
-    if (
-      !this.props.currentMusicListName ||
-      this.props.currentMusicListName !== playlist
-    ) {
-      this.props.changePlayList(this.props.musicInfos, playlist);
-      const myPlayList = JSON.parse(localStorage.getItem('myPlayList')) || [];
+    if (this.props.currentMusicListName === playlist) return;
 
-      this.props.setMyPlayerSubPlayList(myPlayList, 'My PlayList');
-    }
+    const { changePlayList, setMyPlayerSubPlayList } = this.props;
+
+    changePlayList(musicInfos, playlist);
+    const myPlayList = JSON.parse(localStorage.getItem('myPlayList')) || [];
+    setMyPlayerSubPlayList(myPlayList, 'My PlayList');
+    this.setState(prevState => ({
+      togglePlayList: !prevState.togglePlayList,
+    }));
   };
 
   renderArtworks = musicInfos => {
@@ -59,12 +72,13 @@ class ArtWorkPlayContainer extends PureComponent {
   };
 
   render() {
+    const { togglePlayList } = this.state;
     return (
       <div className={cx(`${moduleName}`)}>
         <div className={cx(`${moduleName}-category`)}>
           <div
-            style={activePalyList}
-            className={cx(`${moduleName}-category-patchIcon`)}
+            style={togglePlayList ? activePlayList : deactivePlayList}
+            className="patch-icon"
             onClick={() => this.onClickChangePlayList(this.props.category)}
           />
           <div className={cx(`${moduleName}-category-title`)}>

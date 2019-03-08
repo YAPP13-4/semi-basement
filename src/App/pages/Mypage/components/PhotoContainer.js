@@ -123,18 +123,6 @@ export class PhotoContainer extends Component {
     if (!keyword) return;
     fetchTargets.map(index => this.fetchData(index, keyword));
     Promise.all(fetchTargets.map(index => this.fetchData(index, keyword))).then(
-      // results => {
-      //   console.log('results', results);
-      //   return results.map(({ data }) => {
-      //     this.setState(prevState => ({
-      //       photoList: prevState.photoList.concat(data.results),
-      //       totalPage: data.total_pages,
-      //       fetched: true,
-      //       currentPage: prevState.fetchPage,
-      //       fetchPage: prevState.fetchPage + 1,
-      //     }));
-      //   });
-      // },
       () => {
         const { pictureList } = this.props;
         console.log('pictureList', pictureList);
